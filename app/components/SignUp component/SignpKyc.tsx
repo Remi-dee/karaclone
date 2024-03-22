@@ -70,7 +70,7 @@ const SignpKyc = () => {
             className=" w-[96%]  outline-none"
           />
         </div>
-        <Link href={"/signUp/business-details"}>
+        <Link href={"/signUp/create-password"}>
           <button className="w-full p-2 rounded-md text-center  bg-primaryBtn text-white-100 ">
             Continue
           </button>
@@ -87,4 +87,4 @@ const SignpKyc = () => {
   )
 }
 
-export default SignpKyc
+export default SignpKyc;
