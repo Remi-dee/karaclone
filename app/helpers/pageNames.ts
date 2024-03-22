@@ -4,7 +4,7 @@ const PAGES = {
   BUSINESS: "business",
 
   // Auth routes
-  LOGIN: "pages/auth/login",
+  LOGIN: "auth/login",
 };
 
 export default PAGES;
