@@ -13,6 +13,28 @@ const config: Config = {
         Poppins: ["var(--font-Poppins)"],
         Josefin: ["var(--font-Josefin)"],
       },
+      colors:{
+        white:{
+          100:"#FFFFFF",
+          300: "#FBFBFB"
+
+        },
+
+        gray:{
+          200:"#BDBDBD",
+          300:" #7C7C7C"
+          
+          
+        },
+
+        black:{
+          200:"#333333"
+        },
+
+        signupBg:"#292929",
+        primaryBtn:"#7F56D9"
+
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
