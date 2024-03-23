@@ -38,7 +38,7 @@ const SignUpContent = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setContent((prevState) => !prevState);
-    }, 5000); // Switch content every 5 seconds (5000 milliseconds)
+    }, 4000); 
 
     return () => clearInterval(interval);
   }, []);
