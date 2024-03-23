@@ -45,6 +45,22 @@ const TwoFaSuccessContent = () => {
                 </p>
               </div>
             </div>
+            <div className="w-full flex justify-start items-start gap-2 mb-2">
+              <div className="flex flex-col items-center justify-center mt-2 gap-1">
+                <div className="w-[25px] h-[25px] flex justify-center items-center rounded-full text-center bg-primaryBtn text-white font-montserrat">
+                  <GiCheckMark className="text-white-100" />
+                </div>
+                <div className="w-[1px] h-[30px] bg-gray-300"></div>
+              </div>
+              <div className="font-montserrat mb-2">
+                <h2 className=" text-base font-semibold">
+                  Input Business Details
+                </h2>
+                <p className="text-gray-300 text-sm pb-2">
+                  Fill in your business details
+                </p>
+              </div>
+            </div>
             
             
             <div className="w-full flex justify-start items-start gap-2 mb-2">
