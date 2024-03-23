@@ -2,10 +2,7 @@ import Image from "next/image";
 import React from "react";
 import Logo from "../../../public/Images/Logo.png";
 import { GiCheckMark } from "react-icons/gi";
-import SignpKyc from "@/app/components/SignUp component/SignpKyc";
-
-
-
+import SignpKyc from "@/app/components/SignUp/SignpKyc";
 
 const DetailsContent = () => {
   return (
@@ -48,7 +45,7 @@ const DetailsContent = () => {
                 </p>
               </div>
             </div>
-            
+
             <div className="w-full flex justify-start items-start gap-2 mb-2">
               <div className="flex flex-col items-center justify-center mt-2 gap-1">
                 <div className="w-[25px] h-[25px] flex justify-center border border-gray-200 items-center rounded-full text-center  text-white font-montserrat">
@@ -100,7 +97,7 @@ const DetailsContent = () => {
           </div>
         </div>
         {/* Sign up from component */}
-        <SignpKyc/>
+        <SignpKyc />
       </div>
     </div>
   );

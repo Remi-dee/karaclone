@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { GiCheckMark } from "react-icons/gi";
 import Logo from "../../../public/Images/Logo.png";
-import TwoFactorAuth from "@/app/components/SignUp component/TwoFactorAuth";
+import TwoFactorAuth from "@/app/components/SignUp/TwoFactorAuth";
 
 const Activate2fa = () => {
   return (
@@ -45,8 +45,7 @@ const Activate2fa = () => {
                 </p>
               </div>
             </div>
-            
-            
+
             <div className="w-full flex justify-start items-start gap-2 mb-2">
               <div className="flex flex-col items-center justify-center mt-2 gap-1">
                 <div className="w-[25px] h-[25px] flex justify-center items-center rounded-full text-center bg-primaryBtn text-white font-montserrat">

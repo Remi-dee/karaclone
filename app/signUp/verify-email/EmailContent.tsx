@@ -2,7 +2,7 @@ import Image from "next/image";
 import Logo from "../../../public/Images/Logo.png";
 import { GiCheckMark } from "react-icons/gi";
 
-import VerifyEmail from "@/app/components/SignUp component/VerifyEmail";
+import VerifyEmail from "@/app/components/SignUp/VerifyEmail";
 const EmailContent = () => {
   return (
     <div className="p-0 m-0 box-border">
@@ -44,7 +44,7 @@ const EmailContent = () => {
                 </p>
               </div>
             </div>
-            
+
             <div className="w-full flex justify-start items-start gap-2 mb-2">
               <div className="flex flex-col items-center justify-center mt-2 gap-1">
                 <div className="w-[25px] h-[25px] flex justify-center items-center rounded-full text-center bg-primaryBtn text-white font-montserrat">
@@ -95,7 +95,7 @@ const EmailContent = () => {
           </div>
         </div>
         <div className="w-[100%]">
-          <VerifyEmail/>
+          <VerifyEmail />
         </div>
       </div>
     </div>

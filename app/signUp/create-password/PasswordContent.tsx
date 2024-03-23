@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Logo from "../../../public/Images/Logo.png";
 import { GiCheckMark } from "react-icons/gi";
-import PasswordForm from "@/app/components/SignUp component/PasswordForm";
+import PasswordForm from "@/app/components/SignUp/PasswordForm";
 
 const PasswordContent = () => {
   return (
@@ -45,8 +45,7 @@ const PasswordContent = () => {
                 </p>
               </div>
             </div>
-            
-            
+
             <div className="w-full flex justify-start items-start gap-2 mb-2">
               <div className="flex flex-col items-center justify-center mt-2 gap-1">
                 <div className="w-[25px] h-[25px] flex justify-center border border-purple-200 bg-primaryBtn items-center rounded-full text-center  text-white font-montserrat">
