@@ -1,9 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { userLoggedIn, userLoggedOut, userRegistration } from "./authSlice";
+import { userLoggedIn, userRegistration } from "./authSlice";
 
 type RegistrationResponse = {
   message: string;
-  activationToken: string;
+  activation_token: string;
 };
 
 type RegistrationData = {};
@@ -17,7 +17,7 @@ export const authApi = createApi({
     // Register user endpoint
     register: builder.mutation<RegistrationResponse, RegistrationData>({
       query: (data) => ({
-        url: "authentication/registration",
+        url: "authentication/register",
         method: "POST",
         body: data,
         credentials: "include" as const,
@@ -29,7 +29,7 @@ export const authApi = createApi({
 
           dispatch(
             userRegistration({
-              token: result.data.activationToken,
+              token: result.data.activation_token,
             })
           );
         } catch (error: any) {
@@ -44,8 +44,8 @@ export const authApi = createApi({
         url: "authentication/activate-user",
         method: "POST",
         body: {
-          activation_code,
           activation_token,
+          activation_code,
         },
       }),
     }),

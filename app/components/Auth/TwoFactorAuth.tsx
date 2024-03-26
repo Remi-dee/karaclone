@@ -1,18 +1,34 @@
 "use client";
+import { useEnableTwofaQuery } from "@/redux/features/user/userApi";
 import React, { useState } from "react";
 import { FaKey } from "react-icons/fa";
-import QrCode from "./QrCode";
-const TwoFactorAuth = () => {
-  const [option, setOption] = useState(null);
-  const [showComponent, setShowComponent] = useState(true);
+import QrCode from "../SignUp/QrCode";
 
-  const handleOptionChange = (option: any) => {
+type Props = {};
+
+const TwoFactorAuth = (props: Props) => {
+  const [option, setOption] = useState<string | null>(null);
+  const [showComponent, setShowComponent] = useState(true);
+  const [qrCodeData, setQrCodeData] = useState<string | null>(null);
+
+  // Enable 2FA query
+  const { isLoading, data } = useEnableTwofaQuery({
+    enabled: option === "Google Authenticator",
+  });
+
+  // Handle option change
+  const handleOptionChange = (option: string) => {
     setOption(option);
   };
 
+  // Handle QR code authentication
   const handleQrAuth = () => {
     setShowComponent(false);
+    if (option === "Google Authenticator" && data && data.qrCode) {
+      setQrCodeData(data.qrCode);
+    }
   };
+
   return (
     <>
       {showComponent ? (
@@ -25,8 +41,8 @@ const TwoFactorAuth = () => {
               Activate Two Factor Authentication
             </h3>
             <p className="text-gray-300 text-sm">
-              Add an extra layer of security to your account using the google
-              authenticator app
+              Add an extra layer of security to your account using the Google
+              Authenticator app
             </p>
             <div
               onClick={() => handleOptionChange("Google Authenticator")}
@@ -47,7 +63,7 @@ const TwoFactorAuth = () => {
                   Google Authenticator
                 </h4>
                 <p className="text-gray-200 text-xs">
-                  Receive authentication code on the authenticator app
+                  Receive authentication code on the Authenticator app
                 </p>
               </div>
             </div>
@@ -71,7 +87,7 @@ const TwoFactorAuth = () => {
                   SMS Authentication
                 </h4>
                 <p className="text-gray-200 text-xs">
-                  Receive authentication code via sms to your phone number
+                  Receive authentication code via SMS to your phone number
                 </p>
               </div>
             </div>
@@ -85,10 +101,9 @@ const TwoFactorAuth = () => {
               Skip for Now
             </p>
           </div>
-          {/* {showComponent && option === 'Google Authenticator' && <QrCode/>} */}
         </div>
       ) : (
-        <QrCode />
+        qrCodeData && <QrCode qrCode={qrCodeData} />
       )}
     </>
   );
