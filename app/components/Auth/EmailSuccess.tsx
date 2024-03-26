@@ -1,7 +1,13 @@
-import Link from "next/link";
-
+"use client";
+import React, { FC } from "react";
 import { IoIosCheckmark } from "react-icons/io";
-const EmailVerifySuccess = () => {
+
+type Props = {
+  active: number;
+  setActive: (active: any) => void;
+};
+
+const EmailSuccess: FC<Props> = ({ active, setActive }) => {
   return (
     <div className="w-[500px] mx-auto  shadow-lg rounded-md border border-white-100">
       <div className="w-[400px] pt-6 mx-auto">
@@ -16,14 +22,16 @@ const EmailVerifySuccess = () => {
         <p className="text-gray-200 text-sm pb-4">
           Your email address has been successfully verified
         </p>
-        <Link href={"/signUp/activate-2fa"}>
-          <button className="w-full p-2 mb-6 rounded-md text-center  bg-primaryBtn text-white-100 ">
-            Continue
-          </button>
-        </Link>
+
+        <button
+          onClick={() => setActive(active + 1)}
+          className="w-full p-2 mb-6 rounded-md text-center  bg-primaryBtn text-white-100 "
+        >
+          Continue
+        </button>
       </div>
     </div>
   );
 };
 
-export default EmailVerifySuccess;
+export default EmailSuccess;

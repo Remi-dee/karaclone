@@ -8,13 +8,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-
 const SignUpContent = () => {
   const router = useRouter();
-
-  const TriggerDetailsPage = () => {
-    router.push("signUp/details");
-  };
   const [content, setContent] = useState(true);
   const [selectedOption, setSelectedOption] = useState("");
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
@@ -27,8 +22,9 @@ const SignUpContent = () => {
     setIsButtonDisabled(selectedValue === "");
   };
 
-  const handleButtonClick = () => {
-    TriggerDetailsPage
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    router.push(`/signUp/details/${selectedOption}`);
   };
 
   const toggle = () => {
@@ -38,7 +34,7 @@ const SignUpContent = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setContent((prevState) => !prevState);
-    }, 5000); // Switch content every 5 seconds (5000 milliseconds)
+    }, 4000);
 
     return () => clearInterval(interval);
   }, []);
@@ -116,7 +112,7 @@ const SignUpContent = () => {
                       onChange={handleSelectChange}
                       className="p-2 border border-black rounded-md"
                     >
-                      <option value="" className="" disabled selected>
+                      <option value="" className="">
                         Select account type
                       </option>
                       <option value="individual" className="">
@@ -127,19 +123,19 @@ const SignUpContent = () => {
                       </option>
                     </select>
                   </div>
-                  <Link href={"/signUp/details"}>
+
                   <button
-                    
+                    type="submit"
                     className={`w-full p-2 rounded-md text-center ${
                       isButtonDisabled
                         ? "bg-gray-300 text-black"
                         : "bg-primaryBtn text-white-100 "
                     } `}
                     disabled={isButtonDisabled}
+                    onClick={handleSubmit}
                   >
                     Continue
                   </button>
-                  </Link>
                 </form>
 
                 <p className="py-4 text-center text-sm text-gray-300">
