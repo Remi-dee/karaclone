@@ -52,3 +52,15 @@ export type ToastProps = {
     | "top-left"
     | "top-right";
 };
+
+export interface DashboardLayoutType {
+  title?: string;
+  className?: string;
+  children: React.ReactNode;
+}
+
+export interface NavLink {
+  name: string;
+  icon?: React.ReactNode;
+  link: string;
+}

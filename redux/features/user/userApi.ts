@@ -7,7 +7,7 @@ const baseQuery = fetchBaseQuery({
     const token = localStorage.getItem("auth");
     // If token exists, add it to the authorization header
     if (token) {
-      headers.set("Authorization", `bearer ${token}`);
+      headers.set("Authorization", `Bearer ${token}`);
     }
     return headers;
   },
@@ -17,6 +17,15 @@ export const userApi = createApi({
   reducerPath: "userApi",
   baseQuery, // Use the customized baseQuery
   endpoints: (builder) => ({
+    // get user
+    getUSer: builder.query({
+      query: (data) => ({
+        url: "user/me",
+        method: "GET",
+        credentials: "include" as const,
+      }),
+    }),
+
     // activate 2FA
     enableTwofa: builder.query({
       query: (data) => ({
@@ -26,6 +35,7 @@ export const userApi = createApi({
       }),
     }),
 
+    // verify 2FA
     verifyTwofa: builder.mutation({
       query: ({ topt }) => ({
         url: "user/verify-2fa",
@@ -37,4 +47,5 @@ export const userApi = createApi({
   }),
 });
 
-export const { useEnableTwofaQuery, useVerifyTwofaMutation } = userApi;
+export const { useEnableTwofaQuery, useVerifyTwofaMutation, useGetUSerQuery } =
+  userApi;
