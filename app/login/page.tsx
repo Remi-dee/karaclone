@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { FC, useEffect, useState } from "react";
 import { useFormik } from "formik";
-import * as Yup from "yup";
+import * as Yup from "Yup";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { MdOutlineNavigateBefore, MdOutlineNavigateNext } from "react-icons/md";
 import { styles } from "../styles/style";
