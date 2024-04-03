@@ -13,27 +13,31 @@ const config: Config = {
         Poppins: ["var(--font-Poppins)"],
         Josefin: ["var(--font-Josefin)"],
       },
-      colors:{
-        white:{
-          100:"#FFFFFF",
-          300: "#FBFBFB"
-
+      colors: {
+        white: {
+          100: "#FFFFFF",
+          300: "#FBFBFB",
         },
 
-        gray:{
-          200:"#BDBDBD",
-          300:" #7C7C7C"
-          
-          
+        gray: {
+          100: "#656565",
+          200: "#BDBDBD",
+          300: " #7C7C7C",
+          400: "#525252",
+          500: "#F7F7F7",
+          600: "#75788B",
+          700: "#EFEFEF",
         },
 
-        black:{
-          200:"#333333"
+        black: {
+          200: "#333333",
+        },
+        purple: {
+          100: "#9E77ED",
         },
 
-        signupBg:"#292929",
-        primaryBtn:"#7F56D9"
-
+        signupBg: "#292929",
+        primaryBtn: "#7F56D9",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
