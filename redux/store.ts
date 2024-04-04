@@ -5,6 +5,7 @@ import authSlice from "./features/auth/authSlice";
 import { apiSlice } from "./features/api/apiSlice";
 import { authApi } from "./features/auth/authApi";
 import { userApi } from "./features/user/userApi";
+import modalSlice from "./modal/modalSlice";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     auth: authSlice,
     [userApi.reducerPath]: userApi.reducer,
     [apiSlice.reducerPath]: apiSlice.reducer,
+    modal: modalSlice,
   },
   devTools: false,
   middleware: (getDefaultMiddleware) =>
