@@ -17,7 +17,6 @@ import VerificationEmail from "./components/KYC/VerificationEmail";
 import VerificationSelfie from "./components/KYC/VerificationSelfie";
 import VerificationSuccess from "./components/KYC/VerificationSuccess";
 
-import Transaction from "./components/Transactions/Transaction";
 
 
 interface Props {}
@@ -90,12 +89,10 @@ const Page: FC<Props> = (props) => {
     <>
     <div>
       <h5>Hello world!</h5>
-      {/* <button onClick={openModalHandler}>open modal</button> */}
-      {/* <CustomModal>{renderCurrentPage()}</CustomModal> */}
+      <button onClick={openModalHandler}>open modal</button>
+      <CustomModal>{renderCurrentPage()}</CustomModal>
     </div>
-    <div className="">
-      <Transaction/>
-    </div>
+   
     </>
   );
 };
