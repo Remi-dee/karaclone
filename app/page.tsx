@@ -18,12 +18,24 @@ import VerificationSelfie from "./components/KYC/VerificationSelfie";
 import VerificationSuccess from "./components/KYC/VerificationSuccess";
 
 
+
 interface Props {}
 
 const Page: FC<Props> = (props) => {
   const [active, setActive] = useState(1);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [selectedOptions, setSelectedOptions] = useState<string | null>(null);
   const dispatch = useDispatch();
+
+
+  const options = [
+    { value: 'option1', label: 'Option 1' },
+    { value: 'option2', label: 'Option 2' },
+    { value: 'option3', label: 'Option 3' },
+  ];
+  const handleSelect = (value:string)=>{
+    setSelectedOptions(value)
+  }
   const openModalHandler = () => {
     dispatch(openModal());
   };
@@ -74,11 +86,14 @@ const Page: FC<Props> = (props) => {
     }
   };
   return (
+    <>
     <div>
       <h5>Hello world!</h5>
       <button onClick={openModalHandler}>open modal</button>
       <CustomModal>{renderCurrentPage()}</CustomModal>
     </div>
+   
+    </>
   );
 };
 
