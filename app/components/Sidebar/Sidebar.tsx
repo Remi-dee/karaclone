@@ -52,7 +52,7 @@ return (
     <div className="px-4 mb-10">
         <img src="/fxkara-logo.svg" className="mx-auto" height="200px" alt="" />
     </div>
-    <nav className="flex flex-col px-5 w-full gap-2">
+    <nav className="flex flex-col px-5 w-full gap-2 h-[65vh]">
         {sidebarLinks.map((eachdata, index) => (
         <button key={index} onClick={()=> router.push(eachdata.href)}
             className={`text-white py-3 px-4 small focus:outline-none rounded-xl ${
@@ -122,6 +122,14 @@ return (
 
         ))}
     </nav>
+
+      <div className="  text-gray-100 mt-auto">
+        <div className=" flex flex-col bg-slate-100 border border-slate-100 rounded-xl m-4 p-4 pt-20">
+            <p className="py-3 mt-auto">Need help?</p>
+            <p>Please check our docs</p>
+            <button className="bg-gray-100 text-white-300 rounded-2xl px-3 py-2">Documentation</button>
+        </div>
+    </div>
 
 
 </div>

@@ -8,6 +8,7 @@ import { Bars3Icon } from '@heroicons/react/24/outline';
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Home from "../Home";
 import Wallet from "../Wallet";
+import Withdraw from "../components/withdrawal/withdraw";
 type Props = {};
 
 
@@ -21,7 +22,7 @@ const Dashboard: FC<Props> = (urlParam:any) => {
     console.log(typeof urlLink)
     // const endPoint:string = urlLink.link
     return (
-    <div className="flex items-center bg-[white] h-screen">
+    <div className="flex items-center bg-white-300Background (FBFBFB) h-screen">
 
         {/* sidebar */}
         <Sidebar link={urlLink} showSideBar={showSidebar} />
@@ -43,7 +44,7 @@ const Dashboard: FC<Props> = (urlParam:any) => {
             <div
                 className="flex fixed top-0 left-0 z-[999] xl:pl-96 w-full justify-end lg:justify-between items-center px-10 pr-15 xl:px-32  border-b border-slate-200 bg-white-100 py-5">
                 <div className="hidden lg:block">
-                    <p className="text-gray-700 font-bold text-lg">Hello Omorinsola</p>
+                    <p className="text-black-200 font-bold text-lg">Hello Omorinsola</p>
                     <p className="text-sm text-gray-300">Trade and withdraw funds easily</p>
                 </div>
 
@@ -60,8 +61,11 @@ const Dashboard: FC<Props> = (urlParam:any) => {
                 </div>
             </div>
             {/* content */}
-            <div className="px-5 md:px-10 lg:px-10 xl:px-28 xxl:px-32 text-slate-900 h-screen overflow-y-auto pt-24 md:pt-36">
+            <div className="px-5 md:px-10 lg:px-10 xl:px-28 xxl:px-32 text-slate-900 h-screen overflow-y-auto pt-24 md:pt-36 bg-white-100">
 
+
+            {/* {urlLink.toLowerCase() === 'home' &&
+                <Withdraw />} */}
                 {urlLink.toLowerCase() === 'home' &&
                 <Home />}
                 {urlLink.toLowerCase() === 'wallet' &&
