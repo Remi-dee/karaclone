@@ -6,7 +6,8 @@ import { IoIosArrowRoundBack, IoIosArrowRoundForward } from "react-icons/io";
 import { useDispatch } from "react-redux";
 import { openModal } from "@/redux/modal/modalSlice";
 import CustomModal from "../CustomModal/CustomModal";
-import TransactionDetails from "./TransactionDetails";
+import DepositDetails from "./DepositDetails";
+import EmptyTransaction from "./EmptyTransaction";
 const TransactionTable = () => {
   const [selectedItemId, setSelectedItemId] = useState<number | null>(null);
   const dispatch = useDispatch();
@@ -16,7 +17,8 @@ const TransactionTable = () => {
   };
   return (
     <div className="p-0 m-0 box-border">
-      <table className=" w-[100%] border-collapse  ">
+        {transactionData && transactionData.length > 0 ? (  <>
+      <table className="w-[100%] overflow-auto border-collapse  ">
         <tr className="bg-gray-900  font-medium">
           <th className="p-4 text-left">Type</th>
           <th className="p-4 text-left">Description</th>
@@ -46,7 +48,7 @@ const TransactionTable = () => {
               />
             </td>
             <CustomModal>
-              <TransactionDetails />
+              <DepositDetails />
             </CustomModal>
           </tr>
         ))}
@@ -58,7 +60,7 @@ const TransactionTable = () => {
           <p className="">Previous</p>
         </div>
         <div className="flex justify-start items-center gap-3 ">
-          <button className="w-[30px] h-[30px] rounded-full bg-white-100 active:bg-purple-200 active:text-primaryBtn">
+          <button className="w-[30px] h-[30px] rounded-full bg-purple-200 text-primaryBtn active:bg-purple-200 active:text-primaryBtn">
             1
           </button>
           <button className="w-[30px] h-[30px] rounded-full bg-white-100 active:bg-purple-200 active:text-primaryBtn">
@@ -85,6 +87,10 @@ const TransactionTable = () => {
           <IoIosArrowRoundForward className="text-white-100 bg-primaryBtn" />
         </div>
       </div>
+      </>) : (
+        <EmptyTransaction/>
+      )}
+      
     </div>
   );
 };

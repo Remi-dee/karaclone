@@ -22,10 +22,10 @@ const Transaction = () => {
 
   return (
     <div className="p-0 m-0 box-border">
-      <div className="w-full shadow-lg rounded-md">
+      <div className="w-full min-h-[70vh] shadow-lg rounded-md">
         <div className="w-[96%] mx-auto">
           <h2 className="py-4 text-lg font-semibold">Transaction</h2>
-          <div className="max-w-[600px] w-full pb-6 flex justify-start gap-2 items-center">
+          <div className="max-w-[600px] w-full pb-6 flex flex-wrap justify-start gap-2 items-center">
             <div>
               <CustomDropdown
                 options={transactionOption}

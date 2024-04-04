@@ -90,10 +90,12 @@ const Page: FC<Props> = (props) => {
     <>
     <div>
       <h5>Hello world!</h5>
-      <button onClick={openModalHandler}>open modal</button>
-      <CustomModal>{renderCurrentPage()}</CustomModal>
+      {/* <button onClick={openModalHandler}>open modal</button> */}
+      {/* <CustomModal>{renderCurrentPage()}</CustomModal> */}
     </div>
-    
+    <div className="">
+      <Transaction/>
+    </div>
     </>
   );
 };
