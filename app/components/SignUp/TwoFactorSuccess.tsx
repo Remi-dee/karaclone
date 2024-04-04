@@ -18,7 +18,7 @@ const TwoFactorSuccess = () => {
           Two factor authentication has been successfully enabled for your
           account. Your account is now more secure
         </p>
-        <Link href={"/dashboard"}>
+        <Link href={"/dashboard/home"}>
           <button className="w-full p-2 mb-6 rounded-md text-center  bg-primaryBtn text-white-100 ">
             Go to Dashboard
           </button>
