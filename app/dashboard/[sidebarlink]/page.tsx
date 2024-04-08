@@ -10,6 +10,7 @@ import Home from "../Home";
 import Wallet from "../components/Wallet/Wallet";
 import Withdraw from "../components/withdrawal/withdraw";
 import Transaction from "../components/Transactions/Transaction";
+import Trade from "../components/Trade/Trade";
 type Props = {};
 
 const Dashboard: FC<Props> = (urlParam: any) => {
@@ -59,6 +60,7 @@ const Dashboard: FC<Props> = (urlParam: any) => {
           {urlLink.toLowerCase() === "home" && <Home />}
           {urlLink.toLowerCase() === "wallet" && <Wallet />}
           {urlLink.toLowerCase() === "transaction" && <Transaction />}
+          {urlLink.toLowerCase() === "p2p-trade" && <Trade />}
         </div>
       </div>
     </div>
