@@ -92,6 +92,7 @@ const Login: FC<Props> = () => {
       </div>
       <div className="w-full lg:w-1/2  flex flex-col pb-4  items-center justify-center  bg-[#FBFBFB]">
         <div>
+
           <div className="flex  h-full flex-col items-center">
             <div className="mt-16 px-10">
               <div>
@@ -114,9 +115,8 @@ const Login: FC<Props> = () => {
                     onChange={handleChange}
                     id="email"
                     placeholder="loginemail@gmail.com"
-                    className={`${
-                      errors.email && touched.email && "border-red-500"
-                    } ${styles.input}`}
+                    className={`${errors.email && touched.email && "border-red-500"
+                      } ${styles.input}`}
                   />
                   {errors.email && touched.email && (
                     <span className="text-red-500 pt-2 block">
@@ -135,9 +135,8 @@ const Login: FC<Props> = () => {
                       onChange={handleChange}
                       id="password"
                       placeholder="password!@%"
-                      className={`${
-                        errors.password && touched.password && "border-red-500"
-                      } ${styles.input}`}
+                      className={`${errors.password && touched.password && "border-red-500"
+                        } ${styles.input}`}
                     />
                     {!show ? (
                       <AiOutlineEyeInvisible
@@ -159,6 +158,7 @@ const Login: FC<Props> = () => {
                     )}
                   </div>
 
+
                   {/* Forgot password  */}
                   <div className="flex justify-between items-center mt-5">
                     <div className="flex items-center ">
@@ -166,24 +166,21 @@ const Login: FC<Props> = () => {
                         type="checkbox"
                         id="rememberPassword"
                         className="mr-2 "
-                        // Add any additional props or event handlers as needed
+                      // Add any additional props or event handlers as needed
                       />
-                      <label
-                        htmlFor="rememberPassword"
-                        className="text-[#7C7C7C] whitespace-nowrap text-sm"
-                      >
+                      <label htmlFor="rememberPassword" className="text-[#7C7C7C] whitespace-nowrap text-sm">
                         Remember password for 30 days
                       </label>
                     </div>
                     <div className="w-max h-full ">
-                      <Link
-                        className="text-sm text-red-500 my-auto"
-                        href="/forgot-password"
-                      >
+                      <Link  className="text-sm text-red-500 my-auto" href="/forgot-password">
                         Forgot Password?
                       </Link>
                     </div>
+
                   </div>
+
+
 
                   <div className="w-full mt-5">
                     <input
@@ -206,25 +203,20 @@ const Login: FC<Props> = () => {
           </div>
 
           <div className="flex justify-between items-center text-gray-700 px-10 mt-auto h-12">
-            <p className="whitespace-nowrap text-xs md:text-base">
-              © FXkarasell 2024
-            </p>
+            <p className="whitespace-nowrap text-xs md:text-base">© FXkarasell 2024</p>
             <div className="flex items-center">
               {" "}
               <div className="h-1 w-1 m-2  rounded-full bg-[#7C7C7C]"></div>
-              <p className="whitespace-nowrap text-xs md:text-base">
-                Help center
-              </p>
+              <p className="whitespace-nowrap text-xs md:text-base">Help center</p>
             </div>
             <div className="flex items-center">
               {" "}
               <div className="h-1 w-1 m-2   rounded-full bg-[#7C7C7C]"></div>
-              <p className="whitespace-nowrap text-xs md:text-base">
-                Terms of Service
-              </p>
+              <p className="whitespace-nowrap text-xs md:text-base">Terms of Service</p>
             </div>
           </div>
         </div>
+
       </div>
     </main>
   );

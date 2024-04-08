@@ -1,20 +1,20 @@
 "use Client";
 import React from "react";
-import BalanceDropdown from "./components/BalanceDropdown";
 import { FaEye } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
 import {
   kycSelector,
   toggleStartKycModalSuccess,
 } from "@/redux/features/kyc/kycSlice";
-import KycModal from "../components/KYC/Kyc";
+import { useSelector, useDispatch } from "react-redux";
 import { useLoadUserQuery } from "@/redux/features/user/userApi";
-import DashboardLayout from "../components/general/DashboardLayout";
+import KycModal from "../components/KYC/Kyc";
+import BalanceDropdown from "./components/BalanceDropdown";
 
 function Home() {
   const { startKycModalOpen } = useSelector(kycSelector);
   const { isLoading, data } = useLoadUserQuery({});
   const dispatch = useDispatch();
+
   const quickActions = [
     {
       title: "Fund Wallet",
@@ -40,7 +40,7 @@ function Home() {
   ];
 
   return (
-    <div className="w-full">
+    <div>
       <div className="block lg:flex items-center gap-4">
         <div className="md:w-full lg:w-1/2 flex flex-col gap-4  h-full">
           {/* kyc verification card */}
@@ -69,6 +69,7 @@ function Home() {
                   }}
                   className=" mt-3 lg:mt-5 rounded-lg bg-primaryBtn text-white-100 font-bold px-4 py-2 md:py-3 text-xs  block focus:outline-0 "
                 >
+                  {" "}
                   Start Kyc Verification
                 </button>
               </div>

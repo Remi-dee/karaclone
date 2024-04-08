@@ -80,7 +80,6 @@ const CreateUser: FC<Props> = ({ params }) => {
       email: basicDetails.email,
       phone: basicDetails.phone,
       account_type: params.accountType,
-      role: "user",
       business_name: businessDetails.business_name,
       business_address: businessDetails.business_address,
       business_email: businessDetails.business_email,

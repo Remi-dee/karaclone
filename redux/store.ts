@@ -12,6 +12,7 @@ import { kycApi } from "./features/kyc/kycApi";
 export const store = configureStore({
   reducer: {
     [authApi.reducerPath]: authApi.reducer,
+
     [userApi.reducerPath]: userApi.reducer,
     [apiSlice.reducerPath]: apiSlice.reducer,
     [kycApi.reducerPath]: kycApi.reducer,

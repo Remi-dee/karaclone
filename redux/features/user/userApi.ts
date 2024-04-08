@@ -8,7 +8,7 @@ const baseQuery = fetchBaseQuery({
     const token = localStorage.getItem("auth");
     // If token exists, add it to the authorization header
     if (token) {
-      headers.set("Authorization", `Bearer ${token}`);
+      headers.set("Authorization", `bearer ${token}`);
     }
     return headers;
   },
@@ -50,7 +50,6 @@ export const userApi = createApi({
       }),
     }),
 
-    // verify 2FA
     verifyTwofa: builder.mutation({
       query: ({ topt }) => ({
         url: "user/verify-2fa",

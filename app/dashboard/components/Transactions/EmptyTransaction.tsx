@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
-import empty_img from "../../../public/Images/EmptyImage.png"
+import empty_img from "../../../../public/Images/EmptyImage.png"
 
 const EmptyTransaction = () => {
   return (
