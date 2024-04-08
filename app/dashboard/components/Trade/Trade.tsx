@@ -8,9 +8,9 @@ const Trade = () => {
             <div className='w-[96%] mx-auto'>
                 <div className='flex justify-between items-center'>
                     <span className='font-semibold text-xl'>P2P Trading</span>
-                    <div className='flex justify-center items-center p-2 bg-primaryBtn rounded-md text-white-100'>
+                    <div className='flex justify-center items-center p-1 bg-primaryBtn rounded-md text-white-100'>
                         <IoIosAddCircle/>
-                        <p>New Ad</p>
+                        <p className='text-xs'>New Ad</p>
                     </div>
                 </div>
             </div>
