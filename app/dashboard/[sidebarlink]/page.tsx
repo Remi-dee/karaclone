@@ -5,12 +5,20 @@ import { useFormik } from "formik";
 import { ArrowsRightLeftIcon } from "@heroicons/react/24/outline";
 import { BellIcon, SunIcon, UserCircleIcon } from "@heroicons/react/20/solid";
 import { Bars3Icon } from "@heroicons/react/24/outline";
+import { ArrowsRightLeftIcon } from "@heroicons/react/24/outline";
+import { BellIcon, SunIcon, UserCircleIcon } from "@heroicons/react/20/solid";
+import { Bars3Icon } from "@heroicons/react/24/outline";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Home from "../Home";
-import Wallet from "../Wallet";
+import Wallet from "../components/Wallet/Wallet";
 import Withdraw from "../components/withdrawal/withdraw";
+import Transaction from "../components/Transactions/Transaction";
 type Props = {};
 
+const Dashboard: FC<Props> = (urlParam: any) => {
+  const [showSidebar, setShowSidebar] = useState(false);
+  const urlLink: any = urlParam.params.sidebarlink;
+  const toggleSidebar = () => {
 const Dashboard: FC<Props> = (urlParam: any) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const urlLink: any = urlParam.params.sidebarlink;
@@ -33,7 +41,7 @@ const Dashboard: FC<Props> = (urlParam: any) => {
           <Bars3Icon className="text-gray-300 h-6 w-6" />
         </button>
 
-        <div className="flex fixed top-0 left-0 z-[999] xl:pl-96 w-full lg:justify-between items-center xl:px-32  border-b border-slate-200 bg-white-100">
+        <div className="flex fixed top-0 left-0 z-[999] xl:pl-96 w-full justify-end lg:justify-between items-center px-10 pr-15 xl:px-32  border-b border-slate-200 bg-white-100 py-5">
           <div className="hidden lg:block">
             <p className="text-black-200 font-bold text-lg">Hello Omorinsola</p>
             <p className="text-sm text-gray-300">
@@ -57,6 +65,7 @@ const Dashboard: FC<Props> = (urlParam: any) => {
                 <Withdraw />} */}
           {urlLink.toLowerCase() === "home" && <Home />}
           {urlLink.toLowerCase() === "wallet" && <Wallet />}
+          {urlLink.toLowerCase() === "transaction" && <Transaction />}
         </div>
       </div>
     </div>
