@@ -1,34 +1,68 @@
-import Image from "next/image";
-import kyc from "../../../public/Images/kyc.png";
-import { IoIosCheckmark } from "react-icons/io";
-import { kycData } from "./kycData";
+import { useDispatch } from "react-redux";
+import DefaultModal from "../CustomModal/CustomModalAlt";
+import { toggleStartKycModalSuccess } from "@/redux/features/kyc/kycSlice";
+import { MdOutlineCheck } from "react-icons/md";
+import Link from "next/link";
 
-
-interface kycProp {
-    onNext:()=>void
-}
-const Kyc:React.FC<kycProp> = ({onNext}) => {
+const KycModal = () => {
+  const dispatch = useDispatch();
 
   return (
-    <div>
-      <Image src={kyc} width={40} height={40} alt="" />
+    <DefaultModal
+      dismiss={() => {
+        dispatch(toggleStartKycModalSuccess({ data: false }));
+      }}
+    >
+      <form>
+        <div>
+          <div className="flex justify-between">
+            <img src="/svg/featured_wallet.svg" />
+            <div></div>
+          </div>
+          <div>
+            <h1 className="text-black text-[24px] mb-5 font-semibold">
+              Complete your KYC Verification
+            </h1>
+            <p className="mt-5 mb-5">This will enamble you to:</p>
 
-      <h2 className="py-6 font-bold text-xl">
-        Complete your KYC verification{" "}
-      </h2>
-      <p className="text-gray-400">This will enable you to</p>
-      {kycData?.map((item)=>(
-         <div key={item.id} className="mt-4 flex justify-start  items-center gap-2">
-        
-         <div className="w-[20px] h-[20px] flex justify-center items-center rounded-full bg-purple-100">
-           <IoIosCheckmark className="text-white-100 text-xl" />
-         </div>
-         <p className="text-gray-100 text-sm">{item.name}</p>
-       </div>
-      ))}
-        <button onClick={onNext} className="p-2 my-4 text-white-100 bg-primaryBtn w-full rounded-lg">Begin Verification</button>
-    </div>
+            <div className="mb-5">
+              <ul>
+                <li>
+                  <div className="mt-4 flex gap-1 text-sm">
+                    <MdOutlineCheck className="rounded-full text-center bg-primaryBtn text-white-100 font-montserrat" />
+                    Fund your wallet
+                  </div>
+                </li>
+                <li>
+                  <div className="mt-4 flex gap-1 text-sm">
+                    <MdOutlineCheck className="rounded-full text-center bg-primaryBtn text-white-100 font-montserrat" />
+                    Exchange your currency at best rate
+                  </div>
+                </li>
+                <li>
+                  <div className="mt-4 flex gap-1 text-sm">
+                    <MdOutlineCheck className="rounded-full text-center bg-primaryBtn text-white-100 font-montserrat" />
+                    Start a P2P transaction
+                  </div>
+                </li>
+                <li>
+                  <div className="mt-4 flex gap-1 text-twinklly-gray text-sm">
+                    <MdOutlineCheck className="rounded-full text-center bg-primaryBtn text-white-100 font-montserrat" />
+                    Withdraw funds seemlessly
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <Link href="/kyc-individual">
+              <button className="p-2 my-2 text-white bg-primaryBtn w-full rounded-lg">
+                Begin Verification
+              </button>
+            </Link>
+          </div>
+        </div>
+      </form>
+    </DefaultModal>
   );
 };
 
-export default Kyc;
+export default KycModal;
