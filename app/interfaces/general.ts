@@ -52,3 +52,33 @@ export type ToastProps = {
     | "top-left"
     | "top-right";
 };
+
+export interface DashboardLayoutType {
+  title?: string;
+  className?: string;
+  children: React.ReactNode;
+}
+
+export interface NavLink {
+  name: string;
+  icon?: React.ReactNode;
+  link: string;
+}
+
+export interface PayloadType {
+  payload: {
+    data?: [] | any;
+    message?: string | any;
+    error?: any;
+    action?: () => void;
+  };
+}
+
+export interface CustomModalTypes {
+  children?: React.ReactNode;
+  headerLabel?: string;
+  headerIcon?: React.ReactNode;
+  action?: () => void;
+  dismiss: () => void;
+  className?: string;
+}
