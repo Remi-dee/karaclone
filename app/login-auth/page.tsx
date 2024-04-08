@@ -23,7 +23,7 @@ export default function Home() {
   useEffect(() => {
     if (isSuccess) {
       toast.success("Verified successfully");
-      router.push("/dashboard");
+      router.push("/dashboard/home");
     }
     if (error) {
       if ("data" in error) {

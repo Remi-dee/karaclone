@@ -1,35 +1,47 @@
-import { RootState } from "@/redux/store";
-import { ReactNode } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { MdCancel } from "react-icons/md";
-import { closeModal } from "@/redux/modal/modalSlice";
+import { CustomModalTypes } from "@/app/interfaces/general";
 
-type CustomModalprops = {
-  children: ReactNode;
-};
-
-const CustomModal: React.FC<CustomModalprops> = ({ children }) => {
-  const isModalOpen = useSelector((state: RootState) => state.modal.isOpen);
-  const dispatch = useDispatch()
-  const closeModalHandler = ()=>{
-    dispatch(closeModal())
-  }
-
+const DefaultModal: React.FC<CustomModalTypes> = ({
+  children,
+  dismiss,
+  className,
+}) => {
   return (
-    <>
-      {isModalOpen && (
-        <div className="fixed top-0 left-0 w-screen h-screen flex justify-center items-center inset-0 z-50 overflow-auto bg-gray-200 bg-opacity-50">
-          <div className="relative bg-white-100 rounded-md shadow-lg w-full p-8 max-w-[400px] min-h-[350px]">
-            {children}
-            <div onClick={closeModalHandler} className="absolute top-0 right-0 p-4 cursor-pointer">
-            <MdCancel className="text-gray-200 text-lg" />
-          </div>
-          </div>
-          
+    <div
+      id="medium-modal"
+      tabIndex={-1}
+      className="container overflow-y-auto overflow-x-hidden fixed top-0 
+      right-0 left-0 z-50 min-w-full md:inset-0 min-h-screen backdrop-blur-sm 
+      backdrop-brightness-50"
+    >
+      <div
+        className={`${className} flex flex-col sm:flex-row sm:items-center justify-center min-h-screen `}
+      >
+        <div className="relative bg-[#F6F6F8] sm:px-14 rounded-3xl shadow p-6 m-8">
+          <button
+            type="button"
+            className="absolute -top-5 -right-5 text-[#002C79] hover:text-white p-3 
+            bg-[#F6F6F8] hover:bg-dark-blue rounded-full cursor-pointer shadow"
+            data-modal-toggle="medium-modal"
+            onClick={dismiss}
+          >
+            <svg
+              className="w-5 h-5"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fillRule="evenodd"
+                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </button>
+          <div className="mt-8 pb-2">{children}</div>
         </div>
-      )}
-    </>
+      </div>
+    </div>
   );
 };
 
-export default CustomModal;
+export default DefaultModal;

@@ -110,11 +110,6 @@ const TwoFactorCode = () => {
         >
           Verify
         </button>
-        {/* <Link href={"/signUp/activate-2fa/success"}>
-          <button className="w-full p-2 mb-6 rounded-md text-center  bg-primaryBtn text-white-100 ">
-            Verify
-          </button>
-        </Link> */}
       </div>
     </div>
   );

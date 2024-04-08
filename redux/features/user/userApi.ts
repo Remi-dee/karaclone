@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { userLoggedIn } from "../auth/authSlice";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: process.env.NEXT_PUBLIC_SERVER_URI,
@@ -18,12 +19,26 @@ export const userApi = createApi({
   baseQuery, // Use the customized baseQuery
   endpoints: (builder) => ({
     // get user
-    getUSer: builder.query({
+    loadUser: builder.query({
       query: (data) => ({
-        url: "user/me",
+        url: "me",
         method: "GET",
         credentials: "include" as const,
       }),
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        try {
+          const result = await queryFulfilled;
+
+          dispatch(
+            userLoggedIn({
+              accessToken: result.data.accessToken,
+              user: result.data.user,
+            })
+          );
+        } catch (error: any) {
+          console.log(error);
+        }
+      },
     }),
 
     // activate 2FA
@@ -47,5 +62,5 @@ export const userApi = createApi({
   }),
 });
 
-export const { useEnableTwofaQuery, useVerifyTwofaMutation, useGetUSerQuery } =
+export const { useEnableTwofaQuery, useVerifyTwofaMutation, useLoadUserQuery } =
   userApi;

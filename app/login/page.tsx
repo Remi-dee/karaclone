@@ -90,104 +90,139 @@ const Login: FC<Props> = () => {
           </div>
         </div>
       </div>
-      <div className="w-full lg:w-1/2  flex flex-col pb-4 justify-between  bg-[#FBFBFB]">
-        <div className="flex flex-col items-center">
-          <div className="mt-16 ">
-            <div>
-              <img src="/fxkara-logo.svg" height="200px" alt="" />
-            </div>
-            <div className="h-[500px] w-full flex flex-col justify-center">
-              <h2 className="text-4xl font-bold">Log in</h2>
-              <div className="mt-3 text-lg text-[#7C7C7C]">
-                Welcome back! Please enter your details
+      <div className="w-full lg:w-1/2  flex flex-col pb-4  items-center justify-center  bg-[#FBFBFB]">
+        <div>
+          <div className="flex  h-full flex-col items-center">
+            <div className="mt-16 px-10">
+              <div>
+                <img src="/fxkara-logo.svg" height="200px" alt="" />
               </div>
-              <form onSubmit={handleSubmit}>
-                <label className={`${styles.label}`} htmlFor="email">
-                  Email
-                </label>
-                <input
-                  required
-                  type="email"
-                  name=""
-                  value={values.email}
-                  onChange={handleChange}
-                  id="email"
-                  placeholder="loginemail@gmail.com"
-                  className={`${
-                    errors.email && touched.email && "border-red-500"
-                  } ${styles.input}`}
-                />
-                {errors.email && touched.email && (
-                  <span className="text-red-500 pt-2 block">
-                    {errors.email}
-                  </span>
-                )}
-                <div className="w-full mt-5 relative mb-1">
-                  <label className={`${styles.label}`} htmlFor="password">
-                    Password
+              <div className="h-[500px] w-full flex flex-col justify-center text-black ">
+                <h2 className="text-[black] text-4xl font-bold ">Log in</h2>
+                <div className="my-3 text-lg text-[#7C7C7C]">
+                  Welcome back! Please enter your details
+                </div>
+                <form onSubmit={handleSubmit}>
+                  <label className={`${styles.label}`} htmlFor="email">
+                    Email
                   </label>
                   <input
-                    type={!show ? "password" : "text"}
-                    name="password"
                     required
-                    value={values.password}
+                    type="email"
+                    name=""
+                    value={values.email}
                     onChange={handleChange}
-                    id="password"
-                    placeholder="password!@%"
+                    id="email"
+                    placeholder="loginemail@gmail.com"
                     className={`${
-                      errors.password && touched.password && "border-red-500"
+                      errors.email && touched.email && "border-red-500"
                     } ${styles.input}`}
                   />
-                  {!show ? (
-                    <AiOutlineEyeInvisible
-                      className="absolute bottom-3 right-2 z-1 cursor-pointer"
-                      size={20}
-                      onClick={() => setShow(true)}
-                    />
-                  ) : (
-                    <AiOutlineEye
-                      className="absolute bottom-3 right-2 z-1 cursor-pointer"
-                      size={20}
-                      onClick={() => setShow(false)}
-                    />
-                  )}
-                  {errors.password && touched.password && (
+                  {errors.email && touched.email && (
                     <span className="text-red-500 pt-2 block">
-                      {errors.password}
+                      {errors.email}
                     </span>
                   )}
-                </div>
-                <div className="w-full mt-5">
-                  <input
-                    type="submit"
-                    value="Login"
-                    className="w-full bg-[#1E1E1E] text-[#FFFFFF] rounded-lg h-12 mt-6 flex justify-center items-center cursor-pointer"
-                  />
-                </div>
-                <br />
+                  <div className="w-full mt-5 relative mb-1">
+                    <label className={`${styles.label}`} htmlFor="password">
+                      Password
+                    </label>
+                    <input
+                      type={!show ? "password" : "text"}
+                      name="password"
+                      required
+                      value={values.password}
+                      onChange={handleChange}
+                      id="password"
+                      placeholder="password!@%"
+                      className={`${
+                        errors.password && touched.password && "border-red-500"
+                      } ${styles.input}`}
+                    />
+                    {!show ? (
+                      <AiOutlineEyeInvisible
+                        className="absolute bottom-3 right-2 z-1 cursor-pointer"
+                        size={20}
+                        onClick={() => setShow(true)}
+                      />
+                    ) : (
+                      <AiOutlineEye
+                        className="absolute bottom-3 right-2 z-1 cursor-pointer"
+                        size={20}
+                        onClick={() => setShow(false)}
+                      />
+                    )}
+                    {errors.password && touched.password && (
+                      <span className="text-red-500 pt-2 block">
+                        {errors.password}
+                      </span>
+                    )}
+                  </div>
 
-                <h5 className="text-center pt-4 font-Poppins text-[14px] text-black dark:text-white">
-                  Not have any account?{" "}
-                  <Link className="text-primaryBtn" href={"/signUp"}>
-                    Sign Up
-                  </Link>
-                </h5>
-              </form>
+                  {/* Forgot password  */}
+                  <div className="flex justify-between items-center mt-5">
+                    <div className="flex items-center ">
+                      <input
+                        type="checkbox"
+                        id="rememberPassword"
+                        className="mr-2 "
+                        // Add any additional props or event handlers as needed
+                      />
+                      <label
+                        htmlFor="rememberPassword"
+                        className="text-[#7C7C7C] whitespace-nowrap text-sm"
+                      >
+                        Remember password for 30 days
+                      </label>
+                    </div>
+                    <div className="w-max h-full ">
+                      <Link
+                        className="text-sm text-red-500 my-auto"
+                        href="/forgot-password"
+                      >
+                        Forgot Password?
+                      </Link>
+                    </div>
+                  </div>
+
+                  <div className="w-full mt-5">
+                    <input
+                      type="submit"
+                      value="Login"
+                      className="w-full bg-[#1E1E1E] text-[#FFFFFF] rounded-lg h-12 mt-6 flex justify-center items-center cursor-pointer"
+                    />
+                  </div>
+                  <br />
+
+                  <h5 className="text-center pt-4 font-Poppins text-[14px] text-[black] dark:text-white">
+                    Not have any account?{" "}
+                    <Link className="text-primaryBtn" href={"/signUp"}>
+                      Sign Up
+                    </Link>
+                  </h5>
+                </form>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="flex justify-between items-center px-16 h-12">
-          <div>© FXkarasell 2024</div>
-          <div className="flex items-center">
-            {" "}
-            <div className="h-1 w-1 m-2  rounded-full bg-[#7C7C7C]"></div>
-            <div>Help center</div>
-          </div>
-          <div className="flex items-center">
-            {" "}
-            <div className="h-1 w-1 m-2   rounded-full bg-[#7C7C7C]"></div>
-            <div>Terms of Service</div>
+          <div className="flex justify-between items-center text-gray-700 px-10 mt-auto h-12">
+            <p className="whitespace-nowrap text-xs md:text-base">
+              © FXkarasell 2024
+            </p>
+            <div className="flex items-center">
+              {" "}
+              <div className="h-1 w-1 m-2  rounded-full bg-[#7C7C7C]"></div>
+              <p className="whitespace-nowrap text-xs md:text-base">
+                Help center
+              </p>
+            </div>
+            <div className="flex items-center">
+              {" "}
+              <div className="h-1 w-1 m-2   rounded-full bg-[#7C7C7C]"></div>
+              <p className="whitespace-nowrap text-xs md:text-base">
+                Terms of Service
+              </p>
+            </div>
           </div>
         </div>
       </div>

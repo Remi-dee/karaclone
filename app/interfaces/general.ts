@@ -64,3 +64,21 @@ export interface NavLink {
   icon?: React.ReactNode;
   link: string;
 }
+
+export interface PayloadType {
+  payload: {
+    data?: [] | any;
+    message?: string | any;
+    error?: any;
+    action?: () => void;
+  };
+}
+
+export interface CustomModalTypes {
+  children?: React.ReactNode;
+  headerLabel?: string;
+  headerIcon?: React.ReactNode;
+  action?: () => void;
+  dismiss: () => void;
+  className?: string;
+}
