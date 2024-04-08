@@ -1,6 +1,6 @@
-import NGN from "../../../../public/Images/NGN.png";
-import GDP from "../../../../public/Images/GBP.png";
-import USD from "../../../../public/Images/USD.png";
+import NGN from "../../../public/Images/NGN.png";
+import GDP from "../../../public/Images/GBP.png";
+import USD from "../../../public/Images/USD.png";
 export const currencyData = [
   {
     label: "NGN",

@@ -1,14 +1,16 @@
 "use client";
 import React, { useState } from "react";
-import CustomDropdown from "../../../components/CustomDropdown/CustomDropdown";
+import CustomDropdown from "../CustomDropdown/CustomDropdown";
 import { transactionOption } from "./transactionType";
 import { currencyData } from "./currencyData";
 import TransactionDate from "./TransactionDate";
 import TransactionTable from "./TransactionTable";
 
+
 const Transaction = () => {
   const [transactionType, setTransactionType] = useState<string>("");
   const [currency, setCurrency] = useState<string>("");
+ 
 
   const handleTransaction = (value: string) => {
     setTransactionType(value);
@@ -20,7 +22,7 @@ const Transaction = () => {
 
   return (
     <div className="p-0 m-0 box-border">
-      <div className="w-[100%] min-h-[70vh] shadow-lg rounded-md">
+      <div className="w-full min-h-[70vh] shadow-lg rounded-md">
         <div className="w-[96%] mx-auto">
           <h2 className="py-4 text-lg font-semibold">Transaction</h2>
           <div className="max-w-[600px] w-full pb-6 flex flex-wrap justify-start gap-2 items-center">
@@ -41,11 +43,11 @@ const Transaction = () => {
                 className=""
               />
             </div>
-            <TransactionDate />
+           <TransactionDate/>
           </div>
-          <hr className="border border-gray-500" />
+          <hr  className="border border-gray-500"/>
           <div className="py-4">
-            <TransactionTable />
+            <TransactionTable/>
           </div>
         </div>
       </div>
