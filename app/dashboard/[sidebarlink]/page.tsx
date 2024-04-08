@@ -1,14 +1,13 @@
 "use client";
-import Link from "next/link";
-import { FC, useEffect, useState } from "react";
-import { useFormik } from "formik";
+import { FC, useState } from "react";
 import { ArrowsRightLeftIcon } from "@heroicons/react/24/outline";
 import { BellIcon, SunIcon, UserCircleIcon } from "@heroicons/react/20/solid";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Home from "../Home";
 import Wallet from "../Wallet";
-import Withdraw from "../components/withdrawal/withdraw";
+import Trade from "../components/Trade/Trade";
+import Transaction from "@/app/components/Transactions/Transaction";
 type Props = {};
 
 const Dashboard: FC<Props> = (urlParam: any) => {
@@ -57,6 +56,8 @@ const Dashboard: FC<Props> = (urlParam: any) => {
                 <Withdraw />} */}
           {urlLink.toLowerCase() === "home" && <Home />}
           {urlLink.toLowerCase() === "wallet" && <Wallet />}
+          {urlLink.toLowerCase() === "transaction" && <Transaction />}
+          {urlLink.toLowerCase() === "p2p-trade" && <Trade />}
         </div>
       </div>
     </div>
