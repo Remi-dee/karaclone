@@ -1,7 +1,7 @@
 "use client";
 import React, { FC, useState } from "react";
 import { useDispatch } from "react-redux";
-import CustomModal from "./components/CustomModal/CustomModal";
+import CustomModal from "./components/CustomModal/CustomModalAlt";
 import { openModal } from "@/redux/modal/modalSlice";
 import Kyc from "./components/KYC/Kyc";
 import SelectCountry from "./components/KYC/SelectCountry";
@@ -17,8 +17,6 @@ import VerificationEmail from "./components/KYC/VerificationEmail";
 import VerificationSelfie from "./components/KYC/VerificationSelfie";
 import VerificationSuccess from "./components/KYC/VerificationSuccess";
 
-
-
 interface Props {}
 
 const Page: FC<Props> = (props) => {
@@ -27,15 +25,14 @@ const Page: FC<Props> = (props) => {
   const [selectedOptions, setSelectedOptions] = useState<string | null>(null);
   const dispatch = useDispatch();
 
-
   const options = [
-    { value: 'option1', label: 'Option 1' },
-    { value: 'option2', label: 'Option 2' },
-    { value: 'option3', label: 'Option 3' },
+    { value: "option1", label: "Option 1" },
+    { value: "option2", label: "Option 2" },
+    { value: "option3", label: "Option 3" },
   ];
-  const handleSelect = (value:string)=>{
-    setSelectedOptions(value)
-  }
+  const handleSelect = (value: string) => {
+    setSelectedOptions(value);
+  };
   const openModalHandler = () => {
     dispatch(openModal());
   };
@@ -77,9 +74,8 @@ const Page: FC<Props> = (props) => {
         );
       case 11:
         return <VerificationSelfie onNext={handleNextPage} />;
-        case 12:
+      case 12:
         return <VerificationSuccess />;
-      
 
       default:
         return null;
@@ -87,17 +83,13 @@ const Page: FC<Props> = (props) => {
   };
   return (
     <>
-    <div>
-      <h5>Hello world!</h5>
-      <button onClick={openModalHandler}>open modal</button>
-      <CustomModal>{renderCurrentPage()}</CustomModal>
-    </div>
-   
+      <div>
+        <h5>Hello world!</h5>
+        <button onClick={openModalHandler}>open modal</button>
+        <CustomModal>{renderCurrentPage()}</CustomModal>
+      </div>
     </>
   );
 };
 
 export default Page;
-
-
-

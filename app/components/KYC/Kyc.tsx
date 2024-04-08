@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import DefaultModal from "../CustomModal/CustomModal";
+import DefaultModal from "../CustomModal/CustomModalAlt";
 import { toggleStartKycModalSuccess } from "@/redux/features/kyc/kycSlice";
 import { MdOutlineCheck } from "react-icons/md";
 import Link from "next/link";
