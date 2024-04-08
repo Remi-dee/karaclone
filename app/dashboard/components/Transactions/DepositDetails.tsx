@@ -49,7 +49,7 @@ const DepositDetails = () => {
     <hr className="border border-gray-500" />
     <p className="py-2 text-[#000] text-center">
       Need help?{" "}
-      <a className="font-semibold  text-primaryBtn">
+      <a href='' className="font-semibold  text-primaryBtn">
         Contact Support
       </a>
     </p>

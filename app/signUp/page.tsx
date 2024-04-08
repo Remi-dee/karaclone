@@ -39,12 +39,12 @@ const SignUpContent = () => {
     return () => clearInterval(interval);
   }, []);
   return (
-    <div className="w-full m-0 box-border">
-      <div className="mx-auto">
-        <div className="flex justify-center items-center">
-          <div className="w-[50%] min-h-screen top-0 bottom-0 h-full bg-signupBg">
+    <div className="m-0 p-0 box-border overflow-hidden">
+      <div className="w-[90%] mx-auto">
+        <div className="flex justify-center items-center my-12">
+          <div className="w-[45%] h-[500px] bg-signupBg">
             {content ? (
-              <div className="w-[90%] mx-auto  mt-12">
+              <div className="w-[90%] mx-auto mt-12">
                 <div className="w-[300px] mx-auto h-[250px] mb-8">
                   <Image src={signupHero_1} alt="" className="w-full h-full" />
                 </div>
@@ -90,7 +90,7 @@ const SignUpContent = () => {
               </div>
             </div>
           </div>
-          <div className="w-[50%] min-h-screen top-0 bottom-0 h-full bg-white-300">
+          <div className="w-[45%] h-[500px] bg-white-300">
             <div className="w-[450px]  mx-auto mt-20 shadow-lg">
               <div className="w-[400px] mx-auto pt-8">
                 <div className="w-[25px] flex justify-center shadow-lg border rounded-md h-[25px]">
