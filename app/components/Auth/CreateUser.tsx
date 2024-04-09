@@ -13,23 +13,23 @@ import TwoFactorAuth from "./TwoFactorAuth";
 type Props = { params: { accountType: string } };
 
 const CreateUser: FC<Props> = ({ params }) => {
-  const [registerUser, { isLoading, isSuccess, error, data }] =
-    useRegisterMutation();
+  // const [registerUser, { isLoading, isSuccess, error, data }] =
+  //   useRegisterMutation();
 
-  useEffect(() => {
-    if (isSuccess) {
-      toast.success("User registration successful");
-      setActive(active + 1);
+  // useEffect(() => {
+  //   if (isSuccess) {
+  //     toast.success("User registration successful");
+  //     setActive(active + 1);
 
-      localStorage.setItem("auth", data?.activation_token as any);
-    }
-    if (error) {
-      if ("data" in error) {
-        const errorMessage = error as any;
-        toast.error(errorMessage.data.message);
-      }
-    }
-  }, [isLoading, isSuccess, error]);
+  //     localStorage.setItem("auth", data?.activation_token as any);
+  //   }
+  //   if (error) {
+  //     if ("data" in error) {
+  //       const errorMessage = error as any;
+  //       toast.error(errorMessage.data.message);
+  //     }
+  //   }
+  // }, [isLoading, isSuccess, error]);
 
   const [active, setActive] = useState(1);
   const [basicDetails, setBasicDetails] = useState({
@@ -64,35 +64,35 @@ const CreateUser: FC<Props> = ({ params }) => {
     setActive(3);
   };
 
-  const handleUserRegistration = async () => {
-    const data = userData;
+  // const handleUserRegistration = async () => {
+  //   const data = userData;
 
-    if (!isLoading) {
-      await registerUser(data);
-    }
-  };
+  //   if (!isLoading) {
+  //     await registerUser(data);
+  //   }
+  // };
 
-  const handleSubmit = async () => {
-    // Prepare our data object
-    const data = {
-      name: basicDetails.name,
-      gender: basicDetails.gender,
-      email: basicDetails.email,
-      phone: basicDetails.phone,
-      account_type: params.accountType,
-      business_name: businessDetails.business_name,
-      business_address: businessDetails.business_address,
-      business_email: businessDetails.business_email,
-      business_line: businessDetails.business_line,
-      password: userPassword.password,
-    };
+  // const handleSubmit = async () => {
+  //   // Prepare our data object
+  //   const data = {
+  //     name: basicDetails.name,
+  //     gender: basicDetails.gender,
+  //     email: basicDetails.email,
+  //     phone: basicDetails.phone,
+  //     account_type: params.accountType,
+  //     business_name: businessDetails.business_name,
+  //     business_address: businessDetails.business_address,
+  //     business_email: businessDetails.business_email,
+  //     business_line: businessDetails.business_line,
+  //     password: userPassword.password,
+  //   };
 
-    // Update userData state
-    setUserData(data);
+  //   // Update userData state
+  //   setUserData(data);
 
-    // Call handleUserRegistration() after state update
-    handleUserRegistration();
-  };
+  //   // Call handleUserRegistration() after state update
+  //   handleUserRegistration();
+  // };
 
   return (
     <div className="w-full flex justify-center items-center  min-h-screen">
@@ -130,7 +130,9 @@ const CreateUser: FC<Props> = ({ params }) => {
             setActive={setActive}
             userPassword={userPassword}
             setUserPassword={setUserPassword}
-            handleSubmit={handleSubmit}
+            basicDetails={basicDetails}
+            businessDetails={businessDetails}
+            accountType={params.accountType}
           />
         )}
 

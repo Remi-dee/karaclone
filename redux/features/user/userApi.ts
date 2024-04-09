@@ -1,11 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { userLoggedIn } from "../auth/authSlice";
+import { userLoggedIn, userLoggedOut } from "../auth/authSlice";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: process.env.NEXT_PUBLIC_SERVER_URI,
   prepareHeaders: (headers, { getState }) => {
     // Get the token from localStorage
-    const token = localStorage.getItem("auth");
+    const token = localStorage.getItem("auth_token");
     // If token exists, add it to the authorization header
     if (token) {
       headers.set("Authorization", `bearer ${token}`);
@@ -21,7 +21,7 @@ export const userApi = createApi({
     // get user
     loadUser: builder.query({
       query: (data) => ({
-        url: "me",
+        url: "user/me",
         method: "GET",
         credentials: "include" as const,
       }),
@@ -58,8 +58,28 @@ export const userApi = createApi({
         credentials: "include" as const,
       }),
     }),
+
+    logOut: builder.query({
+      query: () => ({
+        url: "user/logout",
+        method: "GET",
+
+        credentials: "include" as const,
+      }),
+      async onQueryStarted(arg, { dispatch }) {
+        try {
+          dispatch(userLoggedOut());
+        } catch (error: any) {
+          console.log(error);
+        }
+      },
+    }),
   }),
 });
 
-export const { useEnableTwofaQuery, useVerifyTwofaMutation, useLoadUserQuery } =
-  userApi;
+export const {
+  useEnableTwofaQuery,
+  useVerifyTwofaMutation,
+  useLoadUserQuery,
+  useLogOutQuery,
+} = userApi;
