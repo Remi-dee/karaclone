@@ -1,17 +1,21 @@
 "use client";
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import passwordLogo from "../../../public/Images/passwordLogo.png";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { GiCheckMark } from "react-icons/gi";
+import { useRegisterMutation } from "@/redux/features/auth/authApi";
+import toast from "react-hot-toast";
 
 type Props = {
   active: number;
   setActive: (active: any) => void;
   userPassword: any;
   setUserPassword: (userPassword: any) => void;
-  handleSubmit: any;
+  businessDetails: any;
+  basicDetails: any;
+  accountType: string;
 };
 
 const CreatePassword: FC<Props> = ({
@@ -19,13 +23,50 @@ const CreatePassword: FC<Props> = ({
   setActive,
   userPassword,
   setUserPassword,
-  handleSubmit: handleRegUser,
+  businessDetails,
+  basicDetails,
+  accountType,
 }) => {
+  const [registerUser, { isLoading, isSuccess, error, data }] =
+    useRegisterMutation();
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("User registration successful");
+      setActive(active + 1);
+
+      localStorage.setItem("auth", data?.activation_token as any);
+    }
+    if (error) {
+      if ("data" in error) {
+        const errorMessage = error as any;
+        toast.error(errorMessage.data.message);
+      }
+    }
+  }, [isLoading, isSuccess, error]);
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    await handleRegUser();
+    const data = {
+      name: basicDetails.name,
+      gender: basicDetails.gender,
+      email: basicDetails.email,
+      phone: basicDetails.phone,
+      account_type: accountType,
+      role: "user",
+      business_name: businessDetails.business_name,
+      business_address: businessDetails.business_address,
+      business_email: businessDetails.business_email,
+      business_line: businessDetails.business_line,
+      password: userPassword.password,
+    };
+
+    if (!isLoading) {
+      await registerUser(data);
+    }
   };
   const [showPassword, setShowPassword] = useState("password");
+
   return (
     <div className="w-[500px] mx-auto mt-10 shadow-lg  rounded-md border border-white-100">
       <div className="w-[400px] pt-6 mx-auto">

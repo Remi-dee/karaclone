@@ -1,8 +1,11 @@
+import { PayloadType } from "@/app/interfaces/general";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { RootState } from "@/redux/store";
 
 const initialState = {
   token: "",
   user: "",
+  logoutModalOpen: false,
 };
 
 const authSlice = createSlice({
@@ -23,9 +26,17 @@ const authSlice = createSlice({
       state.token = "";
       state.user = "";
     },
+    toggleLogoutModal: (state, { payload }: PayloadType) => {
+      state.logoutModalOpen = payload.data;
+    },
   },
 });
 
-export const { userRegistration, userLoggedIn, userLoggedOut } =
-  authSlice.actions;
+export const {
+  userRegistration,
+  userLoggedIn,
+  userLoggedOut,
+  toggleLogoutModal,
+} = authSlice.actions;
+export const authSelector = (state: RootState) => state.auth;
 export default authSlice.reducer;

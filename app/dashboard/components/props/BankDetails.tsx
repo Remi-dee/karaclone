@@ -26,7 +26,6 @@ function BankDetails({ changeStep }: { changeStep: () => void }) {
   ];
 
   const handleClickEvent = () => {
-    console.log("clicked");
     changeStep();
   };
   return (

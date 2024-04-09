@@ -6,6 +6,7 @@ import { RootState } from "@/redux/store";
 
 const initialState: KYCState = {
   startKycModalOpen: false,
+  startKybModalOpen: false,
 };
 
 export const kycSlice = createSlice({
@@ -15,9 +16,13 @@ export const kycSlice = createSlice({
     toggleStartKycModalSuccess: (state: KYCState, { payload }: PayloadType) => {
       state.startKycModalOpen = payload.data as boolean;
     },
+    toggleStartKybModalSuccess: (state: KYCState, { payload }: PayloadType) => {
+      state.startKybModalOpen = payload.data as boolean;
+    },
   },
 });
 
-export const { toggleStartKycModalSuccess } = kycSlice.actions;
+export const { toggleStartKycModalSuccess, toggleStartKybModalSuccess } =
+  kycSlice.actions;
 export const kycSelector = (state: RootState) => state.kyc;
 export default kycSlice.reducer;
