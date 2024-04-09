@@ -12,8 +12,8 @@ export default function Wallet() {
     setSelectedCurrency(currency);
   };
   return (
-    <div className="p-0 m-0">
-      <div className="w-full rounded-md shadow-lg p-4">
+    <div className="p-0 m-0 gap-4 bg-white-100">
+      <div className="w-full rounded-md shadow-lg mb-3 p-4">
         <h2 className="font-semibold font-Josefin text-lg py-2">Wallet</h2>
         <div className="flex justify-start items-center text-gray-300 gap-2">
           <p className="text-sm">My Balances</p>
@@ -74,7 +74,7 @@ export default function Wallet() {
           </div>
         </div>
       </div>
-      <div className="w-full rounded-md shadow-lg p-4 my-4">
+      <div className="w-full rounded-md shadow-lg mt-4 p-4 my-4">
         <h2 className="font-bold text-sm py-2">Recent Transactions</h2>
         <TransactionTable />
       </div>

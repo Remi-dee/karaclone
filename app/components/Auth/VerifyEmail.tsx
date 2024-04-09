@@ -16,7 +16,7 @@ type VerifyNumber = {
 };
 
 const VerifyEmail: FC<Props> = ({ setVerificationSuccess }) => {
-  const activationToken = localStorage.getItem("auth");
+  const activationToken = localStorage.getItem("auth_token");
   const [activation, { isSuccess, error }] = useActivationMutation();
   const [invalidError, setInvalidError] = useState<boolean>(false);
 

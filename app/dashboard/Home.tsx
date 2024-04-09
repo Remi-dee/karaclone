@@ -3,6 +3,7 @@ import React from "react";
 import { FaEye } from "react-icons/fa";
 import {
   kycSelector,
+  toggleStartKybModalSuccess,
   toggleStartKycModalSuccess,
 } from "@/redux/features/kyc/kycSlice";
 import { useSelector, useDispatch } from "react-redux";
@@ -10,6 +11,7 @@ import { useLoadUserQuery } from "@/redux/features/user/userApi";
 import KycModal from "../components/KYC/Kyc";
 import BalanceDropdown from "./components/BalanceDropdown";
 import { checkAuthentication } from "../hooks/ProtectedRoute";
+import KYBModal from "../components/KYC/kyb";
 
 function Home() {
   const { startKycModalOpen, startKybModalOpen } = useSelector(kycSelector);
@@ -58,7 +60,7 @@ function Home() {
                     </span>
                   </div>
                   <p className="text-3xl font-bold text-gray-800 mt-2">
-                    0.00{" "}
+                    200,000{" "}
                     <span className="text-gray-300 text-base font-medium">
                       NGN
                     </span>{" "}
@@ -74,35 +76,22 @@ function Home() {
               <div className=" bg-white-100 rounded-xl flex-1 grow flex mb-3 lg-mb-0 justify-between border border-slate-200 py-5 h-full ">
                 <div className=" bg-white-100  rounded-md p-4">
                   <div className="flex items-center gap-2">
-                    <h2 className="text-gray-300">Wallet Balance</h2>
-                    <span className="text-gray-300">
-                      <FaEye />
-                    </span>
+                    <h2 className="text-gray-300">Total Transactions</h2>
                   </div>
-                  <p className="text-3xl font-bold text-gray-800 mt-2">
-                    0.00{" "}
-                    <span className="text-gray-300 text-base font-medium">
-                      NGN
-                    </span>{" "}
-                  </p>
-                </div>
-                <div className="px-3 p-4">
-                  <div>
-                    <BalanceDropdown currency={""} />
-                  </div>
+                  <p className="text-3xl font-bold text-gray-800 mt-2">12 </p>
                 </div>
               </div>
 
               <div className=" bg-white-100 rounded-xl flex-1 grow flex mb-3 lg-mb-0 justify-between border border-slate-200 py-5 h-full ">
                 <div className=" bg-white-100  rounded-md p-4">
                   <div className="flex items-center gap-2">
-                    <h2 className="text-gray-300">Wallet Balance</h2>
+                    <h2 className="text-gray-300">Total Transaction Value</h2>
                     <span className="text-gray-300">
                       <FaEye />
                     </span>
                   </div>
                   <p className="text-3xl font-bold text-gray-800 mt-2">
-                    0.00{" "}
+                    200,000{" "}
                     <span className="text-gray-300 text-base font-medium">
                       NGN
                     </span>{" "}
@@ -259,7 +248,7 @@ function Home() {
                       <button
                         onClick={() => {
                           dispatch(
-                            toggleStartKycModalSuccess({
+                            toggleStartKybModalSuccess({
                               data: true,
                             })
                           );
@@ -388,6 +377,7 @@ function Home() {
             </div>
           </div>
           {startKycModalOpen && <KycModal />}
+          {startKybModalOpen && <KYBModal />}
         </div>
       )}
     </div>

@@ -35,7 +35,7 @@ const CreatePassword: FC<Props> = ({
       toast.success("User registration successful");
       setActive(active + 1);
 
-      localStorage.setItem("auth", data?.activation_token as any);
+      localStorage.setItem("auth_token", data?.activation_token as any);
     }
     if (error) {
       if ("data" in error) {

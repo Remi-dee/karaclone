@@ -1,8 +1,8 @@
 import React, { FC, useState } from "react";
 import Image from "next/image";
 import scan from "../../../public/Images/scan.png";
-// import Qrcode from "../../../public/Images/Qrcode.png";
 import TwoFactorCode from "./TwoFactorCode";
+import { useLoadUserQuery } from "@/redux/features/user/userApi";
 
 type Props = {
   qrCode: string;
@@ -10,6 +10,7 @@ type Props = {
 
 const QrCode: FC<Props> = ({ qrCode }) => {
   const [twoFaCode, setTwoFaCode] = useState(true);
+  const { data } = useLoadUserQuery({});
   return (
     <>
       {twoFaCode ? (
@@ -28,9 +29,7 @@ const QrCode: FC<Props> = ({ qrCode }) => {
               <img src={qrCode} alt="QR Code" className="w-full" />
             </div>
             <div className="flex justify-between items-center my-4">
-              <span className="font-semibold text-sm">
-                33245JN 47738NJ 327463339
-              </span>
+              <span className="font-semibold text-sm">{data?.user.secret}</span>
               <span className="text-primaryBtn text-sm font-semibold">
                 Copy
               </span>

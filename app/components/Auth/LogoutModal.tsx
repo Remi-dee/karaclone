@@ -21,6 +21,7 @@ const LogoutModal = () => {
     localStorage.removeItem("auth_token");
     localStorage.removeItem("user");
     localStorage.removeItem("auth");
+    dispatch(toggleLogoutModal({ data: false }));
     router.push("/login");
   };
 
