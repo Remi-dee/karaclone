@@ -69,7 +69,7 @@ const TwoFactorCode = () => {
 
     if (value === "" && index > 0) {
       inputRefs[index - 1].current?.focus();
-    } else if (value.length === 1 && index < 3) {
+    } else if (value.length === 1 && index < 5) {
       inputRefs[index + 1].current?.focus();
     }
   };

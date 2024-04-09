@@ -40,9 +40,9 @@ const Dashboard: FC<Props> = (urlParam: any) => {
           <Bars3Icon className="text-gray-300 h-6 w-6" />
         </button>
 
-        <div className="flex pb-3 top-0 z-[999] xl:pl-96 w-full lg:justify-between xl:px-32 border-b border-slate-200 bg-white-100">
+        <div className="flex justify-between py-5 border-slate-200 bg-white-100">
           <div className="flex items-center">
-            <div className="hidden lg:block ml-auto">
+            <div className="hidden lg:block ml-5">
               <p className="text-black-200 font-bold text-lg">
                 {data?.user.name}
               </p>

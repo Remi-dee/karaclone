@@ -162,15 +162,15 @@ const KYCInfo: FC<Props> = ({
               Upload a government issued CAC document
             </p>
           </div>
-          <div className="sm:space-y-8 space-y-4">
-            <div className="grid sm:grid-cols-2 sm:gap-12">
+          <div className="">
+            <div className="w-full ">
               <div className="w-full">
                 <label htmlFor="" className="font-semibold text-sm">
                   Upload Document<span className="text-red-400">*</span>
                 </label>
                 <input
                   type="file"
-                  className="p-2 w-full border border-gray-300"
+                  className="p-1.5 w-full rounded-md border border-gray-300"
                   placeholder="type in your business address"
                   required
                   accept="image/*"
@@ -225,7 +225,7 @@ const KYCInfo: FC<Props> = ({
                 </label>
                 <input
                   type="file"
-                  className="p-2 w-full border border-gray-300"
+                  className="p-1.5 rounded-md w-full border border-gray-300"
                   placeholder="type in your business address"
                   required
                   accept="image/*"

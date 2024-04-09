@@ -53,8 +53,13 @@ const KYBModal = () => {
                 </li>
               </ul>
             </div>
-            <Link href="/kyc-individual">
-              <button className="p-2 my-2 text-white bg-primaryBtn w-full rounded-lg">
+            <Link href="/kyc-business">
+              <button
+                onClick={() => {
+                  dispatch(toggleStartKybModalSuccess({ data: false }));
+                }}
+                className="p-2 my-2 text-white bg-primaryBtn w-full rounded-lg"
+              >
                 Begin Verification
               </button>
             </Link>

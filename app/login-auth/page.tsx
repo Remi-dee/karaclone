@@ -67,15 +67,33 @@ export default function Home() {
 
   const handleInputChange = (index: number, value: string) => {
     setInvalidError(false);
-    const newVerifyNumber = { ...verifyNumber, [index]: value };
+    let newValue = value; // Initialize newValue with the provided value
+
+    // If the length of the value is greater than 1, trim it to keep only the first character
+    if (value.length > 1) {
+      newValue = value.slice(0, 1);
+    }
+
+    // Update the verifyNumber state with the new value for the specified index
+    const newVerifyNumber = { ...verifyNumber, [index]: newValue };
     setVerifyNumber(newVerifyNumber);
 
-    if (value === "" && index > 0) {
-      inputRefs[index - 1].current?.focus();
-    } else if (value.length === 1 && index < 3) {
+    // Move focus to the next input if a single character is entered
+    if (value.length === 1 && index < 5) {
       inputRefs[index + 1].current?.focus();
     }
   };
+  // const handleInputChange = (index: number, value: string) => {
+  //   setInvalidError(false);
+  //   const newVerifyNumber = { ...verifyNumber, [index]: value };
+  //   setVerifyNumber(newVerifyNumber);
+
+  //   if (value === "" && index > 0) {
+  //     inputRefs[index - 1].current?.focus();
+  //   } else if (value.length === 1 && index < 3) {
+  //     inputRefs[index + 1].current?.focus();
+  //   }
+  // };
   return (
     <main className="flex w-full min-h-screen">
       <div className="hidden w-1/2 lg:flex flex-col justify-center items-center bg-[#292929] py-8 px-4">
@@ -152,56 +170,7 @@ export default function Home() {
                     />
                   ))}
                 </div>
-                {/* <div className="flex justify-between">
-									<div className="mt-2">
-										<input
-											type="text"
-											placeholder="0"
-											maxLength={1}
-											className="w-[70px] h-[70px]  placeholder:text-[#989898]  placeholder:text-center text-center py-3  rounded-xl border-2 border-[#DCDCDC]  text-6xl focus:outline-[#3D3D3D] focus:outline-2 focus:border-[#3D3D3D] focus:border-2"
-										/>
-									</div>
-									<div className="mt-2">
-										<input
-											type="text"
-											placeholder="0"
-											maxLength={1}
-											className="w-[70px] h-[70px]  placeholder:text-[#989898]  placeholder:text-center text-center py-3  rounded-xl border-2 border-[#DCDCDC]  text-6xl focus:outline-[#3D3D3D] focus:outline-2 focus:border-[#3D3D3D] focus:border-2"
-										/>
-									</div>
-									<div className="mt-2">
-										<input
-											type="text"
-											placeholder="0"
-											maxLength={1}
-											className="w-[70px] h-[70px]  placeholder:text-[#989898]  placeholder:text-center text-center py-3  rounded-xl border-2 border-[#DCDCDC]  text-6xl focus:outline-[#3D3D3D] focus:outline-2 focus:border-[#3D3D3D] focus:border-2"
-										/>
-									</div>
-									<div className="mt-2">
-										<input
-											type="text"
-											placeholder="0"
-											maxLength={1}
-											className="w-[70px] h-[70px]  placeholder:text-[#989898]  placeholder:text-center text-center py-3  rounded-xl border-2 border-[#DCDCDC]  text-6xl focus:outline-[#3D3D3D] focus:outline-2 focus:border-[#3D3D3D] focus:border-2"
-										/>
-									</div>
-									<div className="mt-2">
-										<input
-											type="text"
-											placeholder="0"
-											maxLength={1}
-											className="w-[70px] h-[70px]  placeholder:text-[#989898]  placeholder:text-center text-center py-3  rounded-xl border-2 border-[#DCDCDC]  text-6xl focus:outline-[#3D3D3D] focus:outline-2 focus:border-[#3D3D3D] focus:border-2"
-										/>
-									</div>
-									<div className="mt-2">
-										<input
-											type="text"
-											placeholder="0"
-											maxLength={1}
-											className="w-[70px] h-[70px]  placeholder:text-[#989898]  placeholder:text-center text-center py-3  rounded-xl border-2 border-[#DCDCDC]  text-6xl focus:outline-[#3D3D3D] focus:outline-2 focus:border-[#3D3D3D] focus:border-2"
-										/>
-									</div>
-								</div> */}
+
                 <div>
                   <button
                     onClick={verificationHandler}

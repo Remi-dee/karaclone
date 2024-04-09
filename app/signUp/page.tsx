@@ -49,7 +49,7 @@ const SignUpContent = () => {
     });
   }
   return (
-    <main className="flex w-full min-h-screen box-border overflow-hidden">
+    <main className="flex w-full min-h-screen box-border overflow-y-hidden">
       <div className="hidden w-1/2 lg:flex flex-col justify-center items-center bg-[#292929] py-8 px-4">
         <div className="w-[45%] min-h-screen bg-signupBg">
           {content ? (

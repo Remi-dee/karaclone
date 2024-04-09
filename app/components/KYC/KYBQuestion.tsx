@@ -24,9 +24,8 @@ const KYBQuestion: FC<Props> = ({
 
   useEffect(() => {
     if (isSuccess) {
-      toast.success("User KYC is successful");
-
       router.push("dashboard/home");
+      toast.success("User KYC is successful");
     }
     if (error) {
       if ("data" in error) {
