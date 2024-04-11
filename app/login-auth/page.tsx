@@ -180,7 +180,7 @@ export default function Home() {
                   </button>
                 </div>
                 <div className="text-[#7C7C7C] text-sm mt-8 text-center">
-                  Didn't recieve the email?{" "}
+                  &apos; Didn't recieve the email?{" "}
                   <Link href="#">
                     <span className="text-[#7F56D9] font-semibold">
                       Click to resend

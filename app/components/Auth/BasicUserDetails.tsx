@@ -3,7 +3,7 @@ import React, { FC } from "react";
 import Link from "next/link";
 import { TiUser } from "react-icons/ti";
 import { IoIosInformationCircleOutline } from "react-icons/io";
-import { styles } from "@/app/styles/style";
+import { styles } from "../../../app/styles/style";
 
 type Props = {
   basicDetails: any;
@@ -16,8 +16,6 @@ type Props = {
 const BasicUserDetails: FC<Props> = ({
   basicDetails,
   setBasicDetails,
-  active,
-  setActive,
   handleBasicDetailsSubmit,
 }) => {
   const handleSubmit = (e: any) => {

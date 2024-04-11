@@ -1,34 +1,8 @@
+"use client";
 import Link from "next/link";
-import { FC, FormEvent, useEffect, useState } from "react";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { MdOutlineNavigateBefore, MdOutlineNavigateNext } from "react-icons/md";
 import { styles } from "../styles/style";
-// import { useLoginMutation } from "../../redux/features/auth/authApi";
-import toast from "react-hot-toast";
-import { IforgotPasswordInput } from "../interfaces/auth";
-import { useRouter } from "next/navigation";
 
-type Props = {};
-
-const schema = Yup.object().shape({
-  email: Yup.string()
-    .email("Invalid email!")
-    .required("Please enter your email"),
-});
-
-const forgot_password: FC<Props> = () => {
-  const router = useRouter();
-
-  const formik = useFormik({
-    initialValues: { email: "" } as IforgotPasswordInput,
-    onSubmit: async (values) => {
-      // Handle form submission here
-      console.log("Form submitted:", values);
-    },
-  });
-  const { handleChange, handleSubmit } = formik;
+const ForgotPassword = () => {
   return (
     <div className="flex items-center  h-screen justify-center bg-white-300">
       <div className=" w-full md:w-2/3 lg:w-3/5 xl:w-2/5 2xl:w-1/4 my-auto text-center">
@@ -85,4 +59,4 @@ const forgot_password: FC<Props> = () => {
   );
 };
 
-export default forgot_password;
+export default ForgotPassword;

@@ -3,9 +3,7 @@ import React, { useState } from "react";
 import KYCInfo from "./KYCInfo";
 import KYCQuestion from "./KYCQuestion";
 
-type Props = {};
-
-const CreateKYC = (props: Props) => {
+const CreateKYC = () => {
   const [active, setActive] = useState(1);
   const [kycDetails, setKycDetails] = useState({
     country: "",

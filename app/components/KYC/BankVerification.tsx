@@ -23,9 +23,13 @@ const BankVerification: React.FC<bankVerificationProp> = ({ onNext }) => {
         <BiSolidBank />
       </div>
       <h4 className="text-xl font-semibold pb-4">Bank Verification</h4>
-        <p className="text-xs font-bold p-1">Enter BVN</p>
+      <p className="text-xs font-bold p-1">Enter BVN</p>
       <div className="p-2 border rounded-lg border-gray-200">
-        <input type="" className="w-full h-full outline-none" placeholder="Enter digit" />
+        <input
+          type=""
+          className="w-full h-full outline-none"
+          placeholder="Enter digit"
+        />
       </div>
       <div className="flex justify-start mt-1 items-center text-gray-200 gap-2">
         <IoIosInformationCircleOutline />

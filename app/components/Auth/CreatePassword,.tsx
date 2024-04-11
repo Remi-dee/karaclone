@@ -163,11 +163,6 @@ const CreatePassword: FC<Props> = ({
               className="w-full h-[40px] bg-[#7F56D9] text-center text-[#fff] rounded mt-8 cursor-pointer"
             />
           </div>
-          {/* <Link href={"/signUp/verify-email"}>
-            <button className="w-full p-2 rounded-md text-center  bg-primaryBtn text-white-100 ">
-              Continue
-            </button>
-          </Link> */}
         </form>
         <p className="py-4 text-center text-sm text-gray-300">
           Already have an account?{" "}

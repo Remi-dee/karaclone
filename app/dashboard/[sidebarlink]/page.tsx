@@ -1,5 +1,5 @@
 "use client";
-import { FC, useState } from "react";
+import { useState } from "react";
 import { ArrowsRightLeftIcon } from "@heroicons/react/24/outline";
 import { BellIcon, SunIcon, UserCircleIcon } from "@heroicons/react/20/solid";
 import { Bars3Icon } from "@heroicons/react/24/outline";
@@ -8,16 +8,15 @@ import Home from "../Home";
 import Wallet from "../components/Wallet/Wallet";
 import Transaction from "../components/Transactions/Transaction";
 import Trade from "../components/Trade/Trade";
-import { useLoadUserQuery } from "@/redux/features/user/userApi";
+import { useLoadUserQuery } from "../../../redux/features/user/userApi";
 import {
   authSelector,
   toggleLogoutModal,
-} from "@/redux/features/auth/authSlice";
+} from "../../../redux/features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
-import LogoutModal from "@/app/components/Auth/LogoutModal";
-type Props = {};
+import LogoutModal from "../../../app/components/Auth/LogoutModal";
 
-const Dashboard: FC<Props> = (urlParam: any) => {
+const Dashboard = (urlParam: any) => {
   const dispatch = useDispatch();
   const [showSidebar, setShowSidebar] = useState(false);
   const urlLink: any = urlParam.params.sidebarlink;

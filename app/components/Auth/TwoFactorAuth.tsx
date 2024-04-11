@@ -1,18 +1,16 @@
 "use client";
-import { useEnableTwofaQuery } from "@/redux/features/user/userApi";
+import { useEnableTwofaQuery } from "../../../redux/features/user/userApi";
 import React, { useState } from "react";
 import { FaKey } from "react-icons/fa";
 import QrCode from "../SignUp/QrCode";
 
-type Props = {};
-
-const TwoFactorAuth = (props: Props) => {
+const TwoFactorAuth = () => {
   const [option, setOption] = useState<string | null>(null);
   const [showComponent, setShowComponent] = useState(true);
   const [qrCodeData, setQrCodeData] = useState<string | null>(null);
 
   // Enable 2FA query
-  const { isLoading, data } = useEnableTwofaQuery({
+  const { data } = useEnableTwofaQuery({
     enabled: option === "Google Authenticator",
   });
 

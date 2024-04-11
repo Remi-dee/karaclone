@@ -2,12 +2,13 @@ import React, { FC } from "react";
 import Image from "next/image";
 import Logo from "../../../public/Images/Logo.png";
 import { GiCheckMark } from "react-icons/gi";
+
 type Props = {
-  account_type: string;
+  accountType: string;
   active: number;
   setActive: (active: number) => void;
 };
-const SignUpOptions: FC<Props> = ({ account_type, active, setActive }) => {
+const SignUpOptions: FC<Props> = ({ accountType, active }) => {
   const individualOptions = [
     "Choose Account Type",
     "Input Basic Details",
@@ -24,7 +25,7 @@ const SignUpOptions: FC<Props> = ({ account_type, active, setActive }) => {
     "Activate Two Factor Authentication",
   ];
   const optionsToRender =
-    account_type === "individual" ? individualOptions : businessOptions;
+    accountType === "individual" ? individualOptions : businessOptions;
   return (
     <div>
       <div className="my-5 mx-5">
@@ -32,17 +33,17 @@ const SignUpOptions: FC<Props> = ({ account_type, active, setActive }) => {
       </div>
       <div>
         {optionsToRender.map((option: any, index: number) => (
-          <div key={index} className={`w-full flex py-5`}>
+          <div key={index} className={"w-full flex py-5"}>
             <div
               className={`w-[35px] h-[35px] rounded-full flex items-center justify-center ${
-                active + 1 > index ? "bg-blue-500" : "bg-[384766_1]"
+                active + 1 > index ? "bg-purple-100" : "bg-[384766_1]"
               } relative`}
             >
-              <GiCheckMark className="text-[25px]" />
+              <GiCheckMark className="text-[15px]" />
               {index !== optionsToRender.length - 1 && (
                 <div
                   className={`absolute h-[30px] w-1 ${
-                    active + 1 > index ? "bg-blue-500" : "bg-[384766_1]"
+                    active + 1 > index ? "bg-purple-100" : "bg-[384766_1]"
                   } bottom-[-100%]`}
                 />
               )}

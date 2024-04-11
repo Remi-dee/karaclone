@@ -3,7 +3,6 @@ import React from "react";
 import stepOne from "../../../public/Images/step_one_img.png";
 import { FaUser } from "react-icons/fa";
 
-
 interface selectCountryProp {
   onNext: () => void;
 }
@@ -30,9 +29,7 @@ const SelectCountry: React.FC<selectCountryProp> = ({ onNext }) => {
           id=""
           className="w-full rounded-md outline-none focus:outline-none"
         >
-          <option value="">
-            Select country
-          </option>
+          <option value="">Select country</option>
         </select>
       </div>
       <button

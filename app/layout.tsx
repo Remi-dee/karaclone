@@ -19,6 +19,10 @@ const josefin = Josefin_Sans({
   variable: "--font-Josefin",
 });
 
+const Custom: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  return <>{children}</>;
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -41,7 +45,3 @@ export default function RootLayout({
     </html>
   );
 }
-
-const Custom: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  return <>{children}</>;
-};

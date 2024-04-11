@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import DefaultModal from "../CustomModal/CustomModalAlt";
-import { toggleStartKycModalSuccess } from "@/redux/features/kyc/kycSlice";
+import { toggleStartKycModalSuccess } from "../../../redux/features/kyc/kycSlice";
 import { MdOutlineCheck } from "react-icons/md";
 import Link from "next/link";
 
@@ -16,7 +16,7 @@ const KycModal = () => {
       <form>
         <div>
           <div className="flex justify-between">
-            <img src="/svg/featured_wallet.svg" />
+            <img src="/svg/featured_wallet.svg" alt="" />
             <div></div>
           </div>
           <div>

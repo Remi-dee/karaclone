@@ -1,19 +1,24 @@
-import React from 'react';
-import BalanceDropdown from '@/app/dashboard/components/BalanceDropdown' 
-import { useState } from 'react';
+import React from "react";
+import BalanceDropdown from "../../../../app/dashboard/components/BalanceDropdown";
+import { useState } from "react";
 
 interface WithdrawalFormProps {
-  currency: 'usd' | 'naira'; // Define the type of currency prop
+  currency: "usd" | "naira"; // Define the type of currency prop
   placeholder: string;
-  headerText:string;
-  amountToRecieveId:string;
+  headerText: string;
+  amountToRecieveId: string;
   onAmountChange: (newAmount: number) => void;
 }
 
-const WithdrawalForm: React.FC<WithdrawalFormProps> = ({ currency, placeholder,headerText,amountToRecieveId,onAmountChange }) => {
+const WithdrawalForm: React.FC<WithdrawalFormProps> = ({
+  currency,
+  placeholder,
+  headerText,
+  amountToRecieveId,
+  onAmountChange,
+}) => {
   const [amount, setAmount] = useState<number>(0); // State to track the entered amount
   const [isValid, setIsValid] = useState<boolean>(false); // State to track input validity
-
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newAmount = parseFloat(e.target.value);
@@ -24,7 +29,7 @@ const WithdrawalForm: React.FC<WithdrawalFormProps> = ({ currency, placeholder,h
 
   return (
     <div className="mt-5">
-      <h4 className='font-bold'>{headerText}</h4>
+      <h4 className="font-bold">{headerText}</h4>
       <div className="border border-slate-200 rounded-lg flex items-center gap-4 p-2 px-4 mt-2">
         <BalanceDropdown currency={currency} />
         <input

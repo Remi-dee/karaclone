@@ -130,14 +130,4 @@ const Sidebar = (Props: Props) => {
   );
 };
 
-const Style = {
-  transitionProperty: "transform",
-  transitionTimingFunction: "ease-in-out",
-  transitionDuration: "500ms",
-};
-
-{
-  /* */
-}
-
 export default Sidebar;
