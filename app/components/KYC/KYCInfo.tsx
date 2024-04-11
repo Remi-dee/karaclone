@@ -119,8 +119,10 @@ const KYCInfo: FC<Props> = ({
                   <option value="International Passport">
                     International Passport
                   </option>
-                  <option value="Driver License">Driver's Licence</option>
-                  <option value="Voter Card">Voter's Card</option>
+                  <option value="Driver License">
+                    &apos; Driver's Licence
+                  </option>
+                  <option value="Voter Card">&apos; Voter's Card</option>
                 </select>
                 {/* {formik.touched.fullName && formik.errors.fullName && (
                   <p className="mt-2 text-sm text-danger font-medium">

@@ -3,7 +3,7 @@ import { userLoggedIn, userLoggedOut } from "../auth/authSlice";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: process.env.NEXT_PUBLIC_SERVER_URI,
-  prepareHeaders: (headers, { getState }) => {
+  prepareHeaders: (headers) => {
     // Get the token from localStorage
     const token = localStorage.getItem("auth_token");
     // If token exists, add it to the authorization header
@@ -20,7 +20,7 @@ export const userApi = createApi({
   endpoints: (builder) => ({
     // get user
     loadUser: builder.query({
-      query: (data) => ({
+      query: () => ({
         url: "user/me",
         method: "GET",
         credentials: "include" as const,
@@ -43,7 +43,7 @@ export const userApi = createApi({
 
     // activate 2FA
     enableTwofa: builder.query({
-      query: (data) => ({
+      query: () => ({
         url: "user/enable-2fa",
         method: "GET",
         credentials: "include" as const,

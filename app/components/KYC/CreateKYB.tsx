@@ -3,9 +3,7 @@ import React, { useState } from "react";
 import KYBInfo from "./KYBInfo";
 import KYBQuestion from "./KYBQuestion";
 
-type Props = {};
-
-const CreateKYB = (props: Props) => {
+const CreateKYB = () => {
   const [active, setActive] = useState(1);
   const [kybDetails, setKybDetails] = useState({
     country: "",

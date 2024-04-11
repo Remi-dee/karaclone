@@ -1,14 +1,14 @@
-import React from 'react'
+import React from "react";
 import stepOne from "../../../public/Images/step_one_img.png";
 import { FaUser } from "react-icons/fa";
 import Image from "next/image";
 interface verifyIdProp {
-  onNext: ()=>void  
+  onNext: () => void;
 }
-const VerifyId:React.FC<verifyIdProp> = ({onNext}) => {
+const VerifyId: React.FC<verifyIdProp> = ({ onNext }) => {
   return (
     <div>
-        <div className="flex justify-start gap-2 items-center">
+      <div className="flex justify-start gap-2 items-center">
         <Image src={stepOne} className="w-6 h-6" alt="" />
         <span>
           <p className="text-gray-300 text-xs">step 1/3</p>
@@ -31,7 +31,7 @@ const VerifyId:React.FC<verifyIdProp> = ({onNext}) => {
           <option disabled value="">
             Select type
           </option>
-          <option  value="">National Identity Card</option>
+          <option value="">National Identity Card</option>
           <option value="">NIN Slip</option>
           <option value="">International Passport</option>
           <option value="">Driver&apos;s License</option>
@@ -45,7 +45,7 @@ const VerifyId:React.FC<verifyIdProp> = ({onNext}) => {
         Continue
       </button>
     </div>
-  )
-}
+  );
+};
 
-export default VerifyId
+export default VerifyId;

@@ -2,25 +2,31 @@ import { BiLogOut } from "react-icons/bi";
 import { useDispatch } from "react-redux";
 import DefaultModal from "../CustomModal/CustomModalAlt";
 import { toggleLogoutModal } from "@/redux/features/auth/authSlice";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { signOut } from "next-auth/react";
 import { useLogOutQuery } from "@/redux/features/user/userApi";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const LogoutModal = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [logout, setLogout] = useState(false);
-  const {} = useLogOutQuery(undefined, {
+  const { isSuccess } = useLogOutQuery(undefined, {
     skip: !logout ? true : false,
   });
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("Successfully logged out");
+    }
+  }, [isSuccess]);
 
   const logOutHandler = async () => {
     setLogout(true);
     signOut();
     localStorage.removeItem("auth_token");
     localStorage.removeItem("user");
-    localStorage.removeItem("auth");
     dispatch(toggleLogoutModal({ data: false }));
     router.push("/login");
   };

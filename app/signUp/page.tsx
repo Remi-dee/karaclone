@@ -2,8 +2,8 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { TiUser } from "react-icons/ti";
-import signupHero_1 from "../../public/Images/signupHero-1.png";
-import signupHero_2 from "../../public/Images/signupHero-2.png";
+import signupHero1 from "../../public/Images/signupHero-1.png";
+import signupHero2 from "../../public/Images/signupHero-2.png";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -13,7 +13,6 @@ const SignUpContent = () => {
   const [content, setContent] = useState(true);
   const [selectedOption, setSelectedOption] = useState("");
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-  const [scroll, setScroll] = useState(false);
   const handleSelectChange = (
     event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -39,15 +38,6 @@ const SignUpContent = () => {
     return () => clearInterval(interval);
   }, []);
 
-  if (typeof window !== "undefined") {
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 80) {
-        setScroll(true);
-      } else {
-        setScroll(false);
-      }
-    });
-  }
   return (
     <main className="flex w-full min-h-screen box-border overflow-y-hidden">
       <div className="hidden w-1/2 lg:flex flex-col justify-center items-center bg-[#292929] py-8 px-4">
@@ -55,7 +45,7 @@ const SignUpContent = () => {
           {content ? (
             <div className="w-[90%] mx-auto mt-12">
               <div className="w-[300px] mx-auto h-[250px] mb-8">
-                <Image src={signupHero_1} alt="" className="w-full h-full" />
+                <Image src={signupHero1} alt="" className="w-full h-full" />
               </div>
               <h3 className="text-lg text-white-300 text-center font-semibold">
                 Manage Multiple Currencies
@@ -68,7 +58,7 @@ const SignUpContent = () => {
           ) : (
             <div className="w-[90%] mx-auto mt-12">
               <div className="w-[300px] mx-auto h-[250px] mb-8">
-                <Image src={signupHero_2} alt="" className="w-full h-full" />
+                <Image src={signupHero2} alt="" className="w-full h-full" />
               </div>
               <h3 className="text-lg text-white-300 text-center font-semibold">
                 Withdraw with Ease

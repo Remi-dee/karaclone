@@ -16,7 +16,7 @@ const KYBModal = () => {
       <form>
         <div>
           <div className="flex justify-between">
-            <img src="/svg/featured_wallet.svg" />
+            <img src="/svg/featured_wallet.svg" alt="" />
             <div></div>
           </div>
           <div>

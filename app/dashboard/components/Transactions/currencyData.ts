@@ -5,22 +5,22 @@ export const currencyData = [
   {
     label: "NGN",
     imageUrl: NGN,
-    value:"NGN",
+    value: "NGN",
   },
   {
     label: "USD",
     imageUrl: USD,
-    value:"USD",
+    value: "USD",
   },
 
   {
     label: "GDP",
     imageUrl: GDP,
-    value:"GDP",
+    value: "GDP",
   },
   {
     label: "EUR",
     imageUrl: GDP,
-    value:"EUR",
+    value: "EUR",
   },
 ];

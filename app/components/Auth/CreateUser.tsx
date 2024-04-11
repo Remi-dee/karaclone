@@ -1,12 +1,10 @@
 "use-client";
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useState } from "react";
 import SignUpOptions from "./SignUpOptions";
 import BasicUserDetails from "./BasicUserDetails";
 import BusinessDetails from "./BusinessDetails";
 import CreatePassword from "./CreatePassword,";
-import { useRegisterMutation } from "@/redux/features/auth/authApi";
 import VerifyEmail from "./VerifyEmail";
-import toast from "react-hot-toast";
 import EmailSuccess from "./EmailSuccess";
 import TwoFactorAuth from "./TwoFactorAuth";
 
@@ -49,7 +47,7 @@ const CreateUser: FC<Props> = ({ params }) => {
     <div className="w-full flex justify-center items-center  min-h-screen">
       <div className="w-[450px] bg-white-100 h-[100vh] shadow-lg pl-10 ">
         <SignUpOptions
-          account_type={params.accountType}
+          accountType={params.accountType}
           active={active}
           setActive={setActive}
         />
