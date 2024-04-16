@@ -5,9 +5,6 @@ const config: Config = {
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
-
-  
-
   ],
   darkMode: ["class"],
   theme: {
@@ -31,7 +28,7 @@ const config: Config = {
           600: "#75788B",
           700: "#EFEFEF",
           800: "#989898",
-          900:"#FBFBFB"
+          900: "#FBFBFB",
         },
 
         black: {
@@ -61,6 +58,5 @@ const config: Config = {
     },
   },
   plugins: [],
-
 };
 export default config;

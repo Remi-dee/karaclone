@@ -15,8 +15,6 @@ type Props = {
 const BusinessDetails: FC<Props> = ({
   businessDetails,
   setBusinessDetails,
-  active,
-  setActive,
   handleBusinessDetailsSubmit,
 }) => {
   const handleSubmit = (e: any) => {

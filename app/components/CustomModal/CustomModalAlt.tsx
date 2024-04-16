@@ -16,10 +16,10 @@ const DefaultModal: React.FC<CustomModalTypes> = ({
       <div
         className={`${className} flex flex-col sm:flex-row sm:items-center justify-center min-h-screen `}
       >
-        <div className="relative bg-[#F6F6F8] sm:px-14 rounded-3xl shadow p-6 m-8">
+        <div className="relative bg-[#F6F6F8] sm:px-14 rounded-3xl shadow p-2 m-8">
           <button
             type="button"
-            className="absolute -top-5 -right-5 text-[#002C79] hover:text-white p-3 
+            className="absolute top-5 right-5 text-[#002C79] hover:text-white p-3 
             bg-[#F6F6F8] hover:bg-dark-blue rounded-full cursor-pointer shadow"
             data-modal-toggle="medium-modal"
             onClick={dismiss}

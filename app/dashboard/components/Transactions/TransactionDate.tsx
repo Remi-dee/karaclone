@@ -8,7 +8,7 @@ const TransactionDate = () => {
   const handleFromDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFromDate(e.target.value);
   };
-  
+
   const handleToDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     setToDate(e.target.value);
   };

@@ -5,28 +5,27 @@ import React, { FC, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 type Props = {
-  kycQuestion: any;
-  setKycQuestion: (kycQuestion: any) => void;
-  kycDetails: any;
+  kybQuestion: any;
+  setKybQuestion: (kybQuestion: any) => void;
+  kybDetails: any;
 };
 
-const KYCQuestion: FC<Props> = ({
-  kycQuestion,
-  setKycQuestion,
-  kycDetails,
+const KYBQuestion: FC<Props> = ({
+  kybQuestion,
+  setKybQuestion,
+  kybDetails,
 }) => {
   const router = useRouter();
-  const [isPolitician, setIsPolitician] = useState(kycQuestion.is_politician);
+  const [isPolitician, setIsPolitician] = useState(kybQuestion.is_politician);
   const [isCriminalConvict, setIsCriminalConvict] = useState(
-    kycQuestion.is_criminal_convict
+    kybQuestion.is_criminal_convict
   );
   const [processKyc, { isLoading, isSuccess, error }] = useProcessKycMutation();
 
   useEffect(() => {
     if (isSuccess) {
-      toast.success("User KYC is successful");
-
       router.push("dashboard/home");
+      toast.success("User KYC is successful");
     }
     if (error) {
       if ("data" in error) {
@@ -39,17 +38,18 @@ const KYCQuestion: FC<Props> = ({
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     // Update the parent state with the new values
-    setKycQuestion({ ...kycQuestion });
+    setKybQuestion({ ...kybQuestion });
 
     const data = {
-      country: kycDetails.country,
-      id_document_type: kycDetails.id_document_type,
-      id_document: kycDetails.id_document,
-      address_document_type: kycDetails.address_document_type,
-      address_document: kycDetails.address_document,
-      bvn: kycDetails.bvn,
-      is_politician: kycQuestion.is_politician,
-      is_criminal_convict: kycQuestion.is_criminal_convict,
+      country: kybDetails.country,
+      id_document_type: kybDetails.id_document_type,
+      id_document: kybDetails.id_document,
+      address_document_type: kybDetails.address_document_type,
+      address_document: kybDetails.address_document,
+      cac_document: kybDetails.cac_document,
+      bvn: kybDetails.bvn,
+      is_politician: kybQuestion.is_politician,
+      is_criminal_convict: kybQuestion.is_criminal_convict,
     };
 
     await processKyc(data);
@@ -168,4 +168,4 @@ const KYCQuestion: FC<Props> = ({
   );
 };
 
-export default KYCQuestion;
+export default KYBQuestion;

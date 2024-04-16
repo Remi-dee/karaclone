@@ -40,7 +40,7 @@ const BankStatement: React.FC<bankStatementProp> = ({ onNext }) => {
           Please provide a recent bank statement in PNG, or PDF format.
         </p>
       </div>
-      
+
       <button
         onClick={onNext}
         className="p-2 my-4 text-white-100 bg-primaryBtn w-full rounded-lg"

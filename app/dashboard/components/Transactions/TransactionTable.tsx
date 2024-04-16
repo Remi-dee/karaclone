@@ -17,7 +17,7 @@ const TransactionTable = () => {
     dispatch(openModal(id));
   };
   return (
-    <div className="p-0 m-0 box-border">
+    <div className="mt-4 box-border">
       {transactionData && transactionData.length > 0 ? (
         <>
           <table className="w-[100%] overflow-auto border-collapse">
@@ -50,9 +50,9 @@ const TransactionTable = () => {
                   />
                 </td>
                 <div className="pt-4">
-                <CustomModal>
-                  <DepositDetails />
-                </CustomModal>
+                  <CustomModal>
+                    <DepositDetails />
+                  </CustomModal>
                 </div>
               </tr>
             ))}

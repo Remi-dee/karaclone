@@ -3,15 +3,14 @@ import { CiMail } from "react-icons/ci";
 import scan from "../../../public/Images/scan.png";
 import { useState } from "react";
 interface verification {
-  optionsSelected:(option:string)=>void
+  optionsSelected: (option: string) => void;
 }
-const Verification: React.FC<verification> = ({optionsSelected }) => {
+const Verification: React.FC<verification> = ({ optionsSelected }) => {
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
   const handleSelectedOption = (option: string) => {
     setSelectedOption(option);
     optionsSelected(option);
-
   };
   return (
     <div className="mt-6">

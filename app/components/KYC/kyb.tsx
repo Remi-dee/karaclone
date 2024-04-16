@@ -1,16 +1,16 @@
 import { useDispatch } from "react-redux";
 import DefaultModal from "../CustomModal/CustomModalAlt";
-import { toggleStartKycModalSuccess } from "../../../redux/features/kyc/kycSlice";
+import { toggleStartKybModalSuccess } from "@/redux/features/kyc/kycSlice";
 import { MdOutlineCheck } from "react-icons/md";
 import Link from "next/link";
 
-const KycModal = () => {
+const KYBModal = () => {
   const dispatch = useDispatch();
 
   return (
     <DefaultModal
       dismiss={() => {
-        dispatch(toggleStartKycModalSuccess({ data: false }));
+        dispatch(toggleStartKybModalSuccess({ data: false }));
       }}
     >
       <form>
@@ -21,7 +21,7 @@ const KycModal = () => {
           </div>
           <div>
             <h1 className="text-black text-[24px] mb-5 font-semibold">
-              Complete your KYC Verification
+              Complete your KYB Verification
             </h1>
             <p className="mt-5 mb-5">This will enamble you to:</p>
 
@@ -53,10 +53,10 @@ const KycModal = () => {
                 </li>
               </ul>
             </div>
-            <Link href="/kyc-individual">
+            <Link href="/kyc-business">
               <button
                 onClick={() => {
-                  dispatch(toggleStartKycModalSuccess({ data: false }));
+                  dispatch(toggleStartKybModalSuccess({ data: false }));
                 }}
                 className="p-2 my-2 text-white bg-primaryBtn w-full rounded-lg"
               >
@@ -70,4 +70,4 @@ const KycModal = () => {
   );
 };
 
-export default KycModal;
+export default KYBModal;

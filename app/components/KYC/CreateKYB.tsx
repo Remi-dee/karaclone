@@ -1,20 +1,21 @@
 "use client";
 import React, { useState } from "react";
-import KYCInfo from "./KYCInfo";
-import KYCQuestion from "./KYCQuestion";
+import KYBInfo from "./KYBInfo";
+import KYBQuestion from "./KYBQuestion";
 
-const CreateKYC = () => {
+const CreateKYB = () => {
   const [active, setActive] = useState(1);
-  const [kycDetails, setKycDetails] = useState({
+  const [kybDetails, setKybDetails] = useState({
     country: "",
     id_document_type: "",
     id_document: "",
     address_document_type: "",
     address_document: "",
+    cac_document: "",
     bvn: "",
   });
 
-  const [kycQuestion, setKycQuestion] = useState({
+  const [kybQuestion, setKybQuestion] = useState({
     is_politician: false,
     is_criminal_convict: false,
   });
@@ -23,19 +24,19 @@ const CreateKYC = () => {
     <div className="w-full flex justify-center items-center  min-h-screen">
       <div className="w-[100%]">
         {active === 1 && (
-          <KYCInfo
-            kycDetails={kycDetails}
-            setKycDetails={setKycDetails}
+          <KYBInfo
+            kybDetails={kybDetails}
+            setKybDetails={setKybDetails}
             active={active}
             setActive={setActive}
           />
         )}
 
         {active === 2 && (
-          <KYCQuestion
-            kycQuestion={kycQuestion}
-            setKycQuestion={setKycQuestion}
-            kycDetails={kycDetails}
+          <KYBQuestion
+            kybQuestion={kybQuestion}
+            setKybQuestion={setKybQuestion}
+            kybDetails={kybDetails}
           />
         )}
       </div>
@@ -43,4 +44,4 @@ const CreateKYC = () => {
   );
 };
 
-export default CreateKYC;
+export default CreateKYB;

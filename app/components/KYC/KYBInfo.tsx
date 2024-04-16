@@ -3,15 +3,15 @@ import React, { FC, useState } from "react";
 import { CountryDropdown } from "react-country-region-selector";
 
 type Props = {
-  kycDetails: any;
-  setKycDetails: (kycDetails: any) => void;
+  kybDetails: any;
+  setKybDetails: (kycDetails: any) => void;
   active: number;
   setActive: (active: any) => void;
 };
 
 const KYCInfo: FC<Props> = ({
-  kycDetails,
-  setKycDetails,
+  kybDetails,
+  setKybDetails,
   active,
   setActive,
 }) => {
@@ -19,12 +19,10 @@ const KYCInfo: FC<Props> = ({
   const handleCountryChange = (country: any, e: any) => {
     setSelectedCountry(country);
 
-    setKycDetails({
-      ...kycDetails,
+    setKybDetails({
+      ...kybDetails,
       country: e.target.value,
     });
-
-    // formik.setFieldValue("country", country);
   };
 
   const handleIdDocumentChange = (e: any) => {
@@ -32,9 +30,22 @@ const KYCInfo: FC<Props> = ({
     if (file) {
       const reader = new FileReader();
 
-      reader.onload = (e: any) => {
+      reader.onload = () => {
         if (reader.readyState === 2) {
-          setKycDetails({ ...kycDetails, id_document: reader.result });
+          setKybDetails({ ...kybDetails, id_document: reader.result });
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+  const handleCacDocumentChange = (e: any) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        if (reader.readyState === 2) {
+          setKybDetails({ ...kybDetails, cac_document: reader.result });
         }
       };
       reader.readAsDataURL(file);
@@ -46,9 +57,9 @@ const KYCInfo: FC<Props> = ({
     if (file) {
       const reader = new FileReader();
 
-      reader.onload = (e: any) => {
+      reader.onload = () => {
         if (reader.readyState === 2) {
-          setKycDetails({ ...kycDetails, address_document: reader.result });
+          setKybDetails({ ...kybDetails, address_document: reader.result });
         }
       };
       reader.readAsDataURL(file);
@@ -62,9 +73,9 @@ const KYCInfo: FC<Props> = ({
   return (
     <div className="w-full mx-auto ">
       <div className="mt-5 mb-2 items-center text-center">
-        <h3 className="py-2 font-semibold text-2xl">KYC Verification</h3>
+        <h3 className="py-2 font-semibold text-2xl">KYB Verification</h3>
         <p className="text-gray-300 text-sm">
-          Fill in the details below to complete your kyc
+          Fill in the details below to complete your kyb
         </p>
       </div>
       <div className="w-[80%] pt-6 mx-auto mt-4 rounded-md shadow-lg">
@@ -102,10 +113,10 @@ const KYCInfo: FC<Props> = ({
                   className="p-2 w-full border border-gray-300 rounded-lg"
                   defaultValue=""
                   required
-                  value={kycDetails.id_document_type}
+                  value={kybDetails.id_document_type}
                   onChange={(e: any) =>
-                    setKycDetails({
-                      ...kycDetails,
+                    setKybDetails({
+                      ...kybDetails,
                       id_document_type: e.target.value,
                     })
                   }
@@ -148,9 +159,34 @@ const KYCInfo: FC<Props> = ({
           </div>
 
           <div className="mt-10 mb-5">
-            <h3 className="font-semibold text-xl">Verify Address</h3>
+            <h3 className="font-semibold text-xl">Verify Business</h3>
             <p className="text-gray-300 text-sm">
-              Upload a document displaying your address.
+              Upload a government issued CAC document
+            </p>
+          </div>
+          <div className="">
+            <div className="w-full ">
+              <div className="w-full">
+                <label htmlFor="" className="font-semibold text-sm">
+                  Upload Document<span className="text-red-400">*</span>
+                </label>
+                <input
+                  type="file"
+                  className="p-1.5 w-full rounded-md border border-gray-300"
+                  placeholder="type in your business address"
+                  required
+                  accept="image/*"
+                  id="file"
+                  onChange={handleCacDocumentChange}
+                />{" "}
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-10 mb-5">
+            <h3 className="font-semibold text-xl">Verify Business Address</h3>
+            <p className="text-gray-300 text-sm">
+              Upload a document displaying your business address.
             </p>
           </div>
           <div className="sm:space-y-8 space-y-4">
@@ -163,10 +199,10 @@ const KYCInfo: FC<Props> = ({
                   className="p-2 w-full border border-gray-300 rounded-lg"
                   defaultValue=""
                   required
-                  value={kycDetails.address_document_type}
+                  value={kybDetails.address_document_type}
                   onChange={(e: any) =>
-                    setKycDetails({
-                      ...kycDetails,
+                    setKybDetails({
+                      ...kybDetails,
                       address_document_type: e.target.value,
                     })
                   }
@@ -191,7 +227,7 @@ const KYCInfo: FC<Props> = ({
                 </label>
                 <input
                   type="file"
-                  className="p-2 w-full border border-gray-300"
+                  className="p-1.5 rounded-md w-full border border-gray-300"
                   placeholder="type in your business address"
                   required
                   accept="image/*"
@@ -218,10 +254,10 @@ const KYCInfo: FC<Props> = ({
               placeholder="223748958938"
               className="w-full rounded-md p-2 focus:outline-none"
               required
-              value={kycDetails.bvn}
+              value={kybDetails.bvn}
               onChange={(e: any) =>
-                setKycDetails({
-                  ...kycDetails,
+                setKybDetails({
+                  ...kybDetails,
                   bvn: e.target.value,
                 })
               }

@@ -19,7 +19,7 @@ const Transaction = () => {
   };
 
   return (
-    <div className="p-0 m-0 box-border">
+    <div className="p-0 m-0 box-border bg-white-100">
       <div className="w-[100%] min-h-[70vh] shadow-lg rounded-md">
         <div className="w-[96%] mx-auto">
           <h2 className="py-4 text-lg font-semibold">Transaction</h2>

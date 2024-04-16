@@ -5,7 +5,7 @@ export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.NEXT_PUBLIC_SERVER_URI,
   }),
-  endpoints: (builder) => ({}),
+  endpoints: () => ({}),
 });
 
 export const {} = apiSlice;

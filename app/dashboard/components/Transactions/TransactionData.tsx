@@ -6,7 +6,7 @@ export const transactionData = [
     amount: "20,000 NGN",
     date: "12/01/24",
     time: "2.00PM",
-    status:"Successful"
+    status: "Successful",
   },
 
   {
@@ -16,7 +16,7 @@ export const transactionData = [
     amount: "20,000 NGN",
     date: "12/01/24",
     time: "2.00PM",
-    status:"Successful"
+    status: "Successful",
   },
 
   {
@@ -26,6 +26,6 @@ export const transactionData = [
     amount: "20,000 NGN",
     date: "12/01/24",
     time: "2.00PM",
-    status:"Successful"
+    status: "Successful",
   },
 ];

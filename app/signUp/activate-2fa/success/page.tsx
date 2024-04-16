@@ -1,12 +1,12 @@
-import React from 'react'
-import TwoFaSuccessContent from './TwoFaSuccessContent'
+import React from "react";
+import TwoFaSuccessContent from "./TwoFaSuccessContent";
 
 const page = () => {
   return (
     <div>
-        <TwoFaSuccessContent/>
+      <TwoFaSuccessContent />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;

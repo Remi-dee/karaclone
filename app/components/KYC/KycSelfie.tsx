@@ -32,7 +32,7 @@ const KycSelfie: React.FC<kycSelfieProp> = ({ onNext }) => {
         </p>
       </div>
       <div className="h-[200px] rounded-md">
-          <Image src={selfieVideo} alt="" className="w-full h-full" />
+        <Image src={selfieVideo} alt="" className="w-full h-full" />
       </div>
       <button
         onClick={onNext}
