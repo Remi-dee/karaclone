@@ -24,7 +24,7 @@ const Transaction = () => {
         <div className="w-[96%] mx-auto">
           <h2 className="py-4 text-lg font-semibold">Transaction</h2>
           <div className="max-w-[600px] w-full pb-6 flex flex-wrap justify-start gap-2 items-center">
-            <div>
+            <div className="border border-gray-800 p-2 rounded-lg">
               <CustomDropdown
                 options={transactionOption}
                 onSelect={handleTransaction}
@@ -32,7 +32,7 @@ const Transaction = () => {
                 className="text-gray-800"
               />
             </div>
-            <div>
+            <div className="border border-gray-800 p-2 rounded-lg">
               <CustomDropdown
                 options={currencyData}
                 onSelect={handleCurrency}
@@ -40,6 +40,7 @@ const Transaction = () => {
                 displayImages
                 className=""
               />
+             
             </div>
             <TransactionDate />
           </div>
