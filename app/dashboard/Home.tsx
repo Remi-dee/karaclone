@@ -52,20 +52,27 @@ function Home() {
             <div className=" w-1/2 flex flex-col gap-2 h-full">
               {/* Wallet balances cards */}
               <div className=" bg-white-100 rounded-xl flex-1 grow flex mb-3 lg-mb-0 justify-between border border-slate-200 py-5 h-full ">
-                <div className=" bg-white-100  rounded-md p-4">
-                  <div className="flex items-center gap-2">
-                    <h2 className="text-gray-300">Wallet Balance</h2>
-                    <span className="text-gray-300">
-                      <FaEye />
-                    </span>
+                <div className="flex flex-col justify-between">
+                  <div className="bg-purple-100 rounded-full w-[50%] h-[50%]">
+                    <img src="public/Icon.png" alt="" />
                   </div>
-                  <p className="text-3xl font-bold text-gray-800 mt-2">
-                    200,000{" "}
-                    <span className="text-gray-300 text-base font-medium">
-                      NGN
-                    </span>{" "}
-                  </p>
+
+                  <div className=" bg-white-100  rounded-md p-4">
+                    <div className="flex items-center gap-2">
+                      <h2 className="text-gray-300">Wallet Balance</h2>
+                      <span className="text-gray-300">
+                        <FaEye />
+                      </span>
+                    </div>
+                    <p className="text-3xl font-bold text-gray-800 mt-2">
+                      200,000{" "}
+                      <span className="text-gray-300 text-base font-medium">
+                        NGN
+                      </span>{" "}
+                    </p>
+                  </div>
                 </div>
+
                 <div className="px-3 p-4">
                   <div>
                     <BalanceDropdown currency={""} />
