@@ -2,12 +2,13 @@
 import React, { useState } from "react";
 import { BiSolidRightArrow } from "react-icons/bi";
 import { transactionData } from "./TransactionData";
-import { IoIosArrowRoundBack, IoIosArrowRoundForward } from "react-icons/io";
+
 import { useDispatch } from "react-redux";
 import { openModal } from "@/redux/modal/modalSlice";
 import CustomModal from "../../../components/CustomModal/CustomModal";
 import DepositDetails from "./DepositDetails";
 import EmptyTransaction from "./EmptyTransaction";
+import Pagination from "../Pagination";
 const TransactionTable = () => {
   const [selectedItemId, setSelectedItemId] = useState<number | null>(null);
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const TransactionTable = () => {
     <div className="mt-4 box-border">
       {transactionData && transactionData.length > 0 ? (
         <>
-          <table className="w-[100%] overflow-auto border-collapse  ">
+          <table className="w-[100%] overflow-auto border-collapse">
             <tr className="bg-gray-900 text-sm">
               <th className="p-4 text-left">Type</th>
               <th className="p-4 text-left">Description</th>
@@ -57,39 +58,7 @@ const TransactionTable = () => {
             ))}
           </table>
           <hr className="border border-gray-500" />
-          <div className="flex justify-between items-center my-4">
-            <div className="w-auto flex justify-center items-center gap-2 p-1 rounded-md border border-primaryBtn text-primaryBtn  hover:bg-primaryBtn hover:text-white-100 cursor-pointer">
-              <IoIosArrowRoundBack className="text-white-100 bg-primaryBtn" />
-              <p className="text-xs font-semibold">Previous</p>
-            </div>
-            <div className="flex justify-start items-center gap-3 ">
-              <button className="w-[30px] h-[30px] rounded-full bg-purple-200 text-primaryBtn active:bg-purple-200 active:text-primaryBtn">
-                1
-              </button>
-              <button className="w-[30px] h-[30px] rounded-full bg-white-100 active:bg-purple-200 active:text-primaryBtn">
-                2
-              </button>
-              <button className="w-[30px] h-[30px] rounded-full bg-white-100 active:bg-purple-200 active:text-primaryBtn">
-                3
-              </button>
-              <button className="w-[30px] h-[30px] rounded-full bg-white-100 active:bg-purple-200 active:text-primaryBtn">
-                ...
-              </button>
-              <button className="w-[30px] h-[30px] rounded-full bg-white-100 active:bg-purple-200 active:text-primaryBtn">
-                8
-              </button>
-              <button className="w-[30px] h-[30px] rounded-full bg-white-100 active:bg-purple-200 active:text-primaryBtn">
-                9
-              </button>
-              <button className="w-[30px] h-[30px] rounded-full bg-white-100 active:bg-purple-200 active:text-primaryBtn">
-                10
-              </button>
-            </div>
-            <div className="w-auto flex justify-center items-center gap-1 p-1 rounded-md border border-primaryBtn text-primaryBtn hover:bg-primaryBtn hover:text-white-100 cursor-pointer">
-              <p className="text-xs font-semibold">Next</p>
-              <IoIosArrowRoundForward className="text-white-100 bg-primaryBtn" />
-            </div>
-          </div>
+          <Pagination/>
         </>
       ) : (
         <EmptyTransaction />

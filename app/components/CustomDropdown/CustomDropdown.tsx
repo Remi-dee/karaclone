@@ -1,10 +1,10 @@
-import Image from "next/image";
 import React, { useState } from "react";
+import Image, { StaticImageData } from "next/image";
 
 interface DropdownOption {
   value: string;
   label: string;
-  imageUrl?: any; // Optional imageUrl prop for displaying images
+  imageUrl?: StaticImageData; // Updated type for imageUrl
 }
 
 interface DropdownProps {
@@ -12,7 +12,7 @@ interface DropdownProps {
   onSelect: (value: string) => void;
   placeholder?: string;
   className?: string;
-  displayImages?: boolean; // Optional prop to determine whether to display images
+  displayImages?: boolean;
 }
 
 const CustomDropdown: React.FC<DropdownProps> = ({
@@ -22,12 +22,13 @@ const CustomDropdown: React.FC<DropdownProps> = ({
   className = "",
   displayImages = false,
 }) => {
-  const [selectedValue, setSelectedValue] = useState<string | null>(null);
+  const [selectedOption, setSelectedOption] = useState<DropdownOption | null>(null);
   const [isHovered, setIsHovered] = useState<boolean>(false);
 
-  const handleOptionClick = (value: string) => {
-    setSelectedValue(value);
-    onSelect(value);
+  const handleOptionClick = (option: DropdownOption) => {
+    setSelectedOption(option);
+    onSelect(option.value);
+    setIsHovered(false); // Close dropdown after selecting an option
   };
 
   return (
@@ -37,12 +38,25 @@ const CustomDropdown: React.FC<DropdownProps> = ({
       onMouseLeave={() => setIsHovered(false)}
     >
       <div
-        className={`border border-gray-800 rounded-md p-2 text-gray-800 cursor-pointer ${
-          isHovered ? "bg-white-100" : ""
-        }`}
+        className={` border-gray-800  flex justify-center items-center rounded-md  text-gray-800 cursor-pointer ${
+          isHovered ? "bg-white-100" : "" 
+        }` }
         onClick={() => setIsHovered(!isHovered)}
       >
-        {selectedValue || placeholder}
+        {selectedOption ? (
+          <>
+            {displayImages && selectedOption.imageUrl && (
+              <Image
+                src={selectedOption.imageUrl}
+                alt={selectedOption.label}
+                className="w-4 h-4 mr-2"
+              />
+            )}
+            <div className="px-2">{selectedOption.label}</div>
+          </>
+        ) : (
+          placeholder
+        )}
         <svg
           className={`w-4 h-4 inline-block ml-1 transition-transform duration-300 transform ${
             isHovered ? "rotate-180" : ""
@@ -59,17 +73,17 @@ const CustomDropdown: React.FC<DropdownProps> = ({
         </svg>
       </div>
       {isHovered && (
-        <div className="absolute top-full left-0 z-50 bg-white-100 rounded-md mt-1 shadow-md">
+        <div className="absolute top-full w-full left-0 z-50  bg-white-100 rounded-md mt-1 shadow-md">
           {options.map((option) => (
             <div
               key={option.value}
-              className="flex items-center px-5 py-2 font-semibold text-gray-400 rounded-md cursor-pointer hover:bg-[#F3EDFF]"
-              onClick={() => handleOptionClick(option.value)}
+              className="flex items-center  px-5 py-2 font-semibold text-gray-400 rounded-md cursor-pointer hover:bg-[#F3EDFF]"
+              onClick={() => handleOptionClick(option)}
             >
               {displayImages && option.imageUrl && (
                 <Image
                   src={option.imageUrl}
-                  alt={""}
+                  alt={option.label}
                   className="w-4 h-4 mr-2"
                 />
               )}
