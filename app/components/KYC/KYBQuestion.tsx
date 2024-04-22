@@ -3,17 +3,22 @@ import { useProcessKycMutation } from "@/redux/features/kyc/kycApi";
 import { useRouter } from "next/navigation";
 import React, { FC, useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { IoIosArrowRoundBack } from "react-icons/io";
 
 type Props = {
   kybQuestion: any;
   setKybQuestion: (kybQuestion: any) => void;
   kybDetails: any;
+  active: number;
+  setActive: (active: any) => void;
 };
 
 const KYBQuestion: FC<Props> = ({
   kybQuestion,
   setKybQuestion,
   kybDetails,
+  active,
+  setActive,
 }) => {
   const router = useRouter();
   const [isPolitician, setIsPolitician] = useState(kybQuestion.is_politician);
@@ -55,8 +60,19 @@ const KYBQuestion: FC<Props> = ({
     await processKyc(data);
   };
 
+  const handleBack = () => {
+    setActive(active - 1);
+  };
+
   return (
     <div className="w-full mx-auto ">
+      <div
+        onClick={handleBack}
+        className="my-4 mx-6 flex justify-start items-center gap-1 cursor-pointer"
+      >
+        <IoIosArrowRoundBack className="bg-primaryBtn text-white-100 rounded-sm" />
+        <p className="text-primaryBtn font-semibold">Go-Back</p>
+      </div>
       <div className="mt-5 mb-2 items-center text-center">
         <h3 className="py-2 font-semibold text-2xl">KYC Questions</h3>
         <p className="text-gray-300 text-sm">

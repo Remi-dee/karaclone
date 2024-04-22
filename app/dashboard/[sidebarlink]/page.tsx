@@ -15,6 +15,7 @@ import {
 } from "../../../redux/features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import LogoutModal from "../../../app/components/Auth/LogoutModal";
+import Settings from "../components/Settings/Page";
 
 const Dashboard = (urlParam: any) => {
   const dispatch = useDispatch();
@@ -73,6 +74,7 @@ const Dashboard = (urlParam: any) => {
           {urlLink.toLowerCase() === "wallet" && <Wallet />}
           {urlLink.toLowerCase() === "transaction" && <Transaction />}
           {urlLink.toLowerCase() === "p2p-trade" && <Trade />}
+          {urlLink.toLowerCase() === "settings" && <Settings />}
         </div>
       </div>
       {logoutModalOpen && <LogoutModal />}

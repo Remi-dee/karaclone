@@ -5,15 +5,35 @@ import { IoIosAddCircle, IoIosArrowRoundUp } from "react-icons/io";
 import { CgArrowsExchange } from "react-icons/cg";
 import { walletData } from "./walletData";
 import TransactionTable from "../Transactions/TransactionTable";
+import { useRouter } from "next/navigation";
+
 export default function Wallet() {
   const [selectedCurrency, setSelectedCurrency] = useState<string | null>(null);
+  const router = useRouter();
 
   const handleCurrency = (currency: string) => {
     setSelectedCurrency(currency);
   };
+
+  const handleFundWallet = () => {
+    if (selectedCurrency) {
+      router.push("/fund-wallet");
+    }
+  };
+  const handleTrade = () => {
+    if (selectedCurrency) {
+      router.push("/dashboard/P2P-Trade");
+    }
+  };
+  const handleReversal = () => {
+    if (selectedCurrency) {
+      router.push("/fund-reversal");
+    }
+  };
+
   return (
-    <div className="p-0 m-0 gap-4 bg-white-100">
-      <div className="w-full rounded-md shadow-lg mb-3 p-4">
+    <div>
+      <div className="w-full rounded-md shadow-lg mb-3 p-4 bg-white-100">
         <h2 className="font-semibold font-Josefin text-lg py-2">Wallet</h2>
         <div className="flex justify-start items-center text-gray-300 gap-2">
           <p className="text-sm">My Balances</p>
@@ -22,7 +42,7 @@ export default function Wallet() {
         <p className="py-2 text-gray-300 text-xs">
           Select each currency to perform a transaction
         </p>
-        <div className="flex justify-start flex-wrap lg:justify-between items-center mb-2">
+        <div className="flex justify-start lg:justify-between items-center">
           {walletData?.map((item) => (
             <div
               key={item.id}
@@ -47,9 +67,10 @@ export default function Wallet() {
                 ? "text-[#000] border-[#000] cursor-pointer"
                 : "text-gray-300 border-gray-300 cursor-not-allowed"
             }`}
+            onClick={handleFundWallet}
           >
             <IoIosAddCircle />
-            <p className="text-xs">funds</p>
+            <p className="text-xs">Fund Wallet</p>
           </div>
           <div
             className={` action flex justify-start items-center p-2 border rounded-md ${
@@ -57,9 +78,10 @@ export default function Wallet() {
                 ? "text-[#000] border-[#000] cursor-pointer"
                 : "text-gray-300 border-gray-300 cursor-not-allowed"
             }`}
+            onClick={handleTrade}
           >
             <CgArrowsExchange />
-            <p className="text-xs">Exchange</p>
+            <p className="text-xs cursor-pointer">Trade</p>
           </div>
 
           <div
@@ -68,13 +90,14 @@ export default function Wallet() {
                 ? "text-[#000] border-[#000] cursor-pointer"
                 : "text-gray-300 border-gray-300 cursor-not-allowed"
             }`}
+            onClick={handleReversal}
           >
             <IoIosArrowRoundUp />
-            <p className="text-xs">Exchange</p>
+            <p className="text-xs">Reversal</p>
           </div>
         </div>
       </div>
-      <div className="w-full rounded-md shadow-lg mt-4 p-4 my-4">
+      <div className="w-full rounded-md shadow-lg mt-4 p-4 my-4 bg-white-100">
         <h2 className="font-bold text-sm py-2">Recent Transactions</h2>
         <TransactionTable />
       </div>

@@ -27,6 +27,7 @@ const TransactionTable = () => {
               <th className="p-4 text-left">Amount</th>
               <th className="p-4 text-left">Date</th>
               <th className="p-4 text-left">Status</th>
+              <th className="p-4 text-left"></th>
             </tr>
             {transactionData?.map((item) => (
               <tr
@@ -58,7 +59,7 @@ const TransactionTable = () => {
             ))}
           </table>
           <hr className="border border-gray-500" />
-          <Pagination/>
+          <Pagination />
         </>
       ) : (
         <EmptyTransaction />

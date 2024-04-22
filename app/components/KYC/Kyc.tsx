@@ -58,7 +58,7 @@ const KycModal = () => {
                 onClick={() => {
                   dispatch(toggleStartKycModalSuccess({ data: false }));
                 }}
-                className="p-2 my-2 text-white bg-primaryBtn w-full rounded-lg"
+                className="p-2 my-2 text-[#fff] bg-primaryBtn w-full rounded-lg"
               >
                 Begin Verification
               </button>

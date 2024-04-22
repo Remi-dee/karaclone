@@ -36,6 +36,8 @@ const CreateKYC = () => {
             kycQuestion={kycQuestion}
             setKycQuestion={setKycQuestion}
             kycDetails={kycDetails}
+            active={active}
+            setActive={setActive}
           />
         )}
       </div>
