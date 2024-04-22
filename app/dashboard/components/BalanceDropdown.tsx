@@ -10,7 +10,7 @@ function BalanceDropdown({ currency }: { currency: string }) {
   return (
     <div>
       <Menu as="div" className="relative inline-block text-left">
-        <Menu.Button className="inline-flex items-center w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-slate-300 outine-0 focus:outline-0 hover:bg-gray-50">
+        <Menu.Button className="inline-flex items-center w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-[black] shadow-sm ring-1 ring-inset ring-slate-300 outine-0 focus:outline-0 hover:bg-gray-50">
           {currency === "usd" ? (
             <img src="/svg/US.svg" alt="" />
           ) : (
@@ -18,7 +18,7 @@ function BalanceDropdown({ currency }: { currency: string }) {
           )}
           {currency === "usd" ? "US Dollar " : "Naira Balance"}
           <ChevronDownIcon
-            className="-mr-1 h-5 w-5 text-gray-400"
+            className="-mr-1 h-5 w-5 text-[black]"
             aria-hidden="true"
           />
         </Menu.Button>
@@ -39,7 +39,7 @@ function BalanceDropdown({ currency }: { currency: string }) {
                   <a
                     href="#"
                     className={classNames(
-                      active ? "bg-[white] text-gray-900" : "text-gray-[700]",
+                      active ? "bg-[white] text-[black]" : "text-[black]",
                       "block px-4 py-2 text-sm"
                     )}
                   >

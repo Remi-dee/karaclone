@@ -12,33 +12,39 @@ import KycModal from "../components/KYC/Kyc";
 import BalanceDropdown from "./components/BalanceDropdown";
 import { checkAuthentication } from "../hooks/ProtectedRoute";
 import KYBModal from "../components/KYC/kyb";
+import { useRouter } from "next/navigation";
 
 function Home() {
   const { startKycModalOpen, startKybModalOpen } = useSelector(kycSelector);
   const { data } = useLoadUserQuery({});
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const quickActions = [
     {
       title: "Fund Wallet",
       description: "Easily topup your wallet",
       icon: "/svg/featured_wallet.svg",
+      href: "/fund-wallet",
     },
     {
-      title: "Exchange",
+      title: "Trade",
       description: "Convert your funds easily",
       icon: "/svg/featured_exchange.svg",
+      href: "/dashboard/P2P-trade",
     },
 
     {
-      title: "Withdrawal",
-      description: "Make a withdrawal",
+      title: "Reversal",
+      description: "Make a reversal",
       icon: "/svg/featured_withdrawal.svg",
+      href: "/fund-wallet",
     },
     {
-      title: "P2P",
+      title: "Trade Board",
       description: "Initiate peer to peer transfer",
       icon: "/svg/featured_p2p.svg",
+      href: "/dashboard/P2P-trade",
     },
   ];
 
@@ -52,20 +58,27 @@ function Home() {
             <div className=" w-1/2 flex flex-col gap-2 h-full">
               {/* Wallet balances cards */}
               <div className=" bg-white-100 rounded-xl flex-1 grow flex mb-3 lg-mb-0 justify-between border border-slate-200 py-5 h-full ">
-                <div className=" bg-white-100  rounded-md p-4">
-                  <div className="flex items-center gap-2">
-                    <h2 className="text-gray-300">Wallet Balance</h2>
-                    <span className="text-gray-300">
-                      <FaEye />
-                    </span>
+                <div className="flex flex-col justify-between">
+                  <div className="bg-purple-100 rounded-full w-[50%] h-[50%]">
+                    <img src="public/Icon.png" alt="" />
                   </div>
-                  <p className="text-3xl font-bold text-gray-800 mt-2">
-                    200,000{" "}
-                    <span className="text-gray-300 text-base font-medium">
-                      NGN
-                    </span>{" "}
-                  </p>
+
+                  <div className=" bg-white-100  rounded-md p-4">
+                    <div className="flex items-center gap-2">
+                      <h2 className="text-gray-300">Wallet Balance</h2>
+                      <span className="text-gray-300">
+                        <FaEye />
+                      </span>
+                    </div>
+                    <p className="text-3xl font-bold text-gray-800 mt-2">
+                      200,000{" "}
+                      <span className="text-gray-300 text-base font-medium">
+                        NGN
+                      </span>{" "}
+                    </p>
+                  </div>
                 </div>
+
                 <div className="px-3 p-4">
                   <div>
                     <BalanceDropdown currency={""} />
@@ -109,9 +122,10 @@ function Home() {
             <div className="w-1/2 bg-white-100 mb-3 py-5 rounded-2xl border border-slate-200 h-full">
               <p className="font-bold text-lg mt-5 ml-5 mb-5">Quick Actions</p>
 
-              <div className="grid grid-rows-2 grid-flow-col gap-4 py-5 px-5">
+              <div className="grid grid-rows-2 grid-flow-col gap-4 py-5 px-5 cursor-pointer">
                 {quickActions.map((eachdata, index) => (
                   <div
+                    onClick={() => router.push(eachdata.href)}
                     key={index}
                     className=" border border-slate-200 px-2 rounded py-3"
                   >
@@ -300,9 +314,10 @@ function Home() {
             <div className="md:w-full lg:w-1/2 bg-white-100 rounded-2xl border border-slate-200  p-5 h-full">
               <p className="font-bold text-lg pb-5">Quick Actions</p>
 
-              <div className="grid grid-rows-2 grid-flow-col gap-4">
+              <div className="grid grid-rows-2 grid-flow-col gap-4 cursor-pointer">
                 {quickActions.map((eachdata, index) => (
                   <div
+                    onClick={() => router.push(eachdata.href)}
                     key={index}
                     className=" border border-slate-200 px-2 rounded py-3"
                   >

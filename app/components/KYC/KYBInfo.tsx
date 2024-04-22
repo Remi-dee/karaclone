@@ -1,6 +1,8 @@
 "use client";
+import { useRouter } from "next/navigation";
 import React, { FC, useState } from "react";
 import { CountryDropdown } from "react-country-region-selector";
+import { IoIosArrowRoundBack } from "react-icons/io";
 
 type Props = {
   kybDetails: any;
@@ -70,8 +72,21 @@ const KYCInfo: FC<Props> = ({
     e.preventDefault();
     setActive(active + 1);
   };
+
+  const router = useRouter();
+  const handleBack = () => {
+    router.push("/dashboard/Home");
+  };
+
   return (
     <div className="w-full mx-auto ">
+      <div
+        onClick={handleBack}
+        className="my-4 mx-6 flex justify-start items-center gap-1 cursor-pointer"
+      >
+        <IoIosArrowRoundBack className="bg-primaryBtn text-white-100 rounded-sm" />
+        <p className="text-primaryBtn font-semibold">Go-Back</p>
+      </div>
       <div className="mt-5 mb-2 items-center text-center">
         <h3 className="py-2 font-semibold text-2xl">KYB Verification</h3>
         <p className="text-gray-300 text-sm">
@@ -130,10 +145,8 @@ const KYCInfo: FC<Props> = ({
                   <option value="International Passport">
                     International Passport
                   </option>
-                  <option value="Driver License">
-                    &apos; Driver's Licence
-                  </option>
-                  <option value="Voter Card">&apos; Voter's Card</option>
+                  <option value="Driver License">Driver Licence</option>
+                  <option value="Voter Card"> Voter Card</option>
                 </select>
                 {/* {formik.touched.fullName && formik.errors.fullName && (
                   <p className="mt-2 text-sm text-danger font-medium">
@@ -266,7 +279,7 @@ const KYCInfo: FC<Props> = ({
           <div className="w-full flex items-center justify-end">
             <input
               type="submit"
-              value="continue"
+              value="Continue"
               className="w-full h-[40px] bg-[#7F56D9] text-center text-[#fff] rounded mt-8 cursor-pointer"
             />
           </div>

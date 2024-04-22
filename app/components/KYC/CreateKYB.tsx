@@ -37,6 +37,8 @@ const CreateKYB = () => {
             kybQuestion={kybQuestion}
             setKybQuestion={setKybQuestion}
             kybDetails={kybDetails}
+            active={active}
+            setActive={setActive}
           />
         )}
       </div>

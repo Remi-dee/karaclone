@@ -31,13 +31,16 @@ const moreSidebarLinks = [
   { id: 7, label: "Logout", href: "/dashboard/Logout", icon: "" },
 ];
 
-const Sidebar = (Props: Props) => {
+const Sidebar = ({ link, showSideBar }: Props) => {
   const router = useRouter();
-  const link: string = Props.link;
+
+  const isLinkActive = (label: string) =>
+    label.toLowerCase() === link.toLowerCase();
+
   return (
     <div
       className={`border-r border-slate-200 h-full w-96    lg:relative ${
-        Props.showSideBar ? "hidden " : " block"
+        showSideBar ? "hidden " : " block"
       }
    block absolute z-[1000] py-5 bg-white-100 duration-700 transition-transform	`}
     >
@@ -49,38 +52,43 @@ const Sidebar = (Props: Props) => {
           <button
             key={index}
             onClick={() => router.push(eachdata.href)}
-            className={`text-white py-3 px-4 small focus:outline-none rounded-xl ${
-              typeof eachdata.label === "string" &&
-              typeof link === "string" &&
-              eachdata.label.toLowerCase() === link.toLowerCase()
-                ? "bg-purple-800 text-white"
+            className={`text-[#fff] py-3 px-4 small focus:outline-none rounded-xl ${
+              isLinkActive(eachdata.label)
+                ? "bg-purple-800 text-[#fff]"
                 : "text-slate-700 hover:text-purple-700 hover:bg-purple-100"
             } flex items-center text-sm font-medium`}
           >
-            {eachdata.label.toLowerCase() === link.toLowerCase() ? (
-              link.toLowerCase() === "home" ? (
-                <HomeSvg iconColor="#fff" />
-              ) : link.toLowerCase() === "wallet" ? (
-                <WalletSvg iconColor="#fff" />
-              ) : link.toLowerCase() === "transaction" ? (
-                <TransactionSvg iconColor="#fff" />
-              ) : link.toLowerCase() === "order" ? (
-                <OrderSvg iconColor="#fff" />
-              ) : link.toLowerCase() === "p2p-trade" ? (
-                <P2pTradeSvg iconColor="#fff" />
-              ) : null
-            ) : eachdata.label.toLowerCase() === "home" ? (
-              <HomeSvg iconColor="#727272" />
-            ) : eachdata.label.toLowerCase() === "wallet" ? (
-              <WalletSvg iconColor="#727272" />
-            ) : eachdata.label.toLowerCase() === "transaction" ? (
-              <TransactionSvg iconColor="#727272" />
-            ) : eachdata.label.toLowerCase() === "order" ? (
-              <OrderSvg iconColor="#727272" />
-            ) : eachdata.label.toLowerCase() === "p2p-trade" ? (
-              <P2pTradeSvg iconColor="#727272" />
-            ) : null}
-            <span className="ml-3">{eachdata.label}</span>
+            {isLinkActive(eachdata.label) ? (
+              <>
+                {eachdata.label.toLowerCase() === "home" ? (
+                  <HomeSvg iconColor="#fff" />
+                ) : eachdata.label.toLowerCase() === "wallet" ? (
+                  <WalletSvg iconColor="#fff" />
+                ) : eachdata.label.toLowerCase() === "transaction" ? (
+                  <TransactionSvg iconColor="#fff" />
+                ) : eachdata.label.toLowerCase() === "order" ? (
+                  <OrderSvg iconColor="#fff" />
+                ) : eachdata.label.toLowerCase() === "p2p-trade" ? (
+                  <P2pTradeSvg iconColor="#fff" />
+                ) : null}
+                <span className="ml-3 text-[#fff]">{eachdata.label}</span>
+              </>
+            ) : (
+              <>
+                {eachdata.label.toLowerCase() === "home" ? (
+                  <HomeSvg iconColor="#727272" />
+                ) : eachdata.label.toLowerCase() === "wallet" ? (
+                  <WalletSvg iconColor="#727272" />
+                ) : eachdata.label.toLowerCase() === "transaction" ? (
+                  <TransactionSvg iconColor="#727272" />
+                ) : eachdata.label.toLowerCase() === "order" ? (
+                  <OrderSvg iconColor="#727272" />
+                ) : eachdata.label.toLowerCase() === "p2p-trade" ? (
+                  <P2pTradeSvg iconColor="#727272" />
+                ) : null}
+                <span className="ml-3">{eachdata.label}</span>
+              </>
+            )}
           </button>
         ))}
         <hr className="border-t w-full h-2" />
@@ -89,29 +97,30 @@ const Sidebar = (Props: Props) => {
           <button
             key={index}
             onClick={() => router.push(eachdata.href)}
-            className={`text-white py-3 px-4 small focus:outline-none rounded-xl ${
-              typeof eachdata.label === "string" &&
-              typeof link === "string" &&
-              eachdata.label.toLowerCase() === link.toLowerCase()
-                ? "bg-purple-800 text-white"
+            className={`text-[#fff] py-3 px-4 small focus:outline-none rounded-xl ${
+              isLinkActive(eachdata.label)
+                ? "bg-purple-800 text-[#fff]"
                 : "text-slate-700 hover:text-purple-700 hover:bg-purple-100"
             } flex items-center text-sm font-medium`}
           >
-            {eachdata.label.toLowerCase() === link.toLowerCase() ? (
-              link.toLowerCase() === "settings" ? (
-                <SettingsSvg iconColor="#fff" />
-              ) : link.toLowerCase() === "logout" ? (
-                <WalletSvg iconColor="#fff" />
-              ) : null
-            ) : eachdata.label.toLowerCase() === "settings" ? (
-              <SettingsSvg iconColor="#727272" />
-            ) : eachdata.label.toLowerCase() === "logout" ? (
-              <LogoutSvg iconColor="#D70035" />
-            ) : null}
-            {eachdata.label.toLowerCase() === "logout" ? (
-              <span className="ml-3 text-red-700">{eachdata.label}</span>
+            {isLinkActive(eachdata.label) ? (
+              <>
+                {eachdata.label.toLowerCase() === "settings" ? (
+                  <SettingsSvg iconColor="#fff" />
+                ) : eachdata.label.toLowerCase() === "logout" ? (
+                  <LogoutSvg iconColor="#fff" />
+                ) : null}
+                <span className="ml-3 text-[#fff]">{eachdata.label}</span>
+              </>
             ) : (
-              <span className="ml-3">{eachdata.label}</span>
+              <>
+                {eachdata.label.toLowerCase() === "settings" ? (
+                  <SettingsSvg iconColor="#727272" />
+                ) : eachdata.label.toLowerCase() === "logout" ? (
+                  <LogoutSvg iconColor="#D70035" />
+                ) : null}
+                <span className="ml-3">{eachdata.label}</span>
+              </>
             )}
           </button>
         ))}
