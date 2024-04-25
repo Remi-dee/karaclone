@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import CreateKYC from "../components/KYC/CreateKYC";
+import CreateKYC from "@/Components/KYC/CreateKYC";
 
 const page = () => {
   return <CreateKYC />;

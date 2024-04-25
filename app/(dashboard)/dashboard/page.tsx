@@ -12,7 +12,7 @@ import { useLoadUserQuery } from "@/redux/features/user/userApi";
 import {
   authSelector,
   toggleLogoutModal,
-} from "../../../redux/features/auth/authSlice";
+} from "@/redux/features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import LogoutModal from "@/Components/Auth/LogoutModal";
 import Settings from "@/Components/Settings/Page";
@@ -44,7 +44,7 @@ const Dashboard = (urlParam: any) => {
           <div className="flex items-center">
             <div className="hidden lg:block ml-5">
               <p className="text-black-200 font-bold text-lg">
-                {data?.user.name}
+                {"Hello, " + (data?.user.name || "Omoyosola")}
               </p>
               <p className="text-sm text-gray-300">
                 Trade and withdraw funds easily
@@ -70,11 +70,11 @@ const Dashboard = (urlParam: any) => {
         <div className="px-5 text-slate-900 h-screen overflow-y-auto py-5  bg-purple-50">
           {/* {urlLink.toLowerCase() === 'home' &&
                 <Withdraw />} */}
-          {urlLink.toLowerCase() === "home" && <Home />}
-          {urlLink.toLowerCase() === "wallet" && <Wallet />}
-          {urlLink.toLowerCase() === "transaction" && <Transaction />}
-          {urlLink.toLowerCase() === "p2p-trade" && <Trade />}
-          {urlLink.toLowerCase() === "settings" && <Settings />}
+          {urlLink?.toLowerCase() === "home" && <Home />}
+          {urlLink?.toLowerCase() === "wallet" && <Wallet />}
+          {urlLink?.toLowerCase() === "transaction" && <Transaction />}
+          {urlLink?.toLowerCase() === "p2p-trade" && <Trade />}
+          {urlLink?.toLowerCase() === "settings" && <Settings />}
         </div>
       </div>
       {logoutModalOpen && <LogoutModal />}
