@@ -24,21 +24,29 @@ const BasicUserDetails: FC<Props> = ({
   };
 
   return (
-    <div className="w-[500px] py-[1rem] mt-4 shadow-xl rounded-md  ml-20">
-      <div className="w-[400px] mt-4 mx-auto">
-        <div className="w-[25px] flex justify-center shadow-md border border-gray-200  rounded-md h-[25px]">
-          <TiUser className="text-lg" />
+    <div className="w-[550px]  h-[874px] py-[1rem]  flex justify-center items-center  gap-y-[24px] shadow-xl rounded-md  ml-20">
+      <div className=" h-[630px] w-[470px]  gap-y-[24px] flex flex-col justify-center      ">
+        <div className="w-[56px] flex justify-center  items-center content-center shadow-md border border-[#EAECF0]   rounded-md min-h-[56px]">
+          <TiUser className="text-[28px] " />
         </div>
-        <h3 className="py-2 font-semibold text-lg">Input Basic Details</h3>
-        <p className="text-gray-300 text-sm">
-          Fill in your basic details to get started
-        </p>
+        <div className=" flex flex-col gap-y-[16px]">
+          <h3 className="tracking-[-2%]  font-bold  leding-[38.4px] text-[32px]">
+            Input Basic Details
+          </h3>
+          <p className="text-gray-300 text-sm">
+            Further KYC verification will be required on the dashboard. Kindly
+            complete it to ensure uninterrupted service. Thank you.
+          </p>
+        </div>
         <form
           onSubmit={handleSubmit}
-          className={`${styles.label} gap-y-[0.5rem] flex flex-col`}
+          className={`${styles.label} gap-y-[24px] mt-[8px] flex flex-col`}
         >
-          <div className=" flex flex-col mt-2 ">
-            <label htmlFor="" className="font-semibold text-sm">
+          <div className=" flex flex-col gap-y-[8px] ">
+            <label
+              htmlFor=""
+              className="font-semibold text-[16px] leding-[20px] tracking-[-2%]"
+            >
               Full Name<span className=" pl-[0.1rem] text-red-400">*</span>
             </label>
             <input
@@ -53,14 +61,17 @@ const BasicUserDetails: FC<Props> = ({
               placeholder="First name and Last name"
               className={`${styles.input} padingForInput`}
             />
-            <div className="flex items-center justify-start text-gray-200  gap-2">
+            <div className="flex items-center justify-start text-gray-200  gap-y-[8px]">
               <IoIosInformationCircleOutline />
               <p className="text-sm">Your Surname is your Last Name</p>
             </div>
           </div>
 
-          <div className=" flex flex-col mt-2 gap-1">
-            <label htmlFor="" className="font-semibold text-sm">
+          <div className=" flex flex-col  gap-y-[8px]">
+            <label
+              htmlFor=""
+              className="font-semibold text-[16px] leding-[20px] tracking-[-2%]"
+            >
               Gender<span className=" pl-[0.1rem] text-red-400">*</span>
             </label>
             <select
@@ -78,8 +89,11 @@ const BasicUserDetails: FC<Props> = ({
               <option value="Other">Other</option>
             </select>
           </div>
-          <div className=" flex flex-col mt-2 gap-1">
-            <label htmlFor="" className="font-semibold text-sm">
+          <div className=" flex flex-col  gap-y-[8px]">
+            <label
+              htmlFor=""
+              className="font-semibold text-[16px] leding-[20px] tracking-[-2%]"
+            >
               Email Address<span className="text-red-400  pl-[0.1rem]">*</span>
             </label>
             <input
@@ -95,40 +109,71 @@ const BasicUserDetails: FC<Props> = ({
               className={`${styles.input}`}
             />
           </div>
-          <label htmlFor="" className="font-semibold text-sm">
-            Phone Number<span className="text-red-400  pl-[0.1rem]">*</span>
-          </label>
-          <div className="flex items-center mt-2 border mb-6 rounded-md">
-            <select value="" className=" rounded-md p-1.5 focus:outline-none">
-              <option value="NG">+234</option>
-              <option value="US">+1</option>
-              <option value="UK">+44</option>
-            </select>
+
+          <div className=" flex flex-col  gap-y-[8px]">
+            <label
+              htmlFor=""
+              className="font-semibold text-[16px] leding-[20px] tracking-[-2%]"
+            >
+              Home Address<span className="text-red-400  pl-[0.1rem]">*</span>
+            </label>
             <input
               type="text"
+              name=""
               required
-              value={basicDetails.phone}
+              value={basicDetails.email}
               onChange={(e: any) =>
-                setBasicDetails({ ...basicDetails, phone: e.target.value })
+                setBasicDetails({ ...basicDetails, email: e.target.value })
               }
-              placeholder="Phone Number"
-              className=" w-[96%]  outline-none"
+              id="homeaddress"
+              placeholder="4a, example street, ikeja lagos."
+              className={`${styles.input}`}
             />
+          </div>
+          <div className=" flex flex-col gap-y-[8px]">
+            <label
+              htmlFor=""
+              className="font-semibold text-[16px] leding-[20px] tracking-[-2%]"
+            >
+              Phone Number<span className="text-red-400  pl-[0.1rem]">*</span>
+            </label>
+            <div className="flex items-center mt-2 border mb-6 rounded-md">
+              <select value="" className=" rounded-md p-1.5 focus:outline-none">
+                <option value="+1">US</option>
+                <option value="+234">NG</option>
+                <option value="+44">UK</option>
+              </select>
+              <input
+                type="text"
+                required
+                value={basicDetails.phone}
+                onChange={(e: any) =>
+                  setBasicDetails({ ...basicDetails, phone: e.target.value })
+                }
+                placeholder="  +1(555) 000-0000"
+                className=" w-[96%]  outline-none"
+              />
+            </div>
           </div>
           <div className="w-full flex items-center justify-end">
             <input
               type="submit"
-              value="continue"
-              className="w-full h-[40px] bg-[#7F56D9] text-center text-[#fff] rounded mt-8 cursor-pointer"
+              value="Continue"
+              className="w-full h-[40px] bg-[#7F56D9] text-center text-[#fff] rounded  cursor-pointer"
             />
           </div>
         </form>
-        <p className="py-4 text-center text-sm text-gray-300">
-          Already have an account?{" "}
-          <Link className="text-primaryBtn" href={"/login"}>
-            Log In
-          </Link>
-        </p>
+        <div>
+          <p className="py-4 text-center text-sm text-gray-300">
+            Already have an account?{" "}
+            <Link
+              className="text-[#7F56D9] leading-[19px] tracking-[-2%] font-[700] ml-1 "
+              href={"/login"}
+            >
+              Log In
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );

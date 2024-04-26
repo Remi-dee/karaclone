@@ -55,38 +55,47 @@ const Login = () => {
   const { errors, touched, values, handleChange, handleSubmit } = formik;
   return (
     <div className="flex-1 w-full flex pt-0 h-full  justify-center ">
-      <div className=" w-[70%] h-full ">
-        <div className="flex  h-full flex-col  justify-center">
+      <div className=" w-[471px] ">
+        <div className="flex  flex-col  ">
           <div className="">
-            <div>
-              <Image src="/fxkara-logo.svg" height={130} width={130} alt="" />
+            <div className="  mt-[60px]">
+              <Image src="/fxkara-logo.svg" height={40} width={150} alt="" />
             </div>
-            <div className=" h-full w-full flex flex-col justify-center text-black ">
-              <h2 className="text-[black] text-3xl font-bold ">Log in</h2>
-              <div className="my-3 text-[1rem] text-[#7C7C7C]">
-                Welcome back! Please enter your details
+            <div className=" mt-[40px] h-full w-full flex flex-col justify-center gap-y-[40px]  text-black ">
+              <div className=" flex  flex-col">
+                <h2 className="text-[#101828] tracking-[-2%] text-[48px] font-lato  font-[400] ">
+                  Log in
+                </h2>
+                <p className=" leading-[28px] tracking-[-2%]  text-[1rem] text-[#7C7C7C]">
+                  Welcome back! Please enter your details.
+                </p>
               </div>
-              <form onSubmit={handleSubmit} className=" w-full">
-                <label className=" w-full" htmlFor="email">
-                  Email
-                </label>
-                <input
-                  required
-                  type="email"
-                  name=""
-                  value={values.email}
-                  onChange={handleChange}
-                  id="email"
-                  placeholder="loginemail@gmail.com"
-                  className={`${
-                    errors.email && touched.email && "border-red-500"
-                  } ${" w-full text-[black] dark:text-white bg-transparent border border-slate-200 text-sm rounded h-[40px] px-2 outline-none mt-[10px] font-Poppins"} w-full`}
-                />
-                {errors.email && touched.email && (
-                  <span className="text-red-500 pt-2 block">
-                    {errors.email}
-                  </span>
-                )}
+              <form
+                onSubmit={handleSubmit}
+                className=" w-full  flex flex-col gap-[20px]"
+              >
+                <div>
+                  <label className=" w-full" htmlFor="email">
+                    Email
+                  </label>
+                  <input
+                    required
+                    type="email"
+                    name=""
+                    value={values.email}
+                    onChange={handleChange}
+                    id="email"
+                    placeholder="Enter your Email"
+                    className={`${
+                      errors.email && touched.email && "border-red-500"
+                    } ${" w-full text-[black] dark:text-white bg-transparent border border-slate-200 text-sm rounded h-[40px] px-2 outline-none mt-[10px] font-Poppins"} w-full`}
+                  />
+                  {errors.email && touched.email && (
+                    <span className="text-red-500 pt-2 block">
+                      {errors.email}
+                    </span>
+                  )}
+                </div>
                 <div className="w-full mt-5 relative mb-1">
                   <label
                     className={`${"text-[16px] font-Poppins text-[black] dark:text-white"}`}
@@ -101,7 +110,7 @@ const Login = () => {
                     value={values.password}
                     onChange={handleChange}
                     id="password"
-                    placeholder="password!@%"
+                    placeholder="Type in password"
                     className={`${
                       errors.password && touched.password && "border-red-500"
                     } ${"w-full text-[black] dark:text-white bg-transparent border border-slate-200 text-sm rounded h-[40px] px-2 outline-none mt-[10px] font-Poppins"}`}
@@ -144,7 +153,7 @@ const Login = () => {
                   </div>
                   <div className="w-max h-full ">
                     <Link
-                      className="text-sm text-red-500 my-auto"
+                      className="text-sm text-[#FF2452] leading-[14.4px] font-[500] text-[12px] my-auto"
                       href="/forgot-password"
                     >
                       Forgot Password?
@@ -156,14 +165,17 @@ const Login = () => {
                   <input
                     type="submit"
                     value="Login"
-                    className="w-full bg-[#1E1E1E] text-[#FFFFFF] rounded-lg h-12 mt-6 flex justify-center items-center cursor-pointer"
+                    className="w-full bg-[#7F56D9] text-[#FFFFFF] rounded-lg h-12 mt-6 flex justify-center items-center cursor-pointer"
                   />
                 </div>
                 <br />
 
                 <h5 className="text-center pt-[0.5rem] font-Poppins text-[14px] text-[black] dark:text-white">
                   Not have any account?
-                  <Link className="text-primaryBtn ml-1 " href={"/signUp"}>
+                  <Link
+                    className="text-[#7F56D9] leading-[19px] tracking-[-2%] font-[700] ml-1 "
+                    href={"/signUp"}
+                  >
                     Sign Up
                   </Link>
                 </h5>

@@ -16,41 +16,62 @@ const SignUpOptions: FC<Props> = ({ accountType, active }) => {
     "Verify Email Address",
     "Activate Two Factor Authentication",
   ];
+  const individualOthers = [
+    "Select the type of account you want",
+    "Fill in your basic details to get started",
+    "Create your password",
+    "Verify  your registered email address",
+    "Protect your account wIth 2FA ",
+  ];
+
   const businessOptions = [
+    "Choose Account Type",
+    "Input Basic Details",
+    "Input Business Details",
+    "Create Password",
+    "Verify Email Address",
+    "Activate Two Factor Authentication",
+  ];
+  const businessOthers = [
     "Select the type of account you want",
     "Fill in your basic details to get started",
     "Fill in your business details",
-    "Create Password",
-    "Verify your registered email address",
-    "Protect your account with 2FA",
+    "Create your password",
+    "Verify  your registered email address",
+    "Protect your account wIth 2FA ",
   ];
   const optionsToRender =
     accountType === "individual" ? individualOptions : businessOptions;
+
+  const othersToRender =
+    accountType === "individual" ? individualOthers : businessOthers;
   return (
-    <div className=" relative left-0 _justify-center items-center flex top-0 h-screen w-fit flex-col   p-6  text-white max-sm:hidden lg:w-[246px]  ">
-      <div className="my-2 mx-5">
+    <div className=" relative left-0 _justify-center items-center flex top-0 h-screen  flex-col   p-6  text-white max-sm:hidden  w-[431px]  ">
+      <div className=" mt-[1rem] w-[335px]">
         <Image src={Logo} alt="" className="w-48" />
       </div>
-      <div className=" pt-[15%] w-[90%]">
+      <div className=" pt-[15%] w-[335px]">
         {optionsToRender.map((option: any, index: number) => (
           <div
             key={index}
-            className="  w-max flex justify-start items-start gap-2 mb-2"
+            className="  w-max flex justify-start items-start gap-x-[10px] gap-y-[32px] "
           >
             <div className="flex flex-col items-center justify-center mt-2 gap-1">
-              <div className="w-[25px] h-[25px] flex justify-center items-center rounded-full text-center bg-primaryBtn text-white font-montserrat">
-                <GiCheckMark className="text-white-100" />
+              <div className="w-[32px] h-[32px] gap-[10px] flex justify-center items-center rounded-full text-center bg-primaryBtn text-white font-montserrat">
+                <GiCheckMark className="text-white-100 w-[16px] h-[14.01px]" />
               </div>
               {index !== 5 ? (
-                <div className="w-[4px] h-[30px] bg-[#EAECF0]"></div>
+                <div className="w-[2px] h-[37px] bg-[#EAECF0]"></div>
               ) : (
                 <span />
               )}
             </div>
             <div className="font-montserrat mb-2">
-              <h2 className=" text-base font-semibold min-w-max">{option}</h2>
+              <h2 className=" text-[18px] leading-[28px] tracking-[-2%] font-semibold min-w-max">
+                {option}
+              </h2>
               <p className="text-gray-300 text-sm pb-2 w-full">
-                {businessOptions[index]}
+                {othersToRender[index]}
               </p>
             </div>
           </div>
