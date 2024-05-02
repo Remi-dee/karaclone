@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import FundAmount from "@/app/components/FundWallet/FundAmount";
-import FundMethod from "../components/FundWallet/FundMethod";
-import FundSuccess from "../components/FundWallet/FundSuccess";
+import FundAmount from "@/Components/FundWallet/FundAmount";
+import FundMethod from "@/Components/FundWallet/FundMethod";
+import FundSuccess from "@/Components/FundWallet/FundSuccess";
 
 type Props = {};
 

@@ -1,21 +1,21 @@
 "use client";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import CustomModal from "./components/CustomModal/CustomModal";
-import { openModal } from "../redux/modal/modalSlice";
-import Kyc from "./components/KYC/Kyc";
-import SelectCountry from "./components/KYC/SelectCountry";
-import VerifyId from "./components/KYC/VerifyId";
-import UploadId from "./components/KYC/UploadId";
-import UploadingId from "./components/KYC/UploadingId";
-import BankStatement from "./components/KYC/BankStatement";
-import BankVerification from "./components/KYC/BankVerification";
-import KycSelfie from "./components/KYC/KycSelfie";
-import Verification from "./components/KYC/Verification";
-import VerificationQrcode from "./components/KYC/VerificationQrcode";
-import VerificationEmail from "./components/KYC/VerificationEmail";
-import VerificationSelfie from "./components/KYC/VerificationSelfie";
-import VerificationSuccess from "./components/KYC/VerificationSuccess";
+import CustomModal from "@/Components/CustomModal/CustomModal";
+import { openModal } from "@/redux/modal/modalSlice";
+import Kyc from "@/Components/KYC/Kyc";
+import SelectCountry from "@/Components/KYC/SelectCountry";
+import VerifyId from "@/Components/KYC/VerifyId";
+import UploadId from "@/Components/KYC/UploadId";
+import UploadingId from "@/Components/KYC/UploadingId";
+import BankStatement from "@/Components/KYC/BankStatement";
+import BankVerification from "@/Components/KYC/BankVerification";
+import KycSelfie from "@/Components/KYC/KycSelfie";
+import Verification from "@/Components/KYC/Verification";
+import VerificationQrcode from "@/Components/KYC/VerificationQrcode";
+import VerificationEmail from "@/Components/KYC/VerificationEmail";
+import VerificationSelfie from "@/Components/KYC/VerificationSelfie";
+import VerificationSuccess from "@/Components/KYC/VerificationSuccess";
 
 const Page = () => {
   const [active, setActive] = useState(1);

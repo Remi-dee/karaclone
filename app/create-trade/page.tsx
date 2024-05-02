@@ -9,15 +9,15 @@ import CreateTradeDetails from "./createTrade";
 const CreateTrade = () => {
   const router = useRouter();
   const [currency, setCurrency] = useState<string>("");
-  
+
   const [showTradeDetails, setShowTradeDetails] = useState(false);
 
   const handleTradeDetails = () => {
-      setShowTradeDetails(true);
+    setShowTradeDetails(true);
   };
 
   if (showTradeDetails) {
-      return <CreateTradeDetails/>;
+    return <CreateTradeDetails />;
   }
 
   const handleCurrency = (value: string) => {
@@ -123,7 +123,11 @@ const CreateTrade = () => {
                 Payment Method
               </label>
               <div className="p-1 rounded-md border border-gray-200 mt-2 mb-4 flex">
-                <select name="" className="w-full text-gray-300 text-xs p-1" id="">
+                <select
+                  name=""
+                  className="w-full text-gray-300 text-xs p-1"
+                  id=""
+                >
                   <option value="" className="text-300 w-full">
                     Select payment method
                   </option>
@@ -151,7 +155,11 @@ const CreateTrade = () => {
                 Account Number
               </label>
               <div className="p-1 rounded-md border border-gray-200 mt-2 mb-4 flex">
-              <input type="text" className="outline-none placeholder:gray-200 placeholder:text-xs"  placeholder="Enter Account Number"/>
+                <input
+                  type="text"
+                  className="outline-none placeholder:gray-200 placeholder:text-xs"
+                  placeholder="Enter Account Number"
+                />
               </div>
             </div>
             <div>
@@ -159,7 +167,11 @@ const CreateTrade = () => {
                 Account Name
               </label>
               <div className="p-1 rounded-md border border-gray-200 mt-2 mb-4 flex">
-                <input type="text" className="outline-none placeholder:gray-200 placeholder:text-xs"  placeholder="Enter Account name"/>
+                <input
+                  type="text"
+                  className="outline-none placeholder:gray-200 placeholder:text-xs"
+                  placeholder="Enter Account name"
+                />
               </div>
             </div>
             <hr className="mt-2 border-gray-900" />
@@ -178,7 +190,10 @@ const CreateTrade = () => {
                 className="border border-200 rounded-md resize-none outline-none"
               ></textarea>
             </div>
-            <button onClick={handleTradeDetails} className="p-2 my-4 text-white-100 bg-primaryBtn w-full rounded-lg">
+            <button
+              onClick={handleTradeDetails}
+              className="p-2 my-4 text-white-100 bg-primaryBtn w-full rounded-lg"
+            >
               create Ad
             </button>
           </form>

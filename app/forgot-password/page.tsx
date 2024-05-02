@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { styles } from "../styles/style";
+import { styles } from "../../styles/style";
 
 const ForgotPassword = () => {
   return (
