@@ -4,6 +4,7 @@ function HomeSvg({ iconColor }: { iconColor: string }) {
   return (
     <svg
       width="20"
+      className="  min-w-[20px] min-h-[20px]"
       height="20"
       viewBox="0 0 20 20"
       fill="none"

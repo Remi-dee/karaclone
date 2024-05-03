@@ -6,6 +6,7 @@ function P2pTradeSvg({ iconColor }: { iconColor: string }) {
       width="20"
       height="20"
       viewBox="0 0 20 20"
+      className="  min-w-[20px] min-h-[20px]"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >

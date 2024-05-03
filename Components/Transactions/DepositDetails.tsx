@@ -1,11 +1,16 @@
+import Link from "next/link";
 import React from "react";
 import { BiSolidCopy } from "react-icons/bi";
 const DepositDetails = () => {
   return (
-    <div className="mt-4 text-xs font-semibold">
-      <h2 className="py-2 font-semibold text-[#000] text-center text-xl">
+    <div className=" gap-[24px] h-[842px] mt-[32px]  p-[32px_40px_32px_40px] flex-col flex w-[512px] text-xs font-semibold">
+      <div >
+
+      <h2 className="py-2 font-bold leading-[28px] text-[#1E1E1E] text-center text-[18px]  ">
         Transaction Details
       </h2>
+      </div>
+      <div className="  text-[14px]  leading-[20px]  gap-[24px] flex flex-col">
       <div className="flex justify-between items-center my-4">
         <span>Transaction ID</span>
         <div className="flex justify-center items-center gap-1">
@@ -13,6 +18,11 @@ const DepositDetails = () => {
           <BiSolidCopy className="text-primaryBtn" />
         </div>
       </div>
+  
+
+
+
+     
       <div className="flex justify-between items-center ">
         <span>Date & Time</span>
         <p className="text-[#000]">
@@ -43,16 +53,20 @@ const DepositDetails = () => {
           <span>Successful</span>
         </div>
       </div>
-      <button className="p-3 my-2 text-white-100 bg-primaryBtn w-full rounded-lg">
+
+      <button className="p-[10px_16px] h-[44px] w-full my-2 text-white-100 bg-primaryBtn  rounded-lg">
         Download Receipt
       </button>
+      
       <hr className="border border-gray-500" />
       <p className="py-2 text-[#000] text-center">
-        Need help?{" "}
-        <a href="" className="font-semibold  text-primaryBtn">
+        Need Help?{" "}
+        <Link href="" className="font-semibold  text-primaryBtn">
           Contact Support
-        </a>
+        </Link>
       </p>
+      </div>
+      
     </div>
   );
 };

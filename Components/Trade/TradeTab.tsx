@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import CustomDropdown from "@/Components/CustomDropdown/CustomDropdown";
 import { currencyData } from "../Transactions/currencyData";
 
-
 type tradeProp = {
   onSelectBuy: () => void;
   onSelectSell: () => void;
@@ -32,10 +31,10 @@ const TradeTab: React.FC<tradeProp> = ({ onSelectBuy, onSelectSell }) => {
     return active === text;
   };
   return (
-    <div className="flex justify-between items-center gap-2 my-4">
-      <div className="w-[150px] flex justify-between items-center px-3 py-1  gap-2 border rounded-md">
+    <div className="flex justify-between items-center w-full gap-2  my-4">
+      <div className="  w-[156px] h-[46px] flex justify-between items-center p-[6px]  gap-2 border rounded-md">
         <button
-          className={` px-2 font-bold text-sm rounded-md ${
+          className={` px-[8px] w-[66px] h-[30px] font-bold text-sm rounded-md gap-[10px] text-[12px] leading-[14.4px] ${
             buttonIsActive("Buy")
               ? "bg-primaryBtn text-white-100 px-3 rounded-md"
               : ""
@@ -46,7 +45,7 @@ const TradeTab: React.FC<tradeProp> = ({ onSelectBuy, onSelectSell }) => {
         </button>
 
         <button
-          className={` px-2  font-bold text-sm rounded-md ${
+          className={`  px-[8px] w-[66px] h-[30px] font-bold text-sm rounded-md gap-[10px] text-[12px] leading-[14.4px] ${
             buttonIsActive("Sell")
               ? "bg-primaryBtn text-white-100 px-2 rounded-md"
               : ""
@@ -56,37 +55,37 @@ const TradeTab: React.FC<tradeProp> = ({ onSelectBuy, onSelectSell }) => {
           Sell
         </button>
       </div>
-      <div className="w-[250px] p-1 border flex justify-center items-center rounded-md">
+      <div className="w-[360px] h-[48px] border flex  items-center rounded-[12px] p-[8px_16px_8px_16px]">
         <div>
           <input
-            className="w-[120px] border-r border-r-gray-300 px-1 placeholder:text-sm placeholder:text-gray-300 outline-none"
+            className="w-[215px] h-[16px] border-r  border-r-[#BDBDBD]  placeholder:text-sm placeholder:text-[#989898] outline-none"
             placeholder="Amount to Buy"
             type="text"
           />
         </div>
-        <div className="w-[120px] mx-2 bg-gray-900 rounded-lg">
+        <div className="w-[115px] flex justify-center items-center ml-[5px] bg-[#F7F7F7] rounded-[16px] ">
           <CustomDropdown
             onSelect={handleCurrency}
             options={currencyData}
-            placeholder="currency"
+            placeholder="Currency"
             className="w-full outline-none"
             displayImages
           />
         </div>
       </div>
-      <div className="w-[250px] p-1 flex justify-center items-center border rounded-md">
+      <div className="w-[360px] h-[48px] border flex  items-center rounded-[12px] p-[8px_16px_8px_16px]">
         <div>
           <input
-            className="w-[120px] border-r border-r-gray-300 px-1 placeholder:text-sm placeholder:text-gray-300 outline-none"
+            className="w-[215px] h-[16px] border-r  border-r-[#BDBDBD]  placeholder:text-sm placeholder:text-[#989898] outline-none"
             placeholder="Exchange Value"
             type="text"
           />
         </div>
-        <div className="w-[120px] mx-2 bg-gray-900 rounded-lg">
+        <div className="w-[115px] ml-[5px] bg-[#F7F7F7] rounded-[16px]">
           <CustomDropdown
             onSelect={handleCurrency}
             options={currencyData}
-            placeholder="currency"
+            placeholder="Currency"
             className="w-full outline-none"
             displayImages
           />

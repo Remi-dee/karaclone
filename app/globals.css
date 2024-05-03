@@ -148,6 +148,25 @@ background: url("../public/docbox.png");
 background-position: center;
 background-repeat: no-repeat;
  background-size: cover;
- width: 218px;
- height: 170px;
+ 
+}
+
+.dashHomeImage{
+  background: url("../public/Images/Background.png");
+  background-position: center;
+  background-repeat: no-repeat;
+background-size: cover;
+}
+
+
+
+/* Hides the scrollbar but allows scrolling */
+.invisible-scrollbar::-webkit-scrollbar {
+  width: 0px; /* For vertical scrollbars */
+  height: 0px; /* For horizontal scrollbars */
+  background: transparent; /* Optional: just for ensuring scrollbar is fully invisible */
+}
+
+.invisible-scrollbar {
+  scrollbar-width: none; 
 }

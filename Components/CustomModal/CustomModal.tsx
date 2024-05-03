@@ -18,12 +18,12 @@ const CustomModal: React.FC<CustomModalprops> = ({ children }) => {
   return (
     <>
       {isModalOpen && (
-        <div className="fixed pt-4 top-0 left-0 w-screen h-screen flex justify-center items-center inset-0 z-50 pt-12 overflow-auto bg-gray-200 bg-opacity-50">
-          <div className="relative bg-white-100 rounded-md shadow-lg mt-5 w-full p-8 max-w-[480px]  min-h-[350px]">
+        <div className="fixed top-0 left-0 w-screen h-screen flex justify-center items-center inset-0 z-[50000]  overflow-auto bg-gray-200 bg-opacity-50">
+          <div className="relative bg-[white] overflow-y-auto rounded-md shadow-lg mt-5 w-full p-8 max-w-[550px] max-h-[90vh]  min-h-[350px] flex">
             {children}
             <div
               onClick={closeModalHandler}
-              className="absolute top-0 right-0 p-4 cursor-pointer"
+              className="absolute top-0 right-0 p-4 mt-[32px]  cursor-pointer"
             >
               <MdCancel className="text-gray-200 text-lg" />
             </div>

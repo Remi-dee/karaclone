@@ -27,20 +27,20 @@ const Dashboard = (urlParam: any) => {
   const { logoutModalOpen } = useSelector(authSelector);
   const { data } = useLoadUserQuery({});
   return (
-    <div className="flex items-center h-screen">
+    <div className="flex bg-[#F5F1FB]  h-[1024px]">
       {/* sidebar */}
       <Sidebar link={urlLink} showSideBar={showSidebar} />
 
-      <div className="bg-gray-100 h-full w-full ">
+      <div className="  w-full  h-[100px]">
         {/* Wrap Bars3Icon component inside button element */}
         <button
-          className="block lg:hidden fixed top-0 left-0 z-[1000] m-4 p-2 rounded-xl bg-white-100 border border-slate-200  text-white"
+          className="block lg:hidden fixed top-0 left-0 z-[1000] p-2 rounded-xl bg-white-100 border border-slate-200  text-white"
           onClick={toggleSidebar}
         >
           <Bars3Icon className="text-gray-300 h-6 w-6" />
         </button>
 
-        <div className="flex justify-between py-5 border-slate-200 bg-white-100">
+        <div className="flex justify-between py-5 border-slate-200 p-[24px_40px_24px_40px] bg-white-100">
           <div className="flex items-center">
             <div className="hidden lg:block ml-5">
               <p className="text-black-200 font-bold text-lg">
@@ -67,7 +67,7 @@ const Dashboard = (urlParam: any) => {
         </div>
 
         {/* content */}
-        <div className="px-5 text-slate-900 h-screen overflow-y-auto py-5  bg-purple-50">
+        <div className="px-5 text-slate-900   h-full w-full py-5  bg-[#F5F1FB]">
           {/* {urlLink.toLowerCase() === 'home' &&
                 <Withdraw />} */}
           {urlLink.toLowerCase() === "home" && <Home />}

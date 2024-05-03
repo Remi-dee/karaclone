@@ -2,9 +2,10 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { IoIosArrowRoundBack } from "react-icons/io";
-import CustomDropdown from "../components/CustomDropdown/CustomDropdown";
-import { currencyData } from "../dashboard/components/Transactions/currencyData";
+import CustomDropdown from "@/Components/CustomDropdown/CustomDropdown";
+
 import CreateTradeDetails from "./createTrade";
+import { currencyData } from "@/Components/Transactions/currencyData";
 
 const CreateTrade = () => {
   const router = useRouter();
@@ -28,7 +29,7 @@ const CreateTrade = () => {
   };
 
   return (
-    <div className="m-0 p-0 box-border">
+    <div className="m-0 p-0 box-border overflow-hidden">
       <div
         onClick={handleBack}
         className="my-4 mx-6 flex justify-start items-center gap-1 cursor-pointer"

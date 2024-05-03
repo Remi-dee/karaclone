@@ -17,14 +17,14 @@ const TransactionTable = () => {
     dispatch(openModal(id));
   };
   return (
-    <section className="mt-4 box-border h-[404px]">
+    <section className="mt-4 box-border h-[548px]">
       {transactionData && transactionData?.length > 0 ? (
         <div className=" h-full relative w-full">
           <table className="w-[100%] border-collapse">
             <thead>
               <tr className="bg-gray-900 text-sm">
                 <th className="p-4 text-left">Type</th>
-                <th className="p-4 text-left">Description</th>
+                <th className="p-4 text-left">Beneficiary</th>
                 <th className="p-4 text-left">Amount</th>
                 <th className="p-4 text-left">Date</th>
                 <th className="p-4 text-left">Status</th>

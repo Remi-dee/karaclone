@@ -2,11 +2,7 @@ import QrCode from "@/Components/SignUp/QrCode";
 import React from "react";
 
 function Page() {
-  return (
-    <div>
-      <QrCode />
-    </div>
-  );
+  return <QrCode />;
 }
 
 export default Page;

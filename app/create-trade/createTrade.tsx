@@ -13,7 +13,7 @@ const CreateTradeDetails = () => {
   };
 
   return (
-    <div className="p-0 m-0">
+    <div className="p-0 m-0 overflow-hidden h-[840px] w-full ">
       <div
         onClick={handleBack}
         className="my-4 mx-6 flex justify-start items-center gap-1 cursor-pointer"

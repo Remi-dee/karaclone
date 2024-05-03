@@ -27,11 +27,11 @@ const Dashboard = (urlParam: any) => {
   const { logoutModalOpen } = useSelector(authSelector);
   const { data } = useLoadUserQuery({});
   return (
-    <div className="flex items-center h-screen">
+    <div className="flex h- bg-[#F5F1FB] items-center ">
       {/* sidebar */}
       <Sidebar link={urlLink} showSideBar={showSidebar} />
 
-      <div className="bg-gray-100 h-full w-full ">
+      <div className="   h-[1024px] w-full ">
         {/* Wrap Bars3Icon component inside button element */}
         <button
           className="block lg:hidden fixed top-0 left-0 z-[1000] m-4 p-2 rounded-xl bg-white-100 border border-slate-200  text-white"
@@ -67,14 +67,15 @@ const Dashboard = (urlParam: any) => {
         </div>
 
         {/* content */}
-        <div className="px-5 text-slate-900 h-screen overflow-y-auto py-5  bg-purple-50">
+        <div className="px-5 text-slate-900 h-[1024px]  bg-[#F5F1FB]">
           {/* {urlLink.toLowerCase() === 'home' &&
                 <Withdraw />} */}
           {urlLink?.toLowerCase() === "home" && <Home />}
           {urlLink?.toLowerCase() === "wallet" && <Wallet />}
           {urlLink?.toLowerCase() === "transaction" && <Transaction />}
-          {urlLink?.toLowerCase() === "p2p-trade" && <Trade />}
+          {urlLink?.toLowerCase() === "trade-board" && <Trade />}
           {urlLink?.toLowerCase() === "settings" && <Settings />}
+        
         </div>
       </div>
       {logoutModalOpen && <LogoutModal />}

@@ -5,34 +5,46 @@ import Image from "next/image";
 import scan from "@/public/Images/scan.png";
 import TwoFactorCode from "./TwoFactorCode";
 import { useLoadUserQuery } from "@/redux/features/user/userApi";
-import fxqr from "@/public/fxqr.png"
+import fxqr from "@/public/fxqr.png";
 
 type Props = {
   qrCode: string;
 };
 
 const QrCode: FC<Props> = ({ qrCode }) => {
-  const [twoFaCode, setTwoFaCode] = useState(true);
+  const [twoFaCode, setTwoFaCode] = useState(!true);
   const { data } = useLoadUserQuery({});
   return (
     <>
       {twoFaCode ? (
-        <div className="w-[450px] mx-auto  shadow-lg  rounded-md border border-white-100">
-          <div className="w-[350px] pt-6 mx-auto">
-            <div className="w-[25px] flex justify-center items-center shadow-md border border-gray-200  rounded-md h-[25px]">
-              <Image src={scan} alt="Scan" />
+        <div className="w-[550px] mx-auto  h-[760px] shadow-lg  rounded-md border border-white-100">
+          <div className="w-[470px] flex  flex-col gap-y-[32px]  mx-auto">
+            <div className="w-[56px] h-[56px] flex justify-center items-center shadow-md border border-gray-200  rounded-md ">
+              <Image src={scan} alt="Scan" className=" w-[28px] h-[28px]" />
             </div>
-            <h2 className="py-2 font-semibold text-2xl">Scan QR Code</h2>
-            <p className="text-gray-300 text-xs pb-2">
-              Download the google authenticator app, scan the QR code or enter
-              this code manually in your authenticator app.
-            </p>
-            <p className="text-center text-sm">Scan QR Code</p>
-            <div className="w-[200px] mx-auto">
-              <Image src={fxqr} alt="QR Code" className="w-full" />
+            <div>
+              <h2 className=" text-[#1E1E1E] font-bold text-[32px] tracking-[-2%] leading-[38.4px]">
+                Scan QR Code
+              </h2>
+              <p className="text-gray-300 text-[16px] leading-[19.2px] pb-2">
+                Download the google authenticator app, scan the QR code or enter
+                this code manually in your authenticator app.
+              </p>
+            </div>
+            <div className=" w-[334px] h-[334px] mx-auto">
+              <p className="text-center text-[18px] leading-[21.6px] tracking-[-2%]">
+                Scan QR Code
+              </p>
+              <Image
+                src={fxqr}
+                alt="QR Code"
+                className="w-full h-full mt-[16px]"
+              />
             </div>
             <div className="flex justify-between items-center my-4">
-              <span className="font-semibold text-sm">{data?.user.secret}</span>
+              <span className="font-semibold text-sm">
+                {data?.user.secret || "33245JN 47738NJ 327463339"}
+              </span>
               <span className="text-primaryBtn text-sm font-semibold">
                 Copy
               </span>
