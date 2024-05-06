@@ -138,35 +138,83 @@ body {
 
 
 .padingForInput {
-  padding:  8px, 16px, 8px, 16px
+  padding: 8px, 16px, 8px, 16px
 }
 
 
 
-.docBoxImage{
-background: url("../public/docbox.png");
-background-position: center;
-background-repeat: no-repeat;
- background-size: cover;
- 
+.docBoxImage {
+  background: url("../public/docbox.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
 }
 
-.dashHomeImage{
+.dashHomeImage {
   background: url("../public/Images/Background.png");
   background-position: center;
   background-repeat: no-repeat;
-background-size: cover;
+  background-size: cover;
 }
 
 
 
 /* Hides the scrollbar but allows scrolling */
 .invisible-scrollbar::-webkit-scrollbar {
-  width: 0px; /* For vertical scrollbars */
-  height: 0px; /* For horizontal scrollbars */
-  background: transparent; /* Optional: just for ensuring scrollbar is fully invisible */
+  width: 0px;
+  /* For vertical scrollbars */
+  height: 0px;
+  /* For horizontal scrollbars */
+  background: transparent;
+  /* Optional: just for ensuring scrollbar is fully invisible */
 }
 
 .invisible-scrollbar {
-  scrollbar-width: none; 
+  scrollbar-width: none;
+}
+
+
+
+
+
+.custom-checkbox input[type="checkbox"] {
+  display: none;
+}
+
+
+.custom-checkbox .checkmark {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  display: inline-block;
+  border-radius: 8px;
+  border: 2px solid #EEEEEE;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+}
+
+.custom-checkbox input[type="checkbox"]:checked+.checkmark {
+  background-color: #7F56D9;
+}
+
+.custom-checkbox input[type="checkbox"]:checked+.checkmark::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 4px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+
+.custom-checkbox:hover input:not(:checked)~.checkmark {
+  background-color: #eee;
+
 }

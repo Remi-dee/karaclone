@@ -125,7 +125,7 @@ function Home() {
               <div className=" bg-[white] flex flex-row p-[18px_24px_18px_24px] min-h-[134px] h-[134px] w-[490px] rounded-[8px]   lg-mb-0 justify-between border border-slate-200 ">
                 <div className=" w-[75px] pl-[6px] h-full flex  justify-center items-center ">
                   <div className="bg-[#F3EEFF] rounded-full flex justify-center items-center max-w-[60px] w-[60px] h-[60px]">
-                    <img src="/svg/moneys.svg" alt="" />
+                    <img src="/linechart.svg" alt="" />
                   </div>
                 </div>
                 <div className="flex w-full ml-[16px] p-[10px_32px_10px_10px]   justify-center   flex-col gap-[16px] h-full  ">
@@ -150,7 +150,7 @@ function Home() {
               <div className=" bg-[white] flex flex-row p-[18px_24px_18px_24px] min-h-[134px] h-[134px] w-[490px] rounded-[8px]   lg-mb-0 justify-between border border-slate-200 ">
                 <div className=" w-[75px] pl-[6px] h-full flex  justify-center items-center ">
                   <div className="bg-[#F3EEFF] rounded-full flex justify-center items-center max-w-[60px] w-[60px] h-[60px]">
-                    <img src="/svg/moneys.svg" alt="" />
+                    <img src="/icon.svg" alt="" />
                   </div>
                 </div>
                 <div className="flex w-full ml-[16px] p-[10px_32px_10px_10px]   justify-center   flex-col gap-[16px] h-full  ">
