@@ -90,35 +90,23 @@ function Home() {
                     <BalanceDropdown currency={""} />
                   </div> */}
 
+                  <div className=" h-[44px] w-[130px]  border items-center  flex  p-[12px_8px_12px_8px] gap-[8px] bg-[white]  border-[#EFEFEF]  rounded-[8px]     ">
+                    <div className=" w-[20px] h-[20px]  flex justify-center items-center   ">
+                      <Image
+                        src="/svg/nigeriaflag.svg"
+                        alt=""
+                        className=""
+                        height={15}
+                        width={16}
+                      />
+                    </div>
 
-<div className=" h-[44px] w-[130px]  border items-center  flex  p-[12px_8px_12px_8px] gap-[8px] bg-[white]  border-[#EFEFEF]  rounded-[8px]     ">
-                <div className=" w-[20px] h-[20px]  flex justify-center items-center   ">
-                  <Image
-                    src="/svg/nigeriaflag.svg"
-                    alt=""
-                    className=""
-                    height={15}
-                    width={16}
-                  />
-                </div>
-
-
-
-                <div>
-<h2 className=" leading-[20px] text-[14px] text-[#1E1E1E] text-right   ">Naira Balance</h2>
-
-                </div>
-
-</div>
-
-
-
-
-
-
-
-
-                  
+                    <div>
+                      <h2 className=" leading-[20px] text-[14px] text-[#1E1E1E] text-right   ">
+                        Naira Balance
+                      </h2>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -205,8 +193,7 @@ function Home() {
           {/* Table Content */}
 
           <div className=" border mt-[24px] h-[428px]  border-slate-200 bg-white-100 rounded-lg  w-full">
-            
-          <div className="p-6  mx-auto bg-white    border-b border-slate-200 flex items-center justify-between space-x-4">
+            <div className="p-6  mx-auto bg-white    border-b border-slate-200 flex items-center justify-between space-x-4">
               <div className="text-xl font-medium text-black-200">
                 Recent Transactions
               </div>
@@ -226,7 +213,7 @@ function Home() {
                 />
               </div>
             </div>
-            
+
             <div className="p-6  bg-white-100 flex flex-col items-center space-x-4">
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
@@ -265,9 +252,8 @@ function Home() {
                 </thead>
 
                 <tbody></tbody>
-
               </table>
-                {/* empty transactions */}
+              {/* empty transactions */}
               <div className="text-center w-full flex  h-full flex-col items-center justify-center mt-[68px]">
                 <img src="/svg/emptytrans.svg" alt="" />
                 <p className="text-center mt-[24px] leading-[28px] tracking-[-2%] text-[18px] text-[#3D3D3D] font-semibold">

@@ -16,7 +16,10 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import LogoutModal from "@/Components/Auth/LogoutModal";
 import Settings from "@/Components/Settings/Page";
-
+import CreateKYC from "@/Components/KYC/CreateKYC";
+import CreateKYB from "@/Components/KYC/CreateKYB";
+import chatIcon from "@/public/chaticon.png";
+import Image from "next/image";
 const Dashboard = (urlParam: any) => {
   const dispatch = useDispatch();
   const [showSidebar, setShowSidebar] = useState(false);
@@ -27,11 +30,11 @@ const Dashboard = (urlParam: any) => {
   const { logoutModalOpen } = useSelector(authSelector);
   const { data } = useLoadUserQuery({});
   return (
-    <div className="flex bg-[#F5F1FB]  h-[1024px]">
+    <div className="flex bg-[#F5F1FB] relative  h-[1024px]">
       {/* sidebar */}
       <Sidebar link={urlLink} showSideBar={showSidebar} />
-
-      <div className="  w-full  h-[100px]">
+      <Image src={chatIcon} alt=""  className=" absolute  right-[0.5rem] bottom-[0.5rem]  h-[60px] w-[60px]" />
+      <div className=" relative  w-full  h-[100px]">
         {/* Wrap Bars3Icon component inside button element */}
         <button
           className="block lg:hidden fixed top-0 left-0 z-[1000] p-2 rounded-xl bg-white-100 border border-slate-200  text-white"
@@ -67,10 +70,12 @@ const Dashboard = (urlParam: any) => {
         </div>
 
         {/* content */}
-        <div className="px-5 text-slate-900   h-full w-full py-5  bg-[#F5F1FB]">
+        <div className="px-5 text-slate-900 h-full   w-full py-5  bg-[#F5F1FB]">
           {/* {urlLink.toLowerCase() === 'home' &&
                 <Withdraw />} */}
-          {urlLink.toLowerCase() === "home" && <Home />}
+          {/* {urlLink.toLowerCase() === "home" && <Home />} */}
+          {/* {urlLink.toLowerCase() === "home" && <CreateKYC />} */}
+          {urlLink.toLowerCase() === "home" && <CreateKYB />}
           {urlLink.toLowerCase() === "wallet" && <Wallet />}
           {urlLink.toLowerCase() === "transaction" && <Transaction />}
           {urlLink.toLowerCase() === "p2p-trade" && <Trade />}

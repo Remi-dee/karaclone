@@ -70,7 +70,7 @@ const Dashboard = (urlParam: any) => {
         <div className="px-5 text-slate-900 h-[1024px]  bg-[#F5F1FB]">
           {/* {urlLink.toLowerCase() === 'home' &&
                 <Withdraw />} */}
-          {urlLink?.toLowerCase() === "home" && <Home />}
+          {urlLink?.toLowerCase() === "home" && <Home />  }
           {urlLink?.toLowerCase() === "wallet" && <Wallet />}
           {urlLink?.toLowerCase() === "transaction" && <Transaction />}
           {urlLink?.toLowerCase() === "trade-board" && <Trade />}

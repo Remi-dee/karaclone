@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import React, { FC, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { IoIosArrowRoundBack } from "react-icons/io";
+import PurpleCheckBox from "../PurpleCheckBox";
 
 type Props = {
   kycQuestion: any;
@@ -65,7 +66,7 @@ const KYCQuestion: FC<Props> = ({
   };
 
   return (
-    <div className="w-full mx-auto ">
+    <div className="w-[85%]  mx-auto ">
       <div
         onClick={handleBack}
         className="my-4 mx-6 flex justify-start items-center gap-1 cursor-pointer"
@@ -74,12 +75,14 @@ const KYCQuestion: FC<Props> = ({
         <p className="text-primaryBtn font-semibold">Go-Back</p>
       </div>
       <div className="mt-5 mb-2 items-center text-center">
-        <h3 className="py-2 font-semibold text-2xl">KYC Questions</h3>
-        <p className="text-gray-300 text-sm">
+        <h3 className="py-2 font-bold text-[24px] leding-[28.8px] text-[#1E1E1E]  ">
+          KYC Questions
+        </h3>
+        <p className="text-[#7C7C7C] leading-[24px] text-[16px]">
           Answer all questions below to complete your kyc
         </p>
       </div>
-      <div className="w-[80%] pt-6 mx-auto mt-4 rounded-md shadow-lg">
+      <div className="w-[80%] h-[478px] p-[32px_40px_32px_40px]  mx-auto mt-[24px]  rounded-[8px] bg-[white] shadow-lg">
         <form className="px-5 py-5" onSubmit={handleSubmit}>
           <div className="mt-10 mb-5">
             <p className="text-black text-xl font-bold">
@@ -171,11 +174,19 @@ const KYCQuestion: FC<Props> = ({
             </div>
           </div>
 
+          <div className=" flex gap-[8px] mt-[40px]  content-center items-center  ">
+            <PurpleCheckBox />
+            <p className=" text-[#000000] leading-[30px] font-bold  tracking-[-2%]  ">
+              I confirm that all the information I provided above are correct
+              and accurate
+            </p>
+          </div>
+
           <div className="w-full flex items-center justify-end">
             <input
               type="submit"
-              value="continue"
-              className="w-full h-[40px] bg-[#7F56D9] text-center text-[#fff] rounded mt-8 cursor-pointer"
+              value="Submit"
+              className="w-full h-[40px] rounded-[8px] bg-[#7F56D9] text-center text-[#fff]  mt-8 cursor-pointer"
             />
           </div>
         </form>
