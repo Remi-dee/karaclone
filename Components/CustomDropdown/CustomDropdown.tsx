@@ -38,7 +38,7 @@ const CustomDropdown: React.FC<DropdownProps> = ({
       onMouseLeave={() => setIsHovered(false)}
     >
       <div
-        className={` border-gray-800  flex justify-center items-center rounded-md  text-gray-800 cursor-pointer ${
+        className={` border-[#DCDCDC] p-[4px_24px_4px_24px]  flex justify-center items-center content-center rounded-md  text-gray-800 gap-[10px] cursor-pointer ${
           isHovered ? "bg-white-100" : "" 
         }` }
         onClick={() => setIsHovered(!isHovered)}
@@ -49,16 +49,16 @@ const CustomDropdown: React.FC<DropdownProps> = ({
               <Image
                 src={selectedOption.imageUrl}
                 alt={selectedOption.label}
-                className="w-4 h-4 mr-2"
+                className="w-4 "
               />
             )}
-            <div className="px-2">{selectedOption.label}</div>
+            <div className="">{selectedOption.label}</div>
           </>
         ) : (
           placeholder
         )}
         <svg
-          className={`w-4 h-4 inline-block ml-1 transition-transform duration-300 transform ${
+          className={`w-4 h-4 min-w-4 min-h-4 inline-block ml-1 transition-transform duration-300 transform ${
             isHovered ? "rotate-180" : ""
           }`}
           xmlns="http://www.w3.org/2000/svg"

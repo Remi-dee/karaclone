@@ -20,7 +20,7 @@ const CreateKYC = () => {
   });
 
   return (
-    <div className="w-full flex justify-center items-center  min-h-screen">
+    <div className="w-full flex justify-center items-center   max-h-[890px]  overflow-y-scroll   ">
       <div className="w-[100%]">
         {active === 1 && (
           <KYCInfo
@@ -29,6 +29,13 @@ const CreateKYC = () => {
             active={active}
             setActive={setActive}
           />
+          // <KYCQuestion
+          //   kycQuestion={kycQuestion}
+          //   setKycQuestion={setKycQuestion}
+          //   kycDetails={kycDetails}
+          //   active={active}
+          //   setActive={setActive}
+          // />
         )}
 
         {active === 2 && (

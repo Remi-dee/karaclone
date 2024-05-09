@@ -68,35 +68,45 @@ const KYCInfo: FC<Props> = ({
   };
 
   return (
-    <div className="w-full mx-auto ">
+    <div className="w-full flex   flex-col  mx-auto mt-[12rem] h-[1080px]   ">
       <div
         onClick={handleBack}
-        className="my-4 mx-6 flex justify-start items-center gap-1 cursor-pointer"
+        className=" flex justify-start items-center gap-1 cursor-pointer"
       >
         <IoIosArrowRoundBack className="bg-primaryBtn text-white-100 rounded-sm" />
         <p className="text-primaryBtn font-semibold">Go-Back</p>
       </div>
 
-      <div className="mt-5 mb-2 items-center text-center">
-        <h3 className="py-2 font-semibold text-2xl">KYC Verification</h3>
-        <p className="text-gray-300 text-sm">
-          Fill in the details below to complete your kyc
+      <div className="mt-[24px] mb-2 items-center text-center">
+        <h3 className="py-2 font-semibold text-[24px] leading-[28.8px]  trakcing-[-2%]   ">
+          KYC Verification
+        </h3>
+        <p className="text-[#7C7C7C] leading-[24px] text-[16px]">
+          Fill in the details below to complete your KYC
         </p>
       </div>
-      <div className="w-[80%] pt-6 mx-auto mt-4 rounded-md shadow-lg">
-        <form className="px-5 py-5" onSubmit={handleSubmit}>
-          <h3 className="font-semibold text-xl">Verify ID</h3>
-          <p className="text-gray-300 text-sm">
-            Upload government issued identity card.
-          </p>
-          <div className="sm:space-y-8 space-y-4">
-            <div className="grid sm:grid-cols-2 gap-4 sm:gap-12">
-              <div className="w-full">
-                <label htmlFor="" className="font-semibold text-sm">
-                  Select Country<span className="text-red-400">*</span>
+      <div className="w-[80%] h-[1000px] flex p-[32px_40px_32px_40px]  mt-[24px] mx-auto  rounded-md  bg-[white]">
+        <form className="" onSubmit={handleSubmit}>
+          <div className=" flex flex-col gap-[8px]   ">
+            <h3 className="font-semibold text-[18px] leading-[28px]   ">
+              Verify ID
+            </h3>
+            <p className="text-[#7C7C7C] text-[16px] leading-[24px]  ">
+              Upload government issued identity card.
+            </p>
+          </div>
+          <div className=" flex  flex-col mt-[24px]">
+            <div className="grid  sm:grid-cols-2 gap-[24px]">
+              <div className="w-full flex flex-col gap-[8px]   ">
+                <label
+                  htmlFor=""
+                  className="font-semibold text-[16px] text-[#1E1E1E]  tracking-[-2%] leading-[24px]  "
+                >
+                  {/* Select Country<span className="text-red-400">*</span> */}
+                  Select Country
                 </label>
                 <CountryDropdown
-                  classes="p-2 w-full border border-gray-300 rounded-lg"
+                  classes="p-2  h-[48px] w-full border border-gray-300 rounded-[12px]"
                   value={selectedCountry}
                   onChange={handleCountryChange}
                   // defaultOptionLabel={formik.values.country || ""}
@@ -110,12 +120,15 @@ const KYCInfo: FC<Props> = ({
                 )} */}
               </div>
 
-              <div className="w-full">
-                <label htmlFor="" className="font-semibold text-sm">
-                  Select Document<span className="text-red-400">*</span>
+              <div className="w-full flex flex-col gap-[8px] ">
+                <label
+                  htmlFor=""
+                  className="font-semibold text-[16px] text-[#1E1E1E]  tracking-[-2%] leading-[24px] "
+                >
+                  Select Document
                 </label>
                 <select
-                  className="p-2 w-full border border-gray-300 rounded-lg"
+                  className="p-2 h-[48px] w-full border border-gray-300 rounded-[12px]"
                   defaultValue=""
                   required
                   value={kycDetails.id_document_type}
@@ -129,7 +142,7 @@ const KYCInfo: FC<Props> = ({
                 >
                   <option value="" disabled hidden>
                     Select type
-                  </option>{" "}
+                  </option>
                   <option value="National Id Card">National ID Card</option>
                   <option value="NIN Slip">NIN Slip</option>
                   <option value="International Passport">
@@ -148,13 +161,16 @@ const KYCInfo: FC<Props> = ({
               </div>
             </div>
           </div>
-          <div className=" flex flex-col mt-2 gap-1">
-            <label htmlFor="" className="font-semibold text-sm">
-              Upload Document<span className="text-red-400">*</span>
+          <div className=" flex flex-col mt-[24px]  gap-[8px]">
+            <label
+              htmlFor=""
+              className="font-semibold text-[16px] text-[#1E1E1E]  tracking-[-2%] leading-[24px]"
+            >
+              Upload Document
             </label>
             <input
               type="file"
-              className="p-1.5 border rounded-md outline-none"
+              className="p-1.5 h-[48px] border rounded-md outline-none"
               placeholder="type in your business address"
               required
               accept="image/*"
@@ -163,20 +179,29 @@ const KYCInfo: FC<Props> = ({
             />
           </div>
 
-          <div className="mt-10 mb-5">
-            <h3 className="font-semibold text-xl">Verify Address</h3>
-            <p className="text-gray-300 text-sm">
-              Upload a document displaying your address.
-            </p>
+          <div className=" w-full h-[1px] bg-[#EFEFEF] my-[24px]"></div>
+
+          <div className="">
+            <div className=" flex flex-col gap-[8px]   ">
+              <h3 className="font-semibold text-[18px] leading-[28px]   ">
+                Verify Address
+              </h3>
+              <p className="text-[#7C7C7C] text-[16px] leading-[24px]  ">
+                Upload a document displaying your address.
+              </p>
+            </div>
           </div>
           <div className="sm:space-y-8 space-y-4">
             <div className="grid sm:grid-cols-2 gap-4 sm:gap-12">
-              <div className="w-full">
-                <label htmlFor="" className="font-semibold text-sm">
-                  Select Document<span className="text-red-400">*</span>
+              <div className="w-full mt-[24px] flex flex-col gap-[8px]">
+                <label
+                  htmlFor=""
+                  className=" font-semibold text-[16px] text-[#1E1E1E]  tracking-[-2%] leading-[24px]"
+                >
+                  Select Document
                 </label>
                 <select
-                  className="p-2 w-full border border-gray-300 rounded-lg"
+                  className="p-2   h-[48px] w-full border border-gray-300 rounded-[12px]"
                   defaultValue=""
                   required
                   value={kycDetails.address_document_type}
@@ -201,53 +226,70 @@ const KYCInfo: FC<Props> = ({
                 )} */}
               </div>
 
-              <div className="w-full">
-                <label htmlFor="" className="font-semibold text-sm">
-                  Upload Document<span className="text-red-400">*</span>
+              <div className="mt-[24px]  w-full flex flex-col gap-[8px]">
+                <label
+                  htmlFor=""
+                  className="font-semibold text-[16px] text-[#1E1E1E]  tracking-[-2%] leading-[24px]"
+                >
+                  Upload Document
                 </label>
-                <input
-                  type="file"
-                  className="p-2 w-full border border-gray-300"
-                  placeholder="type in your business address"
-                  required
-                  accept="image/*"
-                  id="file"
-                  onChange={handleAddressDocumentChange}
-                />{" "}
+                <div className="file-upload-container">
+                  <label className="upload-box" for="file-upload">
+                    Upload File
+                  </label>
+                  <input
+                    id="file-upload"
+                    type="file"
+                    onchange={updateFileName}
+                  />
+                  <span id="file-name" className="file-name">
+                    Sample PDF
+                  </span>
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="mt-10 mb-5">
-            <h3 className="font-semibold text-xl">Bank Verifcation</h3>
-            <p className="text-gray-300 text-sm">
-              Enter your bank verification number (BVN)
-            </p>
-          </div>
+          <div className=" w-full h-[1px] bg-[#EFEFEF] my-[24px]"></div>
 
-          <label htmlFor="" className="font-semibold text-sm">
-            Enter BVN<span className="text-red-400">*</span>
-          </label>
-          <div className="flex items-center mt-2 border mb-6 rounded-md">
-            <input
-              type="text"
-              placeholder="223748958938"
-              className="w-full rounded-md p-2 focus:outline-none"
-              required
-              value={kycDetails.bvn}
-              onChange={(e: any) =>
-                setKycDetails({
-                  ...kycDetails,
-                  bvn: e.target.value,
-                })
-              }
-            />
+          <div className="flex flex-col gap-[24px]">
+            <div className=" flex flex-col gap-[8px]   ">
+              <h3 className="font-semibold text-[18px] leading-[28px]   ">
+                Bank Verifcation
+              </h3>
+              <p className="text-[#7C7C7C] text-[16px] leading-[24px]  ">
+                Enter your bank verification number (BVN)
+              </p>
+            </div>
+            <div className=" flex  flex-col gap-[8px]">
+              <label
+                htmlFor=""
+                className="font-semibold  text-[16px] text-[#1E1E1E]  tracking-[-2%] leading-[24px]"
+              >
+                Enter BVN
+              </label>
+              <div className="flex items-center mt-2 h-[48px] border mb-6 rounded-md">
+                <input
+                  type="text"
+                  placeholder="223748958938"
+                  className="w-full h-full rounded-md p-2 focus:outline-none"
+                  required
+                  value={kycDetails.bvn}
+                  onChange={(e: any) =>
+                    setKycDetails({
+                      ...kycDetails,
+                      bvn: e.target.value,
+                    })
+                  }
+                />
+              </div>
+            </div>
           </div>
           <div className="w-full flex items-center justify-end">
             <input
               type="submit"
               value="Continue"
-              className="w-full h-[40px] bg-[#7F56D9] text-center text-[#fff] rounded mt-8 cursor-pointer"
+              className="w-full p-[12px] h-[44px] bg-[#7F56D9] text-center text-[#fff] rounded-[12px] mt-8 cursor-pointer"
             />
           </div>
         </form>

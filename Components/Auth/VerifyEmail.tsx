@@ -14,6 +14,8 @@ type VerifyNumber = {
   "1": string;
   "2": string;
   "3": string;
+  "4": string;
+  "5": string;
 };
 
 const VerifyEmail: FC<Props> = ({ setVerificationSuccess }) => {
@@ -42,6 +44,8 @@ const VerifyEmail: FC<Props> = ({ setVerificationSuccess }) => {
     useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null)
   ];
 
   const [verifyNumber, setVerifyNumber] = useState<VerifyNumber>({
@@ -49,11 +53,13 @@ const VerifyEmail: FC<Props> = ({ setVerificationSuccess }) => {
     1: "",
     2: "",
     3: "",
+    4: "",
+    5: "",
   });
 
   const verificationHandler = async () => {
     const verificationNumber = Object.values(verifyNumber).join("");
-    if (verificationNumber.length !== 4) {
+    if (verificationNumber.length !== 6) {
       setInvalidError(true);
       return;
     }
@@ -76,30 +82,32 @@ const VerifyEmail: FC<Props> = ({ setVerificationSuccess }) => {
   };
 
   return (
-    <div className="w-[500px] mx-auto  py-8 shadow-lg  rounded-md border border-white-100">
-      <div className="w-[400px] pt-6 mx-auto">
-        <div className="w-[25px] flex justify-center items-center shadow-md border border-gray-200  rounded-md h-[25px]">
-          <MdMail className="text-sm" />
+    <div className="w-[550px] h-[451px] mx-auto p-[32px_40px_32px_40px]  shadow-lg  rounded-md border border-white-100">
+      <div className="w-[470px] mx-auto">
+        <div className="w-[56px] h-[56px] flex justify-center items-center shadow-md border border-gray-200  rounded-[12px] ">
+          <MdMail className="text-[28px]" />
         </div>
-        <h3 className="py-2 font-semibold text-2xl">
-          Verify Your Email Address
-        </h3>
-        <p className="text-gray-300 text-sm">
-          We sent an OTP code to the email address you provided to verify your
-          email address
-        </p>
-        <div className="m-auto flex items-center justify-around my-4 gap-4">
-          {Object.keys(verifyNumber).map((key, index) => (
+        <div className=" flex flex-col gap-[16px] mt-[24px] ">
+          <h4 className="py-2 font-bold text-[#1E1E1E] leading-[38.4px] text-[32px] tracking-[-2%]">
+            Verify Your Email Address
+          </h4>
+          <p className="text-[#7C7C7C] text-[16px] leading-[19.2px]">
+            We sent an OTP code to the email address you provided to verify your
+            email address
+          </p>
+        </div>
+        <div className=" flex items-center justify-around mt-[32px] gap-[8px]">
+          {Object?.keys(verifyNumber).map((key, index) => (
             <input
               type="number"
               key={key}
               ref={inputRefs[index]}
-              className={`w-[65px] h-[65px] bg-transparent border-[3px] rounded-[10px] flex items-center text-black dark:text-white justify-center text-[18px] font-Poppins outline-none text-center ${
+              className={`w-[64px] h-[64px] bg-transparent border-[2px] border-[#3D3D3D] rounded-[8px] flex items-center text-black dark:text-white juverifyNumberstify-center text-[48px] font-[500] leading-[60px] tracking-[-2%] font-Poppins outline-none p-[2px_8px] text-center ${
                 invalidError
                   ? "shake border-red-500"
                   : "dark:border-white border-[#0000004a]"
-              }`}
-              placeholder=""
+              }   `}
+              placeholder="0"
               maxLength={1}
               value={verifyNumber[key as keyof VerifyNumber]}
               onChange={(e) => handleInputChange(index, e.target.value)}
@@ -108,19 +116,19 @@ const VerifyEmail: FC<Props> = ({ setVerificationSuccess }) => {
         </div>
         <button
           onClick={verificationHandler}
-          className="w-full p-2 mb-4 rounded-md text-center  bg-primaryBtn text-white-100 "
+          className=" p-[10px_16px)] border border-[#7F56D9] h-[40px] w-[470px] mt-[16px] rounded-[8px] text-center  bg-primaryBtn text-white-100 "
         >
-          Access your account
+          Continue
         </button>
-        <div className=" flex justify-normal">
+        <div className=" flex mt-[16px] justify-normal">
           <p className="text-gray-200 w-full text-center text-sm ">
-            Did&apos;t get the email?
-            {/* <span className="text-red-400">00:27mins</span> Resend Code */}
+            Did&apos;t get the email? Can resend in
+            <span className="text-red-400"> 00:27mins</span> 
             <Link
               href=""
-              className=" ml-[0.4rem] font-semibold text-sm text-[#7F56D9]"
+              className=" ml-[0.4rem] block font-semibold text-sm text-[#7F56D9]"
             >
-              Click to resend Code
+           Resend Code
             </Link>
           </p>
         </div>

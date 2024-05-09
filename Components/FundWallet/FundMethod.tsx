@@ -29,6 +29,8 @@ const FundMethod: FC<Props> = ({ active, setActive }) => {
     <>
       {showComponent ? (
         <div>
+        
+          <div className="flex flex-row items-center justify-between text-sm text-neutral-color-800">
           <div
             onClick={handleBack}
             className="my-4 mx-6 flex justify-start items-center gap-1 cursor-pointer"
@@ -37,17 +39,16 @@ const FundMethod: FC<Props> = ({ active, setActive }) => {
             <p className="text-primaryBtn font-semibold">Go-Back</p>
           </div>
 
-          <div className="flex flex-row items-center justify-end text-sm text-neutral-color-800">
             <div className="flex flex-row items-center justify-center gap-[16px]">
               <img
                 className="h-10 w-10 relative"
                 loading="lazy"
                 alt=""
-                src="/progress.svg"
+                src="/svg/progress.svg"
               />
               <div className="flex flex-col items-start justify-start gap-[2px]">
                 <div className="relative leading-[20px] inline-block min-w-[54px]">
-                  Step 1/3
+                  Step 2/3
                 </div>
                 <div className="relative text-base tracking-[-0.39px] leading-[24px] font-semibold text-primary-main whitespace-pre-wrap inline-block min-w-[99px]">
                   Enter Amount
@@ -61,7 +62,7 @@ const FundMethod: FC<Props> = ({ active, setActive }) => {
               <h2 className="m-0 relative text-inherit tracking-[-0.55px] font-bold font-inherit inline-block">
                 Select Payment Method
               </h2>
-              <div className="self-stretch relative text-base leading-[24px] text-neutral-color-500">
+              <div className="self-stretch relative text-base text-[#7C7C7C] leading-[24px] text-neutral-color-500">
                 Select how you want to fund your account
               </div>
             </div>
@@ -78,7 +79,7 @@ const FundMethod: FC<Props> = ({ active, setActive }) => {
                   <div className="flex flex-grow space-x-4">
                     <FaCreditCard className="mt-1" />
                     <h4 className="text-black-200 font-semibold text-sm">
-                      Credit Card
+                      Direct Debit
                     </h4>
                   </div>
                 </div>
@@ -102,7 +103,7 @@ const FundMethod: FC<Props> = ({ active, setActive }) => {
                   <div className="flex flex-grow space-x-4">
                     <FaBuilding className="mt-1" />
                     <h4 className="text-black-200 font-semibold text-sm">
-                      Bank Transfer
+                     Connect to Bank App
                     </h4>
                   </div>
                 </div>

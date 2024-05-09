@@ -5,6 +5,7 @@ function SettingsSvg({ iconColor }: { iconColor: string }) {
     <svg
       width="20"
       height="20"
+      className="  min-w-[20px] min-h-[20px]"
       viewBox="0 0 20 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

@@ -17,10 +17,10 @@ const TransactionTable = () => {
     dispatch(openModal(id));
   };
   return (
-    <section className="mt-4 box-border">
+    <section className="mt-4 box-border h-[404px]">
       {transactionData && transactionData?.length > 0 ? (
-        <>
-          <table className="w-[100%] overflow-auto border-collapse">
+        <div className=" h-full relative w-full">
+          <table className="w-[100%] border-collapse">
             <thead>
               <tr className="bg-gray-900 text-sm">
                 <th className="p-4 text-left">Type</th>
@@ -53,9 +53,9 @@ const TransactionTable = () => {
                       onClick={() => handleTransactionDetails(item.id)}
                     />
                   </td>
-                  
-                    <CustomModal> 
-                      <DepositDetails />
+
+                  <CustomModal>
+                    <DepositDetails />
                   </CustomModal>
                 </tr>
               </tbody>
@@ -63,7 +63,7 @@ const TransactionTable = () => {
           </table>
           <hr className="border border-gray-500" />
           <Pagination />
-        </>
+        </div>
       ) : (
         <EmptyTransaction />
       )}
