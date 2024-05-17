@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { BsEnvelope } from "react-icons/bs";
 import { MdOutlineNavigateBefore, MdOutlineNavigateNext } from "react-icons/md";
-
+import Image from "next/image";
 type VerifyNumber = {
   "0": string;
   "1": string;
@@ -96,74 +96,43 @@ export default function Home() {
   // };
   return (
     <main className="flex w-full min-h-screen">
-      <div className="hidden w-1/2 lg:flex flex-col justify-center items-center bg-[#292929] py-8 px-4">
-        <div className="px-4">
-          <img src="/login-img2.svg" alt="" height="200px" />
-        </div>
-        <div className="my-3 text-center">
-          <p className="text-[#FBFBFB] text-2xl">Withdraw with Ease</p>
-          <p className="text-[#BDBDBD]  text-base">
-            Convert and withdraw your balances back to your local
-            <br />
-            currency effortlessly.
-          </p>
-        </div>
-        <div className="flex justify-center items-center">
-          <div className="flex justify-between w-[140px] items-center mt-5">
-            <MdOutlineNavigateBefore
-              className="tex-lg"
-              style={{
-                color: "#ffffff",
-              }}
-            />
-            <div className="flex justify-between  items-center w-[50px]">
-              <div className="h-2 w-2 rounded-full bg-[#FFFFFF]"></div>
-              <div className="h-2 w-2 rounded-full bg-[#7C7C7C]"></div>
-              <div className="h-2 w-2 rounded-full bg-[#7C7C7C]"></div>
-            </div>
-            <MdOutlineNavigateNext
-              style={{
-                color: "#ffffff",
-              }}
-            />
-          </div>
-        </div>
-      </div>
-      <div className="w-full lg:w-1/2  flex flex-col pb-4 justify-between  bg-[#FBFBFB]">
+      <div className="w-full   flex flex-col pb-4 justify-between  bg-[#FBFBFB]">
         <div className="flex flex-col items-center">
           <div className="mt-16 ">
             <div>
-              <img src="/fxkara-logo.svg" height="200px" alt="" />
+              <Image src="/fxkara-logo.svg" height={40} width={150} alt="" />
             </div>
-            <div className="h-[500px] mt-6 w-full flex flex-col justify-center">
-              <div className=" flex">
-                <div className="p-4 border-2 shadow-sm  border-[#EAECF0] rounded-lg ">
+            <div className="h-[397px]  mt-[24px] w-[471px]  flex flex-col justify-center">
+              <div className=" flex  mt-[24px]">
+                <div className="p-4 flex items-center  justify-center border-2 w-[56px] h-[56px] shadow-sm rounded-[12px]  border-[#EAECF0]  ">
                   <BsEnvelope
                     style={{
+                      height: "28px",
+                      width: "28px",
                       color: "#3D3D3D",
                     }}
                   />
                 </div>
               </div>
-              <h2 className="text-4xl mt-5 font-bold">
+              <h2 className=" tracking-[-2%] text-[#3D3D3D] mt-5 leading-[38.4px] text-[32px] font-bold">
                 Enter your verification Code
               </h2>
-              <p className="mt-3 text-lg text-[#7C7C7C]">
+              <p className="mt-3 text-[16px] leading-[19.2px]  text-[#7C7C7C]">
                 To log in, kindly enter the code we sent to your email
               </p>
-              <div className="mt-6 ">
+              <div className="mt-[24px] ">
                 <div className="flex justify-start items-center my-4 gap-4">
                   {Object.keys(verifyNumber).map((key, index) => (
                     <input
                       type="number"
                       key={key}
                       ref={inputRefs[index]}
-                      className={`w-[45px] h-[45px] bg-transparent border-[2px] rounded-[10px] flex items-center text-black dark:text-white justify-center text-[18px] font-Poppins outline-none text-center ${
+                      className={`w-[64px] min-h-[64px] min-w-[64px] h-[64px] bg-transparent border-[2px]  flex items-center text-black dark:text-white rounded-[8px] leading-[60px] tracking-[-2%] justify-center text-[48px] placeholder:text-[#BDBDBD] font-Poppins outline-none text-center ${
                         invalidError
                           ? "shake border-red-500"
-                          : "dark:border-white border-[#0000004a]"
+                          : "dark:border-white border-[#3D3D3D]"
                       }`}
-                      placeholder=""
+                      placeholder="0"
                       maxLength={1}
                       value={verifyNumber[key as keyof VerifyNumber]}
                       onChange={(e) => handleInputChange(index, e.target.value)}
@@ -171,7 +140,7 @@ export default function Home() {
                   ))}
                 </div>
 
-                <div>
+                <div className=" mt-[40px]">
                   <button
                     onClick={verificationHandler}
                     className="w-full bg-[#1E1E1E] text-[#FFFFFF] rounded-lg h-12 mt-6 flex justify-center items-center"
@@ -191,7 +160,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="flex justify-between items-center px-16 h-12">
+        {/* <div className="flex justify-between items-center px-16 h-12">
           <span>© FXkarasell 2024</span>
           <div className="flex items-center">
             {" "}
@@ -203,7 +172,7 @@ export default function Home() {
             <div className="h-1 w-1 m-2   rounded-full bg-[#7C7C7C]"></div>
             <span>Terms of Service</span>
           </div>
-        </div>
+        </div> */}
       </div>
     </main>
   );

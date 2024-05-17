@@ -1,14 +1,23 @@
-import React, { FC } from "react";
+"use client";
+
+import React, { FC, useState } from "react";
 import Image from "next/image";
 import Logo from "@/public/fxkara-logo.svg";
 import { GiCheckMark } from "react-icons/gi";
+import { useSelector } from "react-redux";
+import { FaGlasses } from "react-icons/fa";
 
 type Props = {
   accountType: string;
   active: number;
   setActive: (active: number) => void;
 };
-const SignUpOptions: FC<Props> = ({ accountType, active }) => {
+const SignUpOptions: FC<Props> = ({ active }) => {
+  const globalState = useSelector((state) => state.auth);
+  const level = globalState?.registrationStage;
+  const accountType = globalState?.account_type;
+  // console.log(accountType);
+
   const individualOptions = [
     "Choose Account Type",
     "Input Basic Details",
@@ -56,9 +65,36 @@ const SignUpOptions: FC<Props> = ({ accountType, active }) => {
             key={index}
             className="  w-max flex justify-start items-start gap-x-[10px] gap-y-[32px] "
           >
-            <div className="flex flex-col items-center justify-center mt-2 gap-1">
-              <div className="w-[32px] h-[32px] gap-[10px] flex justify-center items-center rounded-full text-center bg-primaryBtn text-white font-montserrat">
-                <GiCheckMark className="text-white-100 w-[16px] h-[14.01px]" />
+            <div className="flex breathing-element flex-col items-center justify-center mt-2 gap-1">
+              <div
+                className={` w-[32px] p-[4px] h-[32px] gap-[10px] flex justify-center items-center rounded-full text-center ${
+                  level >= index + 2 ? "bg-[#00A600] " : " bg-[#00A600]"
+                }bg-primaryBtn text-white font-montserrat ${
+                  level >= index + 1 ? "bg-primaryBtn" : "bg-[#ccb4ff]"
+                }  `}
+              >
+                {level >= index + 1 ? (
+                  <GiCheckMark className="text-white-100 w-[16px] h-[14.01px]" />
+                ) : (
+                  <svg
+                    width="32"
+                    height="32"
+                    viewBox="0 0 32 32"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M1 16C1 7.71573 7.71573 1 16 1C24.2843 1 31 7.71573 31 16C31 24.2843 24.2843 31 16 31C7.71573 31 1 24.2843 1 16Z"
+                      fill="#7F56D9"
+                    />
+                    <path
+                      d="M1 16C1 7.71573 7.71573 1 16 1C24.2843 1 31 7.71573 31 16C31 24.2843 24.2843 31 16 31C7.71573 31 1 24.2843 1 16Z"
+                      stroke="#7F56D9"
+                      stroke-width="2"
+                    />
+                    <circle cx="16" cy="16" r="5" fill="white" />
+                  </svg>
+                )}
               </div>
               {index !== 5 ? (
                 <div className="w-[2px] h-[37px] bg-[#EAECF0]"></div>

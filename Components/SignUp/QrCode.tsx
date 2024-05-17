@@ -14,6 +14,7 @@ type Props = {
 const QrCode: FC<Props> = ({ qrCode }) => {
   const [twoFaCode, setTwoFaCode] = useState(!true);
   const { data } = useLoadUserQuery({});
+  console.log(data);
   return (
     <>
       {twoFaCode ? (
@@ -36,7 +37,7 @@ const QrCode: FC<Props> = ({ qrCode }) => {
                 Scan QR Code
               </p>
               <Image
-                src={fxqr}
+                src={qrCode}
                 alt="QR Code"
                 className="w-full h-full mt-[16px]"
               />

@@ -4,7 +4,9 @@ import Link from "next/link";
 import React, { FC, useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { MdMail } from "react-icons/md";
-
+import { useDispatch } from "react-redux";
+import { increaseRegistrationStage } from "@/redux/features/auth/authSlice";
+import getTokenFromLocalStorage from "@/utils/FetchUserToken";
 type Props = {
   setVerificationSuccess: (success: boolean) => void;
 };
@@ -14,19 +16,18 @@ type VerifyNumber = {
   "1": string;
   "2": string;
   "3": string;
-  "4": string;
-  "5": string;
+ 
 };
 
 const VerifyEmail: FC<Props> = ({ setVerificationSuccess }) => {
-  const activationToken = localStorage.getItem("auth_token");
+  const activationToken = getTokenFromLocalStorage();
   const [activation, { isSuccess, error }] = useActivationMutation();
   const [invalidError, setInvalidError] = useState<boolean>(false);
-
+  const dispatch = useDispatch();
   useEffect(() => {
     if (isSuccess) {
       toast.success("Account activated successfully");
-      setVerificationSuccess(true);
+      // setVerificationSuccess(true);
     }
     if (error) {
       if ("data" in error) {
@@ -44,8 +45,6 @@ const VerifyEmail: FC<Props> = ({ setVerificationSuccess }) => {
     useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),
-    useRef<HTMLInputElement>(null),
-    useRef<HTMLInputElement>(null)
   ];
 
   const [verifyNumber, setVerifyNumber] = useState<VerifyNumber>({
@@ -53,13 +52,13 @@ const VerifyEmail: FC<Props> = ({ setVerificationSuccess }) => {
     1: "",
     2: "",
     3: "",
-    4: "",
-    5: "",
   });
 
   const verificationHandler = async () => {
+    console.log(Object.values(verifyNumber).join(""));
+
     const verificationNumber = Object.values(verifyNumber).join("");
-    if (verificationNumber.length !== 6) {
+    if (verificationNumber.length !== 4) {
       setInvalidError(true);
       return;
     }
@@ -67,6 +66,8 @@ const VerifyEmail: FC<Props> = ({ setVerificationSuccess }) => {
       activation_token: activationToken,
       activation_code: verificationNumber,
     });
+
+    // return dispatch(increaseRegistrationStage());
   };
 
   const handleInputChange = (index: number, value: string) => {
@@ -123,12 +124,12 @@ const VerifyEmail: FC<Props> = ({ setVerificationSuccess }) => {
         <div className=" flex mt-[16px] justify-normal">
           <p className="text-gray-200 w-full text-center text-sm ">
             Did&apos;t get the email? Can resend in
-            <span className="text-red-400"> 00:27mins</span> 
+            <span className="text-red-400"> 00:27mins</span>
             <Link
               href=""
               className=" ml-[0.4rem] block font-semibold text-sm text-[#7F56D9]"
             >
-           Resend Code
+              Resend Code
             </Link>
           </p>
         </div>

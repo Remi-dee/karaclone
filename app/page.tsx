@@ -16,6 +16,8 @@ import VerificationQrcode from "@/Components/KYC/VerificationQrcode";
 import VerificationEmail from "@/Components/KYC/VerificationEmail";
 import VerificationSelfie from "@/Components/KYC/VerificationSelfie";
 import VerificationSuccess from "@/Components/KYC/VerificationSuccess";
+import Navbar from "@/Components/LandingPage/Navbar";
+import Footer from "@/Components/LandingPage/Footer";
 
 const Page = () => {
   const [active, setActive] = useState(1);
@@ -71,14 +73,20 @@ const Page = () => {
     }
   };
   return (
-    <>
-      <div>
-        <h5>Hello world!</h5>
-        <button onClick={openModalHandler}>open modal</button>
-        <CustomModal>{renderCurrentPage()}</CustomModal>
-      </div>
-    </>
+    <div>
+      <Navbar />
+
+      <Footer />
+    </div>
   );
 };
 
 export default Page;
+
+{
+  /* <div>
+<h5>Hello world!</h5>
+<button onClick={openModalHandler}>open modal</button>
+<CustomModal>{renderCurrentPage()}</CustomModal>
+</div> */
+}

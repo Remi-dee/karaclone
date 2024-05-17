@@ -1,10 +1,11 @@
+import getTokenFromLocalStorage from "@/utils/FetchUserToken";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: process.env.NEXT_PUBLIC_SERVER_URI,
+  baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
   prepareHeaders: (headers) => {
     // Get the token from localStorage
-    const token = localStorage.getItem("auth_token");
+    const token = getTokenFromLocalStorage();
     // If token exists, add it to the authorization header
     if (token) {
       headers.set("Authorization", `Bearer ${token}`);
@@ -23,7 +24,7 @@ export const kycApi = createApi({
         url: "kyc",
         method: "POST",
         body: data,
-        credentials: "include" as const,
+        // credentials: "include" as const,
       }),
     }),
   }),

@@ -13,6 +13,10 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import man from "@/public/loginMan.png";
 import stars from "@/public/Stars.png";
+import {
+  useLoginUserMutation,
+  useSignupUserMutation,
+} from "@/redux/features/api/apiSlice";
 const schema = Yup.object().shape({
   email: Yup.string()
     .email("Invalid email!")
@@ -24,7 +28,16 @@ const Login = () => {
   const router = useRouter();
   const [show, setShow] = useState(false);
   const [login, { isSuccess, error, data }] = useLoginMutation();
-
+  // const [loginUser, { isLoading: loginLoading, error: loginError }] =
+  //   useLoginUserMutation();
+  // const handleLogin = async ({ email, password }) => {
+  //   try {
+  //     const result = await loginUser({ email, password }).unwrap();
+  //     // Handle successful login
+  //   } catch (error) {
+  //     // Handle login error
+  //   }
+  // };
   const formik = useFormik({
     initialValues: { email: "", password: "" } as ILoginInput,
     validationSchema: schema,

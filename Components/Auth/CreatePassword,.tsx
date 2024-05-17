@@ -9,9 +9,13 @@ import { useRegisterMutation } from "@/redux/features/auth/authApi";
 import toast from "react-hot-toast";
 import mark from "@/public/mark.svg";
 import closecirce from "@/public/close-circle.svg";
+import { useDispatch } from "react-redux";
+import { increaseRegistrationStage } from "@/redux/features/auth/authSlice";
+import { useSelector } from "react-redux";
+
 type Props = {
   active: number;
-  setActive: (active: any) => void;
+
   userPassword: any;
   setUserPassword: (userPassword: any) => void;
   businessDetails: any;
@@ -21,26 +25,27 @@ type Props = {
 
 const CreatePassword: FC<Props> = ({
   active,
-  setActive,
-  userPassword,
-  setUserPassword,
+
   businessDetails,
   basicDetails,
   accountType,
 }) => {
   const [registerUser, { isLoading, isSuccess, error, data }] =
     useRegisterMutation();
+  const globalState = useSelector((state) => state?.auth);
+  console.log(globalState);
   const [passwordValid, setPasswordValid] = useState(false);
+  const [userPassword, setUserPassword] = useState("");
   const [hasSpecialCharacter, setHasSpecialCharacter] = useState(false);
   const [confirmPasswordValid, setConfirmPasswordValid] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
-
+  const dispatch = useDispatch();
   useEffect(() => {
     if (isSuccess) {
       toast.success("User registration successful");
-      setActive(active + 1);
 
       localStorage.setItem("auth_token", data?.activation_token as any);
+      dispatch(increaseRegistrationStage());
     }
     if (error) {
       if ("data" in error) {
@@ -50,26 +55,26 @@ const CreatePassword: FC<Props> = ({
     }
   }, [isLoading, isSuccess, error]);
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
-    const data = {
-      name: basicDetails.name,
-      gender: basicDetails.gender,
-      email: basicDetails.email,
-      phone: basicDetails.phone,
-      account_type: accountType,
-      role: "user",
-      business_name: businessDetails.business_name,
-      business_address: businessDetails.business_address,
-      business_email: businessDetails.business_email,
-      business_line: businessDetails.business_line,
-      password: userPassword.password,
-    };
+  // const handleSubmit = async (e: any) => {
+  //   e.preventDefault();
+  //   const data = {
+  //     name: globalState?.name,
+  //     gender: globalState?.gender,
+  //     email: globalState?.email,
+  //     phone: globalState?.phone,
+  //     account_type: globalState?.account_type,
+  //     role: "user",
+  //     business_name: globalState?.business_name,
+  //     business_address: globalState?.business_address,
+  //     business_email: globalState?.business_email,
+  //     business_line: globalState?.business_line,
+  //     password: userPassword,
+  //   };
 
-    if (!isLoading) {
-      await registerUser(data);
-    }
-  };
+  //   if (!isLoading) {
+  //     await registerUser(data);
+  //   }
+  // };
 
   const validatePassword = (password: string) => {
     setPasswordValid(password.length >= 8);
@@ -80,7 +85,25 @@ const CreatePassword: FC<Props> = ({
   };
 
   const validateConfirmPassword = (confirmPassword: string) => {
-    setConfirmPasswordValid(confirmPassword === userPassword.password);
+    setConfirmPasswordValid(confirmPassword === userPassword);
+  };
+
+  const submitPasswordHandler = (e: any) => {
+    e.preventDefault();
+    const data = {
+      name: globalState?.name,
+      gender: globalState?.gender,
+      email: globalState?.email,
+      phone: globalState?.phone,
+      account_type: globalState?.account_type,
+      role: "user",
+      business_name: globalState?.business_name,
+      business_address: globalState?.business_address,
+      business_email: globalState?.business_email,
+      business_line: globalState?.business_line,
+      password: userPassword,
+    };
+    registerUser(data);
   };
 
   const [showPassword, setShowPassword] = useState("password");
@@ -99,7 +122,7 @@ const CreatePassword: FC<Props> = ({
         </div>
         <div>
           <form
-            onSubmit={handleSubmit}
+            // onSubmit={handleSubmit}
             className=" flex flex-col gap-y-[32px] "
           >
             <div className="flex flex-col mt-2 ">
@@ -115,12 +138,9 @@ const CreatePassword: FC<Props> = ({
                   className="w-full p-1.5 border rounded-md outline-none"
                   placeholder="Type in your password"
                   required
-                  value={userPassword?.password}
+                  value={userPassword}
                   onChange={(e: any) => {
-                    setUserPassword({
-                      ...userPassword,
-                      password: e.target.value,
-                    });
+                    setUserPassword(e.target.value);
                     validatePassword(e.target.value);
                   }}
                 />
@@ -293,15 +313,16 @@ const CreatePassword: FC<Props> = ({
             <div className="w-full flex items-center justify-end">
               <input
                 type="submit"
+                onClick={submitPasswordHandler}
                 value="Continue"
                 className={`w-full h-[40px]  text-[16px] font-semibold text-center text-[#98A2B3] rounded-[8px]
                     : " bg-[#DCDCDC] cursor-not-allowed"
                 }`}
-                disabled={
-                  !passwordValid ||
-                  !hasSpecialCharacter ||
-                  !confirmPasswordValid
-                }
+                // disabled={
+                //   !passwordValid ||
+                //   !hasSpecialCharacter ||
+                //   !confirmPasswordValid
+                // }
               />
             </div>
           </form>
@@ -323,3 +344,86 @@ const CreatePassword: FC<Props> = ({
 };
 
 export default CreatePassword;
+
+///
+
+// Of course! Here's how you can rewrite the example with two endpoints for login and signup:
+
+// ```javascript
+// // apiSlice.js
+// import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
+// const BASE_URL = 'https://api.example.com';
+
+// export const apiSlice = createApi({
+//   reducerPath: 'api',
+//   baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
+//   endpoints: (builder) => ({
+//     // Endpoint for user login
+//     loginUser: builder.mutation({
+//       query: (credentials) => ({
+//         url: '/login',
+//         method: 'POST',
+//         body: credentials,
+//       }),
+//     }),
+//     // Endpoint for user signup
+//     signupUser: builder.mutation({
+//       query: (userData) => ({
+//         url: '/signup',
+//         method: 'POST',
+//         body: userData,
+//       }),
+//     }),
+//   }),
+// });
+
+// // Export hooks for usage in functional components
+// export const { useLoginUserMutation, useSignupUserMutation } = apiSlice;
+// ```
+
+// In this example, I've added two endpoints: `loginUser` and `signupUser`, each defined as a mutation. The `query` function for each mutation specifies the URL and method, and you can pass data to these mutations as parameters.
+
+// The usage of these mutations would be similar to the previous example:
+
+// ```javascript
+// // ExampleComponent.js
+// import { useLoginUserMutation, useSignupUserMutation } from '../apiSlice';
+
+// function ExampleComponent() {
+//   // Example usage of login mutation
+//   const [loginUser, { isLoading: loginLoading, error: loginError }] = useLoginUserMutation();
+
+//   // Example usage of signup mutation
+//   const [signupUser, { isLoading: signupLoading, error: signupError }] = useSignupUserMutation();
+
+//   // Example handlers for login and signup
+//   const handleLogin = async (credentials) => {
+//     try {
+//       const result = await loginUser(credentials).unwrap();
+//       // Handle successful login
+//     } catch (error) {
+//       // Handle login error
+//     }
+//   };
+
+//   const handleSignup = async (userData) => {
+//     try {
+//       const result = await signupUser(userData).unwrap();
+//       // Handle successful signup
+//     } catch (error) {
+//       // Handle signup error
+//     }
+//   };
+
+//   return (
+//     <div>
+//       {/* Your component JSX */}
+//     </div>
+//   );
+// }
+
+// export default ExampleComponent;
+// ```
+
+// You can replace the placeholders like `credentials` and `userData` with the actual data you want to send to the server for login and signup. Also, handle the loading and error states according to your UI requirements.

@@ -1,8 +1,13 @@
 "use client";
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import Link from "next/link";
 import businessLogo from "@/public/Images/Business-logo.png";
 import Image from "next/image";
+import {
+  addBusinessDetailsToObject,
+  increaseRegistrationStage,
+} from "@/redux/features/auth/authSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 type Props = {
   businessDetails: any;
@@ -15,12 +20,33 @@ type Props = {
 const BusinessDetails: FC<Props> = ({
   businessDetails,
   setBusinessDetails,
-  handleBusinessDetailsSubmit,
 }) => {
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    handleBusinessDetailsSubmit();
+  const dispatch = useDispatch();
+  const globalState = useSelector((state) => state.auth);
+
+  const [inputValuesForBasic, setinputValuesForBasic] = useState({
+    business_name: "",
+    business_address: "",
+    business_email: "",
+    business_line: "",
+  });
+  const handleInputChange = (e : any) => {
+    const { name, value } = e.target;
+    console.log(name, value);
+    setinputValuesForBasic({
+      ...inputValuesForBasic,
+      [name]: value,
+    });
   };
+
+  const continueHandler = (e: any) => {
+    e.preventDefault();
+    // console.log(inputValuesForBasic);
+    dispatch(addBusinessDetailsToObject(inputValuesForBasic));
+    console.log(globalState);
+    // dispatch(increaseRegistrationStage());
+  };
+
   return (
     <div className="w-[550px] h-[760px] mx-auto mt-4 rounded-[12px] shadow-lg bg-[#FFFFFF]">
       <div className="w-[470px] pt-6 mx-auto">
@@ -35,7 +61,7 @@ const BusinessDetails: FC<Props> = ({
           complete it to ensure uninterrupted service. Thank you.
         </p>
         <form
-          onSubmit={handleSubmit}
+          // onSubmit={handleSubmit}
           className=" mt-[32px] h-[502px] flex flex-col gap-[24px]"
         >
           <div className=" flex flex-col mt-2 gap-2">
@@ -47,16 +73,12 @@ const BusinessDetails: FC<Props> = ({
             </label>
             <input
               type="text"
+              name="business_name"
               className="p-[8px_16px_8px_16px] mt-[8px] border rounded-[12px] outline-none"
               placeholder="type in your business name"
               required
-              value={businessDetails?.business_name}
-              onChange={(e: any) =>
-                setBusinessDetails({
-                  ...businessDetails,
-                  business_name: e.target.value,
-                })
-              }
+              value={inputValuesForBasic?.business_name}
+              onChange={handleInputChange}
             />
           </div>
           <div className=" flex flex-col mt-2 gap-1">
@@ -68,16 +90,12 @@ const BusinessDetails: FC<Props> = ({
             </label>
             <input
               type="text"
+              name="business_address"
               className="p-[8px_16px_8px_16px] mt-[8px] border rounded-[12px] outline-none"
               placeholder="type in your business address"
               required
-              value={businessDetails?.business_address}
-              onChange={(e: any) =>
-                setBusinessDetails({
-                  ...businessDetails,
-                  business_address: e.target.value,
-                })
-              }
+              value={inputValuesForBasic?.business_address}
+              onChange={handleInputChange}
             />
           </div>
           <div className=" flex flex-col mt-2 gap-1">
@@ -92,13 +110,9 @@ const BusinessDetails: FC<Props> = ({
               className="p-[8px_16px_8px_16px] border rounded-[12px] mt-[8px] #989898 outline-none"
               placeholder="example@domain.com"
               required
-              value={businessDetails?.business_email}
-              onChange={(e: any) =>
-                setBusinessDetails({
-                  ...businessDetails,
-                  business_email: e.target.value,
-                })
-              }
+              name="business_email"
+              value={inputValuesForBasic?.business_email}
+              onChange={handleInputChange}
             />
           </div>
           <div>
@@ -107,7 +121,7 @@ const BusinessDetails: FC<Props> = ({
             </label>
             <div className="flex items-center  border mt-[8px] rounded-[12px]">
               <select
-                value=""
+                // value=""
                 className=" rounded-[12px] p-1.5 focus:outline-none"
               >
                 <option value="+1">US</option>
@@ -116,22 +130,19 @@ const BusinessDetails: FC<Props> = ({
               </select>
               <input
                 type="text"
+                name="business_line"
                 placeholder="+1(555) 000-0000"
                 className=" w-[96%] p-[8px_16px_8px_16px]  outline-none #989898"
                 required
-                value={businessDetails?.business_line}
-                onChange={(e: any) =>
-                  setBusinessDetails({
-                    ...businessDetails,
-                    business_line: e.target.value,
-                  })
-                }
+                value={inputValuesForBasic?.business_line}
+                onChange={handleInputChange}
               />
             </div>
           </div>
           <div className="w-full flex gap-[16px] flex-col  ">
             <input
               type="submit"
+              onClick={continueHandler}
               value="Continue"
               className="w-full h-[40px] bg-[#7F56D9] text-center text-[#fff] rounded-[8px]  cursor-pointer"
             />
