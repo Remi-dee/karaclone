@@ -1,6 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 function BasicDetails() {
+  const { user } = useSelector((state) => state?.auth);
+  console.log(user);
+
   return (
     <div className=" h-[252px] flex  flex-col gap-[24px] bg-[#FFFFFF] w-[100%]  p-[24px] rounded-[8px]  ">
       <div className=" h-[44px]  min-h-[44px] border-b border-b-[#EFEFEF]">
@@ -18,7 +22,7 @@ function BasicDetails() {
             </h2>
 
             <p className=" text-[16px] leading-[24px] tracking-[-2%] text-[#464646]   ">
-              Omorinsola
+            {user.name.split(" ")[0]}
             </p>
           </div>
 
@@ -28,7 +32,7 @@ function BasicDetails() {
             </h2>
 
             <p className=" text-[16px] leading-[24px] tracking-[-2%] text-[#464646]   ">
-              Omoabiodun@gmail.com
+              {user.email}
             </p>
           </div>
         </div>
@@ -39,7 +43,7 @@ function BasicDetails() {
             </h2>
 
             <p className=" text-[16px] leading-[24px] tracking-[-2%] text-[#464646]   ">
-              Omorinsola
+              {user.name.split(" ")[1]}
             </p>
           </div>
 
@@ -49,7 +53,7 @@ function BasicDetails() {
             </h2>
 
             <p className=" text-[16px] leading-[24px] tracking-[-2%] text-[#464646]   ">
-              Omoabiodun@gmail.com
+              {user.phone}
             </p>
           </div>
         </div>
@@ -60,7 +64,7 @@ function BasicDetails() {
           </h2>
 
           <p className=" text-[16px] leading-[24px] tracking-[-2%] text-[#464646]   ">
-            Male
+            {user.gender}
           </p>
         </div>
       </section>

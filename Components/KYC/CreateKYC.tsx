@@ -2,9 +2,11 @@
 import React, { useState } from "react";
 import KYCInfo from "./KYCInfo";
 import KYCQuestion from "./KYCQuestion";
+import { useSelector } from "react-redux";
 
 const CreateKYC = () => {
   const [active, setActive] = useState(1);
+  const { kycLevel } = useSelector((state) => state?.kyc);
   const [kycDetails, setKycDetails] = useState({
     country: "",
     id_document_type: "",
@@ -20,9 +22,9 @@ const CreateKYC = () => {
   });
 
   return (
-    <div className="w-full flex justify-center items-center   max-h-[890px]  overflow-y-scroll   ">
+    <div className="w-full flex justify-center items-center   max-h-[890px] invisible-scrollbar overflow-y-scroll   ">
       <div className="w-[100%]">
-        {active === 1 && (
+        {kycLevel === 1 && (
           <KYCInfo
             kycDetails={kycDetails}
             setKycDetails={setKycDetails}
@@ -38,7 +40,7 @@ const CreateKYC = () => {
           // />
         )}
 
-        {active === 2 && (
+        {kycLevel === 2 && (
           <KYCQuestion
             kycQuestion={kycQuestion}
             setKycQuestion={setKycQuestion}

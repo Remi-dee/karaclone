@@ -7,6 +7,7 @@ const initialState = {
   TextDecoderStream: false,
   conversionFees: "",
   options: "",
+  settingsOption: "Basic Details",
 };
 
 const userSlice = createSlice({
@@ -21,10 +22,15 @@ const userSlice = createSlice({
     addBusinessDetailsToObject: (state, { payload }) => {
       return { ...state, ...payload };
     },
+    toggleSettingsTab: (state, { payload }) => {
+      state.settingsOption = payload;
+    },
   },
 });
-
-export const { addBusinessDetailsToObject, increaseRegistrationStage } =
-  userSlice.actions;
+export const {
+  addBusinessDetailsToObject,
+  increaseRegistrationStage,
+  toggleSettingsTab,
+} = userSlice.actions;
 export const userSelector = (state: RootState) => state.user;
 export default userSlice.reducer;

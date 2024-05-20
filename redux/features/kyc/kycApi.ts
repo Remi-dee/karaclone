@@ -24,7 +24,6 @@ export const kycApi = createApi({
         url: "kyc",
         method: "POST",
         body: data,
-        // credentials: "include" as const,
       }),
     }),
   }),

@@ -33,7 +33,11 @@ const Dashboard = (urlParam: any) => {
     <div className="flex bg-[#F5F1FB] relative  h-[1024px]">
       {/* sidebar */}
       <Sidebar link={urlLink} showSideBar={showSidebar} />
-      <Image src={chatIcon} alt=""  className=" absolute  right-[0.5rem] bottom-[0.5rem]  h-[60px] w-[60px]" />
+      <Image
+        src={chatIcon}
+        alt=""
+        className=" absolute  right-[0.5rem] bottom-[0.5rem]  h-[60px] w-[60px]"
+      />
       <div className=" relative  w-full  h-[100px]">
         {/* Wrap Bars3Icon component inside button element */}
         <button
@@ -73,9 +77,9 @@ const Dashboard = (urlParam: any) => {
         <div className="px-5 text-slate-900 h-full   w-full py-5  bg-[#F5F1FB]">
           {/* {urlLink.toLowerCase() === 'home' &&
                 <Withdraw />} */}
-          {/* {urlLink.toLowerCase() === "home" && <Home />} */}
+          {urlLink.toLowerCase() === "home" && <Home />}
           {/* {urlLink.toLowerCase() === "home" && <CreateKYC />} */}
-          {urlLink.toLowerCase() === "home" && <CreateKYB />}
+          {/* {urlLink.toLowerCase() === "home" && <CreateKYB />} */}
           {urlLink.toLowerCase() === "wallet" && <Wallet />}
           {urlLink.toLowerCase() === "transaction" && <Transaction />}
           {urlLink.toLowerCase() === "p2p-trade" && <Trade />}

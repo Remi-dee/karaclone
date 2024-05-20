@@ -5,7 +5,8 @@ import React, { FC, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import PurpleCheckBox from "../PurpleCheckBox";
-
+import { decreaseKycLevel } from "@/redux/features/kyc/kycSlice";
+import { useDispatch } from "react-redux";
 type Props = {
   kycQuestion: any;
   setKycQuestion: (kycQuestion: any) => void;
@@ -41,7 +42,7 @@ const KYCQuestion: FC<Props> = ({
       }
     }
   }, [isLoading, isSuccess, error]);
-
+  const dispatch = useDispatch();
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     // Update the parent state with the new values
@@ -61,8 +62,9 @@ const KYCQuestion: FC<Props> = ({
     await processKyc(data);
   };
 
-  const handleBack = () => {
-    setActive(active - 1);
+  const handleBack = (e: any) => {
+    e.preventDefault();
+    return dispatch(decreaseKycLevel());
   };
 
   return (
@@ -84,7 +86,7 @@ const KYCQuestion: FC<Props> = ({
       </div>
       <div className="w-[80%] h-[478px] p-[32px_40px_32px_40px]  mx-auto mt-[24px]  rounded-[8px] bg-[white] shadow-lg">
         <form className="px-5 py-5" onSubmit={handleSubmit}>
-          <div className="mt-10 mb-5">
+          <div className="">
             <p className="text-black text-xl font-bold">
               Are you a politically exposed person?
             </p>
