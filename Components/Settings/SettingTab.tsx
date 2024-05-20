@@ -29,12 +29,12 @@ const SettingTab = () => {
         </div>
         <div className="self-stretch rounded-xl bg-[#EFEFEF] w-[95%] flex flex-row items-center justify-start py-3.5 px-4 gap-[8px] text-base text-neutral-500">
           <div className={getClassNames("Basic Details")} onClick={handleClick}>
-            <div className="relative tracking-[-0.02em] leading-[24px] font-semibold">
+            <div className="relative cursor-pointer tracking-[-0.02em] leading-[24px] font-semibold">
               Basic Details
             </div>
           </div>
           <div className={getClassNames("Security")} onClick={handleClick}>
-            <div className="relative tracking-[-0.02em] leading-[24px] font-semibold">
+            <div className="relative cursor-pointer tracking-[-0.02em] leading-[24px] font-semibold">
               Security
             </div>
           </div>
@@ -42,12 +42,12 @@ const SettingTab = () => {
             className={getClassNames("Transaction Limits")}
             onClick={handleClick}
           >
-            <div className="relative tracking-[-0.02em] leading-[24px] font-semibold">
+            <div className="relative cursor-pointer tracking-[-0.02em] leading-[24px] font-semibold">
               Transaction Limits
             </div>
           </div>
           <div className={getClassNames("Notifications")} onClick={handleClick}>
-            <div className="relative tracking-[-0.02em] leading-[24px] font-semibold">
+            <div className="relative cursor-pointer tracking-[-0.02em] leading-[24px] font-semibold">
               Notifications
             </div>
           </div>
