@@ -4,7 +4,6 @@ import CreatePassword from "@/Components/Auth/CreatePassword,";
 function page() {
   return (
     <div>
-        
       <CreatePassword />
     </div>
   );

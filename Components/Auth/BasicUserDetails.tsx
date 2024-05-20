@@ -1,9 +1,14 @@
 "use client";
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import Link from "next/link";
 import { TiUser } from "react-icons/ti";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import { styles } from "@/styles/style";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addBasicDetailsToObject,
+  increaseRegistrationStage,
+} from "@/redux/features/auth/authSlice";
 
 type Props = {
   basicDetails: any;
@@ -13,14 +18,34 @@ type Props = {
   handleBasicDetailsSubmit: any;
 };
 
-const BasicUserDetails: FC<Props> = ({
-  basicDetails,
-  setBasicDetails,
-  handleBasicDetailsSubmit,
-}) => {
-  const handleSubmit = (e: any) => {
+const BasicUserDetails: FC<Props> = ({}) => {
+  const [inputValuesForBasic, setinputValuesForBasic] = useState({
+    name: "",
+    business_address: "",
+    email: "",
+    gender: "",
+    phone: "",
+    role: "user",
+  });
+  const globalState = useSelector((state) => state.auth);
+
+  // console.log(accountType);
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    console.log(name, value);
+    setinputValuesForBasic({
+      ...inputValuesForBasic,
+      [name]: value,
+    });
+  };
+
+  const dispatch = useDispatch();
+  const continueHandler = (e: any) => {
     e.preventDefault();
-    handleBasicDetailsSubmit();
+    // console.log(inputValuesForBasic);
+    dispatch(addBasicDetailsToObject(inputValuesForBasic));
+    console.log(globalState);
+    dispatch(increaseRegistrationStage());
   };
 
   return (
@@ -38,10 +63,7 @@ const BasicUserDetails: FC<Props> = ({
             complete it to ensure uninterrupted service. Thank you.
           </p>
         </div>
-        <form
-          onSubmit={handleSubmit}
-          className={`${styles.label} gap-y-[24px] mt-[8px] flex flex-col`}
-        >
+        <form className={`${styles.label} gap-y-[24px] mt-[8px] flex flex-col`}>
           <div className=" flex flex-col gap-y-[8px] ">
             <label
               htmlFor=""
@@ -50,13 +72,11 @@ const BasicUserDetails: FC<Props> = ({
               Full Name<span className=" pl-[0.1rem] text-red-400">*</span>
             </label>
             <input
-              type="name"
-              name=""
+              type="text"
+              name="name"
               required
-              value={basicDetails.name}
-              onChange={(e: any) =>
-                setBasicDetails({ ...basicDetails, name: e.target.value })
-              }
+              value={inputValuesForBasic.name}
+              onChange={handleInputChange}
               id="name"
               placeholder="First name and Last name"
               className={`${styles.input} padingForInput`}
@@ -76,12 +96,10 @@ const BasicUserDetails: FC<Props> = ({
             </label>
             <select
               className="p-1.5 border border-gray-200 rounded-md"
-              name=""
+              name="gender"
               id=""
-              value={basicDetails.gender}
-              onChange={(e: any) =>
-                setBasicDetails({ ...basicDetails, gender: e.target.value })
-              }
+              value={inputValuesForBasic.gender}
+              onChange={handleInputChange}
             >
               <option value="">Gender</option>
               <option value="Male">Male</option>
@@ -97,13 +115,11 @@ const BasicUserDetails: FC<Props> = ({
               Email Address<span className="text-red-400  pl-[0.1rem]">*</span>
             </label>
             <input
-              type="email"
-              name=""
+              type="text"
+              name="email"
               required
-              value={basicDetails.email}
-              onChange={(e: any) =>
-                setBasicDetails({ ...basicDetails, email: e.target.value })
-              }
+              value={inputValuesForBasic.email}
+              onChange={handleInputChange}
               id="email"
               placeholder="example@domain.com"
               className={`${styles.input}`}
@@ -119,12 +135,10 @@ const BasicUserDetails: FC<Props> = ({
             </label>
             <input
               type="text"
-              name=""
+              name="business_address"
               required
-              value={basicDetails.email}
-              onChange={(e: any) =>
-                setBasicDetails({ ...basicDetails, email: e.target.value })
-              }
+              value={inputValuesForBasic.business_address}
+              onChange={handleInputChange}
               id="homeaddress"
               placeholder="4a, example street, ikeja lagos."
               className={`${styles.input}`}
@@ -138,7 +152,7 @@ const BasicUserDetails: FC<Props> = ({
               Phone Number<span className="text-red-400  pl-[0.1rem]">*</span>
             </label>
             <div className="flex items-center mt-2 border mb-6 rounded-md">
-              <select value="" className=" rounded-md p-1.5 focus:outline-none">
+              <select className=" rounded-md p-1.5 focus:outline-none">
                 <option value="+1">US</option>
                 <option value="+234">NG</option>
                 <option value="+44">UK</option>
@@ -146,10 +160,9 @@ const BasicUserDetails: FC<Props> = ({
               <input
                 type="text"
                 required
-                value={basicDetails.phone}
-                onChange={(e: any) =>
-                  setBasicDetails({ ...basicDetails, phone: e.target.value })
-                }
+                name="phone"
+                value={inputValuesForBasic.phone}
+                onChange={handleInputChange}
                 placeholder="  +1(555) 000-0000"
                 className=" w-[96%]  outline-none"
               />
@@ -159,6 +172,7 @@ const BasicUserDetails: FC<Props> = ({
             <input
               type="submit"
               value="Continue"
+              onClick={continueHandler}
               className="w-full h-[40px] bg-[#7F56D9] text-center text-[#fff] rounded  cursor-pointer"
             />
           </div>

@@ -1,3 +1,5 @@
+
+
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { userLoggedIn, userRegistration } from "./authSlice";
 
@@ -11,7 +13,7 @@ type RegistrationData = {};
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.NEXT_PUBLIC_SERVER_URI,
+    baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
   }),
   endpoints: (builder) => ({
     // Register user endpoint
@@ -20,13 +22,14 @@ export const authApi = createApi({
         url: "authentication/register",
         method: "POST",
         body: data,
-        credentials: "include" as const,
+        // credentials: "include" as const,
       }),
 
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        console.log(arg, queryFulfilled);
         try {
           const result = await queryFulfilled;
-
+          console.log(result);
           dispatch(
             userRegistration({
               token: result.data.activation_token,
@@ -47,6 +50,7 @@ export const authApi = createApi({
           activation_token,
           activation_code,
         },
+        // credentials: "include" as const,
       }),
     }),
 
@@ -56,7 +60,6 @@ export const authApi = createApi({
         url: "authentication/login",
         method: "POST",
         body: { email, password },
-        credentials: "include" as const,
       }),
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {

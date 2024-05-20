@@ -13,28 +13,36 @@ import YesNoDeactivate from "../Auth/YesNoDeactivate";
 import ChatPage from "../Chat/ChatPage";
 import ChatModal from "../CustomModal/ChatModal";
 import ConversationChat from "../Chat/ConversationChat";
+import { useSelector } from "react-redux";
 type Props = {};
 
 const Page = (props: Props) => {
+  const { settingsOption } = useSelector((state) => state?.user);
+
   return (
     <div className="">
       <SettingTab />
 
       <div className=" mt-[40px]">
-        {/* <BasicDetails/> */}
+        {settingsOption === "Basic Details" ? (
+          <BasicDetails />
+        ) : settingsOption === "Security" ? (
+          <Security />
+        ) : settingsOption === "Transaction Limits" ? (
+          <TransLimit />
+        ) : settingsOption === "Notifications" ? (
+          <Notifications />
+        ) : (
+          <></>
+        )}
 
-        {/* <Security/> */}
-
-        {/* <TransLimit /> */}
-        <Notifications />
-
-        <ChatModal>
-          {/* <DeactivateVerification/> 
+        {/* <ChatModal> */}
+        {/* <DeactivateVerification/> 
 
           <YesNoDeactivate /> */}
-{/* <ConversationChat/> */}
-          <ChatPage />
-        </ChatModal>
+        {/* <ConversationChat/> */}
+        {/* <ChatPage /> */}
+        {/* </ChatModal> */}
       </div>
     </div>
   );

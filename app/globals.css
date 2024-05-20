@@ -317,3 +317,24 @@ body {
 input[type="file"] {
   display: none;
 }
+
+
+@keyframes breathing {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+    -webkit-transform: scale(1.08);
+    -moz-transform: scale(1.08);
+    -ms-transform: scale(1.08);
+    -o-transform: scale(1.08);
+}
+  100% {
+    transform: scale(1);
+  }
+}
+
+.breathing-element {
+  animation: breathing 4s infinite ease-in-out;
+}

@@ -93,7 +93,7 @@ const TwoFactorCode = () => {
               type="number"
               key={key}
               ref={inputRefs[index]}
-              className={`w-[64px] h-[64px] leading-[60px] tracking-[-2%] font-[500] bg-transparent border-[2px] rounded-[8px] flex items-center text-black dark:text-white justify-center p-[2px] text-[48px] font-Poppins outline-none text-center ${
+              className={`w-[64px] h-[64px] leading-[60px] tracking-[-2%] font-[500] bg-transparent border-[2px] rounded-[8px] flex items-center text-black dark:text-white justify-center p-[2px] text-[48px] font-Poppins outline-none text-center placeholder:text-[#d3d3d3] ${
                 invalidError
                   ? "shake border-red-500"
                   : "dark:border-white border-[#0000004a]"

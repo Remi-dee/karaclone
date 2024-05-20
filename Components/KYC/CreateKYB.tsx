@@ -21,7 +21,7 @@ const CreateKYB = () => {
   });
 
   return (
-    <div className="w-full flex justify-center  min-h-[800px]   max-h-[1000px]  overflow-y-scroll">
+    <div className="w-full flex justify-center  min-h-[800px]  invisible-scrollbar max-h-[1000px]  overflow-y-scroll">
       <div className="w-[100%] h-full">
         {active === 1 && (
           // <KYBInfo

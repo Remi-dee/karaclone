@@ -1,11 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { userLoggedIn, userLoggedOut } from "../auth/authSlice";
+import getTokenFromLocalStorage from "@/utils/FetchUserToken";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: process.env.NEXT_PUBLIC_SERVER_URI,
+  baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
   prepareHeaders: (headers) => {
     // Get the token from localStorage
-    const token = localStorage.getItem("auth_token");
+    const token = getTokenFromLocalStorage();
     // If token exists, add it to the authorization header
     if (token) {
       headers.set("Authorization", `bearer ${token}`);
@@ -23,7 +24,7 @@ export const userApi = createApi({
       query: () => ({
         url: "user/me",
         method: "GET",
-        credentials: "include" as const,
+        // credentials: "include" as const,
       }),
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
@@ -46,7 +47,7 @@ export const userApi = createApi({
       query: () => ({
         url: "user/enable-2fa",
         method: "GET",
-        credentials: "include" as const,
+        // credentials: "include" as const,
       }),
     }),
 
@@ -55,7 +56,7 @@ export const userApi = createApi({
         url: "user/verify-2fa",
         method: "POST",
         body: { topt },
-        credentials: "include" as const,
+        // credentials: "include" as const,
       }),
     }),
 
@@ -74,6 +75,123 @@ export const userApi = createApi({
         }
       },
     }),
+    //tranasaction
+    //get all transaction fees
+
+    getTransactionFees: builder.query({
+      query: () => ({
+        url: "transaction-fee/get-all",
+        method: "GET",
+        // credentials: "include" as const,
+      }),
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        try {
+          const result = await queryFulfilled;
+
+          console.log(result);
+        } catch (error: any) {
+          console.log(error);
+        }
+      },
+    }),
+    //get conversion rates
+
+    getConversionFees: builder.query({
+      query: () => ({
+        url: "conversion-fee/get-all",
+        method: "GET",
+        // credentials: "include" as const,
+      }),
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        try {
+          const result = await queryFulfilled;
+
+          console.log(result);
+        } catch (error: any) {
+          console.log(error);
+        }
+      },
+    }),
+
+    //next
+
+    //get all currency pairs
+
+    getAllCurrencyPairs: builder.query({
+      query: () => ({
+        url: "currencypair/get-all",
+        method: "GET",
+        // credentials: "include",
+      }),
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        try {
+          const result = await queryFulfilled;
+
+          console.log(result);
+        } catch (error: any) {
+          console.log(error);
+        }
+      },
+    }),
+
+    //get specific currency pair
+
+    getSingleCurrencyPair: builder.query({
+      query: (id) => ({
+        url: `conversion-fee/get/${id}`,
+        method: "GET",
+        // credentials: "include" as const,
+      }),
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        try {
+          const result = await queryFulfilled;
+
+          console.log(result);
+        } catch (error: any) {
+          console.log(error);
+        }
+      },
+    }),
+
+    //generate radom password
+
+    getRandomPassword: builder.query({
+      query: () => ({
+        url: "user/generate-user-password",
+        method: "GET",
+        // credentials: "include" as const,
+      }),
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        try {
+          const result = await queryFulfilled;
+
+          console.log(result);
+        } catch (error: any) {
+          console.log(error);
+        }
+      },
+    }),
+
+    //next
+
+    getAllUsersWallet: builder.query({
+      query: () => ({
+        url: "wallet/get-all-user-wallets",
+        method: "GET",
+        // credentials: "include" as const,
+      }),
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        try {
+          const result = await queryFulfilled;
+
+          console.log(result);
+        } catch (error: any) {
+          console.log(error);
+        }
+      },
+    }),
+
+    //next
   }),
 });
 
@@ -82,4 +200,10 @@ export const {
   useVerifyTwofaMutation,
   useLoadUserQuery,
   useLogOutQuery,
+  useGetTransactionFeesQuery,
+  useGetConversionFeesQuery,
+  useGetRandomPasswordQuery,
+  useGetSingleCurrencyPairQuery,
+  useGetAllCurrencyPairsQuery,
+  useGetAllUsersWalletQuery,
 } = userApi;

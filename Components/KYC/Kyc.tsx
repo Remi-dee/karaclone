@@ -1,6 +1,9 @@
 import { useDispatch } from "react-redux";
 import DefaultModal from "../CustomModal/CustomModalAlt";
-import { toggleStartKycModalSuccess } from "@/redux/features/kyc/kycSlice";
+import {
+  toggleStartKycModalSuccess,
+  toggleKycBegin,
+} from "@/redux/features/kyc/kycSlice";
 import { MdOutlineCheck } from "react-icons/md";
 import Link from "next/link";
 
@@ -23,7 +26,7 @@ const KycModal = () => {
             <h1 className="text-black text-[24px] mb-5 font-semibold">
               Complete your KYC Verification
             </h1>
-            <p className="mt-5 mb-5">This will enamble you to:</p>
+            <p className="mt-5 mb-5">This will enable you to:</p>
 
             <div className="mb-5">
               <ul>
@@ -53,16 +56,17 @@ const KycModal = () => {
                 </li>
               </ul>
             </div>
-            <Link href="/kyc-individual">
-              <button
-                onClick={() => {
-                  dispatch(toggleStartKycModalSuccess({ data: false }));
-                }}
-                className="p-2 my-2 text-[#fff] bg-primaryBtn w-full rounded-lg"
-              >
-                Begin Verification
-              </button>
-            </Link>
+
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                dispatch(toggleStartKycModalSuccess({ data: false }));
+                dispatch(toggleKycBegin());
+              }}
+              className="p-2 my-2 text-[#fff] bg-primaryBtn w-full rounded-lg"
+            >
+              Begin Verification
+            </button>
           </div>
         </div>
       </form>

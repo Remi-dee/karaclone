@@ -6,7 +6,11 @@ import { ThemeProvider } from "./utils/theme-provider";
 import { Toaster } from "react-hot-toast";
 import { Providers } from "./Provider";
 import { SessionProvider } from "next-auth/react";
-
+import { useEffect } from "react";
+import { useLoadUserQuery } from "@/redux/features/user/userApi";
+import getTokenFromLocalStorage from "@/utils/FetchUserToken";
+import { useDispatch } from "react-redux";
+import { addCurrentUser } from "@/redux/features/auth/authSlice";
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
@@ -20,6 +24,17 @@ const josefin = Josefin_Sans({
 });
 
 const Custom: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  // const token = getTokenFromLocalStorage();
+  // const dispatch = useDispatch();
+  // const { isLoading, data } = useLoadUserQuery({});
+
+  // useEffect(() => {
+  //   if (isLoading) {
+  //     if (data?.user?.createdAt) {
+  //       dispatch(addCurrentUser(data));
+  //     }
+  //   }
+  // }, [data, isLoading]);
   return <>{children}</>;
 };
 

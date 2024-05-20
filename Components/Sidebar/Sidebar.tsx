@@ -126,7 +126,7 @@ const Sidebar = ({ link, showSideBar }: Props) => {
                 ) : eachdata.label.toLowerCase() === "logout" ? (
                   <LogoutSvg iconColor="#fff" />
                 ) : null}
-                <span className={`   ml-3 text-[#fff]  text-nowrap `}>
+                <span className={`ml-3 text-[#fff]  text-nowrap `}>
                   {eachdata.label}
                 </span>
               </div>

@@ -3,7 +3,10 @@ import { useRouter } from "next/navigation";
 import React, { FC, useState } from "react";
 import { CountryDropdown } from "react-country-region-selector";
 import { IoIosArrowRoundBack } from "react-icons/io";
-
+import caution from "@/public/svg/caution.svg";
+import { increaseKycLevel, toggleKycOff } from "@/redux/features/kyc/kycSlice";
+import Image from "next/image";
+import { useDispatch } from "react-redux";
 type Props = {
   kycDetails: any;
   setKycDetails: (kycDetails: any) => void;
@@ -42,7 +45,7 @@ const KYCInfo: FC<Props> = ({
       reader.readAsDataURL(file);
     }
   };
-
+  const updateFileName = () => {};
   const handleAddressDocumentChange = (e: any) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -56,15 +59,17 @@ const KYCInfo: FC<Props> = ({
       reader.readAsDataURL(file);
     }
   };
+  const dispacth = useDispatch();
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    setActive(active + 1);
+    dispacth(increaseKycLevel());
   };
 
   const router = useRouter();
-  const handleBack = () => {
-    router.push("/dashboard/Home");
+  const handleBack = (e) => {
+    e.preventDefault();
+    dispacth(toggleKycOff());
   };
 
   return (
@@ -78,15 +83,18 @@ const KYCInfo: FC<Props> = ({
       </div>
 
       <div className="mt-[24px] mb-2 items-center text-center">
-        <h3 className="py-2 font-semibold text-[24px] leading-[28.8px]  trakcing-[-2%]   ">
+        <h3 className="py-2 font-bold text-[24px] leading-[28.8px]  tracking-[-2%]   ">
           KYC Verification
         </h3>
         <p className="text-[#7C7C7C] leading-[24px] text-[16px]">
           Fill in the details below to complete your KYC
         </p>
       </div>
-      <div className="w-[80%] h-[1000px] flex p-[32px_40px_32px_40px]  mt-[24px] mx-auto  rounded-md  bg-[white]">
-        <form className="" onSubmit={handleSubmit}>
+      <div className="w-[80%] h-[1104px] flex p-[32px_40px_32px_40px]  mt-[24px] mx-auto  rounded-[8px]  bg-[white]">
+        <form
+          className=""
+          // onSubmit={handleSubmit}
+        >
           <div className=" flex flex-col gap-[8px]   ">
             <h3 className="font-semibold text-[18px] leading-[28px]   ">
               Verify ID
@@ -168,15 +176,30 @@ const KYCInfo: FC<Props> = ({
             >
               Upload Document
             </label>
-            <input
-              type="file"
-              className="p-1.5 h-[48px] border rounded-md outline-none"
-              placeholder="type in your business address"
-              required
-              accept="image/*"
-              id="file"
-              onChange={handleIdDocumentChange}
-            />
+
+            <div className="file-upload-container mt-[8px]">
+              <label
+                className="upload-box  text-[#7C7C7C] text-[16px]  tracking-[-2%] leading-[24px] font-semibold "
+                htmlFor="file-upload"
+              >
+                Upload File
+              </label>
+              <input
+                id="file-upload"
+                type="file"
+                onChange={handleIdDocumentChange}
+                required
+              />
+              <span id="file-name" className="file-name">
+                sample.pdf
+              </span>
+            </div>
+            <div className=" flex items-center gap-[8px] leading-[20px] text-[14px] text-[#7C7C7C]">
+              <span>
+                <Image src={caution} alt="" />
+              </span>{" "}
+              <span>The file must be either in PDF or DOC format.</span>
+            </div>
           </div>
 
           <div className=" w-full h-[1px] bg-[#EFEFEF] my-[24px]"></div>
@@ -192,7 +215,7 @@ const KYCInfo: FC<Props> = ({
             </div>
           </div>
           <div className="sm:space-y-8 space-y-4">
-            <div className="grid sm:grid-cols-2 gap-4 sm:gap-12">
+            <div className="  flex flex-col gap-4 ">
               <div className="w-full mt-[24px] flex flex-col gap-[8px]">
                 <label
                   htmlFor=""
@@ -201,7 +224,7 @@ const KYCInfo: FC<Props> = ({
                   Select Document
                 </label>
                 <select
-                  className="p-2   h-[48px] w-full border border-gray-300 rounded-[12px]"
+                  className="p-2  px-[12px]  h-[48px] w-full border border-gray-300 rounded-[12px]"
                   defaultValue=""
                   required
                   value={kycDetails.address_document_type}
@@ -234,17 +257,26 @@ const KYCInfo: FC<Props> = ({
                   Upload Document
                 </label>
                 <div className="file-upload-container">
-                  <label className="upload-box" for="file-upload">
+                  <label
+                    className="upload-box  text-[#7C7C7C] text-[16px]  tracking-[-2%]  leading-[24px] font-semibold  "
+                    htmlFor="file-upload"
+                  >
                     Upload File
                   </label>
                   <input
                     id="file-upload"
                     type="file"
-                    onchange={updateFileName}
+                    onChange={updateFileName}
                   />
                   <span id="file-name" className="file-name">
                     Sample PDF
                   </span>
+                </div>
+                <div className=" flex items-center gap-[8px] leading-[20px] text-[14px] text-[#7C7C7C]">
+                  <span>
+                    <Image src={caution} alt="" />
+                  </span>{" "}
+                  <span>The file must be either in PDF or DOC format.</span>
                 </div>
               </div>
             </div>
@@ -271,8 +303,8 @@ const KYCInfo: FC<Props> = ({
               <div className="flex items-center mt-2 h-[48px] border mb-6 rounded-md">
                 <input
                   type="text"
-                  placeholder="223748958938"
-                  className="w-full h-full rounded-md p-2 focus:outline-none"
+                  placeholder="Enter digit"
+                  className="w-full leading-[24px] text-[16px] text-[#989898] h-full rounded-md p-2 focus:outline-none"
                   required
                   value={kycDetails.bvn}
                   onChange={(e: any) =>
@@ -287,6 +319,7 @@ const KYCInfo: FC<Props> = ({
           </div>
           <div className="w-full flex items-center justify-end">
             <input
+              onClick={handleSubmit}
               type="submit"
               value="Continue"
               className="w-full p-[12px] h-[44px] bg-[#7F56D9] text-center text-[#fff] rounded-[12px] mt-8 cursor-pointer"

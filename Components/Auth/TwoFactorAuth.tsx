@@ -57,6 +57,7 @@ const TwoFactorAuth = () => {
                 <div className=" h-[24px] w-[24px] flex  items-center justify-center">
                   <input
                     type="radio"
+                    name="auth"
                     checked={option === "Google Authenticator"}
                     onChange={() => handleOptionChange("Google Authenticator")}
                     className="w-[19px] h-[19px] checked:bg-primaryBtn"
@@ -83,6 +84,7 @@ const TwoFactorAuth = () => {
                 <div className=" h-[24px] w-[24px] flex  items-center justify-center">
                   <input
                     type="radio"
+                    name="auth"
                     checked={option === "Google Authenticator"}
                     onChange={() => handleOptionChange("Google Authenticator")}
                     className="w-[19px] h-[19px] checked:bg-primaryBtn"
@@ -109,6 +111,7 @@ const TwoFactorAuth = () => {
                 <div className=" h-[24px] w-[24px] flex  items-center justify-center">
                   <input
                     type="radio"
+                    name="auth"
                     checked={option === "Google Authenticator"}
                     onChange={() => handleOptionChange("Google Authenticator")}
                     className="w-[19px] h-[19px] checked:bg-primaryBtn"
@@ -132,7 +135,7 @@ const TwoFactorAuth = () => {
                 Proceed
               </button>
               <p className="text-center text-[14px] leading-[20px] cursor-pointer text-black-200 ">
-              Skip for Now
+                Skip for Now
               </p>
             </div>
           </div>
