@@ -3,6 +3,11 @@ import React, { FC } from "react";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import {
+  increaseFundWallet,
+  toggleWalletDispaly,
+} from "@/redux/features/user/userSlice";
 
 type Props = {
   active: number;
@@ -11,25 +16,24 @@ type Props = {
 
 const FundAmount: FC<Props> = ({ active, setActive }) => {
   const router = useRouter();
+  const dispatch = useDispatch();
   const handleSubmit = () => {
-    setActive(active + 1);
+    dispatch(increaseFundWallet(2));
   };
   const handleBack = () => {
-    router.push("/dashboard/home");
+    dispatch(toggleWalletDispaly(""));
+    // router.push("/dashboard/home");
   };
   return (
     <div>
-     
       <div className="flex  flex-row items-center justify-between text-sm text-neutral-color-800">
-
-      <div
-        onClick={handleBack}
-        className="my-4 mx-6 flex justify-start items-center gap-1 cursor-pointer"
-      >
-        <IoIosArrowRoundBack className="bg-primaryBtn text-white-100 rounded-sm" />
-        <p className="text-primaryBtn font-semibold">Go-Back</p>
-      </div>
-
+        <div
+          onClick={handleBack}
+          className="my-4 mx-6 flex justify-start items-center gap-1 cursor-pointer"
+        >
+          <IoIosArrowRoundBack className="bg-primaryBtn text-white-100 rounded-sm" />
+          <p className="text-primaryBtn font-semibold">Go-Back</p>
+        </div>
 
         <div className="flex flex-row items-center justify-center gap-[16px]">
           <img
@@ -123,7 +127,7 @@ const FundAmount: FC<Props> = ({ active, setActive }) => {
                                     name=""
                                     id=""
                                     placeholder="Amount"
-                                    className="w-full border-none"
+                                    className="w-full border-none outline-none"
                                   />
                                 </div>
                               </div>

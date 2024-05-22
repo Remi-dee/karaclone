@@ -4,17 +4,23 @@ import { useRouter } from "next/navigation";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import CustomDropdown from "@/Components/CustomDropdown/CustomDropdown";
 import Image from "next/image";
-import CreateTradeDetails from "./createTrade";
+import CreateTradeDetails from "./CreateTradeComp";
 import { currencyData } from "@/Components/Transactions/currencyData";
-
+import {
+  toggleCreateTrade,
+  toggleCreateTradeStage,
+} from "@/redux/features/user/userSlice";
+import { useDispatch } from "react-redux";
 const CreateTrade = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
   const [currency, setCurrency] = useState<string>("");
 
   const [showTradeDetails, setShowTradeDetails] = useState(false);
 
   const handleTradeDetails = () => {
-    setShowTradeDetails(true);
+    dispatch(toggleCreateTradeStage(3));
+    // setShowTradeDetails(true);
   };
 
   if (showTradeDetails) {
@@ -25,11 +31,13 @@ const CreateTrade = () => {
     setCurrency(value);
   };
   const handleBack = () => {
-    router.push("/dashboard/P2P-trade");
+    dispatch(toggleCreateTradeStage(1));
+
+    // router.push("/dashboard/P2P-trade");
   };
 
   return (
-    <div className="m-0 p-0 box-border  h-[870px]  overflow-auto ">
+    <div className="m-0 p-0 box-border  h-[870px] invisible-scrollbar overflow-auto ">
       <div
         onClick={handleBack}
         className="my-4 mx-6 flex justify-start items-center  w-[513px] gap-1 cursor-pointer"

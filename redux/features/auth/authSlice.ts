@@ -6,7 +6,7 @@ const initialState = {
   loadingState: false,
   token: "",
   user: "",
-  registrationStage: 5,
+  registrationStage: 2,
   currentUser: {},
   logoutModalOpen: false,
   name: "",

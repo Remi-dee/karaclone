@@ -3,6 +3,8 @@ import React, { FC, useState } from "react";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { FaCreditCard, FaBuilding } from "react-icons/fa";
 import BankTransfer from "./BankTransfer";
+import { increaseFundWallet } from "@/redux/features/user/userSlice";
+import { useDispatch } from "react-redux";
 
 type Props = {
   active: number;
@@ -16,8 +18,9 @@ const FundMethod: FC<Props> = ({ active, setActive }) => {
   const handleOptionChange = (option: string) => {
     setOption(option);
   };
+  const dispatch = useDispatch();
   const handleBack = () => {
-    setActive(active - 1);
+    dispatch(increaseFundWallet(1));
   };
   const handleSelct = () => {
     setShowComponent(false);
@@ -29,15 +32,14 @@ const FundMethod: FC<Props> = ({ active, setActive }) => {
     <>
       {showComponent ? (
         <div>
-        
           <div className="flex flex-row items-center justify-between text-sm text-neutral-color-800">
-          <div
-            onClick={handleBack}
-            className="my-4 mx-6 flex justify-start items-center gap-1 cursor-pointer"
-          >
-            <IoIosArrowRoundBack className="bg-primaryBtn text-white-100 rounded-sm" />
-            <p className="text-primaryBtn font-semibold">Go-Back</p>
-          </div>
+            <div
+              onClick={handleBack}
+              className="my-4 mx-6 flex justify-start items-center gap-1 cursor-pointer"
+            >
+              <IoIosArrowRoundBack className="bg-primaryBtn text-white-100 rounded-sm" />
+              <p className="text-primaryBtn font-semibold">Go-Back</p>
+            </div>
 
             <div className="flex flex-row items-center justify-center gap-[16px]">
               <img
@@ -103,7 +105,7 @@ const FundMethod: FC<Props> = ({ active, setActive }) => {
                   <div className="flex flex-grow space-x-4">
                     <FaBuilding className="mt-1" />
                     <h4 className="text-black-200 font-semibold text-sm">
-                     Connect to Bank App
+                      Connect to Bank App
                     </h4>
                   </div>
                 </div>

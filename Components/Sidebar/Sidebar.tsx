@@ -65,7 +65,11 @@ const Sidebar = ({ link, showSideBar }: Props) => {
               isLinkActive(eachdata.label)
                 ? "bg-purple-800 text-[#fff] "
                 : "text-[#BDBDBD]  hover:text-[white] hover:bg-purple-100"
-            } flex items-center text-sm font-medium`}
+            } flex items-center text-sm font-medium    ${
+              eachdata.label === "Trade Board" && link === "P2P-Trade"
+                ? "bg-purple-800 text-[#fff] "
+                : "text-[#BDBDBD]  hover:text-[white] hover:bg-purple-100"
+            }   `}
           >
             {isLinkActive(eachdata.label) ? (
               <div className="flex flex-row gap-[12px]">

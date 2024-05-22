@@ -31,13 +31,6 @@ const CreateKYC = () => {
             active={active}
             setActive={setActive}
           />
-          // <KYCQuestion
-          //   kycQuestion={kycQuestion}
-          //   setKycQuestion={setKycQuestion}
-          //   kycDetails={kycDetails}
-          //   active={active}
-          //   setActive={setActive}
-          // />
         )}
 
         {kycLevel === 2 && (
