@@ -1,40 +1,39 @@
 "use Client";
 import React from "react";
-import { FaEye } from "react-icons/fa";
+
 import {
   kycSelector,
   toggleStartKybModalSuccess,
   toggleStartKycModalSuccess,
 } from "@/redux/features/kyc/kycSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { useLoadUserQuery } from "@/redux/features/user/userApi";
-import KycModal from "@/Components/KYC/Kyc";
-import BalanceDropdown from "@/Components/BalanceDropdown";
+
 import { checkAuthentication } from "@/hooks/ProtectedRoute";
-import KYBModal from "@/Components/KYC/kyb";
-import { useRouter } from "next/navigation";
-import Image from "next/image";
-import arrowRight from "@/public/svg/arrow-right.svg";
+
 import DashHomeBeforeKyc from "./Home/DashHomeBeforeKyc";
 import DashHomeAfterKyc from "./Home/DashHomeAfterKyc";
 import CreateKYC from "./KYC/CreateKYC";
+import Reversal from "./withdrawal/Reversal";
+import WithdrawalComplete from "./withdrawal/WidthdrawalComplete";
 function Home() {
-
-
-  const { kycBegin } = useSelector((state) => state?.kyc);
+  const globalState = useSelector((state) => state);
+  const { kyc, auth, user } = globalState;
+  const { kycBegin } = kyc;
+  const { reversalInitiated } = user;
+  console.log(auth);
 
   return (
     <div className="w-full  h-full  ">
-      {/* //this determines if kyc page is to be displayed or the base homepage */}
-
-      {/* find a way to change true to state of kyc status */}
+      {/* This page directs the Homepage for the dashboard */}
 
       {kycBegin ? (
         <CreateKYC />
-      ) : true ? (
-        <DashHomeAfterKyc />
-      ) : (
+      ) : reversalInitiated ? (
+        <Reversal />
+      ) : auth?.is_completed_kyc ? (
         <DashHomeBeforeKyc />
+      ) : (
+        <DashHomeAfterKyc />
       )}
     </div>
   );

@@ -10,7 +10,7 @@ const DefaultModal: React.FC<CustomModalTypes> = ({
       id="medium-modal"
       tabIndex={-1}
       className="container overflow-y-auto overflow-x-hidden fixed top-0 
-      right-0 left-0 z-50 min-w-full md:inset-0 min-h-screen backdrop-blur-sm 
+      right-0 left-0 z-[1000] min-w-[100vw] m md:inset-0 min-h-screen backdrop-blur-sm 
       backdrop-brightness-50"
     >
       <div

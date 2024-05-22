@@ -1,10 +1,17 @@
+"use client";
 import React from "react";
 import Pagination from "../Pagination";
 import { tradeData } from "./tradeData";
 import EmptyTrade from "./EmptyTrade";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { toggleBuyTradeDisplay } from "@/redux/features/user/userSlice";
 
 const SellTradeTable = () => {
+  const dispatch = useDispatch();
+  const handleBuyButton = () => {
+    dispatch(toggleBuyTradeDisplay(2));
+  };
   return (
     <div className="p-0 m-0 box-border h-full w-full ">
       {tradeData && tradeData.length > 0 ? (
@@ -27,11 +34,12 @@ const SellTradeTable = () => {
                 <td className="p-4">{item.available}</td>
                 <td className="p-4">{item.limit}</td>
                 <td className="p-4">
-                  <Link href={"/buy-trade"}>
-                    <button className="w-[130px] h-[30px] rounded-md text-sm text-white-100 bg-primaryBtn p-1">
-                      Buy
-                    </button>
-                  </Link>
+                  <button
+                    onClick={handleBuyButton}
+                    className="w-[130px] h-[30px] rounded-md text-sm text-white-100 bg-primaryBtn p-1"
+                  >
+                    Buy
+                  </button>
                 </td>
               </tr>
             ))}

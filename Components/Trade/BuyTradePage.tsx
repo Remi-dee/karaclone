@@ -9,11 +9,13 @@ import { BiSolidBank } from "react-icons/bi";
 import NGN from "@/public/Images/NGN.png";
 import TradeSuccess from "@/app/(trade)/buy-trade/TradeSuccess";
 import AddRecipient from "@/app/(trade)/buy-trade/AddRecipient";
+import { useDispatch } from "react-redux";
+import { toggleBuyTradeDisplay } from "@/redux/features/user/userSlice";
 
 const BuyTrade = () => {
-  const router = useRouter();
+  const dispatch = useDispatch();
   const handleBack = () => {
-    router.push("/dashboard/P2P-trade");
+    dispatch(toggleBuyTradeDisplay(1));
   };
   const [selectRecipient, setSelectRecipient] = useState<boolean>(false);
   const [option, setOption] = useState<string | null>("");

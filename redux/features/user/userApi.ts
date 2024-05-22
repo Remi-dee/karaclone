@@ -37,7 +37,7 @@ export const userApi = createApi({
             })
           );
         } catch (error: any) {
-          console.log(error);
+          // console.log(error);
         }
       },
     }),

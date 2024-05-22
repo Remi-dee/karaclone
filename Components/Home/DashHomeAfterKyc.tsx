@@ -14,6 +14,11 @@ import {
 } from "@/redux/features/kyc/kycSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { useLoadUserQuery } from "@/redux/features/user/userApi";
+import {
+  toggleWalletDispaly,
+  toggleReversalState,
+  toggleCreateTrade,
+} from "@/redux/features/user/userSlice";
 import KYBModal from "../KYC/kyb";
 function DashHomeAfterKyc() {
   const { startKycModalOpen, startKybModalOpen } = useSelector(kycSelector);
@@ -27,6 +32,10 @@ function DashHomeAfterKyc() {
       description: "Easliy top up your account",
       icon: "/svg/featured_wallet.svg",
       href: "/fund-wallet",
+      function: () => {
+        dispatch(toggleWalletDispaly("fund-wallet"));
+        router.push("/dashboard/wallet");
+      },
     },
     {
       title: "Trade",
@@ -40,6 +49,10 @@ function DashHomeAfterKyc() {
       description: "Make a reversal",
       icon: "/svg/featured_withdrawal.svg",
       href: "/fund-wallet",
+      function: () => {
+        dispatch(toggleReversalState(true));
+        router.push("/dashboard/Home");
+      },
     },
     {
       title: "Trade Board",
@@ -54,13 +67,8 @@ function DashHomeAfterKyc() {
       <div className="block lg:flex items-center gap-4">
         <div className="  flex flex-col gap-2 h-full">
           {/* kyc verification card */}
-          {data?.user.account_type === "individual" ? (
+          {data?.user?.account_type === "individual" ? (
             <div className="relative dashHomeImage p-[1rem] flex-1 grow overflow-hidden min-h-fit rounded-2xl ">
-              {/* <img
-            src="/Images/Background.png"
-            className="absolute top-0 bottom-0  right-0 left-0 bg-cover "
-            alt=""
-          /> */}
               <div className="relative  flex text-white-100 w-[460px] h-[200px] ">
                 <div className=" flex relative  gap-[25px] top-[34px]  flex-col w-[320px] h-[88px]">
                   <div>
@@ -84,7 +92,6 @@ function DashHomeAfterKyc() {
                     Start KYC Verification
                   </button>
                 </div>
-
                 <Image
                   src="/svg/cardImage.svg"
                   width={200}
@@ -121,7 +128,7 @@ function DashHomeAfterKyc() {
                     }}
                     className="rounded-lg w-max bg-[#7F56D9] font-semibold  text-white-100 tracking-[-2%] leading-[20px] p-[14px]  text-[12px] text-nowrap  block focus:outline-0 "
                   >
-                    Start KYC Verification
+                    Start KYB Verification
                   </button>
                 </div>
 
@@ -173,7 +180,7 @@ function DashHomeAfterKyc() {
           <div className="grid grid-rows-2 grid-flow-col mt-[20px] gap-4 cursor-pointer">
             {quickActions.map((eachdata, index) => (
               <div
-                onClick={() => router.push(eachdata.href)}
+                onClick={eachdata.function}
                 key={index}
                 className=" border max-h-[156px] border-slate-200 px-2 rounded py-3"
               >

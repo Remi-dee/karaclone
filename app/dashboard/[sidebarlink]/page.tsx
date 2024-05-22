@@ -20,6 +20,7 @@ import CreateKYC from "@/Components/KYC/CreateKYC";
 import CreateKYB from "@/Components/KYC/CreateKYB";
 import chatIcon from "@/public/chaticon.png";
 import Image from "next/image";
+import SettingsLogoutModal from "@/Components/Auth/SettingsLogOut";
 const Dashboard = (urlParam: any) => {
   const dispatch = useDispatch();
   const [showSidebar, setShowSidebar] = useState(false);
@@ -72,7 +73,6 @@ const Dashboard = (urlParam: any) => {
             />
           </div>
         </div>
-
         {/* content */}
         <div className="px-5 text-slate-900 h-full   w-full py-5  bg-[#F5F1FB]">
           {/* {urlLink.toLowerCase() === 'home' &&
@@ -84,6 +84,7 @@ const Dashboard = (urlParam: any) => {
           {urlLink.toLowerCase() === "transaction" && <Transaction />}
           {urlLink.toLowerCase() === "p2p-trade" && <Trade />}
           {urlLink.toLowerCase() === "settings" && <Settings />}
+          {urlLink.toLowerCase() === "logout" && <SettingsLogoutModal />}
         </div>
       </div>
       {logoutModalOpen && <LogoutModal />}

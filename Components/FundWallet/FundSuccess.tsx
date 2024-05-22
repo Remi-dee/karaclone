@@ -17,14 +17,13 @@ const FundSuccess = () => {
             </div>
           </div>
           <div className=" flex  flex-col gap-[12px]">
-
- 
-          <h3 className=" text-[32px] text-[#3D3D3D] leadng-[38.4px] font-bold py-2">
-            Transaction is Being Processed
-          </h3>
-          <p className="text-[#7C7C7C] leading-[24px] text-[16px] text-center ">
-          We will confirm your transaction shortly and your wallet would be funded immediately
-          </p>
+            <h3 className=" text-[32px] text-[#3D3D3D] leadng-[38.4px] font-bold py-2">
+              Transaction is Being Processed
+            </h3>
+            <p className="text-[#7C7C7C] leading-[24px] text-[16px] text-center ">
+              We will confirm your transaction shortly and your wallet would be
+              funded immediately
+            </p>
           </div>
 
           <button
