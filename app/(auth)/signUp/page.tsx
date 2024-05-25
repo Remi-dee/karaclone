@@ -28,11 +28,11 @@ const SignUpContent = () => {
   };
   const dispatch = useDispatch();
 
-  const handleTypeSelection = (e) => {
+  const handleTypeSelection = (e: any) => {
     e.preventDefault();
     dispatch(setAccountType(selectedOption));
 
-    return router.push(`/registration`);
+    return router.push("/registration");
   };
 
   return (

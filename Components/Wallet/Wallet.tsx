@@ -8,7 +8,7 @@ import WalletHome from "./WalletHome";
 import { useSelector } from "react-redux";
 
 export default function Wallet() {
-  const globalState = useSelector((state) => state?.user);
+  const globalState = useSelector((state: any) => state?.user);
   // console.log(globalState);
   return (
     <div className="  w-full  h-full">

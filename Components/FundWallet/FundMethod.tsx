@@ -6,12 +6,12 @@ import BankTransfer from "./BankTransfer";
 import { increaseFundWallet } from "@/redux/features/user/userSlice";
 import { useDispatch } from "react-redux";
 
-type Props = {
-  active: number;
-  setActive: (active: any) => void;
-};
+// type Props = {
+//   active: number;
+//   setActive: (active: any) => void;
+// };
 
-const FundMethod: FC<Props> = ({ active, setActive }) => {
+const FundMethod: FC<any> = ({ active, setActive }) => {
   const [showComponent, setShowComponent] = useState(true);
   const [option, setOption] = useState<string | null>(null);
   const [selected, setSelected] = useState<string | null>(null);

@@ -13,7 +13,7 @@ const config: Config = {
         Poppins: ["var(--font-Poppins)"],
         Josefin: ["var(--font-Josefin)"],
       },
-      
+
       colors: {
         white: {
           100: "#FFFFFF",

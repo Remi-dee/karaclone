@@ -1,6 +1,6 @@
 import React from "react";
-import BalanceDropdown from "../../../../app/dashboard/components/BalanceDropdown";
 import { useState } from "react";
+import BalanceDropdown from "../BalanceDropdown";
 
 interface WithdrawalFormProps {
   currency: "usd" | "naira"; // Define the type of currency prop

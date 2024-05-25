@@ -1,3 +1,5 @@
+"use client";
+
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import Image from "next/image";
@@ -6,8 +8,12 @@ import NGN from "../../public/Images/NGN.png";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { BiSolidCopy } from "react-icons/bi";
 import { toggleCreateTradeStage } from "@/redux/features/user/userSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 const CreateTradeDetails = () => {
+  const globalState = useSelector((state: any) => state.user);
+  const { createdTrade } = globalState;
+
+  console.log(createdTrade);
   const router = useRouter();
   const dispatch = useDispatch();
   const handleBack = () => {
@@ -47,7 +53,7 @@ const CreateTradeDetails = () => {
                 <p className="text-gray-300">Currency</p>
                 <div className="flex justify-start items-center  gap-1   ">
                   <Image src={NGN} width={15} height={15} alt="" />
-                  <p className="text-xs">NGN</p>
+                  <p className="text-xs">{createdTrade?.currency}</p>
                 </div>
               </div>
 
@@ -55,25 +61,31 @@ const CreateTradeDetails = () => {
                 <p className="text-gray-300">Exit Currency</p>
                 <div className="flex justify-start items-center  gap-1 mb-2 ">
                   <Image src={USD} alt="" width={15} height={15} />
-                  <p className="text-xs">USD</p>
+                  <p className="text-xs">{createdTrade?.exit_currency}</p>
                 </div>
               </div>
 
               <div className="flex justify-between items-center  text-sm">
                 <p className="text-gray-300">Rate</p>
                 <p className="text-xs font-semibold">
-                  1NGN = <span>0.0081938374</span>
+                  {/* 1NGN = <span>0.0081938374</span> */}
+                  {createdTrade?.rate}
                 </p>
               </div>
 
               <div className="flex justify-between items-center text-sm">
                 <p className="text-gray-300">Amount</p>
-                <p className="text-xs font-semibold">1,000,000 NGN</p>
+                <p className="text-xs font-semibold">
+                  {createdTrade?.amount + " " + createdTrade?.currency}
+                </p>
               </div>
 
               <div className="flex justify-between items-center text-sm">
                 <p className="text-gray-300">Minimum Bid</p>
-                <p className="text-xs font-semibold">10,000 NGN</p>
+                <p className="text-xs font-semibold">
+                  {" "}
+                  {createdTrade?.minimumBid + " " + createdTrade?.currency}
+                </p>
               </div>
 
               <div className="flex justify-between items-center mt-6 mb-2 text-sm">
@@ -83,17 +95,23 @@ const CreateTradeDetails = () => {
 
               <div className="flex justify-between items-center  text-sm">
                 <p className="text-gray-300">Bank Name</p>
-                <p className="text-xs font-semibold">Wema Bank</p>
+                <p className="text-xs font-semibold">
+                  {createdTrade?.bank_name}
+                </p>
               </div>
 
               <div className="flex justify-between items-center  text-sm">
                 <p className="text-gray-300">Account Number</p>
-                <p className="text-xs font-semibold">0240766453</p>
+                <p className="text-xs font-semibold">
+                  {createdTrade?.account_number}
+                </p>
               </div>
 
               <div className="flex justify-between items-center  text-sm">
                 <p className="text-gray-300">Account Name</p>
-                <p className="text-xs font-semibold">Ogunsola Simisola</p>
+                <p className="text-xs font-semibold">
+                  {createdTrade?.beneficiary_name}
+                </p>
               </div>
               <div className="flex justify-between items-center  text-sm">
                 <p className="text-gray-300">Transaction Fee</p>
@@ -141,7 +159,7 @@ const CreateTradeDetails = () => {
             </div>
             <button
               onClick={handleContinue}
-              className={`p-2 mt-[16px] text-white-100 bg-primaryBtn w-full rounded-lg `}
+              className="p-2 mt-[16px] text-white-100 bg-primaryBtn w-full rounded-lg"
             >
               Continue
             </button>

@@ -1,5 +1,5 @@
+import { ToastProps } from "@/app/interfaces/general";
 import { Slide, toast } from "react-toastify";
-import { ToastProps } from "../../../interfaces/general";
 
 export const errorToast = ({ message, position }: ToastProps) => {
   return toast.error(message, {

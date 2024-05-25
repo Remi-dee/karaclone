@@ -6,14 +6,14 @@ import Logo from "@/public/fxkara-logo.svg";
 import { GiCheckMark } from "react-icons/gi";
 import { useSelector } from "react-redux";
 import { FaGlasses } from "react-icons/fa";
-
-type Props = {
-  accountType: string;
-  active: number;
-  setActive: (active: number) => void;
-};
-const SignUpOptions: FC<Props> = ({ active }) => {
-  const globalState = useSelector((state) => state.auth);
+import signupCheck from "@/public/svg/signupCheck.svg";
+// type Props = {
+//   accountType: string;
+//   active: number;
+//   setActive: (active: number) => void;
+// };
+const SignUpOptions: FC<any> = () => {
+  const globalState = useSelector((state: any) => state.auth);
   const level = globalState?.registrationStage;
   const accountType = globalState?.account_type;
   // console.log(accountType);
@@ -76,24 +76,7 @@ const SignUpOptions: FC<Props> = ({ active }) => {
                 {level >= index + 1 ? (
                   <GiCheckMark className="text-white-100 w-[16px] h-[14.01px]" />
                 ) : (
-                  <svg
-                    width="32"
-                    height="32"
-                    viewBox="0 0 32 32"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M1 16C1 7.71573 7.71573 1 16 1C24.2843 1 31 7.71573 31 16C31 24.2843 24.2843 31 16 31C7.71573 31 1 24.2843 1 16Z"
-                      fill="#7F56D9"
-                    />
-                    <path
-                      d="M1 16C1 7.71573 7.71573 1 16 1C24.2843 1 31 7.71573 31 16C31 24.2843 24.2843 31 16 31C7.71573 31 1 24.2843 1 16Z"
-                      stroke="#7F56D9"
-                      stroke-width="2"
-                    />
-                    <circle cx="16" cy="16" r="5" fill="white" />
-                  </svg>
+                  <Image src={signupCheck} alt="" />
                 )}
               </div>
               {index !== 5 ? (

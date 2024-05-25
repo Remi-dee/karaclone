@@ -12,8 +12,8 @@ import { TbNumber4Small } from "react-icons/tb";
 import { useDispatch } from "react-redux";
 import { increaseRegistrationStage } from "@/redux/features/auth/authSlice";
 
-function page() {
-  const globalState = useSelector((state) => state.auth);
+function Page() {
+  const globalState = useSelector((state: any) => state.auth);
   const level = globalState?.registrationStage;
   const accountType = globalState?.account_type;
   console.log(globalState);
@@ -44,4 +44,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

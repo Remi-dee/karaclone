@@ -2,7 +2,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import Image from "next/image";
 import USD from "../../public/Images/USD.png";
-import NGN from "../../public/Images/NGN.png"
+import NGN from "../../public/Images/NGN.png";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { BiSolidCopy } from "react-icons/bi";
 
@@ -34,7 +34,7 @@ const CreateTradeDetails = () => {
             <div className="flex justify-between items-center text-sm">
               <p className="text-gray-300">Currency</p>
               <div className="flex justify-start items-center  gap-1 my-2 ">
-                <Image src={NGN} width={15} height={15} alt=""/>
+                <Image src={NGN} width={15} height={15} alt="" />
                 <p className="text-xs">NGN</p>
               </div>
             </div>
@@ -42,7 +42,7 @@ const CreateTradeDetails = () => {
             <div className="flex justify-between items-center text-sm">
               <p className="text-gray-300">Exit Currency</p>
               <div className="flex justify-start items-center  gap-1 mb-2 ">
-                <Image src={USD} alt="" width={15} height={15}/>
+                <Image src={USD} alt="" width={15} height={15} />
                 <p className="text-xs">USD</p>
               </div>
             </div>
@@ -61,9 +61,7 @@ const CreateTradeDetails = () => {
 
             <div className="flex justify-between items-center my-2 text-sm">
               <p className="text-gray-300">Minimum Bid</p>
-              <p className="text-xs font-semibold">
-                10,000 NGN
-              </p>
+              <p className="text-xs font-semibold">10,000 NGN</p>
             </div>
 
             <div className="flex justify-between items-center mt-6 mb-2 text-sm">
@@ -80,7 +78,7 @@ const CreateTradeDetails = () => {
               <p className="text-gray-300">Account Number</p>
               <p className="text-xs font-semibold">0240766453</p>
             </div>
-           
+
             <div className="flex justify-between items-center my-2 text-sm">
               <p className="text-gray-300">Account Name</p>
               <p className="text-xs font-semibold">Ogunsola Simisola</p>
@@ -90,10 +88,8 @@ const CreateTradeDetails = () => {
               <p className="text-gray-300">Trade Fee</p>
               <p className="text-red-600 text-xs font-semibold">0.01%</p>
             </div>
-            
-            <button
-              className={`p-2  mb-4 text-white-100 bg-primaryBtn w-full rounded-lg `}
-            >
+
+            <button className="p-2  mb-4 text-white-100 bg-primaryBtn w-full rounded-lg">
               Continue
             </button>
           </div>

@@ -5,9 +5,9 @@ import BasicUserDetails from "./BasicUserDetails";
 
 import { useDispatch } from "react-redux";
 
-type Props = { params: { accountType: string } };
+// type Props = { params: { accountType: string } };
 
-const CreateUser: FC<Props> = ({ params }) => {
+const CreateUser: FC<any> = ({ params }) => {
   const [active, setActive] = useState(1);
   const [basicDetails, setBasicDetails] = useState({
     name: "",

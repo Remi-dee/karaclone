@@ -31,7 +31,6 @@ const CreateKYB = () => {
           //   setActive={setActive}
           // />
 
-
           <KYBQuestion
             kybQuestion={kybQuestion}
             setKybQuestion={setKybQuestion}

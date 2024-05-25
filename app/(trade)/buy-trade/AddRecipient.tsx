@@ -104,7 +104,9 @@ const AddRecipient = () => {
 
             <button
               onClick={handleSuccessMessage}
-              className={`p-2  mb-4 text-white-100 bg-primaryBtn w-full rounded-lg `}
+              className={
+                "p-2  mb-4 text-white-100 bg-primaryBtn w-full rounded-lg"
+              }
             >
               Continue
             </button>

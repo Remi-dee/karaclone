@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 function BasicDetails() {
-  const { user } = useSelector((state) => state?.auth);
+  const { user } = useSelector((state: any) => state?.auth);
 
   return (
     <div className=" h-[252px] flex  flex-col gap-[24px] bg-[#FFFFFF] w-[100%]  p-[24px] rounded-[8px]  ">

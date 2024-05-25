@@ -1,13 +1,34 @@
 "use client";
 import Link from "next/link";
 import { styles } from "../../styles/style";
+import { ChangeEvent, useState } from "react";
 import fxKara from "@/public/fxkara-logo.svg";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 const ForgotPassword = () => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const [inputValue, setInputValue] = useState<string>("");
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.target.value);
+  };
+  const validateEmail = (email: string): boolean => {
+    return emailRegex.test(email);
+  };
+  const router = useRouter();
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    if (validateEmail(inputValue)) {
+      const newRoute = "/new-password?email=" + inputValue;
+      return router.push(newRoute);
+    } else {
+      toast.error("Invalid email!");
+    }
+  };
   return (
-    <div className="flex  justify-center p-[32px_40px_32px_40px]  bg-white-300 h-[960px]">
-      <div className=" w-full md:w-2/3 lg:w-3/5 xl:w-2/5 2xl:w-1/4  text-center  h-[381px]">
-        <div className="  pt-[120px]">
+    <div className="flex w-full  justify-center p-[32px_40px_32px_40px]  bg-white-300 h-[960px]">
+      <div className=" gap-[24px]  text-center  h-[381px] flex   flex-col justify-center w-full">
+        <div className=" w-full flex justify-center pt-[120px]">
           <Image
             src={fxKara}
             className="mx-auto mix-blend-darken"
@@ -17,8 +38,8 @@ const ForgotPassword = () => {
         </div>
 
         {/* shadow container*/}
-        <div className="border border-slate-100  mt-[24px]  shadow-md  h-[381px] bg-white-100 rounded-xl w-[551px] text-center flex flex-col gap-[24px] justify-center items-center text-[black]">
-          <div className=" rounded-xl h-[56px] w-[56px] border flex flex-col items-center place-content-between place-items-center object-center content-center relative border-slate-200">
+        <div className="border mx-auto border-slate-100  mt-[24px]  shadow-md  h-[381px] bg-white-100 rounded-xl w-[551px] text-center  p-[32px_40px_32px_40px] flex flex-col gap-[24px] justify-center items-center text-[black]">
+          <div className=" rounded-xl min-h-[56px] min-w-[56px] border flex flex-col items-center place-content-between place-items-center object-center content-center relative border-slate-200">
             <Image
               src="/key-img.png"
               width={28}
@@ -47,10 +68,15 @@ const ForgotPassword = () => {
                 <input
                   type="email"
                   name="email"
+                  value={inputValue}
+                  onChange={handleChange}
                   placeholder="Enter your email address"
                   className={`${styles.input} small mt-0`}
                 />
-                <button className="bg-[#EAECF0] mt-2 text-sm rounded-md py-2 px-6 text-[14px]  text-[#98A2B3] leding-[20px] w-full">
+                <button
+                  onClick={handleSubmit}
+                  className="bg-[#EAECF0] mt-2 text-sm rounded-md py-2 px-6 text-[14px]  text-[#98A2B3] leding-[20px] w-full"
+                >
                   Reset Password
                 </button>
               </div>

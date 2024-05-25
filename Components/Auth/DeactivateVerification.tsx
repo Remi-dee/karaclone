@@ -45,7 +45,7 @@ const VerifyEmail: FC<Props> = ({ setVerificationSuccess }) => {
     useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),
-    useRef<HTMLInputElement>(null)
+    useRef<HTMLInputElement>(null),
   ];
 
   const [verifyNumber, setVerifyNumber] = useState<VerifyNumber>({
@@ -89,10 +89,11 @@ const VerifyEmail: FC<Props> = ({ setVerificationSuccess }) => {
         </div>
         <div className=" text-center px-[1rem] flex flex-col gap-[16px] mt-[24px] ">
           <h4 className="py-2 font-bold text-[#1E1E1E] leading-[38.4px] text-[32px] tracking-[-2%]">
-          Enter your verification code
+            Enter your verification code
           </h4>
           <p className="text-[#7C7C7C] text-[16px] leading-[19.2px]">
-          To deactivate authentication method, kindly enter the code we sent to your email
+            To deactivate authentication method, kindly enter the code we sent
+            to your email
           </p>
         </div>
         <div className=" px-[1rem] flex items-center justify-around mt-[32px] gap-[8px]">
@@ -127,7 +128,7 @@ const VerifyEmail: FC<Props> = ({ setVerificationSuccess }) => {
               href=""
               className=" ml-[0.4rem]  font-semibold text-sm text-[#7F56D9]"
             >
-           Resend Code
+              Resend Code
             </Link>
           </p>
         </div>

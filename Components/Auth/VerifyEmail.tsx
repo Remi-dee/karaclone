@@ -7,19 +7,18 @@ import { MdMail } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { increaseRegistrationStage } from "@/redux/features/auth/authSlice";
 import getTokenFromLocalStorage from "@/utils/FetchUserToken";
-type Props = {
-  setVerificationSuccess: (success: boolean) => void;
-};
+// type Props = {
+//   setVerificationSuccess: (success: boolean) => void;
+// };
 
 type VerifyNumber = {
   "0": string;
   "1": string;
   "2": string;
   "3": string;
- 
 };
 
-const VerifyEmail: FC<Props> = ({ setVerificationSuccess }) => {
+const VerifyEmail: FC<any> = ({ setVerificationSuccess }) => {
   const activationToken = getTokenFromLocalStorage();
   const [activation, { isSuccess, error }] = useActivationMutation();
   const [invalidError, setInvalidError] = useState<boolean>(false);
