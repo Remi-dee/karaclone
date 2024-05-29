@@ -13,7 +13,7 @@ type Props = {
 };
 
 const QrCode: FC<Props> = ({ qrCode, isEmailVerify }) => {
-  console.log(isEmailVerify)
+  console.log(isEmailVerify);
   const [twoFaCode, setTwoFaCode] = useState(isEmailVerify);
   const { data } = useLoadUserQuery({});
 
