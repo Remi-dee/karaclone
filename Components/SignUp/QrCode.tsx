@@ -9,19 +9,27 @@ import fxqr from "@/public/fxqr.png";
 
 type Props = {
   qrCode: string;
+  isEmailVerify: boolean;
 };
 
-const QrCode: FC<Props> = ({ qrCode }) => {
-  const [twoFaCode, setTwoFaCode] = useState(!true);
+const QrCode: FC<Props> = ({ qrCode, isEmailVerify }) => {
+  console.log(isEmailVerify)
+  const [twoFaCode, setTwoFaCode] = useState(isEmailVerify);
   const { data } = useLoadUserQuery({});
-  console.log(data);
+
   return (
     <>
-      {twoFaCode ? (
+      {isEmailVerify ? (
         <div className="w-[550px] mx-auto  h-[760px] shadow-lg  rounded-md border border-white-100">
           <div className="w-[470px] flex  flex-col gap-y-[32px]  mx-auto">
             <div className="w-[56px] h-[56px] flex justify-center items-center shadow-md border border-gray-200  rounded-md ">
-              <Image src={scan} alt="Scan" className=" w-[28px] h-[28px]" />
+              <Image
+                width={50}
+                height={50}
+                src={scan}
+                alt="Scan"
+                className=" w-[28px] h-[28px]"
+              />
             </div>
             <div>
               <h2 className=" text-[#1E1E1E] font-bold text-[32px] tracking-[-2%] leading-[38.4px]">
@@ -38,6 +46,8 @@ const QrCode: FC<Props> = ({ qrCode }) => {
               </p>
               <Image
                 src={qrCode}
+                width={50}
+                height={50}
                 alt="QR Code"
                 className="w-full h-full mt-[16px]"
               />
