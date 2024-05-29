@@ -220,6 +220,20 @@ export const userApi = createApi({
         // credentials: "include" as const,
       }),
     }),
+    // /Currency converstion
+
+    CurrencyConverter: builder.query({
+      query: ({ amount, sourceCurrency, targetCurrency }) => ({
+        url: "currency-conversion",
+        method: "GET",
+        params: {
+          amount,
+          sourceCurrency,
+          targetCurrency,
+        },
+        // credentials: "include" as const,
+      }),
+    }),
 
     //next
     getSingleTrade: builder.query({
@@ -258,4 +272,5 @@ export const {
   useGetAllTradeQuery,
   useGetAllTradeExecptMineQuery,
   useGetSingleTradeQuery,
+  useCurrencyConverterQuery,
 } = userApi;

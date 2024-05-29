@@ -6,6 +6,7 @@ import fxKara from "@/public/fxkara-logo.svg";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import { useSendMailForResetMutation } from "@/redux/features/auth/authApi";
 const ForgotPassword = () => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const [inputValue, setInputValue] = useState<string>("");
@@ -16,10 +17,13 @@ const ForgotPassword = () => {
     return emailRegex.test(email);
   };
   const router = useRouter();
+  const [SendMailForReset, { isSuccess, error, data }] =
+    useSendMailForResetMutation();
   const handleSubmit = (e: any) => {
     e.preventDefault();
     if (validateEmail(inputValue)) {
-      const newRoute = "/new-password?email=" + inputValue;
+      SendMailForReset(inputValue);
+      const newRoute = "/new-password?token=36378494904030";
       return router.push(newRoute);
     } else {
       toast.error("Invalid email!");

@@ -1,5 +1,3 @@
-
-
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { userLoggedIn, userRegistration } from "./authSlice";
 
@@ -76,8 +74,47 @@ export const authApi = createApi({
         }
       },
     }),
+    //reset user email
+
+    SendMailForReset: builder.mutation({
+      query: (args) => ({
+        url: "authentication/forgot-password",
+        method: "POST",
+        body: { email: args },
+        // credentials: "include" as const,
+      }),
+    }),
+
+    //new password resetting
+
+    NewPassword: builder.mutation({
+      query: (args) => ({
+        url: "authentication/reset-password",
+        method: "POST",
+        body: args,
+      }),
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        try {
+          const result = await queryFulfilled;
+
+          dispatch(
+            userLoggedIn({
+              accessToken: result.data.accessToken,
+              user: result.data.user,
+            })
+          );
+        } catch (error: any) {
+          console.log(error);
+        }
+      },
+    }),
   }),
 });
 
-export const { useRegisterMutation, useLoginMutation, useActivationMutation } =
-  authApi;
+export const {
+  useRegisterMutation,
+  useLoginMutation,
+  useNewPasswordMutation,
+  useActivationMutation,
+  useSendMailForResetMutation,
+} = authApi;

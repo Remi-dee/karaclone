@@ -5,7 +5,10 @@ import Link from "next/link";
 import passwordLogo from "@/public/Images/passwordLogo.png";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { GiCheckMark, GiCancel } from "react-icons/gi";
-import { useRegisterMutation } from "@/redux/features/auth/authApi";
+import {
+  useNewPasswordMutation,
+  useRegisterMutation,
+} from "@/redux/features/auth/authApi";
 import toast from "react-hot-toast";
 import mark from "@/public/mark.svg";
 import closecirce from "@/public/close-circle.svg";
@@ -25,6 +28,7 @@ const NewPassword: FC<any> = () => {
   const [confirmPasswordValid, setConfirmPasswordValid] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
   const [userEmail, setuserEmail] = useState(searchParams.get("email")); // this is the user email for request
+  const [resetToken, setResetToken] = useState(searchParams.get("token")); // this is the user email for request
   const dispatch = useDispatch();
   //   console.log(userEmail);
   useEffect(() => {
@@ -53,11 +57,10 @@ const NewPassword: FC<any> = () => {
   const validateConfirmPassword = (confirmPassword: string) => {
     setConfirmPasswordValid(confirmPassword === userPassword);
   };
-
+  const [NewPassword] = useNewPasswordMutation();
   const submitPasswordHandler = (e: any) => {
     e.preventDefault();
-
-    // registerUser(data);
+    NewPassword({ resetToken: resetToken, newPassword: userPassword });
   };
 
   const [showPassword, setShowPassword] = useState("password");
