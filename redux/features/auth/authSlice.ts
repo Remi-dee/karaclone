@@ -6,8 +6,8 @@ const initialState = {
   loadingState: false,
   token: "",
   user: "",
-  // registrationStage: 2,
-  registrationStage: 5,
+  registrationStage: 2,
+
   currentUser: {},
   logoutModalOpen: false,
   name: "",
@@ -33,7 +33,7 @@ const authSlice = createSlice({
       console.log(state.registrationStage);
     },
     addCurrentUser: (state, { payload }) => {
-      console.log(payload)
+      console.log(payload);
       return (state.currentUser = payload);
     },
     setAccountType: (state, action) => {
