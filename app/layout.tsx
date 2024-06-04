@@ -6,11 +6,14 @@ import { ThemeProvider } from "./utils/theme-provider";
 import { Toaster } from "react-hot-toast";
 import { Providers } from "./Provider";
 import { SessionProvider } from "next-auth/react";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { useLoadUserQuery } from "@/redux/features/user/userApi";
 import getTokenFromLocalStorage from "@/utils/FetchUserToken";
 import { useDispatch } from "react-redux";
 import { addCurrentUser } from "@/redux/features/auth/authSlice";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
@@ -48,14 +51,27 @@ export default function RootLayout({
       <body
         className={`${poppins.variable} ${josefin.variable} !bg-white bg-no-repeat dark:bg-gradient-to-b dark:from-gray-900 dark:to-black duration-300`}
       >
-        <Providers>
-          <SessionProvider>
-            <ThemeProvider attribute="class" defaultTheme="system">
-              <Custom>{children}</Custom>
-              <Toaster position="top-center" reverseOrder={false} />
-            </ThemeProvider>
-          </SessionProvider>
-        </Providers>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+        <Suspense fallback={<div>Loading...</div>}>
+          <Providers>
+            <SessionProvider>
+              <ThemeProvider attribute="class" defaultTheme="system">
+                <Custom>{children}</Custom>
+                <Toaster position="top-center" reverseOrder={false} />
+              </ThemeProvider>
+            </SessionProvider>
+          </Providers>
+        </Suspense>
       </body>
     </html>
   );

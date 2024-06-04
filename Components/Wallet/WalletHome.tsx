@@ -15,6 +15,7 @@ import {
   toggleReversalState,
   toggleCreateTrade,
   toggleCreateTradeStage,
+  toggleBuyTradeDisplay,
 } from "@/redux/features/user/userSlice";
 
 import { toast } from "react-toastify";
@@ -36,6 +37,7 @@ function WalletHome() {
   const handleTrade = () => {
     if (selectedCurrency) {
       dispatch(toggleCreateTrade(true));
+      dispatch(toggleBuyTradeDisplay(false));
       dispatch(toggleCreateTradeStage(2));
       router.push("/dashboard/P2P-Trade");
     }

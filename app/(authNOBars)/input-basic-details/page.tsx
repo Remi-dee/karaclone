@@ -3,11 +3,8 @@ import React from "react";
 
 function page() {
   return (
-   <div>
-    
-   </div>
-      // <CreateUser />
-  
+    <div></div>
+    // <CreateUser />
   );
 }
 

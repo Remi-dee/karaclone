@@ -3,7 +3,10 @@
 import { useRouter } from "next/navigation";
 import React from "react";
 
-import { toggleCreateTradeStage } from "@/redux/features/user/userSlice";
+import {
+  toggleCreateTrade,
+  toggleCreateTradeStage,
+} from "@/redux/features/user/userSlice";
 import { useDispatch } from "react-redux";
 
 const CreateTradeSuccess = () => {
@@ -11,11 +14,12 @@ const CreateTradeSuccess = () => {
   const router = useRouter();
   const handleDone = () => {
     dispatch(toggleCreateTradeStage(1));
+    // router.push("/dashboard/P2P-trade");
   };
   return (
     <div>
       <div className="flex  flex-col items-center justify-start gap-[24px] text-center text-2xl text-neutral-black">
-        <div className="w-[550px] p-[32px_40px_32px_40px] mt-32 gap-[25px] mx-auto rounded-[16px] bg-white-100 h-[411px] shadow-lg overflow-hidden flex flex-col justify-center items-center py-8 px-10 box-border max-w-full text-left text-sm text-neutral-color-500 ">
+        <div className="w-[550px] p-[32px_40px_32px_40px] mt-[2rem] ml-[6rem] gap-[25px] mx-auto rounded-[16px] bg-white-100 h-[411px] shadow-lg overflow-hidden flex flex-col justify-center items-center py-8 px-10 box-border max-w-full text-left text-sm text-neutral-color-500 ">
           <div className="w-[56px] h-[56px]  shadow flex justify-center items-center border border[#EAECF0] rounded-[12px] ">
             <div className="w-[20]  rounded-sm text-white-100">
               <svg

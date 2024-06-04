@@ -30,10 +30,14 @@ const KYBInfo: FC<Props> = ({
   };
 
   function updateFileName() {
-    const fileInput = document.getElementById("file-upload");
-    const fileNameSpan = document.getElementById("file-name");
+    const fileInput = document.getElementById("file-upload") as
+      | HTMLElement
+      | any;
+    const fileNameSpan = document.getElementById("file-name") as
+      | HTMLElement
+      | any;
     const fileName = fileInput.files[0]
-      ? fileInput.files[0].name
+      ? fileInput?.files[0].name
       : "Sample PDF";
     fileNameSpan.textContent = fileName;
   }
@@ -178,10 +182,10 @@ const KYBInfo: FC<Props> = ({
             </label>
 
             <div className="file-upload-container">
-              <label className="upload-box" for="file-upload">
+              <label className="upload-box" htmlFor="file-upload">
                 Upload File
               </label>
-              <input id="file-upload" type="file" onchange={updateFileName} />
+              <input id="file-upload" type="file" onChange={updateFileName} />
               <span id="file-name" className="file-name">
                 Sample PDF
               </span>
@@ -268,10 +272,10 @@ const KYBInfo: FC<Props> = ({
                 Upload Document
               </label>
               <div className="file-upload-container">
-                <label className="upload-box" for="file-upload">
+                <label className="upload-box" htmlFor="file-upload">
                   Upload File
                 </label>
-                <input id="file-upload" type="file" onchange={updateFileName} />
+                <input id="file-upload" type="file" onChange={updateFileName} />
                 <span id="file-name" className="file-name">
                   Sample PDF
                 </span>

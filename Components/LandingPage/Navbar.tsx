@@ -1,20 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function Navbar() {
-  return (
-    <header className='  fixed top-0 h-[]'>
-
-
-
-
-
-
-
-
-
-
-    </header>
-  )
+  return <header className="  fixed top-0 h-[]"></header>;
 }
 
-export default Navbar
+export default Navbar;

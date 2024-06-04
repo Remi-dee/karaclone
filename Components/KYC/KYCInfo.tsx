@@ -45,7 +45,9 @@ const KYCInfo: FC<Props> = ({
       reader.readAsDataURL(file);
     }
   };
-  const updateFileName = () => {};
+  const updateFileName = () => {
+    return;
+  };
   const handleAddressDocumentChange = (e: any) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -67,7 +69,7 @@ const KYCInfo: FC<Props> = ({
   };
 
   const router = useRouter();
-  const handleBack = (e) => {
+  const handleBack = (e: any) => {
     e.preventDefault();
     dispacth(toggleKycOff());
   };

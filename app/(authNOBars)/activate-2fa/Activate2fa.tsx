@@ -1,5 +1,4 @@
 import React from "react";
-;
 import TwoFactorAuth from "@/Components/Auth/TwoFactorAuth";
 
 const Activate2fa = () => {

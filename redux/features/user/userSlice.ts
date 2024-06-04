@@ -14,7 +14,10 @@ const initialState = {
   createTradeState: 1,
   isBuyTrade: false,
   isCreateTrade: false,
-  isTradeModal: false,
+  isSuccesssTradeModal: false,
+  recepient: "",
+  createdTrade: {},
+  selectedTrade: {},
 };
 
 const userSlice = createSlice({
@@ -29,7 +32,9 @@ const userSlice = createSlice({
     addBusinessDetailsToObject: (state, { payload }) => {
       return { ...state, ...payload };
     },
-
+    addCreatedTrade: (state, { payload }) => {
+      state.createdTrade = payload;
+    },
     toggleSettingsTab: (state, { payload }) => {
       state.settingsOption = payload;
     },
@@ -43,8 +48,10 @@ const userSlice = createSlice({
       state.createTradeState = payload;
     },
     toggleBuyTradeDisplay: (state, { payload }) => {
+      state.isBuyTrade = payload;
+    },
+    toggleBuyTradeState: (state, { payload }) => {
       state.createTradeState = payload;
-      state.isBuyTrade = state.isBuyTrade === true ? false : true;
     },
     toggleWalletDispaly: (state, { payload }) => {
       state.walletDisplay = payload;
@@ -52,18 +59,28 @@ const userSlice = createSlice({
     increaseFundWallet: (state, { payload }) => {
       state.fundStage = payload;
     },
+    toggleBuyTradeSuccessModal: (state, { payload }) => {
+      state.isSuccesssTradeModal = payload;
+    },
+    addDataForSelectedTrade: (state, { payload }) => {
+      state.selectedTrade = payload;
+    },
   },
 });
 export const {
   addBusinessDetailsToObject,
+  addCreatedTrade,
   increaseRegistrationStage,
   toggleSettingsTab,
   toggleCreateTradeStage,
   toggleReversalState,
   toggleWalletDispaly,
+  toggleBuyTradeState,
   increaseFundWallet,
   toggleCreateTrade,
   toggleBuyTradeDisplay,
+  addDataForSelectedTrade,
+  toggleBuyTradeSuccessModal,
 } = userSlice.actions;
 export const userSelector = (state: RootState) => state.user;
 export default userSlice.reducer;

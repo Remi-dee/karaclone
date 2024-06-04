@@ -191,6 +191,68 @@ export const userApi = createApi({
       },
     }),
 
+    //create a trade
+
+    createTrade: builder.mutation({
+      query: (args) => ({
+        url: "Trade/create-trade",
+        method: "POST",
+        body: args,
+        // credentials: "include" as const,
+      }),
+    }),
+
+    //get all trades including current user
+
+    getAllTrade: builder.query({
+      query: () => ({
+        url: "Trade/get-all-trades",
+        method: "GET",
+        // credentials: "include" as const,
+      }),
+    }),
+    //gett others trade
+
+    getAllTradeExecptMine: builder.query({
+      query: () => ({
+        url: "Trade/get-all-except-mine",
+        method: "GET",
+        // credentials: "include" as const,
+      }),
+    }),
+    // /Currency converstion
+
+    CurrencyConverter: builder.query({
+      query: ({ amount, sourceCurrency, targetCurrency }) => ({
+        url: "currency-conversion",
+        method: "GET",
+        params: {
+          amount,
+          sourceCurrency,
+          targetCurrency,
+        },
+        // credentials: "include" as const,
+      }),
+    }),
+
+    //next
+    getSingleTrade: builder.query({
+      query: (id) => ({
+        url: `Trade/get-trade/${id}`,
+        method: "GET",
+        // credentials: "include" as const,
+      }),
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        try {
+          const result = await queryFulfilled;
+
+          // console.log(result);
+        } catch (error: any) {
+          console.log(error);
+        }
+      },
+    }),
+
     //next
   }),
 });
@@ -206,4 +268,9 @@ export const {
   useGetSingleCurrencyPairQuery,
   useGetAllCurrencyPairsQuery,
   useGetAllUsersWalletQuery,
+  useCreateTradeMutation,
+  useGetAllTradeQuery,
+  useGetAllTradeExecptMineQuery,
+  useGetSingleTradeQuery,
+  useCurrencyConverterQuery,
 } = userApi;

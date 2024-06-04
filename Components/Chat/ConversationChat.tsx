@@ -77,7 +77,7 @@ function ChatPage() {
 
 export default ChatPage;
 
-function EachFaq(params: type) {
+function EachFaq() {
   return (
     <div className="  flex justify-between  ">
       <p className=" text-[10px] leading-[16px] tracking-[-2%] h-full w-full">

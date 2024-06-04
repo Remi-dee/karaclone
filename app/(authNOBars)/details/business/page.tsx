@@ -1,10 +1,8 @@
-import BusinessDetails from '@/Components/Auth/BusinessDetails'
-import React from 'react'
+import BusinessDetails from "@/Components/Auth/BusinessDetails";
+import React from "react";
 
 function Page() {
-  return (
-  <BusinessDetails/>
-  )
+  return <BusinessDetails />;
 }
 
-export default Page
+export default Page;

@@ -14,10 +14,9 @@ import ChatPage from "../Chat/ChatPage";
 import ChatModal from "../CustomModal/ChatModal";
 import ConversationChat from "../Chat/ConversationChat";
 import { useSelector } from "react-redux";
-type Props = {};
 
-const Page = (props: Props) => {
-  const { settingsOption } = useSelector((state) => state?.user);
+const Page = (props: any) => {
+  const { settingsOption } = useSelector((state: any) => state?.user);
 
   return (
     <div className="">

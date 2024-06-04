@@ -17,28 +17,17 @@ const BuyTrade = () => {
   };
   const [selectRecipient, setSelectRecipient] = useState<boolean>(false);
   const [option, setOption] = useState<string | null>("");
-  
-  const [selectedComponent, setSelectedComponent] = useState<React.ReactNode>(null);
 
-  const handleOptionChange = (selectedOption:string) => {
+  const [selectedComponent, setSelectedComponent] =
+    useState<React.ReactNode>(null);
+
+  const handleOptionChange = (selectedOption: string) => {
     setOption(selectedOption);
   };
 
   const handleContinue = () => {
     setSelectRecipient(false); // Hide the recipient selection modal
     // Render the component based on the selected option
-    switch (option) {
-      case 'option 1':
-      case 'option 2':
-        setSelectedComponent(<TradeSuccess />);
-        break;
-      case 'add recipient':
-        setSelectedComponent(<AddRecipient />);
-        break;
-      default:
-        setSelectedComponent(null);
-        break;
-    }
   };
 
   return (
@@ -124,7 +113,7 @@ const BuyTrade = () => {
             </div>
             <button
               onClick={() => setSelectRecipient(true)}
-              className={`p-2  mb-4 text-white-100 bg-primaryBtn w-full rounded-lg `}
+              className="p-2  mb-4 text-white-100 bg-primaryBtn w-full rounded-lg "
             >
               Continue
             </button>
@@ -203,7 +192,7 @@ const BuyTrade = () => {
                 </p>
               </div>
               <button
-              onClick={handleContinue}
+                onClick={handleContinue}
                 disabled={!option}
                 className={`p-2  mb-4 text-white-100 bg-primaryBtn w-full rounded-lg ${
                   !option && "opacity-50 cursor-not-allowed"

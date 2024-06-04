@@ -7,7 +7,7 @@ type tradeProp = {
   onSelectSell: () => void;
 };
 const TradeTab: React.FC<tradeProp> = ({ onSelectBuy, onSelectSell }) => {
-  const [active, setActive] = useState<"Buy" | "Sell" | null>(null);
+  const [active, setActive] = useState<"Buy" | "Sell" | null>("Buy");
   const [currency, setCurrency] = useState<string>("");
 
   const handleCurrency = (value: string) => {

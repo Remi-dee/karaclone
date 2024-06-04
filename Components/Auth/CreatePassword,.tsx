@@ -13,26 +13,10 @@ import { useDispatch } from "react-redux";
 import { increaseRegistrationStage } from "@/redux/features/auth/authSlice";
 import { useSelector } from "react-redux";
 
-type Props = {
-  active: number;
-
-  userPassword: any;
-  setUserPassword: (userPassword: any) => void;
-  businessDetails: any;
-  basicDetails: any;
-  accountType: string;
-};
-
-const CreatePassword: FC<Props> = ({
-  active,
-
-  businessDetails,
-  basicDetails,
-  accountType,
-}) => {
+const CreatePassword: FC<any> = () => {
   const [registerUser, { isLoading, isSuccess, error, data }] =
     useRegisterMutation();
-  const globalState = useSelector((state) => state?.auth);
+  const globalState = useSelector((state: any) => state?.auth);
   console.log(globalState);
   const [passwordValid, setPasswordValid] = useState(false);
   const [userPassword, setUserPassword] = useState("");
@@ -344,86 +328,3 @@ const CreatePassword: FC<Props> = ({
 };
 
 export default CreatePassword;
-
-///
-
-// Of course! Here's how you can rewrite the example with two endpoints for login and signup:
-
-// ```javascript
-// // apiSlice.js
-// import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-
-// const BASE_URL = 'https://api.example.com';
-
-// export const apiSlice = createApi({
-//   reducerPath: 'api',
-//   baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
-//   endpoints: (builder) => ({
-//     // Endpoint for user login
-//     loginUser: builder.mutation({
-//       query: (credentials) => ({
-//         url: '/login',
-//         method: 'POST',
-//         body: credentials,
-//       }),
-//     }),
-//     // Endpoint for user signup
-//     signupUser: builder.mutation({
-//       query: (userData) => ({
-//         url: '/signup',
-//         method: 'POST',
-//         body: userData,
-//       }),
-//     }),
-//   }),
-// });
-
-// // Export hooks for usage in functional components
-// export const { useLoginUserMutation, useSignupUserMutation } = apiSlice;
-// ```
-
-// In this example, I've added two endpoints: `loginUser` and `signupUser`, each defined as a mutation. The `query` function for each mutation specifies the URL and method, and you can pass data to these mutations as parameters.
-
-// The usage of these mutations would be similar to the previous example:
-
-// ```javascript
-// // ExampleComponent.js
-// import { useLoginUserMutation, useSignupUserMutation } from '../apiSlice';
-
-// function ExampleComponent() {
-//   // Example usage of login mutation
-//   const [loginUser, { isLoading: loginLoading, error: loginError }] = useLoginUserMutation();
-
-//   // Example usage of signup mutation
-//   const [signupUser, { isLoading: signupLoading, error: signupError }] = useSignupUserMutation();
-
-//   // Example handlers for login and signup
-//   const handleLogin = async (credentials) => {
-//     try {
-//       const result = await loginUser(credentials).unwrap();
-//       // Handle successful login
-//     } catch (error) {
-//       // Handle login error
-//     }
-//   };
-
-//   const handleSignup = async (userData) => {
-//     try {
-//       const result = await signupUser(userData).unwrap();
-//       // Handle successful signup
-//     } catch (error) {
-//       // Handle signup error
-//     }
-//   };
-
-//   return (
-//     <div>
-//       {/* Your component JSX */}
-//     </div>
-//   );
-// }
-
-// export default ExampleComponent;
-// ```
-
-// You can replace the placeholders like `credentials` and `userData` with the actual data you want to send to the server for login and signup. Also, handle the loading and error states according to your UI requirements.

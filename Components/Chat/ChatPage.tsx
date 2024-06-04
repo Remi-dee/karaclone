@@ -5,6 +5,7 @@ import bgChat from "@/public/Images/bgchat.png";
 import robot from "@/public/Images/robot.png";
 import logo from "@/public/translogo.png";
 import rightarrow from "@/public/svg/rightarrow.svg";
+import sendIcon from "@/public/svg/send.svg";
 function ChatPage() {
   return (
     <div className=" w-full h-[800px]   ">
@@ -62,28 +63,7 @@ function ChatPage() {
             // onClick={handleSearch}
             className="flex-shrink-0"
           >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M7.66667 14C11.1645 14 14 11.1645 14 7.66671C14 4.1689 11.1645 1.33337 7.66667 1.33337C4.16886 1.33337 1.33333 4.1689 1.33333 7.66671C1.33333 11.1645 4.16886 14 7.66667 14Z"
-                stroke="#1E1E1E"
-                stroke-width="1.2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M14.6667 14.6667L13.3333 13.3334"
-                stroke="#1E1E1E"
-                stroke-width="1.2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
+            <Image src={sendIcon} alt="" />
           </button>
         </div>
       </div>
@@ -120,14 +100,14 @@ function ChatPage() {
               Share your thoughts or suggestions with us.
             </h1>
 
-            <div class=" mt-[8px] select-container text-[14px] leading-[20px] text-[#3D3D3D] ">
+            <div className=" mt-[8px] select-container text-[14px] leading-[20px] text-[#3D3D3D] ">
               <select>
                 <option value="option1">Option 1</option>
                 <option value="option2">Option 2</option>
                 <option value="option3">Option 3</option>
               </select>
             </div>
-            <div class=" text-[14px] mt-[12px] h-[44px] leading-[20px] text-[#3D3D3D] w-full  ">
+            <div className=" text-[14px] mt-[12px] h-[44px] leading-[20px] text-[#3D3D3D] w-full  ">
               <p className="font-semibold  text-[12px] leading-[14.4px] tracking-[-2%] text-[#292929] ">
                 Leave more details below
               </p>
@@ -149,7 +129,7 @@ function ChatPage() {
 
 export default ChatPage;
 
-function EachFaq(params: type) {
+function EachFaq(params: any) {
   return (
     <div className="  flex justify-between  ">
       <p className=" text-[10px] leading-[16px] tracking-[-2%] h-full w-full">

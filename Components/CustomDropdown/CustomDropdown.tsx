@@ -22,7 +22,9 @@ const CustomDropdown: React.FC<DropdownProps> = ({
   className = "",
   displayImages = false,
 }) => {
-  const [selectedOption, setSelectedOption] = useState<DropdownOption | null>(null);
+  const [selectedOption, setSelectedOption] = useState<DropdownOption | null>(
+    null
+  );
   const [isHovered, setIsHovered] = useState<boolean>(false);
 
   const handleOptionClick = (option: DropdownOption) => {
@@ -39,8 +41,8 @@ const CustomDropdown: React.FC<DropdownProps> = ({
     >
       <div
         className={` border-[#DCDCDC] p-[4px_24px_4px_24px]  flex justify-center items-center content-center rounded-md  text-gray-800 gap-[10px] cursor-pointer ${
-          isHovered ? "bg-white-100" : "" 
-        }` }
+          isHovered ? "bg-white-100" : ""
+        }`}
         onClick={() => setIsHovered(!isHovered)}
       >
         {selectedOption ? (
