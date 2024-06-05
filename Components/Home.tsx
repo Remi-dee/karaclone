@@ -14,7 +14,7 @@ import DashHomeBeforeKyc from "./Home/DashHomeBeforeKyc";
 import DashHomeAfterKyc from "./Home/DashHomeAfterKyc";
 import CreateKYC from "./KYC/CreateKYC";
 import Reversal from "./withdrawal/Reversal";
-import WithdrawalComplete from "./withdrawal/WidthdrawalComplete";
+
 function Home() {
   const globalState = useSelector((state: any) => state);
   const { kyc, auth, user } = globalState;
