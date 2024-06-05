@@ -15,14 +15,9 @@ import {
   toggleCreateTradeStage,
 } from "@/redux/features/user/userSlice";
 
-import SelectBank from "./SelectBank";
-
-import TradeModal from "../CustomModal/TradeModal";
-import BeneficaryDetails from "./BeneficaryDetails";
 import BuyTradePage from "./BuyTradePage";
 import CreateTradeSuccess from "./CreateTradeSuccess";
-import CustomModal from "../CustomModal/CustomModal";
-import TradeSuccessModal from "../CustomModal/TradeSuccessModal";
+
 const Trade = () => {
   const globalState = useSelector((state: any) => state?.user);
   // console.log(globalState);
