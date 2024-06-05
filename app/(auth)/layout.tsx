@@ -3,7 +3,7 @@
 import React, { Suspense, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import man from "@/public/loginMan.png";
-import stars from "@/public/Stars.png";
+import stars from "@/public/stars.png";
 import manphone from "@/public/Images/manphone.png";
 import manCall from "@/public/Images/manCall.png";
 import manbluebg from "@/public/Images/manbluebg.png";
