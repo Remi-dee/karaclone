@@ -1,9 +1,9 @@
 "use client";
 import React, { FC, useState } from "react";
 // import SignUpOptions from "./SignUpOptions";
-import BasicUserDetails from "./BasicUserDetails";
 
 import { useDispatch } from "react-redux";
+import BasicUserDetails from "./BasicUserDetails";
 
 // type Props = { params: { accountType: string } };
 
