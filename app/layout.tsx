@@ -54,10 +54,10 @@ export default function RootLayout({
         <Suspense fallback={<div>Loading...</div>}>
           <Providers>
             <SessionProvider>
-              <ThemeProvider attribute="class" defaultTheme="system">
-                <Custom>{children}</Custom>
-                <Toaster position="top-center" reverseOrder={false} />
-              </ThemeProvider>
+              {/* <ThemeProvider attribute="class" defaultTheme="system"> */}
+              <Custom>{children}</Custom>
+              <Toaster position="top-center" reverseOrder={false} />
+              {/* </ThemeProvider> */}
             </SessionProvider>
           </Providers>
         </Suspense>

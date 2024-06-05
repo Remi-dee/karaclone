@@ -4,8 +4,8 @@ import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import EnterAmount from "../props/EnterAmount";
 import BankDetails from "../props/BankDetails";
-import ConfirmTransaction from "../props/ConfirmTransaction";
 import Success from "../props/success";
+import ConfirmTransaction from "../props/ConfirmTransaction";
 
 function Withdraw() {
   // const step: number = 1; // Current step
