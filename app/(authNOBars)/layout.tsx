@@ -1,7 +1,5 @@
 import React, { Suspense } from "react";
-import Image from "next/image";
-import man from "@/public/loginMan.png";
-import stars from "@/public/Stars.png";
+
 import SignUpOptions from "@/Components/Auth/SignUpOptions";
 
 // export const metadata: Metadata = {

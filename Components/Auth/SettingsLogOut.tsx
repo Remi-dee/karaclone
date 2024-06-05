@@ -2,13 +2,14 @@
 
 import { BiLogOut } from "react-icons/bi";
 import { useDispatch } from "react-redux";
-import DefaultModal from "../CustomModal/CustomModalAlt";
+
 import { toggleLogoutModal } from "@/redux/features/auth/authSlice";
 import { useEffect, useState } from "react";
 import { signOut } from "next-auth/react";
 import { useLogOutQuery } from "@/redux/features/user/userApi";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import DefaultModal from "../CustomModal/CustomModalAlt";
 
 const SettingsLogoutModal = () => {
   const router = useRouter();

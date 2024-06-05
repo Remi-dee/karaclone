@@ -2,8 +2,7 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { TiUser } from "react-icons/ti";
-import signupHero1 from "../../public/Images/signupHero-1.png";
-import signupHero2 from "../../public/Images/signupHero-2.png";
+
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";

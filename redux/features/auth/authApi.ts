@@ -6,7 +6,7 @@ type RegistrationResponse = {
   activation_token: string;
 };
 
-type RegistrationData = {};
+type RegistrationData = object;
 
 export const authApi = createApi({
   reducerPath: "authApi",
