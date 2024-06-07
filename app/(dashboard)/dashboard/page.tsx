@@ -8,6 +8,7 @@ import Home from "@/Components/Home";
 import Wallet from "@/Components/Wallet/Wallet";
 import Transaction from "@/Components/Transactions/Transaction";
 import Trade from "@/Components/Trade/Trade";
+import wave from "@/public/svg/wave.svg";
 import { useLoadUserQuery } from "@/redux/features/user/userApi";
 import {
   authSelector,
@@ -16,6 +17,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import LogoutModal from "@/Components/Auth/LogoutModal";
 import Settings from "@/Components/Settings/Page";
+import Image from "next/image";
 
 const Dashboard = (urlParam: any) => {
   const dispatch = useDispatch();
@@ -43,9 +45,12 @@ const Dashboard = (urlParam: any) => {
         <div className="flex justify-between py-5 border-slate-200 bg-white-100">
           <div className="flex items-center">
             <div className="hidden lg:block ml-5">
-              <p className="text-black-200 font-bold text-lg">
-                {"Hello, " + (data?.user.name || "Omoyosola")}
-              </p>
+              <div className=" flex gap-[4px]">
+                <p className="text-black-200 font-bold text-lg">
+                  {"Hello, " + data?.user.name}
+                </p>
+                <Image src={wave} width={20} height={20} alt="" />
+              </div>
               <p className="text-sm text-gray-300">
                 Trade and withdraw funds easily
               </p>

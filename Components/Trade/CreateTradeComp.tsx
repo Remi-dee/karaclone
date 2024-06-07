@@ -23,7 +23,7 @@ const CreateTrade = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [currency, setCurrency] = useState<string>("");
-  const [rate, setrate] = useState<number>(1);
+  const [rate, setrate] = useState<number | null | any>(null);
   const [showTradeDetails, setShowTradeDetails] = useState(false);
   const [createTradeDetails, setcreateTradeDetails] = useState({
     currency: "",
@@ -206,7 +206,7 @@ const CreateTrade = () => {
               >
                 Rate
               </label>
-              <div className=" h-[46px] w-[433px] gap-[273px] items-center p-[15px_16px_15px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-gray-900">
+              <div className=" h-[46px] cursor-not-allowed w-[433px] gap-[273px] items-center p-[15px_16px_15px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-gray-900">
                 <input
                   type="text"
                   onChange={handleChange}
@@ -275,12 +275,22 @@ const CreateTrade = () => {
                   className="w-full text-gray-300 outline-none border-none text-xs p-1"
                   id=""
                 >
-                  <option
-                    value=""
-                    className="text-[400] text-[16px] leading-[24px] w-full"
-                  >
-                    Select payment method
-                  </option>
+                  {[
+                    "Select Payment Method",
+                    "Wallet",
+                    "Direct Deposit",
+                    "Connect Bank App",
+                  ].map((e, i) => {
+                    return (
+                      <option
+                        key={i}
+                        value=""
+                        className="text-[400] text-[16px] leading-[24px] w-full"
+                      >
+                        {e}
+                      </option>
+                    );
+                  })}
                 </select>
               </div>
             </div>
