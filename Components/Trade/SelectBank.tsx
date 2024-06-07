@@ -16,7 +16,7 @@ function SelectBank({ onSelect }: { onSelect: any }) {
     if (selected === null) return toast.warn("Select an option!");
     onSelect(selected);
     if (selected === "itemid") {
-      dispatch(toggleBuyTradeSuccessModal(true));
+      dispatch(toggleBuyTradeSuccessModal(false));
     } else {
       dispatch(toggleBuyTradeSuccessModal(true));
     }

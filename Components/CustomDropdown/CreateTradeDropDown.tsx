@@ -47,7 +47,7 @@ const CreateTradeDropDown: React.FC<DropdownProps> = ({
       >
         {selectedOption ? (
           <>
-            {displayImages && selectedOption.imageUrl && (
+            {displayImages && selectedOption && (
               <Image
                 src={
                   selectedOption === "NGN"
@@ -57,7 +57,7 @@ const CreateTradeDropDown: React.FC<DropdownProps> = ({
                     : GBP
                 }
                 alt={selectedOption}
-                className="w-4 "
+                className="w-4  h-4"
               />
             )}
             <div className="">{selectedOption}</div>

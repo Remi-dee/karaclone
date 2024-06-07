@@ -33,7 +33,9 @@ const Dashboard = (urlParam: any) => {
   return (
     <div className="flex bg-[#F5F1FB] relative  h-[1024px]">
       {/* sidebar */}
+
       <Sidebar link={urlLink} showSideBar={showSidebar} />
+
       <Image
         src={chatIcon}
         alt=""
