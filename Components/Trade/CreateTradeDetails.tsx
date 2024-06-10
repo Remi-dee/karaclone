@@ -1,5 +1,5 @@
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import Image from "next/image";
 import USD from "../../public/Images/USD.png";
 import NGN from "../../public/Images/NGN.png";
@@ -7,6 +7,7 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 import { BiSolidCopy } from "react-icons/bi";
 import { toggleCreateTradeStage } from "@/redux/features/user/userSlice";
 import { useDispatch } from "react-redux";
+import { monoPayment } from "@/app/mono/monoServices";
 const CreateTradeDetails = () => {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -14,9 +15,44 @@ const CreateTradeDetails = () => {
     // router.push("/dashboard/P2P-trade");
     dispatch(toggleCreateTradeStage(2));
   };
+
+  const openMonoWidget = useCallback(async () => {
+    const MonoConnect = (await import("@mono.co/connect.js")).default;
+
+    const monoInstance = new MonoConnect({
+      key: "test_pk_ldvcm2kc4zpbki9mq0xt",
+      onClose: () => console.log("Widget closed"),
+      // onLoad: () => setScriptLoaded(true),
+      onSuccess: ({ code }) => console.log(`Linked successfully: ${code}`),
+    });
+
+    monoInstance.setup();
+    monoInstance.open();
+  }, []);
+
+  const payWithMono = useCallback(async () => {
+    const MonoConnect = (await import("@mono.co/connect.js")).default;
+
+    const monoInstance = new MonoConnect({
+      key: "test_pk_ldvcm2kc4zpbki9mq0xt",
+      scope: "payments",
+      data: {
+        type: "one-time-debit", // recurring-debit or one-time-debit
+        amount: 150000, // amount in kobo
+        description: "Payment for light bill",
+        payment_id: "txreq_HeqMWnpWVvzdpMXiB4I123456",
+      },
+      onSuccess: ({ code }) => console.log(`Linked successfully: ${code}`),
+    });
+
+    monoInstance.setup();
+    monoInstance.open();
+  }, []);
+
   const handleContinue = (e: any) => {
     e.preventDefault();
-    dispatch(toggleCreateTradeStage(4));
+    openMonoWidget();
+    // dispatch(toggleCreateTradeStage(4));
   };
 
   return (
@@ -141,7 +177,7 @@ const CreateTradeDetails = () => {
             </div>
             <button
               onClick={handleContinue}
-              className={`p-2 mt-[16px] text-white-100 bg-primaryBtn w-full rounded-lg `}
+              className="selection:p-2 mt-[16px] text-white-100 bg-primaryBtn w-full rounded-lg "
             >
               Continue
             </button>
