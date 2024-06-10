@@ -1,7 +1,14 @@
-import React, { Suspense } from "react";
+"use client";
+
+import React, { Suspense, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import man from "@/public/loginMan.png";
-import stars from "@/public/Stars.png";
+import stars from "@/public/stars.png";
+import manphone from "@/public/Images/manphone.png";
+import manCall from "@/public/Images/manCall.png";
+import manbluebg from "@/public/Images/manbluebg.png";
+import manscan from "@/public/Images/manscan.png";
+import { title } from "process";
 // export const metadata: Metadata = {
 //   title: "Fx",
 //   description:
@@ -10,50 +17,103 @@ import stars from "@/public/Stars.png";
 //     icon: "",
 //   },
 // };
-
+const slides = [
+  {
+    image: manphone,
+    text: "Effortlessly add funds to your account with our simple and user-friendly top-up feature for convenient wallet top up.",
+    title: "Easy top up ",
+  },
+  {
+    image: man,
+    text: "Instantly buy and sell coins with our peer-to-peer transaction feature. Seamlessly connect with buyers and sellers globally.",
+    title: "Easy Peer-to-Peer Transactions",
+  },
+  {
+    image: manbluebg,
+    title: "Manage Multiple Currencies",
+    text: "Store, send, and receive funds in multiple currencies hassle-free. From USD to EUR, manage it all in one place.",
+  },
+  {
+    image: manscan,
+    text: "Instantly buy and sell coins with our peer-to-peer transaction feature. Seamlessly connect with buyers and sellers globally.",
+    title: "Easy Peer-to-Peer Transactions",
+  },
+];
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const slideRef = useRef();
+
+  const goToNextSlide = () => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setTimeout(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
+      setIsAnimating(false);
+    }, 500);
+  };
+
+  const goToPreviousSlide = () => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setTimeout(() => {
+      setCurrentIndex(
+        (prevIndex) => (prevIndex - 1 + slides.length) % slides.length
+      );
+      setIsAnimating(false);
+    }, 500);
+  };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      goToNextSlide();
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
   return (
     <main className=" w-full  relative  lg:w-[] bg-[#FBFBFB] _lg:h-screen h-[960px] flex  jusc items-center ">
       <div className="  h-max w-full relative ">
         <div className=" flex justify-center  max-h-full overflow-y-hidden  lg:flex-row flex-col ">
-          <div className="  lg:flex-1 h-full rounded-[20px]   hidden px-[2rem] lg:flex justify-center items-center  content-center ">
-            <div className=" overflow-hidden relative  rounded-[20px] flex items-center w-[614px]   h-[912px]">
-              <Image
-                src={man}
-                alt=""
-                className=" object-cover   h-full w-full"
-                // height={500}
-                // width={500}
-              />
-
-              <div className=" text_for_login absolute text-[#FFFFFF]">
-                <div className=" px-[1rem]  w-full">
-                  <div className="   flex w-full   justify-between items-center object-center place-self-center place-items-center justify-items-center">
-                    <div className=" inline-flex">
-                      <p className=" font-[600] leading-[30px] text-3xl">
-                        Manage Multiple Currencies
+          <div className="lg:flex-1 relative h-full rounded-[20px] hidden px-[2rem] lg:flex justify-center items-center content-center">
+            <div className="overflow-hidden relative rounded-[20px] flex items-center w-[614px] h-[912px]">
+              <div
+                className="flex transition-transform duration-500 ease-in-out"
+                style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+              >
+                {slides.map((slide, index) => (
+                  <div key={index} className="min-w-full min-h-full h-full">
+                    <Image
+                      src={slide.image}
+                      alt=""
+                      className="object-cover h-full w-full"
+                    />
+                  </div>
+                ))}
+              </div>
+              <div className="text_for_login  bottom-[1rem] mb-[3rem] absolute text-[#FFFFFF]">
+                <div className="px-[1rem] w-full">
+                  <div className="flex w-full justify-between items-center">
+                    <div className="inline-flex">
+                      <p className="font-[600] leading-[30px] text-3xl">
+                        {slides[currentIndex].title}
                       </p>
                     </div>
-
-                    <div className="  inline-flex">
+                    <div className="inline-flex">
                       <Image
-                        className=" w-[9rem] inline-flex h-[1.5rem]"
+                        className="w-[9rem] h-[1.5rem]"
                         src={stars}
-                        alt="***"
-                      ></Image>
+                        alt="stars"
+                      />
                     </div>
                   </div>
-                  <div className="  text-base space-[4px] mt-[1rem]">
-                    Store, send, and receive funds in multiple currencies
-                    <br />
-                    hassle-free. From USD to EUR, manage it all in one place.
+                  <div className="text-base space-[4px] mt-[1rem]">
+                    {slides[currentIndex].text}
                   </div>
                 </div>
-                <div className="flex justify-center items-center"></div>
               </div>
             </div>
           </div>

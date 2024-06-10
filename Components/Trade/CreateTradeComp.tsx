@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import CustomDropdown from "@/Components/CustomDropdown/CustomDropdown";
@@ -9,32 +9,120 @@ import { currencyData } from "@/Components/Transactions/currencyData";
 import {
   toggleCreateTrade,
   toggleCreateTradeStage,
+  addCreatedTrade,
 } from "@/redux/features/user/userSlice";
 import { useDispatch } from "react-redux";
+import {
+  useCreateTradeMutation,
+  useCurrencyConverterQuery,
+  useGetAllCurrencyPairsQuery,
+} from "@/redux/features/user/userApi";
+import toast from "react-hot-toast";
+import CreateTradeDropDown from "../CustomDropdown/CreateTradeDropDown";
 const CreateTrade = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [currency, setCurrency] = useState<string>("");
-
+  const [rate, setrate] = useState<number | null | any>(null);
   const [showTradeDetails, setShowTradeDetails] = useState(false);
+  const [createTradeDetails, setcreateTradeDetails] = useState({
+    currency: "",
+    exit_currency: "",
+    rate: 0,
+    amount: "",
+    minimumBid: "",
+    bank_name: "",
+    account_number: "",
+    beneficiary_name: "",
+    beneficiary_account: "",
+  });
+  const [converstionDataSource, setConverstionDataSource] = useState<string[]>(
+    []
+  );
+  const [converstionDataExit, setConverstionDataExit] = useState<string[]>([]);
+  const [createTrade, { isLoading, error, data, isSuccess }] =
+    useCreateTradeMutation();
+  const HandleTradeDetails = (e: any) => {
+    e.preventDefault();
 
-  const handleTradeDetails = () => {
-    dispatch(toggleCreateTradeStage(3));
+    createTrade(createTradeDetails);
+    // console.log(data);
+    console.log(error);
     // setShowTradeDetails(true);
   };
 
-  if (showTradeDetails) {
-    return <CreateTradeDetails />;
-  }
+  useEffect(() => {
+    // dispatch(toggleCreateTradeStage(3));
+    if (isSuccess) {
+      toast.success("Trade created successfully");
+      dispatch(toggleCreateTradeStage(3));
+      dispatch(addCreatedTrade(data?.trade));
+    }
+    if (error) {
+      toast.error("An error occurred!");
+    }
+  }, [isSuccess, error]);
 
   const handleCurrency = (value: string) => {
+    // console.log(value);
+    setcreateTradeDetails({ ...createTradeDetails, currency: value });
     setCurrency(value);
+  };
+  const handleExitCurrency = (value: string) => {
+    setcreateTradeDetails({ ...createTradeDetails, exit_currency: value });
+    setCurrency(value);
+  };
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement | any>): void => {
+    const { name, value } = event.target;
+
+    setcreateTradeDetails((prevState) => ({
+      ...prevState,
+      [name]: name === "rate" ? Number(value) : value,
+    }));
+  };
+  const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>): void => {
+    const { name, value } = event.target;
+    // console.log(value);
+    setcreateTradeDetails((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
   const handleBack = () => {
     dispatch(toggleCreateTradeStage(1));
 
     // router.push("/dashboard/P2P-trade");
   };
+
+  //get all possible conversions
+
+  const possibleConverstion = useGetAllCurrencyPairsQuery("");
+  // console.log(possibleConverstion);
+  //currency converter
+  useEffect(() => {
+    possibleConverstion?.data?.results?.currencyPairs?.map((e: any) => {
+      setConverstionDataExit((prevItems) => [...prevItems, e?.base_currency]);
+
+      setConverstionDataSource((prevItems) => [
+        ...prevItems,
+        e?.quote_currency,
+      ]);
+    });
+  }, [possibleConverstion?.isSuccess]);
+  const dataForCalc = useCurrencyConverterQuery({
+    amount: createTradeDetails?.amount,
+    sourceCurrency: createTradeDetails?.currency,
+    targetCurrency: createTradeDetails?.exit_currency,
+  });
+
+  // console.log(dataForCalc);
+
+  useEffect(() => {
+    setrate(dataForCalc?.data);
+  }, [dataForCalc?.isSuccess]);
+
+  //currency converter
 
   return (
     <div className="m-0 p-0 box-border  h-[870px] invisible-scrollbar overflow-auto ">
@@ -64,7 +152,7 @@ const CreateTrade = () => {
                 Currency
               </label>
               <div className=" h-[46px]  items-center  flex   w-[433px] mt-[8px] p-[15px_16px_15px_16px] gap-[10px]  rounded-[8px]  bg-[#FBFBFB]">
-                <div>
+                {/* <div>
                   <Image
                     src="/svg/nigeriaflag.svg"
                     alt=""
@@ -78,15 +166,15 @@ const CreateTrade = () => {
                   <h2 className=" leading-[14.4px] text-[12px]  tracking-[-2%]  font-bold ">
                     NGN
                   </h2>
-                </div>
+                </div> */}
 
-                {/* <CustomDropdown
+                <CreateTradeDropDown
                   onSelect={handleCurrency}
                   className=" w-full flex justify-between"
                   placeholder="select currency"
-                  options={currencyData}
+                  options={converstionDataExit}
                   displayImages
-                /> */}
+                />
               </div>
             </div>
 
@@ -98,11 +186,11 @@ const CreateTrade = () => {
                 Select Exit Currency
               </label>
               <div className=" h-[46px] w-full rounded-md mt-[8px] bg-gray-900">
-                <CustomDropdown
-                  onSelect={handleCurrency}
+                <CreateTradeDropDown
+                  onSelect={handleExitCurrency}
                   className="w-full flex justify-between"
                   placeholder="select currency"
-                  options={currencyData}
+                  options={converstionDataSource}
                   displayImages
                 />
               </div>
@@ -118,13 +206,17 @@ const CreateTrade = () => {
               >
                 Rate
               </label>
-              <div className=" h-[46px] w-[433px] gap-[273px] items-center p-[15px_16px_15px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-gray-900">
+              <div className=" h-[46px] cursor-not-allowed w-[433px] gap-[273px] items-center p-[15px_16px_15px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-gray-900">
                 <input
                   type="text"
-                  className="w-[80%] outline-none bg-transparent placeholder:text-gray-300"
+                  onChange={handleChange}
+                  name="rate"
+                  disabled
+                  value={rate}
+                  className="w-[80%]  outline-none bg-transparent placeholder:text-gray-300"
                 />
                 <div className="w-[20%] tracking-[-2%] text-left bg-transparent text-sm">
-                  {currency || "NGN"}
+                  {currency}
                 </div>
               </div>
             </div>
@@ -138,10 +230,12 @@ const CreateTrade = () => {
               <div className="h-[46px] w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white] ">
                 <input
                   type="text"
+                  onChange={handleChange}
+                  name="amount"
                   className="w-[80%] outline-none bg-transparent placeholder:text-gray-300"
                 />
                 <div className="w-[20%] text-right bg-transparent text-gray-300 text-sm">
-                  {currency || "NGN"}
+                  {currency}
                 </div>
               </div>
             </div>
@@ -155,10 +249,12 @@ const CreateTrade = () => {
               <div className="h-[46px] w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
                 <input
                   type="text"
+                  name="minimumBid"
+                  onChange={handleChange}
                   className="w-[80%] outline-none bg-transparent placeholder:text-gray-300"
                 />
                 <div className="w-[20%] text-right bg-transparent text-gray-300 text-sm">
-                  {currency || "NGN"}
+                  {currency}
                 </div>
               </div>
             </div>
@@ -179,16 +275,26 @@ const CreateTrade = () => {
                   className="w-full text-gray-300 outline-none border-none text-xs p-1"
                   id=""
                 >
-                  <option
-                    value=""
-                    className="text-[400] text-[16px] leading-[24px] w-full"
-                  >
-                    Select payment method
-                  </option>
+                  {[
+                    "Select Payment Method",
+                    "Wallet",
+                    "Direct Deposit",
+                    "Connect Bank App",
+                  ].map((e, i) => {
+                    return (
+                      <option
+                        key={i}
+                        value=""
+                        className="text-[400] text-[16px] leading-[24px] w-full"
+                      >
+                        {e}
+                      </option>
+                    );
+                  })}
                 </select>
               </div>
             </div>
-            <div>
+            {/* <div>
               <label
                 htmlFor=""
                 className=" text-[16px]  leading-[24px]  tracking-[-2%]  text-[#000000] font-semibold"
@@ -209,7 +315,7 @@ const CreateTrade = () => {
                   </option>
                 </select>
               </div>
-            </div>
+            </div> */}
 
             <hr className="mt-2 border-gray-900 border" />
 
@@ -222,12 +328,16 @@ const CreateTrade = () => {
               </label>
               <div className="h-[46px] w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
                 <select
-                  name=""
-                  className="w-full text-gray-300 p-1 text-xs"
+                  name="bank_name"
+                  onChange={handleSelectChange}
+                  className="w-full outline-none border-none text-gray-300 p-1 text-xs"
                   id=""
                 >
-                  <option value="" className="text-300 w-full">
-                    Select Bank
+                  <option value=" Zenith Bank" className="text-300 w-full">
+                    Zenith Bank
+                  </option>
+                  <option value="Wema Bank" className="text-300 w-full">
+                    Wema Bank
                   </option>
                 </select>
               </div>
@@ -241,6 +351,8 @@ const CreateTrade = () => {
               </label>
               <div className="h-[46px] w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
                 <input
+                  name="account_number"
+                  onChange={handleChange}
                   type="text"
                   className="outline-none placeholder:gray-200 placeholder:text-xs"
                   placeholder="Enter Account Number"
@@ -257,6 +369,8 @@ const CreateTrade = () => {
               <div className="h-[46px] w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
                 <input
                   type="text"
+                  onChange={handleChange}
+                  name="beneficiary_name"
                   className="outline-none placeholder:gray-200 placeholder:text-xs"
                   placeholder="Enter Account name"
                 />
@@ -271,10 +385,11 @@ const CreateTrade = () => {
                 htmlFor=""
                 className="text-[16px]  font-semibold text-[#1E1E1E] tracking-[-2%]  leading-[24%"
               >
-                Trade Reason
+                Terms of Trade
               </label>
               <textarea
-                name=""
+                name="beneficiary_account"
+                onChange={handleChange}
                 id=""
                 cols={10}
                 placeholder="You wish to tell us about why you create this trade..."
@@ -283,7 +398,8 @@ const CreateTrade = () => {
               ></textarea>
             </div>
             <button
-              onClick={handleTradeDetails}
+              onClick={HandleTradeDetails}
+              disabled={isLoading}
               className="p-[12px]  rounded-[8px] text-white-100 bg-[#7F56D9]  w-[433px] h-[44px]["
             >
               Create Ad

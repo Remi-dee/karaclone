@@ -10,15 +10,15 @@ import {
   increaseRegistrationStage,
 } from "@/redux/features/auth/authSlice";
 
-type Props = {
-  basicDetails: any;
-  setBasicDetails: (basicDetails: any) => void;
-  active: number;
-  setActive: (active: any) => void;
-  handleBasicDetailsSubmit: any;
-};
+// type Props = {
+//   basicDetails: any;
+//   setBasicDetails: (basicDetails: any) => void;
+//   active: number;
+//   setActive: (active: any) => void;
+//   handleBasicDetailsSubmit: any;
+// };
 
-const BasicUserDetails: FC<Props> = ({}) => {
+const BasicUserDetails: FC<any> = () => {
   const [inputValuesForBasic, setinputValuesForBasic] = useState({
     name: "",
     business_address: "",
@@ -27,10 +27,10 @@ const BasicUserDetails: FC<Props> = ({}) => {
     phone: "",
     role: "user",
   });
-  const globalState = useSelector((state) => state.auth);
+  const globalState = useSelector((state: any) => state.auth);
 
   // console.log(accountType);
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: any) => {
     const { name, value } = e.target;
     console.log(name, value);
     setinputValuesForBasic({

@@ -9,20 +9,9 @@ import {
 } from "@/redux/features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-type Props = {
-  businessDetails: any;
-  setBusinessDetails: (businessDetails: any) => void;
-  active: number;
-  setActive: (active: any) => void;
-  handleBusinessDetailsSubmit: any;
-};
-
-const BusinessDetails: FC<Props> = ({
-  businessDetails,
-  setBusinessDetails,
-}) => {
+const BusinessDetails: FC<any> = () => {
   const dispatch = useDispatch();
-  const globalState = useSelector((state) => state.auth);
+  const globalState = useSelector((state: any) => state.auth);
 
   const [inputValuesForBasic, setinputValuesForBasic] = useState({
     business_name: "",
@@ -30,7 +19,7 @@ const BusinessDetails: FC<Props> = ({
     business_email: "",
     business_line: "",
   });
-  const handleInputChange = (e : any) => {
+  const handleInputChange = (e: any) => {
     const { name, value } = e.target;
     console.log(name, value);
     setinputValuesForBasic({

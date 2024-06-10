@@ -12,11 +12,8 @@ import { ILoginInput } from "../../interfaces/auth";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import man from "@/public/loginMan.png";
-import stars from "@/public/Stars.png";
-import {
-  useLoginUserMutation,
-  useSignupUserMutation,
-} from "@/redux/features/api/apiSlice";
+import stars from "@/public/stars.png";
+
 const schema = Yup.object().shape({
   email: Yup.string()
     .email("Invalid email!")

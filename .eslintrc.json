@@ -38,6 +38,7 @@
       }
     ],
     "new-cap": "off",
+    // "import/no-unresolved": "error", 
     "camelcase": "off",
     "require-jsdoc": 0,
     "valid-jsdoc": 0,

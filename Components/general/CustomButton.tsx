@@ -1,6 +1,6 @@
 import React from "react";
-import { CustomButtonProps } from "../../interfaces/general";
 
+import { CustomButtonProps } from "@/app/interfaces/general";
 const CustomButton: React.FC<CustomButtonProps> = ({
   label,
   action,

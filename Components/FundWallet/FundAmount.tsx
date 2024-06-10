@@ -9,12 +9,12 @@ import {
   toggleWalletDispaly,
 } from "@/redux/features/user/userSlice";
 
-type Props = {
-  active: number;
-  setActive: (active: any) => void;
-};
+// type Props = {
+//   active: number;
+//   setActive: (active: any) => void;
+// };
 
-const FundAmount: FC<Props> = ({ active, setActive }) => {
+const FundAmount: FC<any> = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const handleSubmit = () => {

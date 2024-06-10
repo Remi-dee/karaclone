@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 
 const CreateKYC = () => {
   const [active, setActive] = useState(1);
-  const { kycLevel } = useSelector((state) => state?.kyc);
+  const { kycLevel } = useSelector((state: any) => state?.kyc);
   const [kycDetails, setKycDetails] = useState({
     country: "",
     id_document_type: "",

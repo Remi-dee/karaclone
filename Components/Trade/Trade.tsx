@@ -10,20 +10,17 @@ import CreateTrade from "./CreateTradeComp";
 import { useDispatch, useSelector } from "react-redux";
 import CreateTradeDetails from "./CreateTradeDetails";
 import {
+  toggleBuyTradeDisplay,
   toggleCreateTrade,
   toggleCreateTradeStage,
 } from "@/redux/features/user/userSlice";
 
-import SelectBank from "./SelectBank";
-
-import TradeModal from "../CustomModal/TradeModal";
-import BeneficaryDetails from "./BeneficaryDetails";
 import BuyTradePage from "./BuyTradePage";
 import CreateTradeSuccess from "./CreateTradeSuccess";
-import CustomModal from "../CustomModal/CustomModal";
+
 const Trade = () => {
-  const globalState = useSelector((state) => state?.user);
-  console.log(globalState);
+  const globalState = useSelector((state: any) => state?.user);
+  // console.log(globalState);
   const [showSelectBank, setshowSelectBank] = useState(1);
   const { createTradeState, isCreateTrade, isBuyTrade } = globalState;
   const [activeButton, setActiveButton] = useState("Buy");
@@ -38,6 +35,7 @@ const Trade = () => {
   const dispatch = useDispatch();
   const handleNewTrade = () => {
     dispatch(toggleCreateTrade(true));
+    dispatch(toggleBuyTradeDisplay(false));
     dispatch(toggleCreateTradeStage(2));
   };
   return (
@@ -66,16 +64,6 @@ const Trade = () => {
               </div>
             </div>
           </div>
-          {globalState?.isTradeModal === true ? (
-            //this is to control the modals on this page
-            <TradeModal>
-              {showSelectBank === 1 ? (
-                <SelectBank></SelectBank>
-              ) : (
-                <BeneficaryDetails />
-              )}
-            </TradeModal>
-          ) : null}
         </div>
       ) : //this section of the code renders either buy trade or sell trade components
       isBuyTrade === true ? (
@@ -90,7 +78,7 @@ const Trade = () => {
 export default Trade;
 
 function DisplayAltCreateTrade() {
-  const globalState = useSelector((state) => state?.user);
+  const globalState = useSelector((state: any) => state?.user);
 
   const { createTradeState } = globalState;
   return (

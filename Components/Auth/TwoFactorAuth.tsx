@@ -8,21 +8,30 @@ const TwoFactorAuth = () => {
   const [option, setOption] = useState<string | null>(null);
   const [showComponent, setShowComponent] = useState(true);
   const [qrCodeData, setQrCodeData] = useState<string | null>(null);
-
+  const [useforisEmailVerify, setuseforisEmailVerify] = useState(false);
   // Enable 2FA query
   const { data } = useEnableTwofaQuery({
     enabled: option === "Google Authenticator",
   });
 
+  // console.log(data);
   // Handle option change
   const handleOptionChange = (option: string) => {
+    // console.log(option);
     setOption(option);
   };
 
   // Handle QR code authentication
   const handleQrAuth = () => {
     setShowComponent(false);
+
+    if (option === "Email Authenticator") {
+      setQrCodeData(data.qrCode);
+      return setuseforisEmailVerify(false);
+    }
+
     if (option === "Google Authenticator" && data && data.qrCode) {
+      setuseforisEmailVerify(true);
       setQrCodeData(data.qrCode);
     }
   };
@@ -101,9 +110,9 @@ const TwoFactorAuth = () => {
               </div>
 
               <div
-                onClick={() => handleOptionChange("Google Authenticator")}
+                onClick={() => handleOptionChange("Email Authenticator")}
                 className={` h-[75px] w-full cursor cursor-pointer flex justify-start  items-center gap-2 p-2 border rounded-md ${
-                  option === "Google Authenticator"
+                  option === "Email Authenticator"
                     ? "border-black-200"
                     : "border-[#DCDCDC]"
                 }`}
@@ -112,8 +121,8 @@ const TwoFactorAuth = () => {
                   <input
                     type="radio"
                     name="auth"
-                    checked={option === "Google Authenticator"}
-                    onChange={() => handleOptionChange("Google Authenticator")}
+                    checked={option === "Email Authenticator"}
+                    onChange={() => handleOptionChange("Email Authenticator")}
                     className="w-[19px] h-[19px] checked:bg-primaryBtn"
                   />
                 </div>
@@ -141,7 +150,9 @@ const TwoFactorAuth = () => {
           </div>
         </div>
       ) : (
-        qrCodeData && <QrCode qrCode={qrCodeData} />
+        qrCodeData && (
+          <QrCode isEmailVerify={useforisEmailVerify} qrCode={qrCodeData} />
+        )
       )}
     </>
   );

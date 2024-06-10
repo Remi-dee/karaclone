@@ -38,7 +38,9 @@ const Transaction = () => {
     <div className=" m-0 shadow-lg box-border rounded-[8px] h-[778px] bg-white-100">
       <div className="w-[100%]   rounded-md">
         <div className=" p-[1rem] h-full">
-          <h2 className="py-[24px] text-[20px] leading-[24px] tracking-[-2%] font-bold">Transactions</h2>
+          <h2 className="py-[24px] text-[20px] leading-[24px] tracking-[-2%] font-bold">
+            Transactions
+          </h2>
           <div className="  w-full pb-6 flex flex-wrap justify-start gap-[18px] items-center">
             <div className="border border-gray-800 p-2 rounded-lg">
               <CustomDropdown

@@ -1,5 +1,5 @@
 "use client";
-import { ReactElement, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { BiSolidCopy } from "react-icons/bi";
@@ -9,10 +9,37 @@ import { BiSolidBank } from "react-icons/bi";
 import NGN from "@/public/Images/NGN.png";
 import TradeSuccess from "@/app/(trade)/buy-trade/TradeSuccess";
 import AddRecipient from "@/app/(trade)/buy-trade/AddRecipient";
-import { useDispatch } from "react-redux";
-import { toggleBuyTradeDisplay } from "@/redux/features/user/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  toggleBuyTradeDisplay,
+  toggleBuyTradeSuccessModal,
+} from "@/redux/features/user/userSlice";
+import SelectBank from "./SelectBank";
+import TradeModal from "../CustomModal/TradeModal";
+import CreateTradeSuccess from "./CreateTradeSuccess";
+import BeneficaryDetails from "./BeneficaryDetails";
+import TradeSuccessModal from "../CustomModal/TradeSuccessModal";
+import TradeTransSuccesss from "./TradeTransSuccess";
+
+function formatReadableDate(isoDateString: string): string {
+  const date = new Date(isoDateString);
+
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const day = date.getDate().toString().padStart(2, "0");
+  const hours = date.getHours().toString().padStart(2, "0");
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+  const seconds = date.getSeconds().toString().padStart(2, "0");
+
+  const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+
+  return formattedDate;
+}
 
 const BuyTrade = () => {
+  const globalState = useSelector((state: any) => state.user);
+  const { selectedTrade } = globalState;
+  console.log(selectedTrade);
   const dispatch = useDispatch();
   const handleBack = () => {
     dispatch(toggleBuyTradeDisplay(1));
@@ -26,22 +53,14 @@ const BuyTrade = () => {
   const handleOptionChange = (selectedOption: string) => {
     setOption(selectedOption);
   };
+  const [selectedItems, setSelectedItems] = useState("");
 
+  const handleSelect = (item: any) => {
+    console.log(item);
+    setSelectedItems(item);
+  };
   const handleContinue = () => {
-    setSelectRecipient(false); // Hide the recipient selection modal
-    // Render the component based on the selected option
-    switch (option) {
-      case "option 1":
-      case "option 2":
-        setSelectedComponent(<TradeSuccess />);
-        break;
-      case "add recipient":
-        setSelectedComponent(<AddRecipient />);
-        break;
-      default:
-        setSelectedComponent(null);
-        break;
-    }
+    setSelectRecipient(true); // Hide the recipient selection modal
   };
 
   return (
@@ -83,10 +102,10 @@ const BuyTrade = () => {
               </div>
 
               <div className="flex  justify-between items-center text-sm">
-                <p className="text-gray-300">Transaction ID</p>
+                <p className="text-gray-300">Trade ID</p>
                 <div className="flex justify-start items-center  gap-1  ">
                   <span className="leading-[24px] text-[#1E1E1E] tracking-[-2%] font-[500] text-[14px]">
-                    01234567893r3d-fdf4rwd
+                    {selectedTrade?.tradeId}
                   </span>
                   <BiSolidCopy className="text-primaryBtn cursor-pointer" />
                 </div>
@@ -95,7 +114,8 @@ const BuyTrade = () => {
               <div className="flex justify-between items-center my-2 text-sm">
                 <p className="text-gray-300">Date & Time</p>
                 <p className="leading-[24px] text-[#1E1E1E] tracking-[-2%] font-[500] text-[14px]">
-                  12/01/2024 <span> | 2.00PM</span>
+                  {/* 12/01/2024 <span> | 2.00PM</span> */}
+                  {formatReadableDate(selectedTrade?.createdAt)}
                 </p>
               </div>
 
@@ -105,7 +125,7 @@ const BuyTrade = () => {
                   <Image src={USD} alt="US logo" width={15} height={15} />
 
                   <p className="leading-[24px] text-[#1E1E1E] tracking-[-2%] font-[500] text-[14px]">
-                    Buying USD
+                    Buying {selectedTrade?.currency}
                   </p>
                 </div>
               </div>
@@ -113,14 +133,15 @@ const BuyTrade = () => {
               <div className="flex justify-between items-center my-2 text-sm ">
                 <p className="text-gray-300">Rate</p>
                 <p className="leading-[24px] text-[#1E1E1E] tracking-[-2%] font-[500] text-[14px]">
-                  1400NGN <span> = 1USD</span>
+                  {/* 1400NGN <span> = 1USD</span> */}
+                  {selectedTrade?.rate}
                 </p>
               </div>
 
               <div className="flex justify-between items-center mt-[8px]  text-sm">
-                <p className="text-gray-300">Purchase</p>
+                <p className="text-gray-300">Purchase </p>
                 <p className="leading-[24px] text-[#1E1E1E] tracking-[-2%] font-[500] text-[14px]">
-                  150USD
+                  {selectedTrade?.amount + " " + selectedTrade?.currency}
                 </p>
               </div>
 
@@ -151,8 +172,10 @@ const BuyTrade = () => {
               </div>
 
               <button
-                onClick={() => setSelectRecipient(true)}
-                className={`p-2   text-white-100 bg-primaryBtn w-full rounded-lg `}
+                onClick={handleContinue}
+                className={
+                  "p-2   text-white-100 bg-primaryBtn w-full rounded-lg"
+                }
               >
                 Continue
               </button>
@@ -167,91 +190,20 @@ const BuyTrade = () => {
           </p>
         </div>
       </div>
-      {selectRecipient && (
-        <div className="fixed top-0 left-0 w-screen bg-opacity-80 h-screen bg-black-200">
-          <div className="w-[400px]  mx-auto rounded-md bg-white-100 mt-20 shadow-lg">
-            <div className="w-[380px] flex flex-col justify-start items-center mx-auto">
-              <div className="w-[30px] h-[30px] flex justify-center items-center border border-gray-700 mt-4 rounded-sm shadow-lg">
-                <BiSolidBank className="text-2xl" />
-              </div>
-              <h3 className="text-xl font-semibold py-2">Select Beneficiary</h3>
-              <p className="text-gray-300 text-xs text-center">
-                Please select a beneficiary from the list of existing ones, or
-                alternatively, you can choose to add a new beneficiary.
-              </p>
-              <div
-                onClick={() => handleOptionChange("option 1")}
-                className={`w-full cursor-pointer flex justify-between items-center rounded-md my-4 border  p-1 ${
-                  option === "option 1"
-                    ? "border-primaryBtn"
-                    : "border-gray-300"
-                }`}
-              >
-                <div className="flex justify-start items-start gap-2">
-                  <input
-                    type="radio"
-                    checked={option === "option 1"}
-                    onChange={() => handleOptionChange("option 1")}
-                    className="w-[20px]"
-                  />
-
-                  <div>
-                    <p className="text-xs font-semibold">Ogunsola Omorinsola</p>
-                    <span className="text-xs text-gray-300">8299011604</span>
-                  </div>
-                </div>
-                <Image src={USD} alt="" width={20} height={20} />
-              </div>
-              <div
-                onClick={() => handleOptionChange("option 2")}
-                className={`w-full cursor-pointer flex justify-between items-center rounded-md my-4 border  p-1 ${
-                  option === "option 2"
-                    ? "border-primaryBtn"
-                    : "border-gray-300"
-                }`}
-              >
-                <div className="flex justify-start items-start gap-2">
-                  <input
-                    type="radio"
-                    checked={option === "option 2"}
-                    onChange={() => handleOptionChange("option 2")}
-                    className="w-[20px]"
-                  />
-
-                  <div>
-                    <p className="text-xs font-semibold">Afuwape Abiodun</p>
-                    <span className="text-xs text-gray-300">8299011604</span>
-                  </div>
-                </div>
-                <Image src={NGN} alt="" width={20} height={20} />
-              </div>
-              <div
-                onClick={() => handleOptionChange("add recipient")}
-                className="w-full cursor-pointer flex justify-start items-center gap-6 rounded-md my-4 border border-gray-300 p-3"
-              >
-                <input
-                  type="radio"
-                  checked={option === "add recipient"}
-                  onChange={() => handleOptionChange("add recipient")}
-                />
-                <p className="text-primaryBtn text-xs font-semibold">
-                  New Recipient
-                </p>
-              </div>
-              <button
-                onClick={handleContinue}
-                disabled={!option}
-                className={`p-2  text-white-100 bg-primaryBtn w-full rounded-lg ${
-                  !option && "opacity-50 cursor-not-allowed"
-                }`}
-              >
-                Continue
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-      {selectedComponent}
+      {selectRecipient ? (
+        <TradeModal>
+          <SelectBank onSelect={handleSelect} />
+        </TradeModal>
+      ) : selectRecipient && selectedItems === "itemid" ? (
+        <TradeModal>
+          <BeneficaryDetails onSelect={handleSelect} />
+        </TradeModal>
+      ) : selectRecipient ? (
+        <TradeSuccessModal>
+          <TradeTransSuccesss />
+        </TradeSuccessModal>
+      ) : null}
+      {/* {selectedComponent} */}
     </div>
   );
 };

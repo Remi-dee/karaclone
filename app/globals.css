@@ -175,7 +175,14 @@ body {
 }
 
 
+.border-purple-500 {
+  border-color: #7A28CB; /* or any other purple shade you prefer */
+}
 
+/* Add this to make the checkbox purple */
+input[type="radio"]:checked {
+  accent-color: #7A28CB; /* or any other purple shade you prefer */
+}
 
 
 .custom-checkbox input[type="checkbox"] {

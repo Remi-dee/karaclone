@@ -42,11 +42,12 @@ function Notifications() {
 
             <div className=" flex flex-col gap-[8px]  items-start justify-start h-full  ">
               <h2 className=" text-[14px] tracking-[-2%]  leading-[20px]  text-[#1E1E1E] font-semibold ">
-              Transaction Alert
+                Transaction Alert
               </h2>
 
               <p className="  text-[#75788B] text-[12px] leading-[14.4px] tracking-[-2%]  ">
-              You'll receive a notification each time you complete a transaction.
+                You'll receive a notification each time you complete a
+                transaction.
               </p>
             </div>
           </div>
@@ -59,11 +60,12 @@ function Notifications() {
 
             <div className=" flex flex-col gap-[8px]  items-start justify-start h-full  ">
               <h2 className=" text-[14px] tracking-[-2%]  leading-[20px]  text-[#1E1E1E] font-semibold ">
-              Newsletter
+                Newsletter
               </h2>
 
               <p className="  text-[#75788B] text-[12px] leading-[14.4px] tracking-[-2%]  ">
-              Stay up-to-date on all our newsletters to receive notifications regarding news updates and exchange rates.
+                Stay up-to-date on all our newsletters to receive notifications
+                regarding news updates and exchange rates.
               </p>
             </div>
           </div>

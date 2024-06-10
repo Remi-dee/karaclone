@@ -21,7 +21,7 @@ export const kycSlice = createSlice({
     toggleStartKybModalSuccess: (state: KYCState, { payload }: PayloadType) => {
       state.startKybModalOpen = payload.data as boolean;
     },
-    toggleKycBegin: (state: KYCState, { payload }: PayloadType) => {
+    toggleKycBegin: (state: KYCState) => {
       state.kycBegin = true;
     },
     toggleKycOff: (state: KYCState) => {

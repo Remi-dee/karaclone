@@ -4,9 +4,7 @@ import FundAmount from "@/Components/FundWallet/FundAmount";
 import FundMethod from "@/Components/FundWallet/FundMethod";
 import FundSuccess from "@/Components/FundWallet/FundSuccess";
 
-type Props = {};
-
-const page = (props: Props) => {
+const Page = (props: any) => {
   const [active, setActive] = useState(1);
   return (
     <div className="w-full bg-purple-50  min-h-screen overflow-hidden">
@@ -19,4 +17,4 @@ const page = (props: Props) => {
   );
 };
 
-export default page;
+export default Page;

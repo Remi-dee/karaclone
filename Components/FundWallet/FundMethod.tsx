@@ -5,13 +5,14 @@ import { FaCreditCard, FaBuilding } from "react-icons/fa";
 import BankTransfer from "./BankTransfer";
 import { increaseFundWallet } from "@/redux/features/user/userSlice";
 import { useDispatch } from "react-redux";
+import DirectDebit from "./DirectDebit";
 
-type Props = {
-  active: number;
-  setActive: (active: any) => void;
-};
+// type Props = {
+//   active: number;
+//   setActive: (active: any) => void;
+// };
 
-const FundMethod: FC<Props> = ({ active, setActive }) => {
+const FundMethod: FC<any> = ({ active, setActive }) => {
   const [showComponent, setShowComponent] = useState(true);
   const [option, setOption] = useState<string | null>(null);
   const [selected, setSelected] = useState<string | null>(null);
@@ -68,16 +69,16 @@ const FundMethod: FC<Props> = ({ active, setActive }) => {
                 Select how you want to fund your account
               </div>
             </div>
-            <div className="w-[40%] rounded-lg bg-white-100 shadow-lg overflow-hidden flex flex-col items-center justify-start py-8 px-10 box-border max-w-full text-left text-sm text-neutral-color-500 ">
+            <div className="w-[550px] rounded-lg bg-white-100 shadow-lg overflow-hidden flex flex-col items-center justify-start py-8 px-10 box-border max-w-full text-left text-sm text-neutral-color-500 ">
               <div
                 onClick={() => handleOptionChange("Credit Card")}
-                className={`w-full cursor cursor-pointer flex justify-start items-center mt-6 mb-4 gap-2 p-2 border rounded-md ${
+                className={`w-full h-[48px] cursor cursor-pointer flex justify-start items-center mt-6 mb-4 gap-2 p-2 border rounded-md ${
                   option === "Credit Card"
-                    ? "border-black-200"
-                    : "border-gray-200"
+                    ? "border-black-200 bg-[#F5F1FF]"
+                    : "border-gray-200 bg-white-100   "
                 }`}
               >
-                <div className="flex flex-grow justify-between">
+                <div className="flex  flex-grow justify-between">
                   <div className="flex flex-grow space-x-4">
                     <FaCreditCard className="mt-1" />
                     <h4 className="text-black-200 font-semibold text-sm">
@@ -95,10 +96,10 @@ const FundMethod: FC<Props> = ({ active, setActive }) => {
 
               <div
                 onClick={() => handleOptionChange("Bank Transfer")}
-                className={`w-full cursor cursor-pointer flex justify-start items-center mt-6 mb-4 gap-2 p-2 border rounded-md ${
+                className={`w-full h-[48px] cursor cursor-pointer flex justify-start items-center mt-6 mb-4 gap-2 p-2 border rounded-md ${
                   option === "Bank Transfer"
-                    ? "border-black-200"
-                    : "border-gray-200"
+                    ? "border-black-200 bg-[#F5F1FF]"
+                    : "border-gray-200 bg-white-100   "
                 }`}
               >
                 <div className="flex flex-grow justify-between">
@@ -119,15 +120,17 @@ const FundMethod: FC<Props> = ({ active, setActive }) => {
 
               <button
                 onClick={handleSelct}
-                className="p-2 my-2 text-[#fff] bg-primaryBtn w-full rounded-lg"
+                className="p-2 h-[44px] mt-[24px] text-[#fff] bg-primaryBtn w-full rounded-lg"
               >
                 Continue
               </button>
             </div>
           </div>
         </div>
+      ) : selected !== "Bank Transfer" ? (
+        <DirectDebit />
       ) : (
-        selected && <BankTransfer active={active} setActive={setActive} />
+        <BankTransfer active={active} setActive={setActive} />
       )}
     </>
   );

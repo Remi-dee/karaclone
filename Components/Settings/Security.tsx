@@ -28,7 +28,7 @@ function Security() {
             <span className=" flex   items-center content-center gap-[8px]  ">
               <p className="text-[#7F56D9] tracking-[-2%] font-medium text-[14px] leading-[20px]  ">
                 Activate
-              <span className="ml-[8px]">{">"}</span>
+                <span className="ml-[8px]">{">"}</span>
               </p>{" "}
             </span>
           </div>
@@ -73,7 +73,7 @@ function Security() {
           <span className=" flex   items-center content-center gap-[8px]  ">
             <p className="text-[#7F56D9]  tracking-[-2%] font-medium text-[14px] leading-[20px]  ">
               Change Password
-            <span className="ml-[8px]">{">"}</span>
+              <span className="ml-[8px]">{">"}</span>
             </p>{" "}
           </span>
         </div>

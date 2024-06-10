@@ -1,6 +1,7 @@
 import { PayloadType } from "@/app/interfaces/general";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "@/redux/store";
+import { useLoadUserQuery } from "../user/userApi";
 
 const initialState = {
   loadingState: false,

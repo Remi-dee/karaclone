@@ -13,7 +13,7 @@ const CreateTradeDetails = () => {
     router.push("/dashboard/P2P-trade");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     monoPayment(useCallback);
   };
