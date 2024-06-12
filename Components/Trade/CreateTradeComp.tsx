@@ -2,10 +2,7 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { IoIosArrowRoundBack } from "react-icons/io";
-import CustomDropdown from "@/Components/CustomDropdown/CustomDropdown";
-import Image from "next/image";
-import CreateTradeDetails from "./CreateTradeComp";
-import { currencyData } from "@/Components/Transactions/currencyData";
+
 import {
   toggleCreateTrade,
   toggleCreateTradeStage,
@@ -17,8 +14,21 @@ import {
   useCurrencyConverterQuery,
   useGetAllCurrencyPairsQuery,
 } from "@/redux/features/user/userApi";
-import toast from "react-hot-toast";
+
 import CreateTradeDropDown from "../CustomDropdown/CreateTradeDropDown";
+import { toast } from "react-toastify";
+
+interface TradeDetails {
+  currency: string;
+  exit_currency: string;
+  rate: number;
+  amount: string;
+  minimumBid: string;
+  bank_name: string;
+  account_number: string;
+  beneficiary_name: string;
+  beneficiary_account: string;
+}
 const CreateTrade = () => {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -36,6 +46,15 @@ const CreateTrade = () => {
     beneficiary_name: "",
     beneficiary_account: "",
   });
+
+  const isFormValid = (): boolean => {
+    for (const key in createTradeDetails) {
+      if (createTradeDetails[key as keyof TradeDetails] === "") {
+        return false;
+      }
+    }
+    return true;
+  };
   const [converstionDataSource, setConverstionDataSource] = useState<string[]>(
     []
   );
@@ -44,6 +63,12 @@ const CreateTrade = () => {
     useCreateTradeMutation();
   const HandleTradeDetails = (e: any) => {
     e.preventDefault();
+
+    if (!isFormValid()) {
+      toast.warn("Please fill in all the fields.");
+      return;
+    }
+    // form submission handled here
 
     createTrade(createTradeDetails);
     // console.log(data);
@@ -275,22 +300,23 @@ const CreateTrade = () => {
                   className="w-full text-gray-300 outline-none border-none text-xs p-1"
                   id=""
                 >
-                  {[
-                    "Select Payment Method",
-                    "Wallet",
-                    "Direct Deposit",
-                    "Connect Bank App",
-                  ].map((e, i) => {
-                    return (
-                      <option
-                        key={i}
-                        value=""
-                        className="text-[400] text-[16px] leading-[24px] w-full"
-                      >
-                        {e}
-                      </option>
-                    );
-                  })}
+                  <option value="" disabled selected>
+                    Select Payment Method
+                  </option>
+
+                  {["Wallet", "Direct Deposit", "Connect Bank App"].map(
+                    (e, i) => {
+                      return (
+                        <option
+                          key={i}
+                          value=""
+                          className="text-[400] text-[16px] leading-[24px] w-full"
+                        >
+                          {e}
+                        </option>
+                      );
+                    }
+                  )}
                 </select>
               </div>
             </div>
@@ -333,6 +359,10 @@ const CreateTrade = () => {
                   className="w-full outline-none border-none text-gray-300 p-1 text-xs"
                   id=""
                 >
+                  <option value="" disabled selected>
+                    Select Bank
+                  </option>
+
                   <option value=" Zenith Bank" className="text-300 w-full">
                     Zenith Bank
                   </option>

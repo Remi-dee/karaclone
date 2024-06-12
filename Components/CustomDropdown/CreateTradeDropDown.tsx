@@ -56,7 +56,7 @@ const CreateTradeDropDown: React.FC<DropdownProps> = ({
                     ? USD
                     : GBP
                 }
-                alt={selectedOption}
+                alt={selectedOption || ""}
                 className="w-4  h-4"
               />
             )}
@@ -88,11 +88,11 @@ const CreateTradeDropDown: React.FC<DropdownProps> = ({
               className="flex items-center  px-5 py-2 font-semibold text-gray-400 rounded-md cursor-pointer hover:bg-[#F3EDFF]"
               onClick={() => handleOptionClick(option)}
             >
-              {displayImages && option.imageUrl && (
+              {displayImages && option && (
                 <Image
                   src={option === "NGN" ? NGN : option === "USD" ? USD : GBP}
-                  alt={option}
-                  className="w-4 h-4 mr-2"
+                  alt={selectedOption || ""}
+                  className="w-4  h-4"
                 />
               )}
               <div className="px-2">{option}</div>
