@@ -16,11 +16,9 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import LogoutModal from "@/Components/Auth/LogoutModal";
 import Settings from "@/Components/Settings/Page";
-import CreateKYC from "@/Components/KYC/CreateKYC";
-import CreateKYB from "@/Components/KYC/CreateKYB";
 import chatIcon from "@/public/chaticon.png";
 import Image from "next/image";
-import wave from "@/public/WAVE.png";
+import wave from "@/public/svg/wave.svg";
 import SettingsLogoutModal from "@/Components/Auth/SettingsLogOut";
 const Dashboard = (urlParam: any) => {
   const dispatch = useDispatch();
@@ -54,14 +52,14 @@ const Dashboard = (urlParam: any) => {
         <div className="flex justify-between py-5 border-slate-200 p-[24px_40px_24px_40px] bg-white-100">
           <div className="flex items-center">
             <div className="hidden lg:block ml-5">
-              <p className="text-black-200 font-bold text-lg">
+              <span className="text-black-200 font-bold text-lg">
                 <div className=" flex gap-[4px]">
                   <p className="text-black-200 font-bold text-lg">
-                    {"Hello, " + data?.user.name?.split(" ")[1]}
+                    {"Hello, " + data?.user?.name?.split(" ")[1]}
                   </p>
                   <Image src={wave} width={20} height={6} alt="" />
                 </div>
-              </p>
+              </span>
               <p className="text-sm text-gray-300">
                 Trade and withdraw funds easily
               </p>

@@ -52,35 +52,39 @@ const SellTradeTable = () => {
     <div className="p-0 m-0 box-border max-h-[610px]  overflow-auto  overflow-y-scroll  h-full w-full ">
       {listOfTrades && listOfTrades.length > 0 ? (
         <>
-          <table className="w-[100%]  overflow-hidden  overflow-y-scroll  border-collapse">
-            <tr key="1" className="bg-gray-900 text-sm">
-              <th className="p-4 text-left">Trade ID</th>
-              <th className="p-4 text-left">Price (NGN)</th>
-              <th className="p-4 text-left">Available (USD)</th>
-              <th className="p-4 text-left">Limit (USD)</th>
-              <th className="p-4 text-left">Action</th>
-            </tr>
-            {listOfTrades?.map((item: any) => (
-              <tr
-                key={item.tradeId}
-                id={item.tradeId}
-                className="leading-[24px] overflow-auto  text-[#464646] tracking-[-2%] border-b text-[16px] border-b-gray-500"
-              >
-                <td className="p-4">{item.tradeId}</td>
-                <td className="p-4">{item.amount}</td>
-                <td className="p-4">{item.available || "2,000"}</td>
-                <td className="p-4">{item.limit || "100 - 2000"}</td>
-                <td className="p-4">
-                  <button
-                    disabled={isLoading}
-                    onClick={() => handleBuyButton(item.tradeId)}
-                    className="w-[130px] h-[30px] rounded-md text-sm text-white-100 bg-primaryBtn p-1"
-                  >
-                    Buy
-                  </button>
-                </td>
+          <table className="w-[100%] overflow-hidden overflow-y-scroll border-collapse">
+            <thead>
+              <tr key="1" className="bg-gray-900 text-sm">
+                <th className="p-4 text-left">Trade ID</th>
+                <th className="p-4 text-left">Price (NGN)</th>
+                <th className="p-4 text-left">Available (USD)</th>
+                <th className="p-4 text-left">Limit (USD)</th>
+                <th className="p-4 text-left">Action</th>
               </tr>
-            ))}
+            </thead>
+            <tbody>
+              {listOfTrades?.map((item: any, i: any) => (
+                <tr
+                  key={i}
+                  id={item.tradeId}
+                  className="leading-[24px] overflow-auto text-[#464646] tracking-[-2%] border-b text-[16px] border-b-gray-500"
+                >
+                  <td className="p-4">{item.tradeId}</td>
+                  <td className="p-4">{item.amount}</td>
+                  <td className="p-4">{item.available || "2,000"}</td>
+                  <td className="p-4">{item.limit || "100 - 2000"}</td>
+                  <td className="p-4">
+                    <button
+                      disabled={isLoading}
+                      onClick={() => handleBuyButton(item.tradeId)}
+                      className="w-[130px] h-[30px] rounded-md text-sm text-white-100 bg-primaryBtn p-1"
+                    >
+                      Buy
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
           </table>
           {/* <Pagination /> */}
         </>
