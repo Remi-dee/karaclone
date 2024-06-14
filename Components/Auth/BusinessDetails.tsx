@@ -32,8 +32,8 @@ const BusinessDetails: FC<any> = () => {
     e.preventDefault();
     // console.log(inputValuesForBasic);
     dispatch(addBusinessDetailsToObject(inputValuesForBasic));
-    console.log(globalState);
-    // dispatch(increaseRegistrationStage());
+    // console.log(globalState);
+    dispatch(increaseRegistrationStage());
   };
 
   return (

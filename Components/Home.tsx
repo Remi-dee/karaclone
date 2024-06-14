@@ -16,8 +16,10 @@ import CreateKYC from "./KYC/CreateKYC";
 import Reversal from "./withdrawal/Reversal";
 
 function Home() {
-  const globalState = useSelector((state: any) => state);
-  const { kyc, auth, user } = globalState;
+  const kyc = useSelector((state: any) => state?.kyc);
+  const user = useSelector((state: any) => state?.user);
+  const auth = useSelector((state: any) => state?.auth);
+  // const { kyc, auth, user } = globalState;
   const { kycBegin } = kyc;
   const { reversalInitiated } = user;
 

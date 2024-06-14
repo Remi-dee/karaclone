@@ -38,7 +38,7 @@ function Page() {
       ) : level === 5 ? (
         <Activate2fa />
       ) : (
-        TbNumber4Small
+        <></>
       )}
     </>
   );
