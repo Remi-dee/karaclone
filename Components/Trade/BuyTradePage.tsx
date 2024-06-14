@@ -5,10 +5,7 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 import { BiSolidCopy } from "react-icons/bi";
 import Image from "next/image";
 import USD from "@/public/Images/USD.png";
-import { BiSolidBank } from "react-icons/bi";
-import NGN from "@/public/Images/NGN.png";
-import TradeSuccess from "@/app/(trade)/buy-trade/TradeSuccess";
-import AddRecipient from "@/app/(trade)/buy-trade/AddRecipient";
+
 import { useDispatch, useSelector } from "react-redux";
 import {
   toggleBuyTradeDisplay,
@@ -16,7 +13,6 @@ import {
 } from "@/redux/features/user/userSlice";
 import SelectBank from "./SelectBank";
 import TradeModal from "../CustomModal/TradeModal";
-import CreateTradeSuccess from "./CreateTradeSuccess";
 import BeneficaryDetails from "./BeneficaryDetails";
 import TradeSuccessModal from "../CustomModal/TradeSuccessModal";
 import TradeTransSuccesss from "./TradeTransSuccess";
