@@ -6,9 +6,7 @@ import CreateUser from "@/Components/Auth/CreateUser";
 import CreatePassword from "@/Components/Auth/CreatePassword,";
 import Activate2fa from "../activate-2fa/Activate2fa";
 import VerifyEmail from "@/Components/Auth/VerifyEmail";
-import QrCode from "@/Components/SignUp/QrCode";
 import { useSelector } from "react-redux";
-import { TbNumber4Small } from "react-icons/tb";
 import { useDispatch } from "react-redux";
 import { increaseRegistrationStage } from "@/redux/features/auth/authSlice";
 
