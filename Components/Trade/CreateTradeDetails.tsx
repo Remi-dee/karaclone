@@ -8,58 +8,24 @@ import NGN from "../../public/Images/NGN.png";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { BiSolidCopy } from "react-icons/bi";
 import { toggleCreateTradeStage } from "@/redux/features/user/userSlice";
-<<<<<<< HEAD
-import { useDispatch } from "react-redux";
-import { monoPayment } from "@/app/mono/monoServices";
-=======
 import { useDispatch, useSelector } from "react-redux";
->>>>>>> ce6db81c0ad2f1786a6eb713ca92cc19febb4b9c
+import { useMonoPayment, useMonoWidget } from "@/app/mono/monoServices";
+
 const CreateTradeDetails = () => {
   const globalState = useSelector((state: any) => state.user);
   const { createdTrade } = globalState;
 
   console.log(createdTrade);
   const router = useRouter();
+  const payWithMono = useMonoPayment();
+  const openMonoWidget = useMonoWidget();
   const dispatch = useDispatch();
   const handleBack = () => {
     // router.push("/dashboard/P2P-trade");
     dispatch(toggleCreateTradeStage(2));
   };
 
-  const openMonoWidget = useCallback(async () => {
-    const MonoConnect = (await import("@mono.co/connect.js")).default;
-
-    const monoInstance = new MonoConnect({
-      key: "test_pk_ldvcm2kc4zpbki9mq0xt",
-      onClose: () => console.log("Widget closed"),
-      // onLoad: () => setScriptLoaded(true),
-      onSuccess: ({ code }) => console.log(`Linked successfully: ${code}`),
-    });
-
-    monoInstance.setup();
-    monoInstance.open();
-  }, []);
-
-  const payWithMono = useCallback(async () => {
-    const MonoConnect = (await import("@mono.co/connect.js")).default;
-
-    const monoInstance = new MonoConnect({
-      key: "test_pk_ldvcm2kc4zpbki9mq0xt",
-      scope: "payments",
-      data: {
-        type: "one-time-debit", // recurring-debit or one-time-debit
-        amount: 150000, // amount in kobo
-        description: "Payment for light bill",
-        payment_id: "txreq_HeqMWnpWVvzdpMXiB4I123456",
-      },
-      onSuccess: ({ code }) => console.log(`Linked successfully: ${code}`),
-    });
-
-    monoInstance.setup();
-    monoInstance.open();
-  }, []);
-
-  const handleContinue = (e: any) => {
+  const handleContinue = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     openMonoWidget();
     // dispatch(toggleCreateTradeStage(4));
@@ -199,11 +165,7 @@ const CreateTradeDetails = () => {
             </div>
             <button
               onClick={handleContinue}
-<<<<<<< HEAD
-              className="selection:p-2 mt-[16px] text-white-100 bg-primaryBtn w-full rounded-lg "
-=======
               className="p-2 mt-[16px] text-white-100 bg-primaryBtn w-full rounded-lg"
->>>>>>> ce6db81c0ad2f1786a6eb713ca92cc19febb4b9c
             >
               Continue
             </button>

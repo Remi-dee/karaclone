@@ -42,9 +42,10 @@ const CreateTrade = () => {
   const [converstionDataExit, setConverstionDataExit] = useState<string[]>([]);
   const [createTrade, { isLoading, error, data, isSuccess }] =
     useCreateTradeMutation();
+
   const HandleTradeDetails = (e: any) => {
     e.preventDefault();
-
+    console.log(createTradeDetails);
     createTrade(createTradeDetails);
     // console.log(data);
     console.log(error);

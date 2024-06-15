@@ -1,4 +1,6 @@
-function monoPayment(useCallback) {
+import { useCallback } from "react";
+
+function useMonoPayment() {
   const payWithMono = useCallback(async () => {
     const MonoConnect = (await import("@mono.co/connect.js")).default;
 
@@ -19,5 +21,21 @@ function monoPayment(useCallback) {
 
   return payWithMono;
 }
+function useMonoWidget() {
+  const openMonoWidget = useCallback(async () => {
+    const MonoConnect = (await import("@mono.co/connect.js")).default;
 
-export { monoPayment };
+    const monoInstance = new MonoConnect({
+      key: "test_pk_ldvcm2kc4zpbki9mq0xt",
+      onClose: () => console.log("Widget closed"),
+
+      onSuccess: ({ code }) => console.log(`Linked successfully: ${code}`),
+    });
+
+    monoInstance.setup();
+    monoInstance.open();
+
+    return openMonoWidget;
+  }, []);
+}
+export { useMonoPayment, useMonoWidget };
