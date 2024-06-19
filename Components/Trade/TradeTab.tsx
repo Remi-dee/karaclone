@@ -37,14 +37,6 @@ const TradeTab: React.FC<tradeProp> = ({ onSelectBuy, onSelectSell }) => {
     });
   }, [possibleConverstion?.isSuccess]);
 
-  // const [rateFetchStatus, setrateFetchStatus] = useState(false);
-  // const [rateFetchData, setrateFetchData] = useState<number | null | any>(null);
-
-  // const dataForCalc = useCurrencyConverterQuery({
-  //   amount: amount,
-  //   sourceCurrency: currency,
-  //   targetCurrency: exit_currency,
-  // });
   const { data, error, isLoading } = useCurrencyConverterQuery(
     {
       amount: amount,
@@ -53,8 +45,6 @@ const TradeTab: React.FC<tradeProp> = ({ onSelectBuy, onSelectSell }) => {
     },
     { skip: amount?.length < 2 }
   );
-
-  // console.log(dataForCalc);
 
   useEffect(() => {
     setrate(data);
