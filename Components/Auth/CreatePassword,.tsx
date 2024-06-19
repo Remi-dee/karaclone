@@ -12,7 +12,7 @@ import closecirce from "@/public/close-circle.svg";
 import { useDispatch } from "react-redux";
 import { increaseRegistrationStage } from "@/redux/features/auth/authSlice";
 import { useSelector } from "react-redux";
-
+import greenCorrect from "@/public/svg/greenCorrect.svg";
 const CreatePassword: FC<any> = () => {
   const [registerUser, { isLoading, isSuccess, error, data }] =
     useRegisterMutation();
@@ -38,27 +38,6 @@ const CreatePassword: FC<any> = () => {
       }
     }
   }, [isLoading, isSuccess, error]);
-
-  // const handleSubmit = async (e: any) => {
-  //   e.preventDefault();
-  //   const data = {
-  //     name: globalState?.name,
-  //     gender: globalState?.gender,
-  //     email: globalState?.email,
-  //     phone: globalState?.phone,
-  //     account_type: globalState?.account_type,
-  //     role: "user",
-  //     business_name: globalState?.business_name,
-  //     business_address: globalState?.business_address,
-  //     business_email: globalState?.business_email,
-  //     business_line: globalState?.business_line,
-  //     password: userPassword,
-  //   };
-
-  //   if (!isLoading) {
-  //     await registerUser(data);
-  //   }
-  // };
 
   const validatePassword = (password: string) => {
     setPasswordValid(password.length >= 8);
@@ -154,7 +133,7 @@ const CreatePassword: FC<any> = () => {
                     {!passwordValid ? (
                       <Image src={mark} alt="" />
                     ) : (
-                      <GiCancel className="text-[#989898]" />
+                      <Image src={greenCorrect} alt="" />
                     )}
                   </div>
                   <p className="text-[#989898] text-xs">
@@ -173,7 +152,8 @@ const CreatePassword: FC<any> = () => {
                     {!hasSpecialCharacter ? (
                       <Image src={mark} alt="" />
                     ) : (
-                      <GiCancel className="text-[#989898]" />
+                      <Image src={greenCorrect} alt="" />
+                      // <GiCancel className="text-[#989898]" />
                     )}
                   </div>
                   <p className="text-[#989898] text-xs">
@@ -191,7 +171,8 @@ const CreatePassword: FC<any> = () => {
                     {!hasSpecialCharacter ? (
                       <Image src={mark} alt="" />
                     ) : (
-                      <GiCancel className="text-[#989898]" />
+                      <Image src={greenCorrect} alt="" />
+                      // <GiCancel className="text-[#989898]" />
                     )}
                   </div>
                   <p className="text-[#989898] text-xs">
@@ -209,7 +190,8 @@ const CreatePassword: FC<any> = () => {
                     {!hasSpecialCharacter ? (
                       <Image src={mark} alt="" />
                     ) : (
-                      <GiCancel className="text-[#989898]" />
+                      <Image src={greenCorrect} alt="" />
+                      // <GiCancel className="text-[#989898]" />
                     )}
                   </div>
                   <p className="text-[#989898] text-xs">
@@ -227,7 +209,8 @@ const CreatePassword: FC<any> = () => {
                     {!hasSpecialCharacter ? (
                       <Image src={mark} alt="" />
                     ) : (
-                      <GiCancel className="text-[#989898]" />
+                      // <GiCancel className="text-[#989898]" />
+                      <Image src={greenCorrect} alt="" />
                     )}
                   </div>
                   <p className="text-[#989898] text-xs">
