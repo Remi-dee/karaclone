@@ -135,11 +135,14 @@ const CreateTrade = () => {
       ]);
     });
   }, [possibleConverstion?.isSuccess]);
-  const dataForCalc = useCurrencyConverterQuery({
-    amount: createTradeDetails?.amount,
-    sourceCurrency: createTradeDetails?.currency,
-    targetCurrency: createTradeDetails?.exit_currency,
-  });
+  const dataForCalc = useCurrencyConverterQuery(
+    {
+      amount: createTradeDetails?.amount,
+      sourceCurrency: createTradeDetails?.currency,
+      targetCurrency: createTradeDetails?.exit_currency,
+    },
+    { skip: createTradeDetails?.amount?.length < 3 }
+  );
 
   // console.log(dataForCalc);
 

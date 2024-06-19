@@ -101,7 +101,7 @@ const BasicUserDetails: FC<any> = () => {
               value={inputValuesForBasic.gender}
               onChange={handleInputChange}
             >
-              <option value="" selected disabled hidden>
+              <option value="" disabled>
                 Gender
               </option>
               <option value="Male">Male</option>
