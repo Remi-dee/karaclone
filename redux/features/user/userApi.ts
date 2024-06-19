@@ -222,7 +222,10 @@ export const userApi = createApi({
     }),
     // /Currency converstion
 
-    CurrencyConverter: builder.query({
+    CurrencyConverter: builder.query<
+      any,
+      { amount: string; sourceCurrency: string; targetCurrency: string }
+    >({
       query: ({ amount, sourceCurrency, targetCurrency }) => ({
         url: "currency-conversion",
         method: "GET",

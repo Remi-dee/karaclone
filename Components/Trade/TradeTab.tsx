@@ -1,7 +1,14 @@
-import React, { useState } from "react";
+"use client";
+
+import React, { ChangeEvent, useEffect, useState } from "react";
 import CustomDropdown from "@/Components/CustomDropdown/CustomDropdown";
 import { currencyData } from "../Transactions/currencyData";
-
+import {
+  useCreateTradeMutation,
+  useCurrencyConverterQuery,
+  useGetAllCurrencyPairsQuery,
+} from "@/redux/features/user/userApi";
+import CreateTradeDropDown from "../CustomDropdown/CreateTradeDropDown";
 type tradeProp = {
   onSelectBuy: () => void;
   onSelectSell: () => void;
@@ -9,11 +16,57 @@ type tradeProp = {
 const TradeTab: React.FC<tradeProp> = ({ onSelectBuy, onSelectSell }) => {
   const [active, setActive] = useState<"Buy" | "Sell" | null>("Buy");
   const [currency, setCurrency] = useState<string>("");
+  const [exit_currency, setexit_currency] = useState<string>("");
+  const [rate, setrate] = useState<number | null | any>(null);
+  const [converstionDataSource, setConverstionDataSource] = useState<string[]>(
+    []
+  );
+  const [amount, setamount] = useState("");
+  const [converstionDataExit, setConverstionDataExit] = useState<string[]>([]);
+  const possibleConverstion = useGetAllCurrencyPairsQuery("");
+  const [shouldConvert, setshouldConvert] = useState(false);
+
+  useEffect(() => {
+    possibleConverstion?.data?.results?.currencyPairs?.map((e: any) => {
+      setConverstionDataExit((prevItems) => [...prevItems, e?.base_currency]);
+
+      setConverstionDataSource((prevItems) => [
+        ...prevItems,
+        e?.quote_currency,
+      ]);
+    });
+  }, [possibleConverstion?.isSuccess]);
+
+  const { data, error, isLoading } = useCurrencyConverterQuery(
+    {
+      amount: amount,
+      sourceCurrency: currency,
+      targetCurrency: exit_currency,
+    },
+    { skip: amount?.length < 2 }
+  );
+
+  useEffect(() => {
+    setrate(data);
+  }, [isLoading]);
 
   const handleCurrency = (value: string) => {
     setCurrency(value);
   };
+  const handleExitCurrency = (value: string) => {
+    setexit_currency(value);
+  };
+  const handleAmountChange = (e: ChangeEvent<HTMLInputElement | any>) => {
+    const { name, value } = e.target;
 
+    setamount(value);
+
+    if (amount?.length > 1) {
+      setshouldConvert(true);
+    } else {
+      setshouldConvert(false);
+    }
+  };
   const handleActive = (text: "Buy" | "Sell") => {
     if (text === active) {
       setActive(null);
@@ -60,13 +113,14 @@ const TradeTab: React.FC<tradeProp> = ({ onSelectBuy, onSelectSell }) => {
           <input
             className="w-[215px] h-[16px] border-r  border-r-[#BDBDBD]  placeholder:text-sm placeholder:text-[#989898] outline-none"
             placeholder="Amount to Buy"
+            onChange={handleAmountChange}
             type="text"
           />
         </div>
         <div className="w-[115px] flex justify-center items-center ml-[5px] bg-[#F7F7F7] rounded-[16px] ">
-          <CustomDropdown
+          <CreateTradeDropDown
             onSelect={handleCurrency}
-            options={currencyData}
+            options={converstionDataExit}
             placeholder="Currency"
             className="w-full outline-none"
             displayImages
@@ -74,17 +128,19 @@ const TradeTab: React.FC<tradeProp> = ({ onSelectBuy, onSelectSell }) => {
         </div>
       </div>
       <div className="w-[360px] h-[48px] border flex  items-center rounded-[12px] p-[8px_16px_8px_16px]">
-        <div>
+        <div className=" w-full h-full">
           <input
-            className="w-[215px] h-[16px] border-r  border-r-[#BDBDBD]  placeholder:text-sm placeholder:text-[#989898] outline-none"
+            className="w-[215px] pl-[0.5rem]  h-full border-r  border-r-[#BDBDBD]  placeholder:text-sm placeholder:text-[#989898] outline-none cursor-not-allowed"
             placeholder="Exchange Value"
             type="text"
+            value={rate}
+            disabled
           />
         </div>
         <div className="w-[115px] ml-[5px] bg-[#F7F7F7] rounded-[16px]">
-          <CustomDropdown
-            onSelect={handleCurrency}
-            options={currencyData}
+          <CreateTradeDropDown
+            onSelect={handleExitCurrency}
+            options={converstionDataSource}
             placeholder="Currency"
             className="w-full outline-none"
             displayImages
