@@ -9,6 +9,7 @@ import {
   useGetAllCurrencyPairsQuery,
 } from "@/redux/features/user/userApi";
 import CreateTradeDropDown from "../CustomDropdown/CreateTradeDropDown";
+
 type tradeProp = {
   onSelectBuy: () => void;
   onSelectSell: () => void;
@@ -48,7 +49,7 @@ const TradeTab: React.FC<tradeProp> = ({ onSelectBuy, onSelectSell }) => {
 
   useEffect(() => {
     setrate(data);
-  }, [isLoading]);
+  }, [isLoading, data]);
 
   const handleCurrency = (value: string) => {
     setCurrency(value);
@@ -58,14 +59,14 @@ const TradeTab: React.FC<tradeProp> = ({ onSelectBuy, onSelectSell }) => {
   };
   const handleAmountChange = (e: ChangeEvent<HTMLInputElement | any>) => {
     const { name, value } = e.target;
+    const newValue = value.replace(/[^0-9]/g, "");
+    setamount(newValue);
 
-    setamount(value);
-
-    if (amount?.length > 1) {
-      setshouldConvert(true);
-    } else {
-      setshouldConvert(false);
-    }
+    // if (amount?.length > 1) {
+    //   setshouldConvert(true);
+    // } else {
+    //   setshouldConvert(false);
+    // }
   };
   const handleActive = (text: "Buy" | "Sell") => {
     if (text === active) {
@@ -115,6 +116,7 @@ const TradeTab: React.FC<tradeProp> = ({ onSelectBuy, onSelectSell }) => {
             placeholder="Amount to Buy"
             onChange={handleAmountChange}
             type="text"
+            value={amount}
           />
         </div>
         <div className="w-[115px] flex justify-center items-center ml-[5px] bg-[#F7F7F7] rounded-[16px] ">
