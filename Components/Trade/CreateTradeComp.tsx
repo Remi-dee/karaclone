@@ -100,7 +100,11 @@ const CreateTrade = () => {
 
   const handleChange = (event: ChangeEvent<HTMLInputElement | any>): void => {
     const { name, value } = event.target;
+    if (name === "amount") {
+      const newValue = value.replace(/[^0-9]/g, "");
 
+      return setcreateTradeDetails({ ...createTradeDetails, amount: newValue });
+    }
     setcreateTradeDetails((prevState) => ({
       ...prevState,
       [name]: name === "rate" ? Number(value) : value,
@@ -148,7 +152,7 @@ const CreateTrade = () => {
 
   useEffect(() => {
     setrate(dataForCalc?.data);
-  }, [dataForCalc?.isSuccess]);
+  }, [dataForCalc?.isSuccess, dataForCalc?.data]);
 
   //currency converter
 
@@ -260,6 +264,7 @@ const CreateTrade = () => {
                   type="text"
                   onChange={handleChange}
                   name="amount"
+                  value={createTradeDetails?.amount}
                   className="w-[80%] outline-none bg-transparent placeholder:text-gray-300"
                 />
                 <div className="w-[20%] text-right bg-transparent text-gray-300 text-sm">
