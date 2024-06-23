@@ -126,9 +126,9 @@ export const userApi = createApi({
         try {
           const result = await queryFulfilled;
 
-          console.log(result);
+          // console.log(result);
         } catch (error: any) {
-          console.log(error);
+          // console.log(error);
         }
       },
     }),
@@ -183,9 +183,9 @@ export const userApi = createApi({
         try {
           const result = await queryFulfilled;
 
-          console.log(result);
+          // console.log(result);
         } catch (error: any) {
-          console.log(error);
+          // console.log(error);
         }
       },
     }),
@@ -255,6 +255,27 @@ export const userApi = createApi({
       },
     }),
 
+    //Create Beneficiary
+
+    createBeneficiary: builder.mutation({
+      query: (args) => ({
+        url: "Trade/create-beneficiary",
+        method: "POST",
+        body: args,
+        // credentials: "include" as const,
+      }),
+    }),
+
+    //Get all beneficiaries
+
+    getBeneficiaries: builder.query({
+      query: () => ({
+        url: "Trade/get-user-beneficiaries",
+        method: "GET",
+        // credentials: "include" as const,
+      }),
+    }),
+
     //next
   }),
 });
@@ -275,4 +296,6 @@ export const {
   useGetAllTradeExecptMineQuery,
   useGetSingleTradeQuery,
   useCurrencyConverterQuery,
+  useCreateBeneficiaryMutation,
+  useGetBeneficiariesQuery,
 } = userApi;

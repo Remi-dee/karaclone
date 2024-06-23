@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { toggleBuyTradeSuccessModal } from "@/redux/features/user/userSlice";
 import { useDispatch } from "react-redux";
 import svgBank from "@/public/svg/svgBank.svg";
+import { useGetBeneficiariesQuery } from "@/redux/features/user/userApi";
 function SelectBank({ onSelect }: { onSelect: any }) {
   const [selected, setSelected] = useState<string | number>("");
   const dispatch = useDispatch();
@@ -25,23 +26,12 @@ function SelectBank({ onSelect }: { onSelect: any }) {
   // if (ShowSuccess) {
   //   return <CreateTradeSuccess />;
   // }
-  const items = [
-    {
-      id: 1,
-      name: "Fakiya Favour",
-      phone: "92029284849",
-    },
-    {
-      id: 2,
-      name: "Fakiya Tosin",
-      phone: "92029284849",
-    },
-    {
-      id: 3,
-      name: "Fakiya Oluwatosin",
-      phone: "92029284849",
-    },
-  ];
+
+  const { data, error, isLoading } = useGetBeneficiariesQuery("");
+
+  if (isLoading) return <div>Fetching your beneficiaries...</div>;
+  if (error) return <div>Error fetching beneficiaries</div>;
+
   return (
     <div className="  mb-[10rem] h-full w-[500px]  min-h-max">
       <div className=" w-full justify-center flex">
@@ -60,11 +50,11 @@ function SelectBank({ onSelect }: { onSelect: any }) {
       </div>
 
       <div className=" mt-[24px] w-full flex flex-col gap-[24px]">
-        {items.map((item) => (
+        {data.map((item: any) => (
           <div
-            key={item.id}
-            className={`h-[75px] flex justify-between items-center rounded-[8px] w-full border border-[#DCDCDC] p-4 gap-2 ${
-              selected === item.id ? "border-purple-500" : ""
+            key={item._id}
+            className={`h-[75px]  cursor-pointer flex justify-between items-center rounded-[8px] w-full border border-[#DCDCDC] p-4 gap-2 ${
+              selected === item._id ? "border-purple-500" : ""
             }`}
             onClick={() => setSelected(item.id)}
           >
@@ -75,15 +65,15 @@ function SelectBank({ onSelect }: { onSelect: any }) {
                   className="w-[19px] h-[19px]"
                   name="radio"
                   id="radio"
-                  checked={selected === item.id}
-                  onChange={() => setSelected(item.id)}
+                  checked={selected === item._id}
+                  onChange={() => setSelected(item._id)}
                 />
               </div>
               <div className="flex flex-col gap-[4px] justify-start">
                 <h1 className="text-[16px] leading-[19.2px] tracking-[-2%] font-medium">
-                  {item.name}
+                  {item?.name}
                 </h1>
-                <h2>{item.phone}</h2>
+                <h2>{item?.account}</h2>
               </div>
             </div>
             <div>
