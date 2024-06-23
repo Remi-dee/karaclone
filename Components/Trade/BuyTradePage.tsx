@@ -188,16 +188,16 @@ const BuyTrade = () => {
       </div>
       {selectRecipient ? (
         <TradeModal>
-          <SelectBank onSelect={handleSelect} />
+          {selectedItems === "" ? (
+            <SelectBank onSelect={handleSelect} />
+          ) : selectedItems === "itemid" ? (
+            <BeneficaryDetails onSelect={handleSelect} />
+          ) : (
+            <TradeSuccessModal>
+              <TradeTransSuccesss />
+            </TradeSuccessModal>
+          )}
         </TradeModal>
-      ) : selectRecipient && selectedItems === "itemid" ? (
-        <TradeModal>
-          <BeneficaryDetails onSelect={handleSelect} />
-        </TradeModal>
-      ) : selectRecipient ? (
-        <TradeSuccessModal>
-          <TradeTransSuccesss />
-        </TradeSuccessModal>
       ) : null}
       {/* {selectedComponent} */}
     </div>

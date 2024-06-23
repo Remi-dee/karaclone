@@ -17,6 +17,11 @@ import {
 
 import CreateTradeDropDown from "../CustomDropdown/CreateTradeDropDown";
 import { toast } from "react-toastify";
+import TradeModal from "../CustomModal/TradeModal";
+import TradeSuccessModal from "../CustomModal/TradeSuccessModal";
+import BeneficaryDetails from "./BeneficaryDetails";
+import SelectBank from "./SelectBank";
+import TradeTransSuccesss from "./TradeTransSuccess";
 
 interface TradeDetails {
   currency: string;
@@ -35,17 +40,36 @@ const CreateTrade = () => {
   const [currency, setCurrency] = useState<string>("");
   const [rate, setrate] = useState<number | null | any>(null);
   const [showTradeDetails, setShowTradeDetails] = useState(false);
+
   const [createTradeDetails, setcreateTradeDetails] = useState({
     currency: "",
     exit_currency: "",
-    rate: 0,
+    rate: rate,
     amount: "",
     minimumBid: "",
     bank_name: "",
     account_number: "",
     beneficiary_name: "",
-    beneficiary_account: "",
+    beneficiary_account: "Default Account",
+    beneficiary_bank: "Default Bank",
+    vat_fee: "XX",
+    sold: 0,
+    payment_method: "",
+    additional_information: "",
+    transaction_fee: "XX",
   });
+
+  //manange modal
+  const [selectRecipient, setSelectRecipient] = useState<boolean>(false);
+  const [selectedItems, setSelectedItems] = useState<string | number>("");
+  const HandleRecepientModal = () => {
+    setSelectRecipient(true); // Hide the recipient selection modal
+  };
+
+  const handleSelect = (item: string | number) => {
+    console.log(item);
+    setSelectedItems(item);
+  };
 
   const isFormValid = (): boolean => {
     for (const key in createTradeDetails) {
@@ -59,8 +83,10 @@ const CreateTrade = () => {
     []
   );
   const [converstionDataExit, setConverstionDataExit] = useState<string[]>([]);
+
   const [createTrade, { isLoading, error, data, isSuccess }] =
     useCreateTradeMutation();
+
   const HandleTradeDetails = (e: any) => {
     e.preventDefault();
 
@@ -152,9 +178,14 @@ const CreateTrade = () => {
 
   useEffect(() => {
     setrate(dataForCalc?.data);
+    setcreateTradeDetails({ ...createTradeDetails, rate: dataForCalc?.data });
   }, [dataForCalc?.isSuccess, dataForCalc?.data]);
 
-  //currency converter
+  const beneficicaryHandlder = (e: any) => {
+    selectRecipient === true
+      ? setSelectRecipient(false)
+      : setSelectRecipient(true); // Hide the recipient selection modal
+  };
 
   return (
     <div className="m-0 p-0 box-border  h-[870px] invisible-scrollbar overflow-auto ">
@@ -302,33 +333,33 @@ const CreateTrade = () => {
               >
                 Payment Method
               </label>
-              <div className="h-[46px] w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
+              <div className="h-[46px] w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px] border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
                 <select
-                  name=""
+                  name="payment_method"
                   className="w-full text-gray-300 outline-none border-none text-xs p-1"
                   id=""
+                  value={createTradeDetails?.payment_method}
+                  onChange={handleSelectChange}
                 >
-                  <option value="" disabled selected>
+                  <option value="" selected disabled>
                     Select Payment Method
                   </option>
 
                   {["Wallet", "Direct Deposit", "Connect Bank App"].map(
-                    (e, i) => {
-                      return (
-                        <option
-                          key={i}
-                          value=""
-                          className="text-[400] text-[16px] leading-[24px] w-full"
-                        >
-                          {e}
-                        </option>
-                      );
-                    }
+                    (method, index) => (
+                      <option
+                        key={index}
+                        value={method}
+                        className="text-[400] text-[16px] leading-[24px] w-full"
+                      >
+                        {method}
+                      </option>
+                    )
                   )}
                 </select>
               </div>
             </div>
-            {/* <div>
+            <div>
               <label
                 htmlFor=""
                 className=" text-[16px]  leading-[24px]  tracking-[-2%]  text-[#000000] font-semibold"
@@ -337,6 +368,7 @@ const CreateTrade = () => {
               </label>
               <div className="h-[46px] w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
                 <select
+                  onClick={beneficicaryHandlder}
                   name=""
                   className="w-full text-gray-300 outline-none border-none text-xs p-1"
                   id=""
@@ -345,11 +377,11 @@ const CreateTrade = () => {
                     value=""
                     className="text-[400] text-[16px] leading-[24px] w-full"
                   >
-                    Select payment method
+                    Select Beneficiary
                   </option>
                 </select>
               </div>
-            </div> */}
+            </div>
 
             <hr className="mt-2 border-gray-900 border" />
 
@@ -426,7 +458,7 @@ const CreateTrade = () => {
                 Terms of Trade
               </label>
               <textarea
-                name="beneficiary_account"
+                name="additional_information"
                 onChange={handleChange}
                 id=""
                 cols={10}
@@ -445,6 +477,21 @@ const CreateTrade = () => {
           </form>
         </div>
       </div>
+
+      {selectRecipient ? (
+        <TradeModal>
+          {selectedItems === "" ? (
+            <SelectBank onSelect={handleSelect} />
+          ) : selectedItems === "itemid" ? (
+            <BeneficaryDetails onSelect={handleSelect} />
+          ) : (
+            <TradeSuccessModal>
+              <TradeTransSuccesss />
+            </TradeSuccessModal>
+          )}
+        </TradeModal>
+      ) : null}
+      {/* {selectedComponent} */}
     </div>
   );
 };

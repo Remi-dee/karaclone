@@ -3,8 +3,9 @@
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import Image from "next/image";
-import USD from "../../public/Images/USD.png";
-import NGN from "../../public/Images/NGN.png";
+import NGN from "@/public/Images/NGN.png";
+import GBP from "@/public/Images/GBP.png";
+import USD from "@/public/Images/USD.png";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { BiSolidCopy } from "react-icons/bi";
 import { toggleCreateTradeStage } from "@/redux/features/user/userSlice";
@@ -52,7 +53,18 @@ const CreateTradeDetails = () => {
               <div className="flex justify-between items-center text-sm">
                 <p className="text-gray-300">Currency</p>
                 <div className="flex justify-start items-center  gap-1   ">
-                  <Image src={NGN} width={15} height={15} alt="" />
+                  <Image
+                    src={
+                      createdTrade?.currency === "NGN"
+                        ? NGN
+                        : createdTrade?.currency === "USD"
+                        ? USD
+                        : GBP
+                    }
+                    width={15}
+                    height={15}
+                    alt=""
+                  />
                   <p className="text-xs">{createdTrade?.currency}</p>
                 </div>
               </div>
@@ -60,7 +72,18 @@ const CreateTradeDetails = () => {
               <div className="flex justify-between items-center text-sm">
                 <p className="text-gray-300">Exit Currency</p>
                 <div className="flex justify-start items-center  gap-1 mb-2 ">
-                  <Image src={USD} alt="" width={15} height={15} />
+                  <Image
+                    src={
+                      createdTrade?.exit_currency === "NGN"
+                        ? NGN
+                        : createdTrade?.exit_currency === "USD"
+                        ? USD
+                        : GBP
+                    }
+                    alt=""
+                    width={15}
+                    height={15}
+                  />
                   <p className="text-xs">{createdTrade?.exit_currency}</p>
                 </div>
               </div>
@@ -69,7 +92,7 @@ const CreateTradeDetails = () => {
                 <p className="text-gray-300">Rate</p>
                 <p className="text-xs font-semibold">
                   {/* 1NGN = <span>0.0081938374</span> */}
-                  {createdTrade?.rate}
+                  {createdTrade?.rate + " " + createdTrade?.exit_currency}
                 </p>
               </div>
 
@@ -90,7 +113,9 @@ const CreateTradeDetails = () => {
 
               <div className="flex justify-between items-center mt-6 mb-2 text-sm">
                 <p className="text-gray-300">Payment Method</p>
-                <p className="text-xs font-semibold">Bank Transfer</p>
+                <p className="text-xs font-semibold">
+                  {createdTrade?.payment_method}
+                </p>
               </div>
 
               <div className="flex justify-between items-center  text-sm">
@@ -116,13 +141,13 @@ const CreateTradeDetails = () => {
               <div className="flex justify-between items-center  text-sm">
                 <p className="text-gray-300">Transaction Fee</p>
                 <p className="text-xs text-[#FF104B] tracking-[-2%] font-semibold">
-                  25.12 NGN
+                  {createdTrade?.transaction_fee}
                 </p>
               </div>
               <div className="flex justify-between items-center text-sm">
                 <p className="text-gray-300">VAT Fee</p>
                 <p className="text-xs text-[#FF104B] tracking-[-2%] font-semibold">
-                  0.1%
+                  {createdTrade?.vat_fee + "%"}
                 </p>
               </div>
             </div>
