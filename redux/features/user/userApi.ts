@@ -75,7 +75,8 @@ export const userApi = createApi({
         }
       },
     }),
-    //tranasaction
+
+    //tranasactions
     //get all transaction fees
 
     getTransactionFees: builder.query({
@@ -112,8 +113,6 @@ export const userApi = createApi({
         }
       },
     }),
-
-    //next
 
     //get all currency pairs
 
@@ -206,7 +205,7 @@ export const userApi = createApi({
 
     getAllTrade: builder.query({
       query: () => ({
-        url: "Trade/get-all-trades",
+        url: "Trade/get-mine",
         method: "GET",
         // credentials: "include" as const,
       }),

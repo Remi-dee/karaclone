@@ -18,6 +18,7 @@ import VerificationSelfie from "@/Components/KYC/VerificationSelfie";
 import VerificationSuccess from "@/Components/KYC/VerificationSuccess";
 import Navbar from "@/Components/LandingPage/Navbar";
 import Footer from "@/Components/LandingPage/Footer";
+import MomoModal from "@/Components/CustomModal/MomoModal";
 
 const Page = () => {
   const [active, setActive] = useState(1);
@@ -75,7 +76,7 @@ const Page = () => {
   return (
     <div>
       <Navbar />
-
+      <MomoModal />
       <Footer />
     </div>
   );

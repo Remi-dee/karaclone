@@ -97,7 +97,14 @@ const Sidebar = ({ link, showSideBar }: Props) => {
                 ) : eachdata.label.toLowerCase() === "order" ? (
                   <OrderSvg iconColor="#727272" />
                 ) : eachdata.label.toLowerCase() === "trade board" ? (
-                  <P2pTradeSvg iconColor="#727272" />
+                  <P2pTradeSvg
+                    iconColor={
+                      eachdata.label.toLowerCase() === "trade board" &&
+                      link === "P2P-Trade"
+                        ? "#fff"
+                        : "#727272"
+                    }
+                  />
                 ) : null}
                 <span className="  w-full text-[14px] tracking-[-2%] leading-[22px] text-nowrap">
                   {eachdata.label}
@@ -139,7 +146,13 @@ const Sidebar = ({ link, showSideBar }: Props) => {
                 {eachdata.label.toLowerCase() === "settings" ? (
                   <SettingsSvg iconColor="#727272" />
                 ) : eachdata.label.toLowerCase() === "logout" ? (
-                  <LogoutSvg iconColor="#D70035" />
+                  <LogoutSvg
+                    iconColor={
+                      eachdata.label.toLowerCase() === "logout"
+                        ? "#D70035"
+                        : "#fff"
+                    }
+                  />
                 ) : null}
                 <span
                   className={`ml-3 text-[black] ${

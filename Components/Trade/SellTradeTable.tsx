@@ -11,6 +11,7 @@ import {
   toggleBuyTradeState,
 } from "@/redux/features/user/userSlice";
 import {
+  useGetAllTradeExecptMineQuery,
   useGetAllTradeQuery,
   useGetSingleTradeQuery,
 } from "@/redux/features/user/userApi";
@@ -25,8 +26,8 @@ const SellTradeTable = () => {
     }
   );
   const [listOfTrades, setlistOfTrades] = useState([]);
-  const allTradeData = useGetAllTradeQuery("");
-
+  // const allTradeData = useGetAllTradeQuery("");
+  const allTradeData = useGetAllTradeExecptMineQuery("");
   useEffect(() => {
     // createTrade();
 
