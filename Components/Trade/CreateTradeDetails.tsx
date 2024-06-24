@@ -27,7 +27,7 @@ const CreateTradeDetails = () => {
 
   const handleContinue = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    openMonoWidget();
+    openMonoWidget;
     // dispatch(toggleCreateTradeStage(4));
   };
 

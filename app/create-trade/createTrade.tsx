@@ -5,7 +5,6 @@ import USD from "../../public/Images/USD.png";
 import NGN from "../../public/Images/NGN.png";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { BiSolidCopy } from "react-icons/bi";
-import { useMonoPayment, useMonoWidget } from "../mono/monoServices";
 
 const CreateTradeDetails = () => {
   const router = useRouter();

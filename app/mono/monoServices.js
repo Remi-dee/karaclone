@@ -28,14 +28,13 @@ function useMonoWidget() {
     const monoInstance = new MonoConnect({
       key: "test_pk_ldvcm2kc4zpbki9mq0xt",
       onClose: () => console.log("Widget closed"),
-
       onSuccess: ({ code }) => console.log(`Linked successfully: ${code}`),
     });
 
     monoInstance.setup();
     monoInstance.open();
-
-    return openMonoWidget;
   }, []);
+
+  return openMonoWidget;
 }
 export { useMonoPayment, useMonoWidget };

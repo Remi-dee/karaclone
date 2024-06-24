@@ -13,10 +13,14 @@ import {
   useCreateTradeMutation,
   useCurrencyConverterQuery,
   useGetAllCurrencyPairsQuery,
+  useLoadUserQuery,
 } from "@/redux/features/user/userApi";
 
 import CreateTradeDropDown from "../CustomDropdown/CreateTradeDropDown";
 import { toast } from "react-toastify";
+import { useMonoWidget } from "@/app/mono/monoServices";
+import { useCreatePaymentMutation } from "@/redux/features/truelayer/truelayerApi";
+import { setPaymentDetails } from "@/redux/features/truelayer/truelayerSlice";
 
 interface TradeDetails {
   currency: string;
@@ -46,6 +50,20 @@ const CreateTrade = () => {
     beneficiary_name: "",
     beneficiary_account: "",
   });
+  const { data } = useLoadUserQuery({});
+  const [
+    createTrade,
+    {
+      isLoading: isCreatingTrade,
+      error: tradeError,
+      data: tradeData,
+      isSuccess: isTradeSuccess,
+    },
+  ] = useCreateTradeMutation();
+  const [
+    createPayment,
+    { isLoading: isCreatingPayment, error: paymentError, data: paymentData },
+  ] = useCreatePaymentMutation();
 
   const isFormValid = (): boolean => {
     for (const key in createTradeDetails) {
@@ -59,10 +77,60 @@ const CreateTrade = () => {
     []
   );
   const [converstionDataExit, setConverstionDataExit] = useState<string[]>([]);
-  const [createTrade, { isLoading, error, data, isSuccess }] =
-    useCreateTradeMutation();
 
-  const HandleTradeDetails = (e: any) => {
+  const openMonoWidget = useMonoWidget();
+
+  const handleCreateTruelayerPayment = async () => {
+    try {
+      const paymentData = {
+        amount_in_minor: parseInt(createTradeDetails?.amount), // Assuming amount is part of the trade details
+        currency: createTradeDetails?.currency, // Assuming currency is part of the trade details
+        payment_method: {
+          provider_selection: {
+            type: "user_selected",
+          },
+          type: "bank_transfer",
+          beneficiary: {
+            type: "merchant_account",
+            merchant_account_id: process.env.NEXT_PUBLIC_MERCHANT_ACCOUNT_ID,
+          },
+        },
+        user: {
+          id: "f61c0ec7-0f83-414e-8e5f-aace86e0ed35",
+          name: data.user.name,
+          email: data.user.email,
+          phone: data.user.phone,
+          date_of_birth: "1992-11-28",
+          address: {
+            address_line1: "40 Finsbury Square",
+            city: "London",
+            state: "London",
+            zip: "EC2A 1PX",
+            country_code: "GB",
+          },
+        },
+      };
+      console.log("payment data is", paymentData);
+      const result = await createPayment(paymentData).unwrap();
+      dispatch(
+        setPaymentDetails({
+          paymentId: result.payment_id,
+          resourceToken: result.resource_token,
+        })
+      );
+
+      const returnUri = encodeURIComponent(
+        "http://localhost:3000/dashboard/P2P-Trade"
+      );
+      const hppUrl = `https://payment.truelayer-sandbox.com/payments#payment_id=${result.payment_id}&resource_token=${result.resource_token}&return_uri=${returnUri}`;
+
+      window.location.href = hppUrl;
+    } catch (error) {
+      console.error("Error creating payment:", error);
+    }
+  };
+
+  const HandleTradeDetails = async (e: any) => {
     e.preventDefault();
     console.log(createTradeDetails);
 
@@ -72,23 +140,29 @@ const CreateTrade = () => {
     }
     // form submission handled here
 
-    createTrade(createTradeDetails);
+    // createTrade(createTradeDetails);
     // console.log(data);
-    console.log(error);
+    console.log(tradeError);
+    if (createTradeDetails?.currency === "NGN") {
+      await openMonoWidget();
+    } else {
+      handleCreateTruelayerPayment();
+    }
+
     // setShowTradeDetails(true);
   };
 
   useEffect(() => {
     // dispatch(toggleCreateTradeStage(3));
-    if (isSuccess) {
+    if (isTradeSuccess) {
       toast.success("Trade created successfully");
       dispatch(toggleCreateTradeStage(3));
-      dispatch(addCreatedTrade(data?.trade));
+      dispatch(addCreatedTrade(tradeData?.trade));
     }
-    if (error) {
+    if (tradeError) {
       toast.error("An error occurred!");
     }
-  }, [isSuccess, error]);
+  }, [isTradeSuccess, tradeError]);
 
   const handleCurrency = (value: string) => {
     // console.log(value);
