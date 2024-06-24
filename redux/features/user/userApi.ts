@@ -75,7 +75,8 @@ export const userApi = createApi({
         }
       },
     }),
-    //tranasaction
+
+    //tranasactions
     //get all transaction fees
 
     getTransactionFees: builder.query({
@@ -113,8 +114,6 @@ export const userApi = createApi({
       },
     }),
 
-    //next
-
     //get all currency pairs
 
     getAllCurrencyPairs: builder.query({
@@ -127,9 +126,9 @@ export const userApi = createApi({
         try {
           const result = await queryFulfilled;
 
-          console.log(result);
+          // console.log(result);
         } catch (error: any) {
-          console.log(error);
+          // console.log(error);
         }
       },
     }),
@@ -184,9 +183,9 @@ export const userApi = createApi({
         try {
           const result = await queryFulfilled;
 
-          console.log(result);
+          // console.log(result);
         } catch (error: any) {
-          console.log(error);
+          // console.log(error);
         }
       },
     }),
@@ -206,7 +205,7 @@ export const userApi = createApi({
 
     getAllTrade: builder.query({
       query: () => ({
-        url: "Trade/get-all-trades",
+        url: "Trade/get-mine",
         method: "GET",
         // credentials: "include" as const,
       }),
@@ -256,6 +255,27 @@ export const userApi = createApi({
       },
     }),
 
+    //Create Beneficiary
+
+    createBeneficiary: builder.mutation({
+      query: (args) => ({
+        url: "Trade/create-beneficiary",
+        method: "POST",
+        body: args,
+        // credentials: "include" as const,
+      }),
+    }),
+
+    //Get all beneficiaries
+
+    getBeneficiaries: builder.query({
+      query: () => ({
+        url: "Trade/get-user-beneficiaries",
+        method: "GET",
+        // credentials: "include" as const,
+      }),
+    }),
+
     //next
   }),
 });
@@ -276,4 +296,6 @@ export const {
   useGetAllTradeExecptMineQuery,
   useGetSingleTradeQuery,
   useCurrencyConverterQuery,
+  useCreateBeneficiaryMutation,
+  useGetBeneficiariesQuery,
 } = userApi;

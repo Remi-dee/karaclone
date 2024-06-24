@@ -19,7 +19,7 @@ const CustomModal: React.FC<CustomModalprops> = ({ children }) => {
     <>
       {isModalOpen && (
         <div className="fixed top-0 left-0 w-screen h-screen flex justify-center items-center inset-0 z-50  overflow-auto bg-gray-200 bg-opacity-50">
-          <div className="relative bg-[white] overflow-y-auto rounded-md shadow-lg mt-5 w-full p-8 max-w-[550px] max-h-[90vh]  min-h-[350px] flex">
+          <div className="relative bg-[white] overflow-y-auto rounded-md shadow-lg mt-5 w-full p-8 max-w-[550px] max-h-[90vh]   h-max _min-h-[350px] flex">
             {children}
             <div
               onClick={closeModalHandler}
