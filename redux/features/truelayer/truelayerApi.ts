@@ -50,7 +50,7 @@ export const trueLayerApi = createApi({
   endpoints: (builder) => ({
     createPayment: builder.mutation<PaymentResponse, CreatePaymentData>({
       query: (data) => ({
-        url: "/api/truelayer/payments/initiate",
+        url: "/truelayer/payments/initiate",
         method: "POST",
         body: data,
       }),
