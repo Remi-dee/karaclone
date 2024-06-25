@@ -8,9 +8,20 @@ import { toggleBuyTradeSuccessModal } from "@/redux/features/user/userSlice";
 import { useDispatch } from "react-redux";
 import svgBank from "@/public/svg/svgBank.svg";
 import { useGetBeneficiariesQuery } from "@/redux/features/user/userApi";
-function SelectBank({ onSelect }: { onSelect: any }) {
+import { closeModal } from "@/redux/modal/modalSlice";
+
+interface SelectBankProps {
+  // onAccountChange: (account: string) => void;
+  // onNameChange: (name: string) => void;
+  onSelect: any;
+  onAccountAndNameChange: (item: any) => void;
+}
+
+function SelectBank({ onSelect, onAccountAndNameChange }: SelectBankProps) {
   const [selected, setSelected] = useState<string | number>("");
+
   const dispatch = useDispatch();
+
   const handleSuccessMessage = () => {
     // setShowSuccess(true);
 
@@ -19,8 +30,19 @@ function SelectBank({ onSelect }: { onSelect: any }) {
     if (selected === "itemid") {
       dispatch(toggleBuyTradeSuccessModal(false));
     } else {
-      dispatch(toggleBuyTradeSuccessModal(true));
+      // instead of the modal that shows transaction success, close modal automatically.
+      // dispatch(toggleBuyTradeSuccessModal(true));
+
+      dispatch(closeModal());
     }
+  };
+
+  const handleSelect = (item: any) => {
+    console.log("Selected item:", item); // Debugging log
+    setSelected(item._id);
+    // onAccountChange(item?.account);
+    // onNameChange(item?.name);
+    onAccountAndNameChange(item);
   };
 
   // if (ShowSuccess) {
@@ -56,7 +78,10 @@ function SelectBank({ onSelect }: { onSelect: any }) {
             className={`h-[75px]  cursor-pointer flex justify-between items-center rounded-[8px] w-full border border-[#DCDCDC] p-4 gap-2 ${
               selected === item._id ? "border-purple-500" : ""
             }`}
-            onClick={() => setSelected(item.id)}
+            onClick={() => {
+              setSelected(item.id);
+              handleSelect(item);
+            }}
           >
             <div className="flex gap-[12px]">
               <div>
@@ -66,7 +91,10 @@ function SelectBank({ onSelect }: { onSelect: any }) {
                   name="radio"
                   id="radio"
                   checked={selected === item._id}
-                  onChange={() => setSelected(item._id)}
+                  onChange={() => {
+                    setSelected(item._id);
+                    handleSelect(item);
+                  }}
                 />
               </div>
               <div className="flex flex-col gap-[4px] justify-start">

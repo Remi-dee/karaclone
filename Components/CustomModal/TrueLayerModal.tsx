@@ -25,7 +25,7 @@ const MomoModal = () => {
     >
       <div className="text-center">
         <p className="mt-4">
-          Are you sure you want to Proceed with Mono Payment?
+          Are you sure you want to Proceed with True Layer?
         </p>
 
         <div className="flex justify-between gap-2 p-10">
