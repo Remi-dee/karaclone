@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   toggleBuyTradeDisplay,
   toggleBuyTradeSuccessModal,
+  toggleCreateTradeStage,
 } from "@/redux/features/user/userSlice";
 import SelectBank from "./SelectBank";
 import TradeModal from "../CustomModal/TradeModal";
@@ -38,7 +39,8 @@ const BuyTrade = () => {
   console.log(selectedTrade);
   const dispatch = useDispatch();
   const handleBack = () => {
-    dispatch(toggleBuyTradeDisplay(1));
+    dispatch(toggleCreateTradeStage(1));
+    // dispatch(toggleBuyTradeDisplay(1));
   };
   const [selectRecipient, setSelectRecipient] = useState<boolean>(false);
   const [option, setOption] = useState<string | null>("");

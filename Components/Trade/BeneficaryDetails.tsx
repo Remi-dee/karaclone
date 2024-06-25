@@ -1,8 +1,10 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import Image from "next/image";
 import svgBank from "@/public/svg/svgBank.svg";
 import { useCreateBeneficiaryMutation } from "@/redux/features/user/userApi";
 import { toast } from "react-toastify";
+import { closeModal } from "@/redux/modal/modalSlice";
+import { useDispatch } from "react-redux";
 
 interface BeneficiaryInputProps {
   label: string;
@@ -44,12 +46,14 @@ interface BeneficiarySelectProps {
   label: string;
   inputName: string;
   onChange: (value: string | any) => void;
+  options: Array<string> | any;
 }
 
 const BeneficiarySelect: React.FC<BeneficiarySelectProps> = ({
   label,
   inputName,
   onChange,
+  options,
 }) => {
   const [selectedValue, setSelectedValue] = useState<any>("");
 
@@ -74,9 +78,14 @@ const BeneficiarySelect: React.FC<BeneficiarySelectProps> = ({
           <option value="" disabled hidden>
             Select an option
           </option>
-          <option value="option1">Zenith Bank</option>
-          <option value="option2">Wema Bank</option>
-          <option value="option3">Kuda Bank</option>
+
+          {options?.map((option: string, i: number) => {
+            return (
+              <option key={i} value={option}>
+                {option}
+              </option>
+            );
+          })}
         </select>
         <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
           <svg
@@ -99,15 +108,27 @@ const BeneficiarySelect: React.FC<BeneficiarySelectProps> = ({
   );
 };
 
-function BeneficaryDetails({ onSelect }: { onSelect: any }) {
+function BeneficaryDetails({
+  onSelect,
+  currency,
+}: {
+  currency: string;
+  onSelect: any;
+}) {
   const [createBeneficiary, { isLoading, isError, isSuccess, data, error }] =
     useCreateBeneficiaryMutation();
   const [BeneficaryDetails, setBeneficaryDetails] = useState({
     name: "",
     account: "",
     bank_name: "",
+    currency: currency,
+    swift_code: "",
+    ACH_Routing: "",
+    Account_Type: "",
+    bank_address: "",
   });
 
+  const dispatch = useDispatch();
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     // console.log(e);
@@ -133,12 +154,35 @@ function BeneficaryDetails({ onSelect }: { onSelect: any }) {
       toast.error("There was an error creating Beneficiary!");
     }
   };
+
+  const validateDetails = () => {
+    for (const key in BeneficaryDetails) {
+      if (BeneficaryDetails[key as keyof typeof BeneficaryDetails] === "") {
+        return false;
+      }
+    }
+    return true;
+  };
+
   const continueHanlder = (e: any) => {
     e.preventDefault();
     // onSelect("1");
-    console.log(BeneficaryDetails);
-    handleCreateBeneficiary(BeneficaryDetails);
+
+    if (validateDetails()) {
+      console.log(BeneficaryDetails);
+      handleCreateBeneficiary(BeneficaryDetails);
+    } else {
+      toast.error("Please fill in all fields.");
+      // Optionally display an error message to the user
+    }
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("Beneficary created successfully!");
+      dispatch(closeModal());
+    }
+  }, [isSuccess]);
 
   return (
     <div className="   h-[1000px]  max-h-[1027px]  min-h-max">
@@ -171,6 +215,7 @@ function BeneficaryDetails({ onSelect }: { onSelect: any }) {
           onChange={handleSelectChange}
           inputName="bank_name"
           label="Bank Name"
+          options={["Zenith Bank", "Kuda Bank", "Wemic Bank"]}
         />
         <BeneficiaryInput
           inputName="swift_code"
@@ -178,14 +223,15 @@ function BeneficaryDetails({ onSelect }: { onSelect: any }) {
           label="Swift Code"
         />
         <BeneficiaryInput
-          inputName="ach_routing"
+          inputName="ACH_Routing"
           onChange={handleInputChange}
           label="ACH Routing"
         />
         <BeneficiarySelect
-          inputName="account_type"
+          inputName="Account_Type"
           onChange={handleSelectChange}
           label="Account Type"
+          options={["Business", "Individual"]}
         />
         <BeneficiaryInput
           inputName="bank_address"

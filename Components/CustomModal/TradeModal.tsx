@@ -17,16 +17,16 @@ const CustomModal: React.FC<CustomModalprops> = ({ children }) => {
 
   return (
     <>
-      {true && (
+      {isModalOpen && (
         <div className="fixed top-0 left-0 w-screen h-full flex justify-center items-center inset-0 z-50  overflow-auto bg-gray-200 bg-opacity-[0.7]">
-          <div className="relative p-[32px_40px_32px_40px] bg-[white] overflow-y-auto rounded-md shadow-lg   h-full  max-h-[90vh]  min-h-[350px] flex">
+          <div className="relative p-[32px_40px_32px_40px] bg-[white] overflow-y-auto rounded-md shadow-lg   h-full  max-h-[90vh]  min-h-[360px] flex">
             {children}
-            {/* <div
+            <div
               onClick={closeModalHandler}
               className="absolute top-0 right-0 p-4 mt-[32px]  cursor-pointer"
             >
               <MdCancel className="text-gray-200 text-lg" />
-            </div> */}
+            </div>
           </div>
         </div>
       )}

@@ -22,7 +22,7 @@ import TradeSuccessModal from "../CustomModal/TradeSuccessModal";
 import BeneficaryDetails from "./BeneficaryDetails";
 import SelectBank from "./SelectBank";
 import TradeTransSuccesss from "./TradeTransSuccess";
-
+import { openModal } from "@/redux/modal/modalSlice";
 interface TradeDetails {
   currency: string;
   exit_currency: string;
@@ -41,6 +41,8 @@ const CreateTrade = () => {
   const [rate, setrate] = useState<number | null | any>(null);
   const [showTradeDetails, setShowTradeDetails] = useState(false);
 
+  const [beneficiary_account, setbeneficiary_account] = useState("");
+
   const [createTradeDetails, setcreateTradeDetails] = useState({
     currency: "",
     exit_currency: "",
@@ -50,14 +52,29 @@ const CreateTrade = () => {
     bank_name: "",
     account_number: "",
     beneficiary_name: "",
-    beneficiary_account: "Default Account",
-    beneficiary_bank: "Default Bank",
+    beneficiary_account: "",
+    beneficiary_bank: "",
     vat_fee: "XX",
     sold: 0,
     payment_method: "",
     additional_information: "",
     transaction_fee: "XX",
   });
+
+  const handleAccountAndNameChange = (item: any) => {
+    setcreateTradeDetails({
+      ...createTradeDetails,
+      beneficiary_name: item?.name,
+    });
+    setcreateTradeDetails((prevDetails) => ({
+      ...prevDetails,
+      beneficiary_account: item?.account,
+    }));
+    setcreateTradeDetails((prevDetails) => ({
+      ...prevDetails,
+      beneficiary_bank: item?.bank_name,
+    }));
+  };
 
   //manange modal
   const [selectRecipient, setSelectRecipient] = useState<boolean>(false);
@@ -67,7 +84,7 @@ const CreateTrade = () => {
   };
 
   const handleSelect = (item: string | number) => {
-    console.log(item);
+    // console.log(item);
     setSelectedItems(item);
   };
 
@@ -89,7 +106,7 @@ const CreateTrade = () => {
 
   const HandleTradeDetails = (e: any) => {
     e.preventDefault();
-
+    console.log(createTradeDetails);
     if (!isFormValid()) {
       toast.warn("Please fill in all the fields.");
       return;
@@ -182,6 +199,9 @@ const CreateTrade = () => {
   }, [dataForCalc?.isSuccess, dataForCalc?.data]);
 
   const beneficicaryHandlder = (e: any) => {
+    e.preventDefault();
+    dispatch(openModal());
+    return setSelectRecipient(true);
     selectRecipient === true
       ? setSelectRecipient(false)
       : setSelectRecipient(true); // Hide the recipient selection modal
@@ -370,12 +390,12 @@ const CreateTrade = () => {
                 <select
                   onClick={beneficicaryHandlder}
                   name=""
-                  className="w-full text-gray-300 outline-none border-none text-xs p-1"
+                  className="w-full text-gray-300 outline-none border-none text-xs p-1   "
                   id=""
                 >
                   <option
                     value=""
-                    className="text-[400] text-[16px] leading-[24px] w-full"
+                    className="text-[400] appearance-none text-[16px] leading-[24px] w-full"
                   >
                     Select Beneficiary
                   </option>
@@ -384,51 +404,54 @@ const CreateTrade = () => {
             </div>
 
             <hr className="mt-2 border-gray-900 border" />
+            {createTradeDetails?.payment_method === "Direct Deposit" ? (
+              <>
+                <div>
+                  <label
+                    htmlFor=""
+                    className=" text-[16px]  leading-[24px]  tracking-[-2%]  text-[#000000] font-semibold"
+                  >
+                    Bank Name
+                  </label>
+                  <div className="h-[46px] w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
+                    <select
+                      name="bank_name"
+                      onChange={handleSelectChange}
+                      className="w-full outline-none border-none text-gray-300 p-1 text-xs"
+                      id=""
+                    >
+                      <option value="" disabled selected>
+                        Select Bank
+                      </option>
 
-            <div>
-              <label
-                htmlFor=""
-                className=" text-[16px]  leading-[24px]  tracking-[-2%]  text-[#000000] font-semibold"
-              >
-                Bank Name
-              </label>
-              <div className="h-[46px] w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
-                <select
-                  name="bank_name"
-                  onChange={handleSelectChange}
-                  className="w-full outline-none border-none text-gray-300 p-1 text-xs"
-                  id=""
-                >
-                  <option value="" disabled selected>
-                    Select Bank
-                  </option>
-
-                  <option value=" Zenith Bank" className="text-300 w-full">
-                    Zenith Bank
-                  </option>
-                  <option value="Wema Bank" className="text-300 w-full">
-                    Wema Bank
-                  </option>
-                </select>
-              </div>
-            </div>
-            <div>
-              <label
-                htmlFor=""
-                className=" text-[16px]  leading-[24px]  tracking-[-2%]  text-[#000000] font-semibold"
-              >
-                Account Number
-              </label>
-              <div className="h-[46px] w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
-                <input
-                  name="account_number"
-                  onChange={handleChange}
-                  type="text"
-                  className="outline-none placeholder:gray-200 placeholder:text-xs"
-                  placeholder="Enter Account Number"
-                />
-              </div>
-            </div>
+                      <option value=" Zenith Bank" className="text-300 w-full">
+                        Zenith Bank
+                      </option>
+                      <option value="Wema Bank" className="text-300 w-full">
+                        Wema Bank
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div>
+                  <label
+                    htmlFor=""
+                    className=" text-[16px]  leading-[24px]  tracking-[-2%]  text-[#000000] font-semibold"
+                  >
+                    Account Number
+                  </label>
+                  <div className="h-[46px] w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
+                    <input
+                      name="account_number"
+                      onChange={handleChange}
+                      type="text"
+                      className="outline-none placeholder:gray-200 placeholder:text-xs"
+                      placeholder="Enter Account Number"
+                    />
+                  </div>
+                </div>{" "}
+              </>
+            ) : null}
             <div>
               <label
                 htmlFor=""
@@ -480,15 +503,27 @@ const CreateTrade = () => {
 
       {selectRecipient ? (
         <TradeModal>
-          {selectedItems === "" ? (
-            <SelectBank onSelect={handleSelect} />
-          ) : selectedItems === "itemid" ? (
-            <BeneficaryDetails onSelect={handleSelect} />
-          ) : (
-            <TradeSuccessModal>
-              <TradeTransSuccesss />
-            </TradeSuccessModal>
-          )}
+          {
+            selectedItems === "" ? (
+              <SelectBank
+                onAccountAndNameChange={handleAccountAndNameChange}
+                onSelect={handleSelect}
+              />
+            ) : selectedItems === "itemid" ? (
+              <BeneficaryDetails
+                currency={createTradeDetails?.currency}
+                onSelect={handleSelect}
+              />
+            ) : (
+              <SelectBank
+                onAccountAndNameChange={handleAccountAndNameChange}
+                onSelect={handleSelect}
+              />
+            )
+            // <TradeSuccessModal>
+            //   <TradeTransSuccesss />
+            // </TradeSuccessModal>
+          }
         </TradeModal>
       ) : null}
       {/* {selectedComponent} */}
