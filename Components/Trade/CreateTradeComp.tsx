@@ -2,7 +2,9 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { IoIosArrowRoundBack } from "react-icons/io";
-
+import NGN from "@/public/Images/NGN.png";
+import GBP from "@/public/Images/GBP.png";
+import USD from "@/public/Images/USD.png";
 import {
   toggleCreateTrade,
   toggleCreateTradeStage,
@@ -23,6 +25,7 @@ import BeneficaryDetails from "./BeneficaryDetails";
 import SelectBank from "./SelectBank";
 import TradeTransSuccesss from "./TradeTransSuccess";
 import { openModal } from "@/redux/modal/modalSlice";
+import Image from "next/image";
 interface TradeDetails {
   currency: string;
   exit_currency: string;
@@ -41,7 +44,7 @@ const CreateTrade = () => {
   const [rate, setrate] = useState<number | null | any>(null);
   const [showTradeDetails, setShowTradeDetails] = useState(false);
 
-  const [beneficiary_account, setbeneficiary_account] = useState("");
+  const [benefiaryCurrency, setbenefiaryCurrency] = useState("");
 
   const [createTradeDetails, setcreateTradeDetails] = useState({
     currency: "",
@@ -74,6 +77,7 @@ const CreateTrade = () => {
       ...prevDetails,
       beneficiary_bank: item?.bank_name,
     }));
+    return setbenefiaryCurrency(item?.currency);
   };
 
   //manange modal
@@ -386,20 +390,49 @@ const CreateTrade = () => {
               >
                 Select Beneficiary
               </label>
-              <div className="h-[46px] w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
-                <select
-                  onClick={beneficicaryHandlder}
-                  name=""
-                  className="w-full text-gray-300 outline-none border-none text-xs p-1   "
-                  id=""
-                >
-                  <option
-                    value=""
-                    className="text-[400] appearance-none text-[16px] leading-[24px] w-full"
+
+              <div className="h-[46px] w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px] border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
+                {createTradeDetails?.beneficiary_name === "" &&
+                createTradeDetails?.beneficiary_bank === "" ? (
+                  <select
+                    onClick={beneficicaryHandlder}
+                    name=""
+                    className="w-full text-gray-300 outline-none border-none text-xs p-1"
+                    id=""
                   >
-                    Select Beneficiary
-                  </option>
-                </select>
+                    <option
+                      value=""
+                      className="text-[400] appearance-none text-[16px] leading-[24px] w-full"
+                    >
+                      Select Beneficiary
+                    </option>
+                  </select>
+                ) : (
+                  <div
+                    onClick={beneficicaryHandlder}
+                    className="w-full text-gray-300 text-xs p-1 flex justify-between items-center"
+                  >
+                    <div>
+                      <div className="text-[400] text-[16px] leading-[24px]">
+                        {createTradeDetails?.beneficiary_name}
+                      </div>
+                      <div className="text-[400] text-[12px] leading-[24px]">
+                        {createTradeDetails?.beneficiary_account}
+                      </div>
+                    </div>
+                    <Image
+                      src={
+                        benefiaryCurrency === "NGN"
+                          ? NGN
+                          : benefiaryCurrency === "USD"
+                          ? USD
+                          : GBP
+                      }
+                      alt="flag"
+                      className="h-6 w-6"
+                    />
+                  </div>
+                )}
               </div>
             </div>
 

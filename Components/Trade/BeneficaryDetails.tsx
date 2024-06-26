@@ -167,9 +167,9 @@ function BeneficaryDetails({
   const continueHanlder = (e: any) => {
     e.preventDefault();
     // onSelect("1");
-
+    // console.log(BeneficaryDetails);
     if (validateDetails()) {
-      console.log(BeneficaryDetails);
+      // console.log(BeneficaryDetails);
       handleCreateBeneficiary(BeneficaryDetails);
     } else {
       toast.error("Please fill in all fields.");
@@ -181,6 +181,7 @@ function BeneficaryDetails({
     if (isSuccess) {
       toast.success("Beneficary created successfully!");
       dispatch(closeModal());
+      onSelect(1);
     }
   }, [isSuccess]);
 
