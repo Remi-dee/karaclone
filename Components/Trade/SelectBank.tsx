@@ -9,7 +9,9 @@ import { useDispatch } from "react-redux";
 import svgBank from "@/public/svg/svgBank.svg";
 import { useGetBeneficiariesQuery } from "@/redux/features/user/userApi";
 import { closeModal } from "@/redux/modal/modalSlice";
-
+import NGN from "@/public/Images/NGN.png";
+import GBP from "@/public/Images/GBP.png";
+import USD from "@/public/Images/USD.png";
 interface SelectBankProps {
   // onAccountChange: (account: string) => void;
   // onNameChange: (name: string) => void;
@@ -105,7 +107,16 @@ function SelectBank({ onSelect, onAccountAndNameChange }: SelectBankProps) {
               </div>
             </div>
             <div>
-              <Image src={NigerianFlag} alt="" />
+              <Image
+                src={
+                  item?.currency === "NGN"
+                    ? NGN
+                    : item?.currency === "USD"
+                    ? USD
+                    : GBP
+                }
+                alt=""
+              />
             </div>
           </div>
         ))}
