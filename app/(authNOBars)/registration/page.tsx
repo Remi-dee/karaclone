@@ -14,7 +14,7 @@ function Page() {
   const globalState = useSelector((state: any) => state.auth);
   const level = globalState?.registrationStage;
   const accountType = globalState?.account_type;
-  console.log(globalState);
+
   const dispatch = useDispatch();
   const continueHandler = () => {
     dispatch(increaseRegistrationStage());

@@ -3,6 +3,9 @@ import React, { ChangeEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { v4 as uuidv4 } from "uuid";
+import NGN from "@/public/Images/NGN.png";
+import GBP from "@/public/Images/GBP.png";
+import USD from "@/public/Images/USD.png";
 import {
   toggleCreateTrade,
   toggleCreateTradeStage,
@@ -28,6 +31,8 @@ import SelectBank from "./SelectBank";
 import TradeTransSuccesss from "./TradeTransSuccess";
 import { handleCreateTruelayerPayment } from "./util/truelayerService";
 
+import { openModal } from "@/redux/modal/modalSlice";
+import Image from "next/image";
 interface TradeDetails {
   currency: string;
   exit_currency: string;
@@ -46,6 +51,8 @@ const CreateTrade = () => {
   const [rate, setrate] = useState<number | null | any>(null);
   const [showTradeDetails, setShowTradeDetails] = useState(false);
 
+  const [benefiaryCurrency, setbenefiaryCurrency] = useState("");
+
   const [createTradeDetails, setcreateTradeDetails] = useState({
     currency: "",
     exit_currency: "",
@@ -55,8 +62,8 @@ const CreateTrade = () => {
     bank_name: "",
     account_number: "",
     beneficiary_name: "",
-    beneficiary_account: "Default Account",
-    beneficiary_bank: "Default Bank",
+    beneficiary_account: "",
+    beneficiary_bank: "",
     vat_fee: "XX",
     sold: 0,
     payment_method: "",
@@ -78,6 +85,22 @@ const CreateTrade = () => {
     { isLoading: isCreatingPayment, error: paymentError, data: paymentData },
   ] = useCreatePaymentMutation();
 
+  const handleAccountAndNameChange = (item: any) => {
+    setcreateTradeDetails({
+      ...createTradeDetails,
+      beneficiary_name: item?.name,
+    });
+    setcreateTradeDetails((prevDetails) => ({
+      ...prevDetails,
+      beneficiary_account: item?.account,
+    }));
+    setcreateTradeDetails((prevDetails) => ({
+      ...prevDetails,
+      beneficiary_bank: item?.bank_name,
+    }));
+    return setbenefiaryCurrency(item?.currency);
+  };
+
   //manange modal
   const [selectRecipient, setSelectRecipient] = useState<boolean>(false);
   const [selectedItems, setSelectedItems] = useState<string | number>("");
@@ -86,7 +109,7 @@ const CreateTrade = () => {
   };
 
   const handleSelect = (item: string | number) => {
-    console.log(item);
+    // console.log(item);
     setSelectedItems(item);
   };
 
@@ -159,7 +182,6 @@ const CreateTrade = () => {
   const HandleTradeDetails = async (e: any) => {
     e.preventDefault();
     console.log(createTradeDetails);
-
     if (!isFormValid()) {
       toast.warn("Please fill in all the fields.");
       return;
@@ -264,6 +286,9 @@ const CreateTrade = () => {
   }, [dataForCalc?.isSuccess, dataForCalc?.data]);
 
   const beneficicaryHandlder = (e: any) => {
+    e.preventDefault();
+    dispatch(openModal());
+    return setSelectRecipient(true);
     selectRecipient === true
       ? setSelectRecipient(false)
       : setSelectRecipient(true); // Hide the recipient selection modal
@@ -448,69 +473,101 @@ const CreateTrade = () => {
               >
                 Select Beneficiary
               </label>
-              <div className="h-[46px] w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
-                <select
-                  onClick={beneficicaryHandlder}
-                  name=""
-                  className="w-full text-gray-300 outline-none border-none text-xs p-1"
-                  id=""
-                >
-                  <option
-                    value=""
-                    className="text-[400] text-[16px] leading-[24px] w-full"
+
+              <div className="h-[46px] w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px] border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
+                {createTradeDetails?.beneficiary_name === "" &&
+                createTradeDetails?.beneficiary_bank === "" ? (
+                  <select
+                    onClick={beneficicaryHandlder}
+                    name=""
+                    className="w-full text-gray-300 outline-none border-none text-xs p-1"
+                    id=""
                   >
-                    Select Beneficiary
-                  </option>
-                </select>
+                    <option
+                      value=""
+                      className="text-[400] appearance-none text-[16px] leading-[24px] w-full"
+                    >
+                      Select Beneficiary
+                    </option>
+                  </select>
+                ) : (
+                  <div
+                    onClick={beneficicaryHandlder}
+                    className="w-full text-gray-300 text-xs p-1 flex justify-between items-center"
+                  >
+                    <div>
+                      <div className="text-[400] text-[16px] leading-[24px]">
+                        {createTradeDetails?.beneficiary_name}
+                      </div>
+                      <div className="text-[400] text-[12px] leading-[24px]">
+                        {createTradeDetails?.beneficiary_account}
+                      </div>
+                    </div>
+                    <Image
+                      src={
+                        benefiaryCurrency === "NGN"
+                          ? NGN
+                          : benefiaryCurrency === "USD"
+                          ? USD
+                          : GBP
+                      }
+                      alt="flag"
+                      className="h-6 w-6"
+                    />
+                  </div>
+                )}
               </div>
             </div>
 
             <hr className="mt-2 border-gray-900 border" />
+            {createTradeDetails?.payment_method === "Direct Deposit" ? (
+              <>
+                <div>
+                  <label
+                    htmlFor=""
+                    className=" text-[16px]  leading-[24px]  tracking-[-2%]  text-[#000000] font-semibold"
+                  >
+                    Bank Name
+                  </label>
+                  <div className="h-[46px] w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
+                    <select
+                      name="bank_name"
+                      onChange={handleSelectChange}
+                      className="w-full outline-none border-none text-gray-300 p-1 text-xs"
+                      id=""
+                    >
+                      <option value="" disabled selected>
+                        Select Bank
+                      </option>
 
-            <div>
-              <label
-                htmlFor=""
-                className=" text-[16px]  leading-[24px]  tracking-[-2%]  text-[#000000] font-semibold"
-              >
-                Bank Name
-              </label>
-              <div className="h-[46px] w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
-                <select
-                  name="bank_name"
-                  onChange={handleSelectChange}
-                  className="w-full outline-none border-none text-gray-300 p-1 text-xs"
-                  id=""
-                >
-                  <option value="" disabled selected>
-                    Select Bank
-                  </option>
-
-                  <option value=" Zenith Bank" className="text-300 w-full">
-                    Zenith Bank
-                  </option>
-                  <option value="Wema Bank" className="text-300 w-full">
-                    Wema Bank
-                  </option>
-                </select>
-              </div>
-            </div>
-            <div>
-              <label
-                htmlFor=""
-                className=" text-[16px]  leading-[24px]  tracking-[-2%]  text-[#000000] font-semibold"
-              >
-                Account Number
-              </label>
-              <div className="h-[46px] w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
-                <input
-                  name="account_number"
-                  onChange={handleChange}
-                  type="text"
-                  className="outline-none placeholder:gray-200 placeholder:text-xs"
-                  placeholder="Enter Account Number"
-                />
-              </div>
-            </div>
+                      <option value=" Zenith Bank" className="text-300 w-full">
+                        Zenith Bank
+                      </option>
+                      <option value="Wema Bank" className="text-300 w-full">
+                        Wema Bank
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div>
+                  <label
+                    htmlFor=""
+                    className=" text-[16px]  leading-[24px]  tracking-[-2%]  text-[#000000] font-semibold"
+                  >
+                    Account Number
+                  </label>
+                  <div className="h-[46px] w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
+                    <input
+                      name="account_number"
+                      onChange={handleChange}
+                      type="text"
+                      className="outline-none placeholder:gray-200 placeholder:text-xs"
+                      placeholder="Enter Account Number"
+                    />
+                  </div>
+                </div>{" "}
+              </>
+            ) : null}
             <div>
               <label
                 htmlFor=""
@@ -562,15 +619,27 @@ const CreateTrade = () => {
 
       {selectRecipient ? (
         <TradeModal>
-          {selectedItems === "" ? (
-            <SelectBank onSelect={handleSelect} />
-          ) : selectedItems === "itemid" ? (
-            <BeneficaryDetails onSelect={handleSelect} />
-          ) : (
-            <TradeSuccessModal>
-              <TradeTransSuccesss />
-            </TradeSuccessModal>
-          )}
+          {
+            selectedItems === "" ? (
+              <SelectBank
+                onAccountAndNameChange={handleAccountAndNameChange}
+                onSelect={handleSelect}
+              />
+            ) : selectedItems === "itemid" ? (
+              <BeneficaryDetails
+                currency={createTradeDetails?.currency}
+                onSelect={handleSelect}
+              />
+            ) : (
+              <SelectBank
+                onAccountAndNameChange={handleAccountAndNameChange}
+                onSelect={handleSelect}
+              />
+            )
+            // <TradeSuccessModal>
+            //   <TradeTransSuccesss />
+            // </TradeSuccessModal>
+          }
         </TradeModal>
       ) : null}
       {/* {selectedComponent} */}

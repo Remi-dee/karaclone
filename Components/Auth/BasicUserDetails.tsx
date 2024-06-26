@@ -1,5 +1,5 @@
 "use client";
-import React, { FC, useState } from "react";
+import React, { ChangeEvent, FC, useEffect, useState } from "react";
 import Link from "next/link";
 import { TiUser } from "react-icons/ti";
 import { IoIosInformationCircleOutline } from "react-icons/io";
@@ -17,6 +17,24 @@ import {
 //   setActive: (active: any) => void;
 //   handleBasicDetailsSubmit: any;
 // };
+interface PhoneFormat {
+  placeholder: string;
+  regex: RegExp;
+}
+const phoneFormats: { [key: string]: PhoneFormat } = {
+  "+1": {
+    placeholder: "+1 (555) 000-0000",
+    regex: /^\+1\s\(\d{3}\)\s\d{3}-\d{4}$/,
+  },
+  "+234": {
+    placeholder: "+234 800 000 0000",
+    regex: /^\+234\s\d{4}\s\d{3}\s\d{4}$/,
+  },
+  "+44": {
+    placeholder: "+44 07123 456789",
+    regex: /^\+44\s\d{5}\s\d{6}$/,
+  },
+};
 
 const BasicUserDetails: FC<any> = () => {
   const [inputValuesForBasic, setinputValuesForBasic] = useState({
@@ -27,16 +45,43 @@ const BasicUserDetails: FC<any> = () => {
     phone: "",
     role: "user",
   });
-  const globalState = useSelector((state: any) => state.auth);
+  const [selectedCountry, setSelectedCountry] = useState<string>("+1");
 
-  // console.log(accountType);
+  const [isValid, setIsValid] = useState<boolean>(true);
+  const globalState = useSelector((state: any) => state.auth);
+  const validatePhoneNumber = (value: string) => {
+    const isValid = value.startsWith(selectedCountry);
+    setIsValid(isValid);
+  };
+
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
-    console.log(name, value);
+
+    if (name === "phone") {
+      validatePhoneNumber(value);
+    }
+
     setinputValuesForBasic({
       ...inputValuesForBasic,
       [name]: value,
     });
+  };
+
+  useEffect(() => {
+    if (inputValuesForBasic?.phone) {
+      validatePhoneNumber(inputValuesForBasic?.phone);
+    }
+  }, [selectedCountry]);
+
+  const handleCountryChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    setSelectedCountry(e.target.value);
+
+    setinputValuesForBasic({
+      ...inputValuesForBasic,
+      phone: "",
+    });
+
+    setIsValid(true);
   };
 
   const dispatch = useDispatch();
@@ -154,7 +199,11 @@ const BasicUserDetails: FC<any> = () => {
               Phone Number<span className="text-red-400  pl-[0.1rem]">*</span>
             </label>
             <div className="flex items-center mt-2 border mb-6 rounded-md">
-              <select className=" rounded-md p-1.5 focus:outline-none">
+              <select
+                value={selectedCountry}
+                onChange={handleCountryChange}
+                className="rounded-md p-1.5 focus:outline-none"
+              >
                 <option value="+1">US</option>
                 <option value="+234">NG</option>
                 <option value="+44">UK</option>
@@ -163,11 +212,18 @@ const BasicUserDetails: FC<any> = () => {
                 type="text"
                 required
                 name="phone"
-                value={inputValuesForBasic.phone}
+                value={inputValuesForBasic?.phone}
                 onChange={handleInputChange}
-                placeholder="  +1(555) 000-0000"
-                className=" w-[96%]  outline-none"
+                placeholder={phoneFormats[selectedCountry].placeholder}
+                className={`w-[96%] outline-none ${
+                  !isValid ? "border-red-500" : ""
+                }`}
               />
+              {!isValid && (
+                <p className="text-red-500 text-sm mt-1">
+                  Must match {selectedCountry}!
+                </p>
+              )}
             </div>
           </div>
           <div className="w-full flex items-center justify-end">
