@@ -74,6 +74,17 @@ body {
 
 }
 
+.dropdown-arrow {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 0.5em;
+  vertical-align: middle;
+  border-top: 0.4em solid #ccc;
+  border-right: 0.4em solid transparent;
+  border-left: 0.4em solid transparent;
+}
+
 @keyframes changeBackgroundColor {
 
   0%,
