@@ -394,19 +394,15 @@ const CreateTrade = () => {
               <div className="h-[46px] w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px] border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
                 {createTradeDetails?.beneficiary_name === "" &&
                 createTradeDetails?.beneficiary_bank === "" ? (
-                  <select
+                  <div
                     onClick={beneficicaryHandlder}
-                    name=""
-                    className="w-full text-gray-300 outline-none border-none text-xs p-1"
-                    id=""
+                    className="w-full text-gray-300 text-xs p-1 flex justify-between items-center"
                   >
-                    <option
-                      value=""
-                      className="text-[400] appearance-none text-[16px] leading-[24px] w-full"
-                    >
+                    <span className="text-[400] text-[16px] leading-[24px]">
                       Select Beneficiary
-                    </option>
-                  </select>
+                    </span>
+                    <span className="dropdown-arrow"></span>
+                  </div>
                 ) : (
                   <div
                     onClick={beneficicaryHandlder}
