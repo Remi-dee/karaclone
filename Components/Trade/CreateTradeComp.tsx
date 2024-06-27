@@ -182,10 +182,10 @@ const CreateTrade = () => {
   const HandleTradeDetails = async (e: any) => {
     e.preventDefault();
     console.log(createTradeDetails);
-    if (!isFormValid()) {
-      toast.warn("Please fill in all the fields.");
-      return;
-    }
+    // if (!isFormValid()) {
+    //   toast.warn("Please fill in all the fields.");
+    //   return;
+    // }
     // form submission handled here
 
     // createTrade(createTradeDetails);
