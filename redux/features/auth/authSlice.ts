@@ -22,6 +22,12 @@ const initialState = {
   business_line: "",
   password: "",
   confirmPassword: "",
+  // date_of_birth: "",
+  // address: "",
+  // city: "",
+  // state: "",
+  // zip: "",
+  // country_code: "",
 };
 
 const authSlice = createSlice({

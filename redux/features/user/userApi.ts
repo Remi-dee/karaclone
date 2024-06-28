@@ -236,6 +236,20 @@ export const userApi = createApi({
         // credentials: "include" as const,
       }),
     }),
+    CurrentRate: builder.query<
+      any,
+      { baseCurrency: string; quoteCurrency: string }
+    >({
+      query: ({ baseCurrency, quoteCurrency }) => ({
+        url: "currency-conversion/exchange-rate",
+        method: "GET",
+        params: {
+          baseCurrency,
+          quoteCurrency,
+        },
+        // credentials: "include" as const,
+      }),
+    }),
 
     //next
     getSingleTrade: builder.query({
@@ -274,6 +288,7 @@ export const userApi = createApi({
         method: "GET",
         // credentials: "include" as const,
       }),
+      keepUnusedDataFor: 60, // Keep the data for 60 seconds in the cache
     }),
 
     //next
@@ -282,6 +297,7 @@ export const userApi = createApi({
 
 export const {
   useEnableTwofaQuery,
+  useCurrentRateQuery,
   useVerifyTwofaMutation,
   useLoadUserQuery,
   useLogOutQuery,
