@@ -2,6 +2,7 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { IoIosArrowRoundBack } from "react-icons/io";
+import { v4 as uuidv4 } from "uuid";
 import NGN from "@/public/Images/NGN.png";
 import GBP from "@/public/Images/GBP.png";
 import USD from "@/public/Images/USD.png";
@@ -16,15 +17,21 @@ import {
   useCurrencyConverterQuery,
   useCurrentRateQuery,
   useGetAllCurrencyPairsQuery,
+  useLoadUserQuery,
 } from "@/redux/features/user/userApi";
 
 import CreateTradeDropDown from "../CustomDropdown/CreateTradeDropDown";
 import { toast } from "react-toastify";
+import { useMonoWidget } from "@/app/mono/monoServices";
+import { useCreatePaymentMutation } from "@/redux/features/truelayer/truelayerApi";
+import { setPaymentDetails } from "@/redux/features/truelayer/truelayerSlice";
 import TradeModal from "../CustomModal/TradeModal";
 import TradeSuccessModal from "../CustomModal/TradeSuccessModal";
 import BeneficaryDetails from "./BeneficaryDetails";
 import SelectBank from "./SelectBank";
 import TradeTransSuccesss from "./TradeTransSuccess";
+import { handleCreateTruelayerPayment } from "./util/truelayerService";
+
 import { openModal } from "@/redux/modal/modalSlice";
 import Image from "next/image";
 interface TradeDetails {
@@ -64,6 +71,16 @@ const CreateTrade = () => {
     additional_information: "",
     transaction_fee: "XX",
   });
+  const { data } = useLoadUserQuery({});
+  const [
+    createTrade,
+    {
+      isLoading: isCreatingTrade,
+      error: tradeError,
+      data: tradeData,
+      isSuccess: isTradeSuccess,
+    },
+  ] = useCreateTradeMutation();
 
   const handleAccountAndNameChange = (item: any) => {
     setcreateTradeDetails({
@@ -106,10 +123,9 @@ const CreateTrade = () => {
   );
   const [converstionDataExit, setConverstionDataExit] = useState<string[]>([]);
 
-  const [createTrade, { isLoading, error, data, isSuccess }] =
-    useCreateTradeMutation();
+  const openMonoWidget = useMonoWidget();
 
-  const HandleTradeDetails = (e: any) => {
+  const HandleTradeDetails = async (e: any) => {
     e.preventDefault();
     console.log(createTradeDetails);
     if (!isFormValid()) {
@@ -117,24 +133,27 @@ const CreateTrade = () => {
       return;
     }
     // form submission handled here
+    dispatch(addCreatedTrade(createTradeDetails));
 
-    createTrade(createTradeDetails);
-    // console.log(data);
-    console.log(error);
+    dispatch(toggleCreateTradeStage(3));
+    // createTrade(createTradeDetails);
+    // console.log(createTradeDetails);
+    console.log(tradeError);
+
     // setShowTradeDetails(true);
   };
 
-  useEffect(() => {
-    // dispatch(toggleCreateTradeStage(3));
-    if (isSuccess) {
-      toast.success("Trade created successfully");
-      dispatch(toggleCreateTradeStage(3));
-      dispatch(addCreatedTrade(data?.trade));
-    }
-    if (error) {
-      toast.error("An error occurred!");
-    }
-  }, [isSuccess, error]);
+  // useEffect(() => {
+  //   // dispatch(toggleCreateTradeStage(3));
+  //   if (isTradeSuccess) {
+  //     toast.success("Trade created successfully");
+  //     dispatch(toggleCreateTradeStage(3));
+  //     dispatch(addCreatedTrade(tradeData?.trade));
+  //   }
+  //   if (tradeError) {
+  //     toast.error("An error occurred!");
+  //   }
+  // }, [isTradeSuccess, tradeError]);
 
   const handleCurrency = (value: string) => {
     // console.log(value);
@@ -527,7 +546,7 @@ const CreateTrade = () => {
             </div>
             <button
               onClick={HandleTradeDetails}
-              disabled={isLoading}
+              disabled={isCreatingTrade}
               className="p-[12px]  rounded-[8px] text-white-100 bg-[#7F56D9]  w-[433px] h-[44px]["
             >
               Create Ad

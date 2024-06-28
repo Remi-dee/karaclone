@@ -9,6 +9,8 @@ import modalSlice from "./modal/modalSlice";
 import kycSlice from "./features/kyc/kycSlice";
 import { kycApi } from "./features/kyc/kycApi";
 import userSlice from "./features/user/userSlice";
+import { trueLayerApi } from "./features/truelayer/truelayerApi";
+import truelayerSlice from "./features/truelayer/truelayerSlice";
 
 export const store = configureStore({
   reducer: {
@@ -17,7 +19,9 @@ export const store = configureStore({
     [userApi.reducerPath]: userApi.reducer,
 
     [kycApi.reducerPath]: kycApi.reducer,
+    [trueLayerApi.reducerPath]: trueLayerApi.reducer,
 
+    trueLayer: truelayerSlice,
     auth: authSlice,
     modal: modalSlice,
     kyc: kycSlice,
@@ -28,7 +32,8 @@ export const store = configureStore({
     getDefaultMiddleware().concat(
       authApi.middleware,
       userApi.middleware,
-      kycApi.middleware
+      kycApi.middleware,
+      trueLayerApi.middleware
     ),
 });
 

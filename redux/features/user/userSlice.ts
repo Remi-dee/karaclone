@@ -83,4 +83,5 @@ export const {
   toggleBuyTradeSuccessModal,
 } = userSlice.actions;
 export const userSelector = (state: RootState) => state.user;
+
 export default userSlice.reducer;
