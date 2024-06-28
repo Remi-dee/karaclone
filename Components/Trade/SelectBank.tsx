@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PurpleCheckBox from "../PurpleCheckBox";
 import NigerianFlag from "@/public/svg/nigeriaflag.svg";
 import Image from "next/image";
@@ -51,8 +51,14 @@ function SelectBank({ onSelect, onAccountAndNameChange }: SelectBankProps) {
   //   return <CreateTradeSuccess />;
   // }
 
-  const { data, error, isLoading } = useGetBeneficiariesQuery("");
+  // const { data, error, isLoading } = useGetBeneficiariesQuery("");
+  const { data, error, isLoading, refetch } = useGetBeneficiariesQuery("");
 
+  useEffect(() => {
+    refetch();
+
+    toast.success("rendered");
+  }, []);
   if (isLoading) return <div>Fetching your beneficiaries...</div>;
   if (error) return <div>Error fetching beneficiaries</div>;
 

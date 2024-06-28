@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { SlOptions } from "react-icons/sl";
-import USD from "@/public/Images/USD.png";
+
 import { openModal } from "@/redux/modal/modalSlice";
 import CustomModal from "@/Components/CustomModal/CustomModal";
 import TradeHistory from "./TradeHistory";
 import { useDispatch } from "react-redux";
-import {
-  useGetAllTradeExecptMineQuery,
-  useGetAllTradeQuery,
-} from "@/redux/features/user/userApi";
+import NGN from "@/public/Images/NGN.png";
+import GBP from "@/public/Images/GBP.png";
+import USD from "@/public/Images/USD.png";
+import { useGetAllTradeQuery } from "@/redux/features/user/userApi";
 
 const BuyTradeTable = () => {
   const data = useGetAllTradeQuery("");
-  console.log(data);
+  // console.log(data);
 
   const dispatch = useDispatch();
   const [showOption, setShowOption] = useState(true);
@@ -47,14 +47,27 @@ const BuyTradeTable = () => {
               className="leading-[24px] tracking-[-2%] text-[16px] text-[#464646] border-b font-semibold border-b-gray-500"
             >
               <td className="flex justify-start items-center p-4 gap-1">
-                <Image src={USD} alt="" width={15} height={15} />
-                <p className="text-sm">US Dollar</p>
+                <Image
+                  src={
+                    item?.currency === "NGN"
+                      ? NGN
+                      : item?.currency === "USD"
+                      ? USD
+                      : GBP
+                  }
+                  alt=""
+                  width={15}
+                  height={15}
+                />
+                <p className="text-sm">{item?.currency}</p>
               </td>
               <td className="p-4">{item?.amount + " " + item?.currency}</td>
-              <td className="p-4">2,000 {item?.currency}</td>
+              <td className="p-4">
+                {item?.amount} {item?.currency}
+              </td>
               <td className="p-4">{item?.minimumBid}</td>
-              <td className="p-4">Bank Transfer</td>
-              <td className="p-4">{item?.rate}</td>
+              <td className="p-4">{item?.payment_method || "X Method"}</td>
+              <td className="p-4">{item?.sold}</td>
               <td className="relative p-4">
                 <span
                   onClick={toggleOption}
