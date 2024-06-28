@@ -4,11 +4,13 @@ import { RootState } from "@/redux/store";
 interface TrueLayerState {
   paymentId: string;
   resourceToken: string;
+  isPaymentSuccess: boolean;
 }
 
 const initialState: TrueLayerState = {
   paymentId: "",
   resourceToken: "",
+  isPaymentSuccess: false,
 };
 
 const trueLayerSlice = createSlice({
@@ -26,10 +28,16 @@ const trueLayerSlice = createSlice({
       state.paymentId = "";
       state.resourceToken = "";
     },
+    setIsPaymentSuccess: (state, { payload }) => {
+      state.isPaymentSuccess = payload;
+    },
   },
 });
 
-export const { setPaymentDetails, clearPaymentDetails } =
+export const { setPaymentDetails, clearPaymentDetails, setIsPaymentSuccess } =
   trueLayerSlice.actions;
 export const trueLayerSelector = (state: RootState) => state.trueLayer;
+export const isPaymentSuccessSelector = (state: RootState) =>
+  state.trueLayer.isPaymentSuccess;
+
 export default trueLayerSlice.reducer;

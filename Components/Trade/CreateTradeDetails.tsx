@@ -1,35 +1,94 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import NGN from "@/public/Images/NGN.png";
 import GBP from "@/public/Images/GBP.png";
 import USD from "@/public/Images/USD.png";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { BiSolidCopy } from "react-icons/bi";
-import { toggleCreateTradeStage } from "@/redux/features/user/userSlice";
+import {
+  addCreatedTrade,
+  toggleCreateTradeStage,
+} from "@/redux/features/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useMonoPayment, useMonoWidget } from "@/app/mono/monoServices";
+
+import {
+  useCreateTradeMutation,
+  useLoadUserQuery,
+} from "@/redux/features/user/userApi";
+import { toast } from "react-toastify";
+import { handleCreateTruelayerPayment } from "./util/truelayerService";
+import {
+  isPaymentSuccessSelector,
+  setPaymentDetails,
+  setIsPaymentSuccess,
+} from "@/redux/features/truelayer/truelayerSlice";
+import { useMonoWidget } from "@/app/mono/monoServices";
+import { useCreatePaymentMutation } from "@/redux/features/truelayer/truelayerApi";
 
 const CreateTradeDetails = () => {
   const globalState = useSelector((state: any) => state.user);
   const { createdTrade } = globalState;
-
+  const { data } = useLoadUserQuery({});
   console.log(createdTrade);
   const router = useRouter();
-  const payWithMono = useMonoPayment();
   const openMonoWidget = useMonoWidget();
   const dispatch = useDispatch();
   const handleBack = () => {
     // router.push("/dashboard/P2P-trade");
     dispatch(toggleCreateTradeStage(2));
   };
+  const isPaymentSuccess = useSelector(isPaymentSuccessSelector);
+  const [
+    createPayment,
+    { isLoading: isCreatingPayment, error: paymentError, data: paymentData },
+  ] = useCreatePaymentMutation();
 
-  const handleContinue = (e: { preventDefault: () => void }) => {
+  const [
+    createTrade,
+    {
+      isLoading: isCreatingTrade,
+      error: tradeError,
+      data: tradeData,
+      isSuccess: isTradeSuccess,
+    },
+  ] = useCreateTradeMutation();
+
+  useEffect(() => {
+    // dispatch(toggleCreateTradeStage(3));
+    if (isPaymentSuccess) {
+      createTrade(createdTrade);
+    }
+    if (isTradeSuccess) {
+      toast.success("Trade created successfully");
+      dispatch(toggleCreateTradeStage(3));
+      dispatch(addCreatedTrade(tradeData?.trade));
+    }
+    if (tradeError) {
+      toast.error("An error occurred!");
+    }
+  }, [isTradeSuccess, tradeError, isPaymentSuccess]);
+
+  const handleContinue = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    openMonoWidget;
-    // dispatch(toggleCreateTradeStage(4));
+    if (createdTrade?.currency === "NGN") {
+      await openMonoWidget();
+    } else {
+      // const paymentCreated = await handleCreateTruelayerPayment(
+      //   createdTrade,
+      //   data,
+      //   createPayment,
+      //   dispatch,
+      //   setPaymentDetails
+      // );
+      // if (paymentCreated.status === "success") {
+      //   dispatch(setIsPaymentSuccess(true));
+      // }
+      createTrade(createdTrade);
+    }
+    dispatch(toggleCreateTradeStage(4));
   };
 
   return (
