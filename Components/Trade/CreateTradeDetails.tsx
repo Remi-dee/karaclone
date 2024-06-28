@@ -223,15 +223,24 @@ const CreateTradeDetails = () => {
             <div className=" flex flex-col gap-[13px]">
               <div className="flex justify-between items-center  text-sm">
                 <p className="text-gray-300">Bank Name</p>
-                <p className="text-xs font-semibold">Wema Bank</p>
+                <p className="text-xs font-semibold">
+                  {" "}
+                  {createdTrade?.beneficiary_bank}
+                </p>
               </div>
               <div className="flex justify-between items-center  text-sm">
                 <p className="text-gray-300">Account Number</p>
-                <p className="text-xs font-semibold">0240548244</p>
+                <p className="text-xs font-semibold">
+                  {" "}
+                  {createdTrade?.beneficiary_account}
+                </p>
               </div>
               <div className="flex justify-between items-center  text-sm">
                 <p className="text-gray-300">Account Name</p>
-                <p className="text-xs font-semibold">Ernest Damilola</p>
+                <p className="text-xs font-semibold">
+                  {" "}
+                  {createdTrade?.beneficiary_name}
+                </p>
               </div>
             </div>
             {/* Third batch */}

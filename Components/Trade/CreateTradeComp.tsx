@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 import {
   useCreateTradeMutation,
   useCurrencyConverterQuery,
+  useCurrentRateQuery,
   useGetAllCurrencyPairsQuery,
   useLoadUserQuery,
 } from "@/redux/features/user/userApi";
@@ -161,7 +162,6 @@ const CreateTrade = () => {
   };
   const handleExitCurrency = (value: string) => {
     setcreateTradeDetails({ ...createTradeDetails, exit_currency: value });
-    setCurrency(value);
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement | any>): void => {
@@ -205,20 +205,26 @@ const CreateTrade = () => {
       ]);
     });
   }, [possibleConverstion?.isSuccess]);
-  const dataForCalc = useCurrencyConverterQuery(
+  const dataForCalc = useCurrentRateQuery(
     {
-      amount: createTradeDetails?.amount,
-      sourceCurrency: createTradeDetails?.currency,
-      targetCurrency: createTradeDetails?.exit_currency,
+      baseCurrency: createTradeDetails?.currency,
+      quoteCurrency: createTradeDetails?.exit_currency,
     },
-    { skip: createTradeDetails?.amount?.length < 3 }
+    {
+      skip:
+        createTradeDetails?.currency?.length < 2 &&
+        createTradeDetails?.exit_currency?.length < 2,
+    }
   );
 
-  // console.log(dataForCalc);
+  console.log(dataForCalc);
 
   useEffect(() => {
-    setrate(dataForCalc?.data);
-    setcreateTradeDetails({ ...createTradeDetails, rate: dataForCalc?.data });
+    setrate(dataForCalc?.data?.exchangeRate);
+    setcreateTradeDetails({
+      ...createTradeDetails,
+      rate: dataForCalc?.data?.exchangeRate,
+    });
   }, [dataForCalc?.isSuccess, dataForCalc?.data]);
 
   const beneficicaryHandlder = (e: any) => {
