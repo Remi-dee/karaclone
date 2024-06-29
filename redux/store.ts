@@ -9,6 +9,8 @@ import modalSlice from "./modal/modalSlice";
 import kycSlice from "./features/kyc/kycSlice";
 import { kycApi } from "./features/kyc/kycApi";
 import userSlice from "./features/user/userSlice";
+import { tradeApi } from "./features/trade/tradeApi";
+import tradeSlice from "./features/trade/tradeSlice";
 
 export const store = configureStore({
   reducer: {
@@ -22,13 +24,15 @@ export const store = configureStore({
     modal: modalSlice,
     kyc: kycSlice,
     user: userSlice,
+    trade: tradeSlice,
   },
   devTools: false,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
       authApi.middleware,
       userApi.middleware,
-      kycApi.middleware
+      kycApi.middleware,
+      tradeApi.middleware
     ),
 });
 

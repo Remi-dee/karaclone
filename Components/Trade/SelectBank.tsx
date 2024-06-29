@@ -56,8 +56,6 @@ function SelectBank({ onSelect, onAccountAndNameChange }: SelectBankProps) {
 
   useEffect(() => {
     refetch();
-
-    toast.success("rendered");
   }, []);
   if (isLoading) return <div>Fetching your beneficiaries...</div>;
   if (error) return <div>Error fetching beneficiaries</div>;
@@ -154,7 +152,7 @@ function SelectBank({ onSelect, onAccountAndNameChange }: SelectBankProps) {
         </div>
         <button
           onClick={handleSuccessMessage}
-          className="p-[12px]  rounded-[8px] text-white-100 bg-[#7F56D9]  w-full h-[44px]["
+          className="p-[12px]  rounded-[8px] text-white-100 bg-[#7F56D9]  w-full h-[44px]   mb-[2rem]"
         >
           Continue
         </button>

@@ -4,7 +4,7 @@ import Pagination from "../Pagination";
 import { tradeData } from "./tradeData";
 import EmptyTrade from "./EmptyTrade";
 import Link from "next/link";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   addDataForSelectedTrade,
   toggleBuyTradeDisplay,
@@ -12,12 +12,18 @@ import {
 } from "@/redux/features/user/userSlice";
 import {
   useGetAllTradeExecptMineQuery,
-  useGetAllTradeQuery,
   useGetSingleTradeQuery,
 } from "@/redux/features/user/userApi";
+import CustomModal from "../CustomModal/CustomModal";
+import { openModal, openTradeModal } from "@/redux/modal/modalSlice";
+import AmountToTrade from "./AmountToTrade";
+import TradeSuccessModal from "../CustomModal/TradeSuccessModal";
+import { RootState } from "@/redux/store";
 
 const SellTradeTable = () => {
   const [tradeId, setTradeId] = useState<string | null>(null);
+  const [showModal, setshowModal] = useState(true);
+  const isModalOpen = useSelector((state: RootState) => state.modal.isOpen);
   const dispatch = useDispatch();
   const { data, error, isLoading, isSuccess } = useGetSingleTradeQuery(
     tradeId!,
@@ -28,6 +34,7 @@ const SellTradeTable = () => {
   const [listOfTrades, setlistOfTrades] = useState([]);
   // const allTradeData = useGetAllTradeQuery("");
   const allTradeData = useGetAllTradeExecptMineQuery("");
+  console.log(allTradeData.data);
   useEffect(() => {
     // createTrade();
 
@@ -45,6 +52,8 @@ const SellTradeTable = () => {
   }, [isSuccess]);
 
   const handleBuyButton = (id: string | any) => {
+    //handle modal for amount
+    dispatch(openTradeModal());
     // handle fetching of selected trade here
 
     setTradeId(id);

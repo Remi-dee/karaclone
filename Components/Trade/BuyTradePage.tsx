@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { BiSolidCopy } from "react-icons/bi";
 import Image from "next/image";
+import NGN from "@/public/Images/NGN.png";
+import GBP from "@/public/Images/GBP.png";
 import USD from "@/public/Images/USD.png";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -17,7 +19,9 @@ import TradeModal from "../CustomModal/TradeModal";
 import BeneficaryDetails from "./BeneficaryDetails";
 import TradeSuccessModal from "../CustomModal/TradeSuccessModal";
 import TradeTransSuccesss from "./TradeTransSuccess";
-
+import { openModal } from "@/redux/modal/modalSlice";
+import { RootState } from "@/redux/store";
+import AmountToTrade from "./AmountToTrade";
 function formatReadableDate(isoDateString: string): string {
   const date = new Date(isoDateString);
 
@@ -35,8 +39,17 @@ function formatReadableDate(isoDateString: string): string {
 
 const BuyTrade = () => {
   const globalState = useSelector((state: any) => state.user);
+  const isTradeModalOpen = useSelector(
+    (state: RootState) => state.modal.isTradeModalOpen
+  );
   const { selectedTrade } = globalState;
-  console.log(selectedTrade);
+  // console.log(selectedTrade);
+  const [beneficiaryDetails, setbeneficiaryDetails] = useState({
+    beneficiary_bank: "",
+    beneficiary_name: "",
+    currency: selectedTrade?.currency,
+    beneficiary_account: "",
+  });
   const dispatch = useDispatch();
   const handleBack = () => {
     dispatch(toggleCreateTradeStage(1));
@@ -44,9 +57,16 @@ const BuyTrade = () => {
   };
   const [selectRecipient, setSelectRecipient] = useState<boolean>(false);
   const [option, setOption] = useState<string | null>("");
-
-  const [selectedComponent, setSelectedComponent] =
-    useState<React.ReactNode>(null);
+  const handleAccountAndNameChange = (item: any) => {
+    setbeneficiaryDetails((prevDetails: any) => ({
+      ...prevDetails,
+      beneficiary_name: item?.name,
+      beneficiary_account: item?.account,
+      beneficiary_bank: item?.bank_name,
+    }));
+  };
+  // const [selectedComponent, setSelectedComponent] =
+  //   useState<React.ReactNode>(null);
 
   const handleOptionChange = (selectedOption: string) => {
     setOption(selectedOption);
@@ -57,8 +77,11 @@ const BuyTrade = () => {
     console.log(item);
     setSelectedItems(item);
   };
-  const handleContinue = () => {
+  const handleContinue = (e: any) => {
     setSelectRecipient(true); // Hide the recipient selection modal
+    e.preventDefault();
+    dispatch(openModal());
+    return setSelectRecipient(true);
   };
 
   return (
@@ -120,7 +143,18 @@ const BuyTrade = () => {
               <div className="flex justify-between items-center text-sm">
                 <p className="text-gray-300">Transaction Type</p>
                 <div className="flex justify-start items-center  gap-1  ">
-                  <Image src={USD} alt="US logo" width={15} height={15} />
+                  <Image
+                    src={
+                      selectedTrade?.currency === "NGN"
+                        ? NGN
+                        : selectedTrade?.currency === "USD"
+                        ? USD
+                        : GBP
+                    }
+                    alt="US logo"
+                    width={15}
+                    height={15}
+                  />
 
                   <p className="leading-[24px] text-[#1E1E1E] tracking-[-2%] font-[500] text-[14px]">
                     Buying {selectedTrade?.currency}
@@ -191,17 +225,38 @@ const BuyTrade = () => {
       {selectRecipient ? (
         <TradeModal>
           {selectedItems === "" ? (
-            <SelectBank onSelect={handleSelect} />
+            <SelectBank
+              onAccountAndNameChange={handleAccountAndNameChange}
+              onSelect={handleSelect}
+            />
           ) : selectedItems === "itemid" ? (
-            <BeneficaryDetails onSelect={handleSelect} />
+            <BeneficaryDetails
+              currency={beneficiaryDetails?.currency}
+              onSelect={handleSelect}
+            />
           ) : (
-            <TradeSuccessModal>
-              <TradeTransSuccesss />
-            </TradeSuccessModal>
+            <SelectBank
+              onAccountAndNameChange={handleAccountAndNameChange}
+              onSelect={handleSelect}
+            />
           )}
         </TradeModal>
       ) : null}
-      {/* {selectedComponent} */}
+
+      {beneficiaryDetails?.beneficiary_name !== "" &&
+        beneficiaryDetails?.beneficiary_account !== "" &&
+        selectedItems !== "itemid" &&
+        selectedItems !== "" && (
+          <TradeSuccessModal>
+            <TradeTransSuccesss />
+          </TradeSuccessModal>
+        )}
+
+      {isTradeModalOpen && (
+        <TradeSuccessModal>
+          <AmountToTrade />
+        </TradeSuccessModal>
+      )}
     </div>
   );
 };

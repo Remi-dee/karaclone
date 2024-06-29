@@ -42,10 +42,16 @@ function ChatPage() {
         </section>
 
         <section className=" p-[1rem] flex justify-between">
-          <button className=" w-[160px] h-[38px] bg-[#7F56D9] text-[white] rounded-[8px]  outline-none  ">
+          <button
+            onClick={() => alert("")}
+            className=" z-40 w-[160px] h-[38px] bg-[#7F56D9] text-[white] rounded-[8px]  outline-none  "
+          >
             Ticket Status
           </button>
-          <button className=" w-[160px] h-[38px] bg-[] border-[1.1px] outline-none border-[#7F56D9]  text-[#7F56D9]  rounded-[8px]    ">
+          <button
+            onClick={() => alert("")}
+            className=" z-40 w-[160px] h-[38px] bg-[] border-[1.1px] outline-none border-[#7F56D9]  text-[#7F56D9]  rounded-[8px]    "
+          >
             Contact support
           </button>
         </section>

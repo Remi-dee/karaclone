@@ -20,6 +20,12 @@ import chatIcon from "@/public/chaticon.png";
 import Image from "next/image";
 import wave from "@/public/svg/wave.svg";
 import SettingsLogoutModal from "@/Components/Auth/SettingsLogOut";
+import DeactivateVerification from "@/Components/Auth/DeactivateVerification";
+import YesNoDeactivate from "@/Components/Auth/YesNoDeactivate";
+import ChatPage from "@/Components/Chat/ChatPage";
+import ConversationChat from "@/Components/Chat/ConversationChat";
+import ChatModal from "@/Components/CustomModal/ChatModal";
+import Chat from "@/Components/Chat/Chat";
 const Dashboard = (urlParam: any) => {
   const dispatch = useDispatch();
   const [showSidebar, setShowSidebar] = useState(false);
@@ -38,7 +44,7 @@ const Dashboard = (urlParam: any) => {
       <Image
         src={chatIcon}
         alt=""
-        className=" absolute  right-[1rem] bottom-[0.5rem]  h-[50px] w-[50px]"
+        className=" absolute  right-[1rem] bottom-[0.5rem] z-[900]  h-[50px] w-[50px]"
       />
 
       <div className="  overflow-auto  h-screen w-full">
@@ -98,6 +104,9 @@ const Dashboard = (urlParam: any) => {
           </div>
         </div>
       </div>
+
+      {/* <ChatModal><Chat /></ChatModal> */}
+
       {logoutModalOpen && <LogoutModal />}
     </div>
   );
