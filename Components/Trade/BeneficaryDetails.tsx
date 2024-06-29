@@ -1,10 +1,11 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import Image from "next/image";
 import svgBank from "@/public/svg/svgBank.svg";
-import { useCreateBeneficiaryMutation } from "@/redux/features/user/userApi";
+
 import { toast } from "react-toastify";
 import { closeModal } from "@/redux/modal/modalSlice";
 import { useDispatch } from "react-redux";
+import { useCreateBeneficiaryMutation } from "@/redux/features/trade/tradeApi";
 
 interface BeneficiaryInputProps {
   label: string;
@@ -169,11 +170,10 @@ function BeneficaryDetails({
     // onSelect("1");
     // console.log(BeneficaryDetails);
     if (validateDetails()) {
-      // console.log(BeneficaryDetails);
+      console.log(BeneficaryDetails);
       handleCreateBeneficiary(BeneficaryDetails);
     } else {
       toast.error("Please fill in all fields.");
-      // Optionally display an error message to the user
     }
   };
 
@@ -205,12 +205,12 @@ function BeneficaryDetails({
         <BeneficiaryInput
           onChange={handleInputChange}
           inputName="name"
-          label="  Account Name"
+          label="Account Name"
         />
         <BeneficiaryInput
           onChange={handleInputChange}
           inputName="account"
-          label="  Account Number"
+          label="Account Number"
         />
         <BeneficiarySelect
           onChange={handleSelectChange}

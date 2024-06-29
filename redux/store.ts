@@ -19,7 +19,7 @@ export const store = configureStore({
     [authApi.reducerPath]: authApi.reducer,
 
     [userApi.reducerPath]: userApi.reducer,
-
+    [tradeApi.reducerPath]: tradeApi.reducer,
     [kycApi.reducerPath]: kycApi.reducer,
     [trueLayerApi.reducerPath]: trueLayerApi.reducer,
 

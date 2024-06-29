@@ -10,11 +10,21 @@ import bag from "@/public/svg/bag.svg";
 import BalanceDropdown from "../BalanceDropdown";
 import CreateTradeDropDown from "../CustomDropdown/CreateTradeDropDown";
 import { closeModal, closeTradeModal } from "@/redux/modal/modalSlice";
-const AmountToTrade = () => {
+const AmountToTrade = ({
+  currency,
+  handleAmountChange,
+}: {
+  currency: string;
+  handleAmountChange: any;
+}) => {
   const dispatch = useDispatch();
-  const [currency, setCurrency] = useState<string>("");
-  const router = useRouter();
+  const [currencies, setCurrency] = useState<string>("");
+  const [error, setError] = useState("");
   const handleDone = () => {
+    // if (true) {
+    //   return setError("Trade to purchase exceeds available amount!");
+    // }
+
     dispatch(closeTradeModal());
   };
   const handleCurrency = (value: string) => {
@@ -31,29 +41,31 @@ const AmountToTrade = () => {
             Enter Amount
           </h3>
           <p className="text-[#7C7C7C] leading-[24px] text-[16px] text-center ">
-            Enter the specify amount of dollar you want to buy.
+            Enter the specify amount of {currency} you want to buy.
           </p>
         </div>
 
-        <div className="w-[360px] h-[48px] border flex  items-center rounded-[12px] p-[8px_16px_8px_16px]">
-          <div>
-            <input
-              className="w-[215px] h-[16px] border-r  border-r-[#BDBDBD]  placeholder:text-sm placeholder:text-[#989898] outline-none"
-              placeholder="Amount to Buy"
-              //   onChange={handleAmountChange}
-              type="text"
-              //   value={amount}
-            />
+        <div>
+          <div className="w-[360px] h-[48px] border flex items-center rounded-[12px] p-[8px_16px]">
+            <div>
+              <input
+                className="w-[215px] h-[16px] border-r border-r-[#BDBDBD] placeholder:text-sm placeholder:text-[#989898] outline-none"
+                placeholder="Amount to Buy"
+                onChange={handleAmountChange}
+                type="text"
+              />
+            </div>
+            <div className="w-[115px] flex justify-center items-center ml-[5px] bg-[#F7F7F7] rounded-[16px]">
+              <CreateTradeDropDown
+                onSelect={handleCurrency}
+                options={[currency]}
+                placeholder="Currency"
+                className="w-full outline-none"
+                displayImages
+              />
+            </div>
           </div>
-          <div className="w-[115px] flex justify-center items-center ml-[5px] bg-[#F7F7F7] rounded-[16px] ">
-            <CreateTradeDropDown
-              onSelect={handleCurrency}
-              options={["USD"]}
-              placeholder="Currency"
-              className="w-full outline-none"
-              displayImages
-            />
-          </div>
+          {error && <div className="text-red-500 mt-2">{error}</div>}
         </div>
 
         <div className=" mt-[9px]">

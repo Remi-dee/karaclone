@@ -24,7 +24,6 @@ export const userApi = createApi({
       query: () => ({
         url: "user/me",
         method: "GET",
-        // credentials: "include" as const,
       }),
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
@@ -47,7 +46,6 @@ export const userApi = createApi({
       query: () => ({
         url: "user/enable-2fa",
         method: "GET",
-        // credentials: "include" as const,
       }),
     }),
 
@@ -56,7 +54,6 @@ export const userApi = createApi({
         url: "user/verify-2fa",
         method: "POST",
         body: { topt },
-        // credentials: "include" as const,
       }),
     }),
 
@@ -71,7 +68,7 @@ export const userApi = createApi({
         try {
           dispatch(userLoggedOut());
         } catch (error: any) {
-          console.log(error);
+          // console.log(error);
         }
       },
     }),
@@ -83,17 +80,7 @@ export const userApi = createApi({
       query: () => ({
         url: "transaction-fee/get-all",
         method: "GET",
-        // credentials: "include" as const,
       }),
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
-        try {
-          const result = await queryFulfilled;
-
-          console.log(result);
-        } catch (error: any) {
-          console.log(error);
-        }
-      },
     }),
     //get conversion rates
 
@@ -101,17 +88,7 @@ export const userApi = createApi({
       query: () => ({
         url: "conversion-fee/get-all",
         method: "GET",
-        // credentials: "include" as const,
       }),
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
-        try {
-          const result = await queryFulfilled;
-
-          console.log(result);
-        } catch (error: any) {
-          console.log(error);
-        }
-      },
     }),
 
     //get all currency pairs
@@ -120,17 +97,7 @@ export const userApi = createApi({
       query: () => ({
         url: "currencypair/get-all",
         method: "GET",
-        // credentials: "include",
       }),
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
-        try {
-          const result = await queryFulfilled;
-
-          // console.log(result);
-        } catch (error: any) {
-          // console.log(error);
-        }
-      },
     }),
 
     //get specific currency pair
@@ -139,15 +106,14 @@ export const userApi = createApi({
       query: (id) => ({
         url: `conversion-fee/get/${id}`,
         method: "GET",
-        // credentials: "include" as const,
       }),
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
 
-          console.log(result);
+          // console.log(result);
         } catch (error: any) {
-          console.log(error);
+          // console.log(error);
         }
       },
     }),
@@ -160,15 +126,6 @@ export const userApi = createApi({
         method: "GET",
         // credentials: "include" as const,
       }),
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
-        try {
-          const result = await queryFulfilled;
-
-          console.log(result);
-        } catch (error: any) {
-          console.log(error);
-        }
-      },
     }),
 
     //next
@@ -177,7 +134,6 @@ export const userApi = createApi({
       query: () => ({
         url: "wallet/get-all-user-wallets",
         method: "GET",
-        // credentials: "include" as const,
       }),
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
@@ -190,35 +146,6 @@ export const userApi = createApi({
       },
     }),
 
-    //create a trade
-
-    createTrade: builder.mutation({
-      query: (args) => ({
-        url: "Trade/create-trade",
-        method: "POST",
-        body: args,
-        // credentials: "include" as const,
-      }),
-    }),
-
-    //get all trades including current user
-
-    getAllTrade: builder.query({
-      query: () => ({
-        url: "Trade/get-mine",
-        method: "GET",
-        // credentials: "include" as const,
-      }),
-    }),
-    //gett others trade
-
-    getAllTradeExecptMine: builder.query({
-      query: () => ({
-        url: "Trade/get-all-except-mine",
-        method: "GET",
-        // credentials: "include" as const,
-      }),
-    }),
     // /Currency converstion
 
     CurrencyConverter: builder.query<
@@ -233,7 +160,6 @@ export const userApi = createApi({
           sourceCurrency,
           targetCurrency,
         },
-        // credentials: "include" as const,
       }),
     }),
     CurrentRate: builder.query<
@@ -252,46 +178,6 @@ export const userApi = createApi({
     }),
 
     //next
-    getSingleTrade: builder.query({
-      query: (id) => ({
-        url: `Trade/get-trade/${id}`,
-        method: "GET",
-        // credentials: "include" as const,
-      }),
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
-        try {
-          const result = await queryFulfilled;
-
-          // console.log(result);
-        } catch (error: any) {
-          console.log(error);
-        }
-      },
-    }),
-
-    //Create Beneficiary
-
-    createBeneficiary: builder.mutation({
-      query: (args) => ({
-        url: "Trade/create-beneficiary",
-        method: "POST",
-        body: args,
-        // credentials: "include" as const,
-      }),
-    }),
-
-    //Get all beneficiaries
-
-    getBeneficiaries: builder.query({
-      query: () => ({
-        url: "Trade/get-user-beneficiaries",
-        method: "GET",
-        // credentials: "include" as const,
-      }),
-      keepUnusedDataFor: 60, // Keep the data for 60 seconds in the cache
-    }),
-
-    //next
   }),
 });
 
@@ -307,11 +193,6 @@ export const {
   useGetSingleCurrencyPairQuery,
   useGetAllCurrencyPairsQuery,
   useGetAllUsersWalletQuery,
-  useCreateTradeMutation,
-  useGetAllTradeQuery,
-  useGetAllTradeExecptMineQuery,
-  useGetSingleTradeQuery,
+
   useCurrencyConverterQuery,
-  useCreateBeneficiaryMutation,
-  useGetBeneficiariesQuery,
 } = userApi;

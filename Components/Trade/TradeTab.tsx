@@ -1,10 +1,7 @@
 "use client";
 
 import React, { ChangeEvent, useEffect, useState } from "react";
-import CustomDropdown from "@/Components/CustomDropdown/CustomDropdown";
-import { currencyData } from "../Transactions/currencyData";
 import {
-  useCreateTradeMutation,
   useCurrencyConverterQuery,
   useGetAllCurrencyPairsQuery,
 } from "@/redux/features/user/userApi";
@@ -25,7 +22,6 @@ const TradeTab: React.FC<tradeProp> = ({ onSelectBuy, onSelectSell }) => {
   const [amount, setamount] = useState("");
   const [converstionDataExit, setConverstionDataExit] = useState<string[]>([]);
   const possibleConverstion = useGetAllCurrencyPairsQuery("");
-  const [shouldConvert, setshouldConvert] = useState(false);
 
   useEffect(() => {
     possibleConverstion?.data?.results?.currencyPairs?.map((e: any) => {

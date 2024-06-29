@@ -9,11 +9,11 @@ import { useDispatch } from "react-redux";
 import NGN from "@/public/Images/NGN.png";
 import GBP from "@/public/Images/GBP.png";
 import USD from "@/public/Images/USD.png";
-import { useGetAllTradeQuery } from "@/redux/features/user/userApi";
+import { useGetAllTradeQuery } from "@/redux/features/trade/tradeApi";
 
 const BuyTradeTable = () => {
   const data = useGetAllTradeQuery("");
-  // console.log(data);
+  console.log(data);
 
   const dispatch = useDispatch();
   const [showOption, setShowOption] = useState(true);

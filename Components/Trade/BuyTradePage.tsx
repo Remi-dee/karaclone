@@ -22,6 +22,7 @@ import TradeTransSuccesss from "./TradeTransSuccess";
 import { openModal } from "@/redux/modal/modalSlice";
 import { RootState } from "@/redux/store";
 import AmountToTrade from "./AmountToTrade";
+import { useCurrentRateQuery } from "@/redux/features/trade/tradeApi";
 function formatReadableDate(isoDateString: string): string {
   const date = new Date(isoDateString);
 
@@ -43,7 +44,7 @@ const BuyTrade = () => {
     (state: RootState) => state.modal.isTradeModalOpen
   );
   const { selectedTrade } = globalState;
-  // console.log(selectedTrade);
+  console.log(selectedTrade);
   const [beneficiaryDetails, setbeneficiaryDetails] = useState({
     beneficiary_bank: "",
     beneficiary_name: "",
@@ -56,6 +57,7 @@ const BuyTrade = () => {
     // dispatch(toggleBuyTradeDisplay(1));
   };
   const [selectRecipient, setSelectRecipient] = useState<boolean>(false);
+  const [rate, setrate] = useState("");
   const [option, setOption] = useState<string | null>("");
   const handleAccountAndNameChange = (item: any) => {
     setbeneficiaryDetails((prevDetails: any) => ({
@@ -72,11 +74,27 @@ const BuyTrade = () => {
     setOption(selectedOption);
   };
   const [selectedItems, setSelectedItems] = useState("");
-
+  const [amountToBuy, setamountToBuy] = useState("");
   const handleSelect = (item: any) => {
     console.log(item);
     setSelectedItems(item);
   };
+
+  const dataForCalc = useCurrentRateQuery(
+    {
+      baseCurrency: selectedTrade?.currency,
+      quoteCurrency: selectedTrade?.exit_currency,
+    },
+    {
+      skip:
+        selectedTrade?.currency?.length < 2 &&
+        selectedTrade?.exit_currency?.length < 2,
+    }
+  );
+
+  useEffect(() => {
+    setrate(dataForCalc?.data?.exchangeRate);
+  }, [dataForCalc?.isSuccess, dataForCalc?.data]);
   const handleContinue = (e: any) => {
     setSelectRecipient(true); // Hide the recipient selection modal
     e.preventDefault();
@@ -84,6 +102,9 @@ const BuyTrade = () => {
     return setSelectRecipient(true);
   };
 
+  const amountToBuyHandler = (e: any) => {
+    setamountToBuy(e.target.value);
+  };
   return (
     <div className="p-0 m-0 box-border">
       <div
@@ -165,8 +186,9 @@ const BuyTrade = () => {
               <div className="flex justify-between items-center my-2 text-sm ">
                 <p className="text-gray-300">Rate</p>
                 <p className="leading-[24px] text-[#1E1E1E] tracking-[-2%] font-[500] text-[14px]">
-                  {/* 1400NGN <span> = 1USD</span> */}
-                  {selectedTrade?.rate}
+                  {rate + " " + selectedTrade?.exit_currency}{" "}
+                  <span> = 1 {selectedTrade?.currency}</span>
+                  {/* {selectedTrade?.rate} */}
                 </p>
               </div>
 
@@ -254,7 +276,10 @@ const BuyTrade = () => {
 
       {isTradeModalOpen && (
         <TradeSuccessModal>
-          <AmountToTrade />
+          <AmountToTrade
+            handleAmountChange={amountToBuyHandler}
+            currency={selectedTrade?.currency}
+          />
         </TradeSuccessModal>
       )}
     </div>

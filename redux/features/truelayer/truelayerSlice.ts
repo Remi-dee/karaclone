@@ -21,8 +21,8 @@ const trueLayerSlice = createSlice({
       state,
       action: PayloadAction<{ paymentId: string; resourceToken: string }>
     ) => {
-      state.paymentId = action.payload.paymentId;
-      state.resourceToken = action.payload.resourceToken;
+      state.paymentId = action?.payload?.paymentId;
+      state.resourceToken = action?.payload?.resourceToken;
     },
     clearPaymentDetails: (state) => {
       state.paymentId = "";
@@ -38,6 +38,6 @@ export const { setPaymentDetails, clearPaymentDetails, setIsPaymentSuccess } =
   trueLayerSlice.actions;
 export const trueLayerSelector = (state: RootState) => state.trueLayer;
 export const isPaymentSuccessSelector = (state: RootState) =>
-  state.trueLayer.isPaymentSuccess;
+  state.trueLayer?.isPaymentSuccess;
 
 export default trueLayerSlice.reducer;

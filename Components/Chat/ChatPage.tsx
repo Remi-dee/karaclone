@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { MdCancel } from "react-icons/md";
 import Image from "next/image";
 import bgChat from "@/public/Images/bgchat.png";
@@ -6,7 +6,18 @@ import robot from "@/public/Images/robot.png";
 import logo from "@/public/translogo.png";
 import rightarrow from "@/public/svg/rightarrow.svg";
 import sendIcon from "@/public/svg/send.svg";
-function ChatPage() {
+import { useDispatch } from "react-redux";
+import { closeChatModal } from "@/redux/modal/modalSlice";
+function ChatPage({ clickHandler }: { clickHandler: any }) {
+  const [Value, setValue] = useState("");
+
+  const handleChange = (option: string) => {
+    // console.log(option)
+    setValue(option);
+    clickHandler(option);
+  };
+  const dispatch = useDispatch();
+
   return (
     <div className=" w-full h-[800px]   ">
       <div className=" flex chatPageBg  py-[1rem]    flex-col  min-h-[231px]   w-full h-[231px] relative ">
@@ -22,7 +33,10 @@ function ChatPage() {
             className=" bg-blend-darken min-w-[90px] min-h-[25px]"
             alt=""
           />
-          <MdCancel className="text-gray-200 text-lg" />
+          <MdCancel
+            onClick={() => dispatch(closeChatModal())}
+            className="text-gray-200 cursor-pointer z-40 text-lg"
+          />
         </section>
 
         <section className=" px-[1rem] mt-[1rem] flex text-[white]  justify-between  ">
@@ -43,13 +57,13 @@ function ChatPage() {
 
         <section className=" p-[1rem] flex justify-between">
           <button
-            onClick={() => alert("")}
+            onClick={() => handleChange("ticketStatus")}
             className=" z-40 w-[160px] h-[38px] bg-[#7F56D9] text-[white] rounded-[8px]  outline-none  "
           >
             Ticket Status
           </button>
           <button
-            onClick={() => alert("")}
+            onClick={() => handleChange("contactSupport")}
             className=" z-40 w-[160px] h-[38px] bg-[] border-[1.1px] outline-none border-[#7F56D9]  text-[#7F56D9]  rounded-[8px]    "
           >
             Contact support

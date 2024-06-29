@@ -7,11 +7,12 @@ import { toast } from "react-toastify";
 import { toggleBuyTradeSuccessModal } from "@/redux/features/user/userSlice";
 import { useDispatch } from "react-redux";
 import svgBank from "@/public/svg/svgBank.svg";
-import { useGetBeneficiariesQuery } from "@/redux/features/user/userApi";
+
 import { closeModal } from "@/redux/modal/modalSlice";
 import NGN from "@/public/Images/NGN.png";
 import GBP from "@/public/Images/GBP.png";
 import USD from "@/public/Images/USD.png";
+import { useGetBeneficiariesQuery } from "@/redux/features/trade/tradeApi";
 interface SelectBankProps {
   // onAccountChange: (account: string) => void;
   // onNameChange: (name: string) => void;

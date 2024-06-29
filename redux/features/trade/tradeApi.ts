@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { userLoggedIn, userLoggedOut } from "../auth/authSlice";
 import getTokenFromLocalStorage from "@/utils/FetchUserToken";
 
 const baseQuery = fetchBaseQuery({
@@ -16,34 +15,9 @@ const baseQuery = fetchBaseQuery({
 });
 
 export const tradeApi = createApi({
-  reducerPath: "userApi",
+  reducerPath: "tradeApi",
   baseQuery, // Use the customized baseQuery
   endpoints: (builder) => ({
-    // get user
-    loadUser: builder.query({
-      query: () => ({
-        url: "user/me",
-        method: "GET",
-        // credentials: "include" as const,
-      }),
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
-        try {
-          const result = await queryFulfilled;
-
-          dispatch(
-            userLoggedIn({
-              accessToken: result.data.accessToken,
-              user: result.data.user,
-            })
-          );
-        } catch (error: any) {
-          // console.log(error);
-        }
-      },
-    }),
-
-    //generate radom password
-
     //create a trade
 
     createTrade: builder.mutation({
@@ -51,7 +25,6 @@ export const tradeApi = createApi({
         url: "Trade/create-trade",
         method: "POST",
         body: args,
-        // credentials: "include" as const,
       }),
     }),
 
@@ -61,7 +34,6 @@ export const tradeApi = createApi({
       query: () => ({
         url: "Trade/get-mine",
         method: "GET",
-        // credentials: "include" as const,
       }),
     }),
     //gett others trade
@@ -70,7 +42,6 @@ export const tradeApi = createApi({
       query: () => ({
         url: "Trade/get-all-except-mine",
         method: "GET",
-        // credentials: "include" as const,
       }),
     }),
     // /Currency converstion
@@ -129,8 +100,6 @@ export const tradeApi = createApi({
       query: (args) => ({
         url: "Trade/create-beneficiary",
         method: "POST",
-        body: args,
-        // credentials: "include" as const,
       }),
     }),
 
@@ -140,7 +109,6 @@ export const tradeApi = createApi({
       query: () => ({
         url: "Trade/get-user-beneficiaries",
         method: "GET",
-        // credentials: "include" as const,
       }),
       keepUnusedDataFor: 60, // Keep the data for 60 seconds in the cache
     }),
