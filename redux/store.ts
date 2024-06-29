@@ -11,6 +11,8 @@ import { kycApi } from "./features/kyc/kycApi";
 import userSlice from "./features/user/userSlice";
 import { tradeApi } from "./features/trade/tradeApi";
 import tradeSlice from "./features/trade/tradeSlice";
+import { trueLayerApi } from "./features/truelayer/truelayerApi";
+import truelayerSlice from "./features/truelayer/truelayerSlice";
 
 export const store = configureStore({
   reducer: {
@@ -19,7 +21,9 @@ export const store = configureStore({
     [userApi.reducerPath]: userApi.reducer,
 
     [kycApi.reducerPath]: kycApi.reducer,
+    [trueLayerApi.reducerPath]: trueLayerApi.reducer,
 
+    trueLayer: truelayerSlice,
     auth: authSlice,
     modal: modalSlice,
     kyc: kycSlice,
@@ -32,7 +36,8 @@ export const store = configureStore({
       authApi.middleware,
       userApi.middleware,
       kycApi.middleware,
-      tradeApi.middleware
+      tradeApi.middleware,
+      trueLayerApi.middleware
     ),
 });
 
