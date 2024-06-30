@@ -27,17 +27,15 @@ const Page = (props: any) => {
         ) : (
           <></>
         )}
-
-        {/* <ChatModal> */}
-        {/* <DeactivateVerification/> 
-
-          <YesNoDeactivate /> */}
-        {/* <ConversationChat/> */}
-        {/* <ChatPage /> */}
-        {/* </ChatModal> */}
       </div>
     </div>
   );
 };
 
 export default Page;
+
+{
+  /* <DeactivateVerification />
+
+<YesNoDeactivate /> */
+}

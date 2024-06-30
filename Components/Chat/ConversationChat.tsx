@@ -1,11 +1,24 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import { MdCancel } from "react-icons/md";
 import Image from "next/image";
 import bgChat from "@/public/Images/bgchat.png";
 import robot from "@/public/Images/robot.png";
 import logo from "@/public/translogo.png";
 import rightarrow from "@/public/svg/rightarrow.svg";
-function ChatPage() {
+import backarrow from "@/public/svg/backarrow.svg";
+import { useDispatch } from "react-redux";
+import { closeChatModal } from "@/redux/modal/modalSlice";
+function ChatPage({ clickHandler }: { clickHandler: any }) {
+  const [Value, setValue] = useState("");
+  const dispatch = useDispatch();
+  const handleChange = (option: string) => {
+    // console.log(option)
+    setValue(option);
+    clickHandler(option);
+  };
+
   return (
     <div className=" w-full h-[800px] max-h-[800px] grid-flow-col grid grid-rows-[20%_75%_10%] rounded-[12px]   ">
       <section className=" flex chatPageBg  py-[1rem]    flex-col  min-h-[116px] max-h-[116px]   w-full h-[231px] relative ">
@@ -17,11 +30,17 @@ function ChatPage() {
           />
 
           <Image
-            src={logo}
-            className=" bg-blend-darken min-w-[90px] min-h-[25px]"
+            width={15}
+            height={15}
+            src={backarrow}
+            onClick={() => handleChange("")}
+            className=" bg-blend-darken ml-[0.6rem] cursor-pointer z-20"
             alt=""
           />
-          <MdCancel className="text-gray-200 text-lg" />
+          <MdCancel
+            onClick={() => dispatch(closeChatModal())}
+            className="text-gray-200 text-lg   z-30 cursor-pointer"
+          />
         </section>
 
         <div className=" flex p-[0.5rem] ">

@@ -13,7 +13,6 @@ import {
 } from "@/redux/features/user/userSlice";
 import { useDispatch } from "react-redux";
 import {
-  useCreateTradeMutation,
   useCurrencyConverterQuery,
   useCurrentRateQuery,
   useGetAllCurrencyPairsQuery,
@@ -34,6 +33,7 @@ import { handleCreateTruelayerPayment } from "./util/truelayerService";
 
 import { openModal } from "@/redux/modal/modalSlice";
 import Image from "next/image";
+import { useCreateTradeMutation } from "@/redux/features/trade/tradeApi";
 interface TradeDetails {
   currency: string;
   exit_currency: string;
@@ -62,6 +62,7 @@ const CreateTrade = () => {
     minimumBid: "",
     bank_name: "",
     account_number: "",
+    account_name: "",
     beneficiary_name: "",
     beneficiary_account: "",
     beneficiary_bank: "",
@@ -111,7 +112,16 @@ const CreateTrade = () => {
   };
 
   const isFormValid = (): boolean => {
+    const keysToExclude = ["account_name", "account_number", "bank_name"];
+
+    const shouldExcludeKeys =
+      createTradeDetails.payment_method !== "Direct deposit";
+
     for (const key in createTradeDetails) {
+      if (shouldExcludeKeys && keysToExclude.includes(key)) {
+        continue;
+      }
+
       if (createTradeDetails[key as keyof TradeDetails] === "") {
         return false;
       }
@@ -264,22 +274,6 @@ const CreateTrade = () => {
                 Currency
               </label>
               <div className=" h-[46px]  items-center  flex   w-[433px] mt-[8px] p-[15px_16px_15px_16px] gap-[10px]  rounded-[8px]  bg-[#FBFBFB]">
-                {/* <div>
-                  <Image
-                    src="/svg/nigeriaflag.svg"
-                    alt=""
-                    className=""
-                    height={15}
-                    width={16}
-                  />
-                </div>
-
-                <div>
-                  <h2 className=" leading-[14.4px] text-[12px]  tracking-[-2%]  font-bold ">
-                    NGN
-                  </h2>
-                </div> */}
-
                 <CreateTradeDropDown
                   onSelect={handleCurrency}
                   className=" w-full flex justify-between"
@@ -328,7 +322,7 @@ const CreateTrade = () => {
                   className="w-[80%]  outline-none bg-transparent placeholder:text-gray-300"
                 />
                 <div className="w-[20%] tracking-[-2%] text-left bg-transparent text-sm">
-                  {currency}
+                  {createTradeDetails?.exit_currency}
                 </div>
               </div>
             </div>
@@ -503,26 +497,27 @@ const CreateTrade = () => {
                       placeholder="Enter Account Number"
                     />
                   </div>
-                </div>{" "}
+                </div>
+                <div>
+                  <label
+                    htmlFor=""
+                    className=" text-[16px]  leading-[24px]  tracking-[-2%]  text-[#000000] font-semibold"
+                  >
+                    Account Name
+                  </label>
+                  <div className="h-[46px] w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
+                    <input
+                      type="text"
+                      onChange={handleChange}
+                      name="account_name"
+                      className="outline-none placeholder:gray-200 placeholder:text-xs"
+                      placeholder="Enter Account name"
+                    />
+                  </div>
+                </div>
               </>
             ) : null}
-            <div>
-              <label
-                htmlFor=""
-                className=" text-[16px]  leading-[24px]  tracking-[-2%]  text-[#000000] font-semibold"
-              >
-                Account Name
-              </label>
-              <div className="h-[46px] w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
-                <input
-                  type="text"
-                  onChange={handleChange}
-                  name="beneficiary_name"
-                  className="outline-none placeholder:gray-200 placeholder:text-xs"
-                  placeholder="Enter Account name"
-                />
-              </div>
-            </div>
+
             <hr className="mt-2 border-gray-900" />
             <h3 className="text-[18px]  leading-[24px]  tracking-[-2%]  text-[#000000] font-bold">
               Additional Information

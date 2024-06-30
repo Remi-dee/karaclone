@@ -18,26 +18,8 @@ type VerifyNumber = {
   "5": string;
 };
 
-const VerifyEmail: FC<Props> = ({ setVerificationSuccess }) => {
-  const activationToken = localStorage.getItem("auth_token");
-  const [activation, { isSuccess, error }] = useActivationMutation();
+const DeactivateVerification: FC<Props> = ({ setVerificationSuccess }) => {
   const [invalidError, setInvalidError] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (isSuccess) {
-      toast.success("Account activated successfully");
-      setVerificationSuccess(true);
-    }
-    if (error) {
-      if ("data" in error) {
-        const errorData = error as any;
-        toast.error(errorData.data.message);
-        setInvalidError(true);
-      } else {
-        console.log("An error occurred:", error);
-      }
-    }
-  }, [isSuccess, error]);
 
   const inputRefs = [
     useRef<HTMLInputElement>(null),
@@ -58,15 +40,17 @@ const VerifyEmail: FC<Props> = ({ setVerificationSuccess }) => {
   });
 
   const verificationHandler = async () => {
-    const verificationNumber = Object.values(verifyNumber).join("");
-    if (verificationNumber.length !== 6) {
-      setInvalidError(true);
-      return;
-    }
-    await activation({
-      activation_token: activationToken,
-      activation_code: verificationNumber,
-    });
+    setVerificationSuccess(true);
+
+    // const verificationNumber = Object.values(verifyNumber).join("");
+    // if (verificationNumber.length !== 6) {
+    //   setInvalidError(true);
+    //   return;
+    // }
+    // await activation({
+    //   activation_token: activationToken,
+    //   activation_code: verificationNumber,
+    // });
   };
 
   const handleInputChange = (index: number, value: string) => {
@@ -76,7 +60,7 @@ const VerifyEmail: FC<Props> = ({ setVerificationSuccess }) => {
 
     if (value === "" && index > 0) {
       inputRefs[index - 1].current?.focus();
-    } else if (value.length === 1 && index < 3) {
+    } else if (value.length === 1 && index < 5) {
       inputRefs[index + 1].current?.focus();
     }
   };
@@ -84,8 +68,10 @@ const VerifyEmail: FC<Props> = ({ setVerificationSuccess }) => {
   return (
     <div className="w-[470px] h-[451px] mx-auto  shadow-md rounded-[16px] border border-white-100">
       <div className="w-[470px] text-center mx-auto">
-        <div className="w-[56px]   ml-[1rem] h-[56px] flex justify-center items-center shadow-md border border-gray-200  rounded-[12px] ">
-          <MdMail className="text-[28px]" />
+        <div className=" w-full flex items-center justify-center">
+          <div className="w-[56px]    ml-[1rem] h-[56px] flex justify-center items-center shadow-md border border-gray-200  rounded-[12px] ">
+            <MdMail className="text-[22px]" />
+          </div>
         </div>
         <div className=" text-center px-[1rem] flex flex-col gap-[16px] mt-[24px] ">
           <h4 className="py-2 font-bold text-[#1E1E1E] leading-[38.4px] text-[32px] tracking-[-2%]">
@@ -107,7 +93,7 @@ const VerifyEmail: FC<Props> = ({ setVerificationSuccess }) => {
                   ? "shake border-red-500"
                   : "dark:border-white border-[#0000004a]"
               }   `}
-              placeholder="0"
+              placeholder=""
               maxLength={1}
               value={verifyNumber[key as keyof VerifyNumber]}
               onChange={(e) => handleInputChange(index, e.target.value)}
@@ -137,4 +123,4 @@ const VerifyEmail: FC<Props> = ({ setVerificationSuccess }) => {
   );
 };
 
-export default VerifyEmail;
+export default DeactivateVerification;

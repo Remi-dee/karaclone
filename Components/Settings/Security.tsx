@@ -1,7 +1,24 @@
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import rightarrow from "@/public/svg/arrow-right.svg";
+
+import DeactivateVerification from "../Auth/DeactivateVerification";
+
+import { useDispatch } from "react-redux";
+import { openModal } from "@/redux/modal/modalSlice";
+import CustomModal from "../CustomModal/CustomModal";
+import YesNoDeactivate from "../Auth/YesNoDeactivate";
+
 function Security() {
+  const dispatch = useDispatch();
+  const [verificationResponse, setverificationResponse] = useState(false);
+  const handleDeactive = () => {
+    dispatch(openModal());
+  };
+  const handleResonse = (e: boolean) => {
+    setverificationResponse(e);
+  };
+
   return (
     <div>
       <div className=" h-[252px] flex  flex-col gap-[24px] bg-[#FFFFFF] w-[100%]  p-[24px] rounded-[8px]">
@@ -44,8 +61,11 @@ function Security() {
             </p>
 
             <span className=" flex   items-center content-center gap-[8px]  ">
-              <p className="text-[#F04438] tracking-[-2%] font-medium text-[14px] leading-[20px]  ">
-                Activate <span> {">"} </span>
+              <p
+                onClick={handleDeactive}
+                className="text-[#F04438] cursor-pointer tracking-[-2%] font-medium text-[14px] leading-[20px]  "
+              >
+                Deactivate <span> {">"} </span>
               </p>{" "}
               {/* <Image
                 src={rightarrow}
@@ -78,6 +98,14 @@ function Security() {
           </span>
         </div>
       </div>
+
+      <CustomModal>
+        {verificationResponse ? (
+          <YesNoDeactivate setVerificationSuccess={handleResonse} />
+        ) : (
+          <DeactivateVerification setVerificationSuccess={handleResonse} />
+        )}
+      </CustomModal>
     </div>
   );
 }

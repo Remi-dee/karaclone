@@ -14,10 +14,7 @@ import {
 } from "@/redux/features/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-import {
-  useCreateTradeMutation,
-  useLoadUserQuery,
-} from "@/redux/features/user/userApi";
+import { useLoadUserQuery } from "@/redux/features/user/userApi";
 import { toast } from "react-toastify";
 import { handleCreateTruelayerPayment } from "./util/truelayerService";
 import {
@@ -27,6 +24,7 @@ import {
 } from "@/redux/features/truelayer/truelayerSlice";
 import { useMonoWidget } from "@/app/mono/monoServices";
 import { useCreatePaymentMutation } from "@/redux/features/truelayer/truelayerApi";
+import { useCreateTradeMutation } from "@/redux/features/trade/tradeApi";
 
 const CreateTradeDetails = () => {
   const globalState = useSelector((state: any) => state.user);

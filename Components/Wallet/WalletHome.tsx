@@ -64,7 +64,7 @@ function WalletHome() {
             <TiEye className=" text-[20px]  text-[#7C7C7C]" />
           </div>
           <p className="leading-[24px] text-[#7C7C7C]  text-[16px] font-regular tracking-[-2%]">
-            Select each curre ncy to perform a transaction
+            Select each currency to perform a transaction
           </p>
         </div>
         <div className="flex justify-start lg:justify-between gap-[16px] items-center">

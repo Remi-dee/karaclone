@@ -7,11 +7,12 @@ import { toast } from "react-toastify";
 import { toggleBuyTradeSuccessModal } from "@/redux/features/user/userSlice";
 import { useDispatch } from "react-redux";
 import svgBank from "@/public/svg/svgBank.svg";
-import { useGetBeneficiariesQuery } from "@/redux/features/user/userApi";
+
 import { closeModal } from "@/redux/modal/modalSlice";
 import NGN from "@/public/Images/NGN.png";
 import GBP from "@/public/Images/GBP.png";
 import USD from "@/public/Images/USD.png";
+import { useGetBeneficiariesQuery } from "@/redux/features/trade/tradeApi";
 interface SelectBankProps {
   // onAccountChange: (account: string) => void;
   // onNameChange: (name: string) => void;
@@ -56,8 +57,6 @@ function SelectBank({ onSelect, onAccountAndNameChange }: SelectBankProps) {
 
   useEffect(() => {
     refetch();
-
-    toast.success("rendered");
   }, []);
   if (isLoading) return <div>Fetching your beneficiaries...</div>;
   if (error) return <div>Error fetching beneficiaries</div>;
@@ -154,7 +153,7 @@ function SelectBank({ onSelect, onAccountAndNameChange }: SelectBankProps) {
         </div>
         <button
           onClick={handleSuccessMessage}
-          className="p-[12px]  rounded-[8px] text-white-100 bg-[#7F56D9]  w-full h-[44px]["
+          className="p-[12px]  rounded-[8px] text-white-100 bg-[#7F56D9]  w-full h-[44px]   mb-[2rem]"
         >
           Continue
         </button>

@@ -4,20 +4,27 @@ import Pagination from "../Pagination";
 import { tradeData } from "./tradeData";
 import EmptyTrade from "./EmptyTrade";
 import Link from "next/link";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   addDataForSelectedTrade,
   toggleBuyTradeDisplay,
   toggleBuyTradeState,
 } from "@/redux/features/user/userSlice";
+
+import CustomModal from "../CustomModal/CustomModal";
+import { openModal, openTradeModal } from "@/redux/modal/modalSlice";
+import AmountToTrade from "./AmountToTrade";
+import TradeSuccessModal from "../CustomModal/TradeSuccessModal";
+import { RootState } from "@/redux/store";
 import {
-  useGetAllTradeExecptMineQuery,
-  useGetAllTradeQuery,
   useGetSingleTradeQuery,
-} from "@/redux/features/user/userApi";
+  useGetAllTradeExecptMineQuery,
+} from "@/redux/features/trade/tradeApi";
 
 const SellTradeTable = () => {
   const [tradeId, setTradeId] = useState<string | null>(null);
+  const [showModal, setshowModal] = useState(true);
+  const isModalOpen = useSelector((state: RootState) => state.modal.isOpen);
   const dispatch = useDispatch();
   const { data, error, isLoading, isSuccess } = useGetSingleTradeQuery(
     tradeId!,
@@ -25,9 +32,11 @@ const SellTradeTable = () => {
       skip: !tradeId, // Skip the query until tradeId is set
     }
   );
+
   const [listOfTrades, setlistOfTrades] = useState([]);
   // const allTradeData = useGetAllTradeQuery("");
   const allTradeData = useGetAllTradeExecptMineQuery("");
+  console.log(allTradeData);
   useEffect(() => {
     // createTrade();
 
@@ -45,6 +54,8 @@ const SellTradeTable = () => {
   }, [isSuccess]);
 
   const handleBuyButton = (id: string | any) => {
+    //handle modal for amount
+    dispatch(openTradeModal());
     // handle fetching of selected trade here
 
     setTradeId(id);
@@ -57,9 +68,9 @@ const SellTradeTable = () => {
             <thead>
               <tr key="1" className="bg-gray-900 text-sm">
                 <th className="p-4 text-left">Trade ID</th>
-                <th className="p-4 text-left">Price (NGN)</th>
-                <th className="p-4 text-left">Available (USD)</th>
-                <th className="p-4 text-left">Limit (USD)</th>
+                <th className="p-4 text-left">Price </th>
+                <th className="p-4 text-left">Available</th>
+                <th className="p-4 text-left">Limit</th>
                 <th className="p-4 text-left">Action</th>
               </tr>
             </thead>
@@ -72,8 +83,16 @@ const SellTradeTable = () => {
                 >
                   <td className="p-4">{item.tradeId}</td>
                   <td className="p-4">{item.amount}</td>
-                  <td className="p-4">{item.available || "2,000"}</td>
-                  <td className="p-4">{item.limit || "100 - 2000"}</td>
+                  <td className="p-4">
+                    {Number(item.amount) - Number(item?.sold)}
+                  </td>
+                  <td className="p-4">
+                    {item.minimumBid +
+                      " " +
+                      "-" +
+                      " " +
+                      (Number(item.amount) - Number(item?.sold))}
+                  </td>
                   <td className="p-4">
                     <button
                       disabled={isLoading}

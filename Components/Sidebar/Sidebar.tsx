@@ -151,15 +151,19 @@ const Sidebar = ({ link, showSideBar }: Props) => {
                       iconColor={
                         eachdata.label.toLowerCase() === "logout"
                           ? "#D70035"
-                          : "#fff"
+                          : "#D70035"
                       }
                     />
                   ) : null}
                   <span
-                    className={`ml-3 text-[black] ${
+                    className={`ml-3 ${
+                      eachdata.label.toLowerCase() === "logout"
+                        ? " text-[#D70035]"
+                        : "text-[black]"
+                    }  ${
                       eachdata.label.toLowerCase() === "logout"
                         ? " text-[#D70035] "
-                        : "text-[#fff]"
+                        : "text-[#D70035]"
                     }  `}
                   >
                     {eachdata.label}

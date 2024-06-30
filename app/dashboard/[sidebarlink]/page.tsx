@@ -20,6 +20,24 @@ import chatIcon from "@/public/chaticon.png";
 import Image from "next/image";
 import wave from "@/public/svg/wave.svg";
 import SettingsLogoutModal from "@/Components/Auth/SettingsLogOut";
+import DeactivateVerification from "@/Components/Auth/DeactivateVerification";
+import YesNoDeactivate from "@/Components/Auth/YesNoDeactivate";
+import ChatPage from "@/Components/Chat/ChatPage";
+import ConversationChat from "@/Components/Chat/ConversationChat";
+import ChatModal from "@/Components/CustomModal/ChatModal";
+import Chat from "@/Components/Chat/Chat";
+import {
+  openChatModal,
+  openCheckRateModal,
+  openNotificationModal,
+  toggleProfileModal,
+} from "@/redux/modal/modalSlice";
+import Notification from "@/Components/Notification/Notification";
+import NotificationModal from "@/Components/CustomModal/NotificationModal";
+import CheckRateModal from "@/Components/CustomModal/CheckRateModal";
+import TodayRate from "@/Components/Rate/TodayRate";
+import ProfileModal from "@/Components/CustomModal/ProfileModal";
+import Profile from "@/Components/Profile/Profile";
 const Dashboard = (urlParam: any) => {
   const dispatch = useDispatch();
   const [showSidebar, setShowSidebar] = useState(false);
@@ -29,16 +47,20 @@ const Dashboard = (urlParam: any) => {
   };
   const { logoutModalOpen } = useSelector(authSelector);
   const { data } = useLoadUserQuery({});
+  const handleChatIcon = () => {
+    dispatch(openChatModal());
+  };
   return (
-    <div className="flex bg-[#F5F1FB]  w-full h-screen max-h-screen   fixed top-0  bottom-0  _h-[1024px]">
+    <div className="flex bg-[#F5F1FB]  relative w-full h-screen max-h-screen   fixed top-0  bottom-0  _h-[1024px]">
       {/* sidebar */}
 
       <Sidebar link={urlLink} showSideBar={showSidebar} />
 
       <Image
+        onClick={handleChatIcon}
         src={chatIcon}
         alt=""
-        className=" absolute  right-[1rem] bottom-[0.5rem]  h-[50px] w-[50px]"
+        className=" absolute cursor-pointer  right-[1rem] bottom-[0.5rem] z-[900]  h-[50px] w-[50px]"
       />
 
       <div className="  overflow-auto  h-screen w-full">
@@ -69,16 +91,22 @@ const Dashboard = (urlParam: any) => {
                 </div>
               </div>
 
-              <div className="flex items-center gap-5">
-                <div className="flex items-center font-bold mr-5">
+              <div className="flex items-center gap-[40px]">
+                <div
+                  onClick={() => dispatch(openCheckRateModal())}
+                  className="flex cursor-pointer items-center font-bold mr-5"
+                >
                   <ArrowsRightLeftIcon className="text-purple-700 text-sm h-6 w-6" />
                   <p className="text-purple-700">Check out our rates </p>
                 </div>
-                <BellIcon className="text-gray-300 h-6 w-6" />
-                <SunIcon className="text-gray-300 h-6 w-6" />
+                <BellIcon
+                  onClick={() => dispatch(openNotificationModal())}
+                  className="text-gray-300 cursor-pointer h-6 w-6"
+                />
+                {/* <SunIcon className="text-gray-300 h-6 w-6" /> */}
                 <UserCircleIcon
                   className="text-gray-300 h-6 w-6 cursor-pointer"
-                  onClick={() => dispatch(toggleLogoutModal({ data: true }))}
+                  onClick={() => dispatch(toggleProfileModal())}
                 />
               </div>
             </div>
@@ -98,6 +126,21 @@ const Dashboard = (urlParam: any) => {
           </div>
         </div>
       </div>
+
+      <NotificationModal>
+        <Notification />
+      </NotificationModal>
+
+      <ChatModal>
+        <Chat />
+      </ChatModal>
+
+      <CheckRateModal>
+        <TodayRate />
+      </CheckRateModal>
+      <ProfileModal>
+        <Profile />
+      </ProfileModal>
       {logoutModalOpen && <LogoutModal />}
     </div>
   );
