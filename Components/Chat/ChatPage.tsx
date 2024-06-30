@@ -8,6 +8,9 @@ import rightarrow from "@/public/svg/rightarrow.svg";
 import sendIcon from "@/public/svg/send.svg";
 import { useDispatch } from "react-redux";
 import { closeChatModal } from "@/redux/modal/modalSlice";
+
+const data = [1, 2, 3, 4, 5];
+
 function ChatPage({ clickHandler }: { clickHandler: any }) {
   const [Value, setValue] = useState("");
 
@@ -17,6 +20,10 @@ function ChatPage({ clickHandler }: { clickHandler: any }) {
     clickHandler(option);
   };
   const dispatch = useDispatch();
+
+  const handleFAQClick = () => {
+    handleChange("FAQ");
+  };
 
   return (
     <div className=" w-full h-[800px]   ">
@@ -92,23 +99,24 @@ function ChatPage({ clickHandler }: { clickHandler: any }) {
       <div className=" pb-[1rem]">
         <div className=" h-full w-full flex justify-center mt-[24px]">
           <div className="  max-h-[248px] h-full flex  flex-col  w-[327px]  p-[16px] gap-[10px] rounded-[8px] border border-[#EFEFEF]  ">
-            <EachFaq />
-
-            <div className=" w-[295px]  h-[0.5px] bg-[#EFEFEF]   "></div>
-
-            <EachFaq />
-
-            <div className=" w-[295px]  h-[0.5px] bg-[#EFEFEF]   "></div>
-            <EachFaq />
-            <div className=" w-[295px]  h-[0.5px] bg-[#EFEFEF]   "></div>
-            <EachFaq />
-
-            <div className=" w-[295px]  h-[0.5px] bg-[#EFEFEF]   "></div>
-
-            <EachFaq />
-
-            <div className=" w-[295px]  h-[0.5px] bg-[#EFEFEF]   "></div>
-            <EachFaq />
+            {data?.map((e, i) => (
+              <>
+                <div key={i} className="flex justify-between items-center">
+                  <p className="text-[10px] leading-[16px] tracking-[-2%] h-full w-full">
+                    Can I trust the sellers/buyers on the platform?
+                  </p>
+                  <Image
+                    onClick={handleFAQClick}
+                    src={rightarrow}
+                    alt="Arrow right"
+                    className="w-[14px] cursor-pointer h-[12px]"
+                  />
+                </div>
+                {i < data.length - 1 && (
+                  <div className="bg-[#EFEFEF] h-[0.5px] mt-[12px] w-[295px]"></div>
+                )}
+              </>
+            ))}
           </div>
         </div>
 
@@ -148,14 +156,3 @@ function ChatPage({ clickHandler }: { clickHandler: any }) {
 }
 
 export default ChatPage;
-
-function EachFaq(params: any) {
-  return (
-    <div className="  flex justify-between  ">
-      <p className=" text-[10px] leading-[16px] tracking-[-2%] h-full w-full">
-        Can I trust the sellers/buyers on the platform?
-      </p>
-      <Image src={rightarrow} alt=" w-[14px] h-[12px]" />
-    </div>
-  );
-}

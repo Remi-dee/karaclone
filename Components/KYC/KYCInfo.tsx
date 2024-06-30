@@ -21,6 +21,8 @@ const KYCInfo: FC<Props> = ({
   setActive,
 }) => {
   const [selectedCountry, setSelectedCountry] = useState("");
+  const [address_Document_Name, setaddress_Document_Name] = useState("");
+  const [documentFile, setdocumentFile] = useState("");
   const handleCountryChange = (country: any, e: any) => {
     setSelectedCountry(country);
 
@@ -34,6 +36,8 @@ const KYCInfo: FC<Props> = ({
 
   const handleIdDocumentChange = (e: any) => {
     const file = e.target.files?.[0];
+    setdocumentFile(e.target.files[0].name);
+
     if (file) {
       const reader = new FileReader();
 
@@ -49,6 +53,7 @@ const KYCInfo: FC<Props> = ({
     return;
   };
   const handleAddressDocumentChange = (e: any) => {
+    setaddress_Document_Name(e.target.files[0].name);
     const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
@@ -56,6 +61,7 @@ const KYCInfo: FC<Props> = ({
       reader.onload = (e: any) => {
         if (reader.readyState === 2) {
           setKycDetails({ ...kycDetails, address_document: reader.result });
+          // console.log(reader.result);
         }
       };
       reader.readAsDataURL(file);
@@ -93,10 +99,7 @@ const KYCInfo: FC<Props> = ({
         </p>
       </div>
       <div className="w-[80%] h-[1104px] flex p-[32px_40px_32px_40px]  mt-[24px] mx-auto  rounded-[8px]  bg-[white]">
-        <form
-          className=""
-          // onSubmit={handleSubmit}
-        >
+        <form className="" onSubmit={handleSubmit}>
           <div className=" flex flex-col gap-[8px]   ">
             <h3 className="font-semibold text-[18px] leading-[28px]   ">
               Verify ID
@@ -193,7 +196,7 @@ const KYCInfo: FC<Props> = ({
                 required
               />
               <span id="file-name" className="file-name">
-                sample.pdf
+                {documentFile || "sample.pdf"}
               </span>
             </div>
             <div className=" flex items-center gap-[8px] leading-[20px] text-[14px] text-[#7C7C7C]">
@@ -240,7 +243,7 @@ const KYCInfo: FC<Props> = ({
                 >
                   <option value="" disabled hidden>
                     Select type
-                  </option>{" "}
+                  </option>
                   <option value="Waste Bill">Waste Bill</option>
                   <option value="Electricity Bill">Electricity Bill</option>
                 </select>
@@ -261,23 +264,23 @@ const KYCInfo: FC<Props> = ({
                 <div className="file-upload-container">
                   <label
                     className="upload-box  text-[#7C7C7C] text-[16px]  tracking-[-2%]  leading-[24px] font-semibold  "
-                    htmlFor="file-upload"
+                    htmlFor="address_file-upload"
                   >
                     Upload File
                   </label>
                   <input
-                    id="file-upload"
+                    id="address_file-upload"
                     type="file"
-                    onChange={updateFileName}
+                    onChange={handleAddressDocumentChange}
                   />
                   <span id="file-name" className="file-name">
-                    Sample PDF
+                    {address_Document_Name || "Sample PDF"}
                   </span>
                 </div>
                 <div className=" flex items-center gap-[8px] leading-[20px] text-[14px] text-[#7C7C7C]">
                   <span>
                     <Image src={caution} alt="" />
-                  </span>{" "}
+                  </span>
                   <span>The file must be either in PDF or DOC format.</span>
                 </div>
               </div>

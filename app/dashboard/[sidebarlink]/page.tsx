@@ -30,11 +30,14 @@ import {
   openChatModal,
   openCheckRateModal,
   openNotificationModal,
+  toggleProfileModal,
 } from "@/redux/modal/modalSlice";
 import Notification from "@/Components/Notification/Notification";
 import NotificationModal from "@/Components/CustomModal/NotificationModal";
 import CheckRateModal from "@/Components/CustomModal/CheckRateModal";
 import TodayRate from "@/Components/Rate/TodayRate";
+import ProfileModal from "@/Components/CustomModal/ProfileModal";
+import Profile from "@/Components/Profile/Profile";
 const Dashboard = (urlParam: any) => {
   const dispatch = useDispatch();
   const [showSidebar, setShowSidebar] = useState(false);
@@ -88,7 +91,7 @@ const Dashboard = (urlParam: any) => {
                 </div>
               </div>
 
-              <div className="flex items-center gap-5">
+              <div className="flex items-center gap-[40px]">
                 <div
                   onClick={() => dispatch(openCheckRateModal())}
                   className="flex cursor-pointer items-center font-bold mr-5"
@@ -103,7 +106,7 @@ const Dashboard = (urlParam: any) => {
                 {/* <SunIcon className="text-gray-300 h-6 w-6" /> */}
                 <UserCircleIcon
                   className="text-gray-300 h-6 w-6 cursor-pointer"
-                  onClick={() => dispatch(toggleLogoutModal({ data: true }))}
+                  onClick={() => dispatch(toggleProfileModal())}
                 />
               </div>
             </div>
@@ -135,7 +138,9 @@ const Dashboard = (urlParam: any) => {
       <CheckRateModal>
         <TodayRate />
       </CheckRateModal>
-
+      <ProfileModal>
+        <Profile />
+      </ProfileModal>
       {logoutModalOpen && <LogoutModal />}
     </div>
   );

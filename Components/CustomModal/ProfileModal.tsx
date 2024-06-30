@@ -2,32 +2,32 @@ import { RootState } from "@/redux/store";
 import { ReactNode } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { closeChatModal } from "@/redux/modal/modalSlice";
+import { toggleProfileModal } from "@/redux/modal/modalSlice";
 
 type CustomModalprops = {
   children: ReactNode;
 };
 
-const ChatModal: React.FC<CustomModalprops> = ({ children }) => {
-  const isChatModalOpen = useSelector(
-    (state: RootState) => state.modal.isChatModalOpen
+const ProfileModal: React.FC<CustomModalprops> = ({ children }) => {
+  const isProfileModalOpen = useSelector(
+    (state: RootState) => state.modal.isProfileModalOpen
   );
   const dispatch = useDispatch();
   const closeModalHandler = () => {
-    dispatch(closeChatModal());
+    dispatch(toggleProfileModal());
   };
   const stopPropagationHandler = (e: React.MouseEvent) => {
     e.stopPropagation();
   };
   return (
     <>
-      {isChatModalOpen && (
+      {isProfileModalOpen && (
         <div
           onClick={closeModalHandler}
-          className="fixed  top-0 left-0 right-0 w-screen h-screen flex justify-center items-center inset-0 z-[50000]  overflow-auto bg-[#404040] bg-opacity-90"
+          className="fixed  top-0 left-0 right-0 w-screen h-screen flex justify-center items-center inset-0 z-[50000]  overflow-auto bg-[#989898] bg-opacity-10"
         >
           <div className=" " onClick={stopPropagationHandler}>
-            <div className="absolute bg-[white]  overflow-y-auto invisible-scrollbar  shadow-lg right-[1rem]   top-[1.5rem]  w-[375px]  max-w-[375px] max-h-[90vh]  min-h-[350px] flex">
+            <div className="absolute bg-[white]  overflow-y-auto    shadow-lg right-[1.7rem]   top-[6rem]  w-[375px]  max-w-[284px] max-h-[284px]  min-h-[284px] flex">
               {children}
               <div
                 onClick={closeModalHandler}
@@ -43,4 +43,4 @@ const ChatModal: React.FC<CustomModalprops> = ({ children }) => {
   );
 };
 
-export default ChatModal;
+export default ProfileModal;

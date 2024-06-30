@@ -1,7 +1,14 @@
 import React from "react";
 import WarnIcon from "@/public/svg/warnIcon.svg";
 import Image from "next/image";
-function YesNoDeactivate() {
+import { useDispatch } from "react-redux";
+import { closeModal } from "@/redux/modal/modalSlice";
+function YesNoDeactivate({
+  setVerificationSuccess,
+}: {
+  setVerificationSuccess: any;
+}) {
+  const dispatch = useDispatch();
   return (
     <div className=" w-full  h-full flex flex-col gap-[40px]">
       <div className=" w-full flex justify-center">
@@ -15,10 +22,24 @@ function YesNoDeactivate() {
       </div>
 
       <div className="  flex  justify-between">
-        <button className=" p-[12px] shadow-xs w-[215px] border  border-[#3D3D3D] outline-none rounded-[8px]   ">
+        <button
+          onClick={() => {
+            dispatch(closeModal());
+
+            setVerificationSuccess(false);
+          }}
+          className=" p-[12px] shadow-xs w-[215px] border  border-[#3D3D3D] outline-none rounded-[8px]   "
+        >
           No
         </button>
-        <button className=" p-[12px] shadow-xs bg-[#D92D20] text-[white] w-[215px] border outline-none  border-[#D92D20] rounded-[8px]   ">
+        <button
+          onClick={() => {
+            dispatch(closeModal());
+
+            setVerificationSuccess(false);
+          }}
+          className=" p-[12px] shadow-xs bg-[#D92D20] text-[white] w-[215px] border outline-none  border-[#D92D20] rounded-[8px]   "
+        >
           Yes
         </button>
       </div>

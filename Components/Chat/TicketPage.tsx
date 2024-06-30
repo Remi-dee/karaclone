@@ -29,9 +29,9 @@ function TicketPage({ clickHandler }: { clickHandler: any }) {
     setActiveButton(status);
   };
   return (
-    <div className=" w-full h-[800px]  grid-flow-col grid grid-rows-[20%_75%_10%] rounded-[12px]   ">
+    <div className=" w-full px-[1.5rem] h-[800px]  grid-flow-col grid grid-rows-[20%_75%_10%] rounded-[12px]   ">
       <section className=" flex   py-[1rem] h-full     flex-col    w-full relative ">
-        <section className=" flex  justify-between pr-[1rem]">
+        <section className=" flex  justify-between">
           <Image
             width={15}
             height={15}
@@ -45,7 +45,7 @@ function TicketPage({ clickHandler }: { clickHandler: any }) {
             className="text-gray-200 cursor-pointer text-lg"
           />
         </section>
-        <div className=" w-full p-[1rem] pl-[2rem]">
+        <div className=" px-[1rem] w-full mt-[1.5rem]">
           <h1 className=" font-bold text-[16px] tracking-[-2%]  leading-[24px]   ">
             Ticket Status
           </h1>

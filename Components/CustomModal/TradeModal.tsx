@@ -8,7 +8,7 @@ type CustomModalprops = {
   children: ReactNode;
 };
 
-const CustomModal: React.FC<CustomModalprops> = ({ children }) => {
+const TradeModal: React.FC<CustomModalprops> = ({ children }) => {
   const isModalOpen = useSelector((state: RootState) => state.modal.isOpen);
   const dispatch = useDispatch();
   const closeModalHandler = () => {
@@ -44,4 +44,4 @@ const CustomModal: React.FC<CustomModalprops> = ({ children }) => {
   );
 };
 
-export default CustomModal;
+export default TradeModal;

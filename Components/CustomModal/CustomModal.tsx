@@ -31,7 +31,7 @@ const CustomModal: React.FC<CustomModalprops> = ({ children }) => {
                 onClick={closeModalHandler}
                 className="absolute top-0 right-0 p-4 mt-[32px]  cursor-pointer"
               >
-                <MdCancel className="text-gray-200 text-lg" />
+                {/* <MdCancel className="text-gray-200 text-lg" /> */}
               </div>
             </div>
           </div>

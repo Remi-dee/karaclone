@@ -6,6 +6,7 @@ interface modalState {
   isChatModalOpen: boolean;
   isNotificationModalOpen: boolean;
   isCheckRateModalOpen: boolean;
+  isProfileModalOpen: boolean;
 }
 
 const initialState: modalState = {
@@ -14,6 +15,7 @@ const initialState: modalState = {
   isChatModalOpen: false,
   isNotificationModalOpen: false,
   isCheckRateModalOpen: false,
+  isProfileModalOpen: false,
 };
 
 const modalSlice = createSlice({
@@ -55,6 +57,13 @@ const modalSlice = createSlice({
     closeCheckRateModal: (state) => {
       state.isCheckRateModalOpen = false;
     },
+    toggleProfileModal: (state) => {
+      if (state.isProfileModalOpen === false) {
+        state.isProfileModalOpen = true;
+      } else {
+        state.isProfileModalOpen = false;
+      }
+    },
   },
 });
 
@@ -69,5 +78,6 @@ export const {
   openNotificationModal,
   closeCheckRateModal,
   openCheckRateModal,
+  toggleProfileModal,
 } = modalSlice.actions;
 export default modalSlice.reducer;
