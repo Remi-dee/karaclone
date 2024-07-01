@@ -2,7 +2,8 @@
 import { useState } from "react";
 import { ArrowsRightLeftIcon } from "@heroicons/react/24/outline";
 import { BellIcon, SunIcon, UserCircleIcon } from "@heroicons/react/20/solid";
-import { Bars3Icon } from "@heroicons/react/24/outline";
+import CircleIcon from "@/public/profile-circle.png";
+import Menu from "@/public/menu.png";
 import Sidebar from "@/Components/Sidebar/Sidebar";
 import Home from "@/Components/Home";
 import Wallet from "@/Components/Wallet/Wallet";
@@ -38,6 +39,7 @@ import CheckRateModal from "@/Components/CustomModal/CheckRateModal";
 import TodayRate from "@/Components/Rate/TodayRate";
 import ProfileModal from "@/Components/CustomModal/ProfileModal";
 import Profile from "@/Components/Profile/Profile";
+import Logo from "@/public/Images/Logo.png";
 const Dashboard = (urlParam: any) => {
   const dispatch = useDispatch();
   const [showSidebar, setShowSidebar] = useState(false);
@@ -67,12 +69,12 @@ const Dashboard = (urlParam: any) => {
         <div className="min-h-[1024px] w-full">
           <div className=" relative  w-full  h-[100px]">
             {/* Wrap Bars3Icon component inside button element */}
-            <button
-              className="block lg:hidden fixed top-0 left-0 z-[1000] p-2 rounded-xl bg-white-100 border border-slate-200  text-white"
+            {/* <button
+              className="block lg:hidden fixed top-0 left-0 z-[1000]"
               onClick={toggleSidebar}
             >
-              <Bars3Icon className="text-gray-300 h-6 w-6" />
-            </button>
+              <Image src={Menu} width={20} height={6} alt="" />
+            </button> */}
 
             <div className="flex justify-between py-5 border-slate-200 p-[24px_40px_24px_40px] bg-white-100">
               <div className="flex items-center">
@@ -91,23 +93,41 @@ const Dashboard = (urlParam: any) => {
                 </div>
               </div>
 
-              <div className="flex items-center gap-[40px]">
-                <div
-                  onClick={() => dispatch(openCheckRateModal())}
-                  className="flex cursor-pointer items-center font-bold mr-5"
-                >
-                  <ArrowsRightLeftIcon className="text-purple-700 text-sm h-6 w-6" />
-                  <p className="text-purple-700">Check out our rates </p>
+              <div className="flex justify-between space-x-[330px]">
+                {" "}
+                <div>
+                  <button className="md:hidden cursor-pointer">
+                    <Image src={Logo} alt="Logo" className="" />
+                  </button>
                 </div>
-                <BellIcon
-                  onClick={() => dispatch(openNotificationModal())}
-                  className="text-gray-300 cursor-pointer h-6 w-6"
-                />
-                {/* <SunIcon className="text-gray-300 h-6 w-6" /> */}
-                <UserCircleIcon
-                  className="text-gray-300 h-6 w-6 cursor-pointer"
-                  onClick={() => dispatch(toggleProfileModal())}
-                />
+                <div className="flex items-center gap-[40px]">
+                  <div
+                    onClick={() => dispatch(openCheckRateModal())}
+                    className=" cursor-pointer items-center font-bold mr-5 hidden md:flex"
+                  >
+                    <ArrowsRightLeftIcon className="text-purple-700 text-sm h-6 w-6" />
+                    <p className="text-purple-700">Check out our rates </p>
+                  </div>
+                  <BellIcon
+                    onClick={() => dispatch(openNotificationModal())}
+                    className="text-gray-300 cursor-pointer h-6 w-6"
+                  />
+                  {/* <SunIcon className="text-gray-300 h-6 w-6" /> */}
+
+                  <button
+                    className="block h-8 w-8 cursor-pointer"
+                    onClick={() => dispatch(toggleProfileModal())}
+                  >
+                    <Image src={CircleIcon} alt="Profile" className="h-6 w-6" />
+                  </button>
+
+                  <button
+                    className=" cursor-pointer md:hidden block"
+                    onClick={() => dispatch(toggleProfileModal())}
+                  >
+                    <Image src={Menu} className="h-6 w-6" alt="Menu" />
+                  </button>
+                </div>
               </div>
             </div>
             {/* content */}

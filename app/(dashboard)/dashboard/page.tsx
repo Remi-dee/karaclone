@@ -29,7 +29,7 @@ const Dashboard = (urlParam: any) => {
   const { logoutModalOpen } = useSelector(authSelector);
   const { data } = useLoadUserQuery({});
   return (
-    <div className="flex h- bg-[#F5F1FB] items-center ">
+    <div className="flex bg-[#F5F1FB] items-center ">
       {/* sidebar */}
       <Sidebar link={urlLink} showSideBar={showSidebar} />
 
