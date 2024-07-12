@@ -1,6 +1,6 @@
 "use client";
 import React, { ChangeEvent, useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { v4 as uuidv4 } from "uuid";
 import NGN from "@/public/Images/NGN.png";
@@ -30,10 +30,13 @@ import BeneficaryDetails from "./BeneficaryDetails";
 import SelectBank from "./SelectBank";
 import TradeTransSuccesss from "./TradeTransSuccess";
 import { handleCreateTruelayerPayment } from "./util/truelayerService";
+import { Modal } from "@/Components/modal/modal";
 
 import { openModal } from "@/redux/modal/modalSlice";
 import Image from "next/image";
 import { useCreateTradeMutation } from "@/redux/features/trade/tradeApi";
+import CreateTradeDetails from "./CreateTradeDetails";
+import CreateTradeSuccess from "./CreateTradeSuccess";
 interface TradeDetails {
   currency: string;
   exit_currency: string;
@@ -53,13 +56,14 @@ const CreateTrade = () => {
   const [showTradeDetails, setShowTradeDetails] = useState(false);
 
   const [benefiaryCurrency, setbenefiaryCurrency] = useState("");
+  const view = useSearchParams().get("view");
 
   const [createTradeDetails, setcreateTradeDetails] = useState({
     currency: "",
     exit_currency: "",
     rate: rate,
-    amount: "",
-    minimumBid: "",
+    amount: 0,
+    minimumBid: 0,
     bank_name: "",
     account_number: "",
     account_name: "",
@@ -177,13 +181,14 @@ const CreateTrade = () => {
   const handleChange = (event: ChangeEvent<HTMLInputElement | any>): void => {
     const { name, value } = event.target;
     if (name === "amount") {
-      const newValue = value.replace(/[^0-9]/g, "");
+      const newValue = Number(value.replace(/[^0-9]/g, ""));
 
       return setcreateTradeDetails({ ...createTradeDetails, amount: newValue });
     }
     setcreateTradeDetails((prevState) => ({
       ...prevState,
       [name]: name === "rate" ? Number(value) : value,
+      [name]: name === "minimumBid" ? Number(value) : value,
     }));
   };
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>): void => {
@@ -548,6 +553,19 @@ const CreateTrade = () => {
             </button>
           </form>
         </div>
+      </div>
+      <div>
+        {view == "createtradesuccess" ? (
+          <Modal
+            onClose={() => {
+              router.push("/");
+            }}
+          >
+            <CreateTradeSuccess />
+          </Modal>
+        ) : (
+          <div></div>
+        )}{" "}
       </div>
 
       {selectRecipient ? (

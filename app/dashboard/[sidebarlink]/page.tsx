@@ -40,10 +40,14 @@ import TodayRate from "@/Components/Rate/TodayRate";
 import ProfileModal from "@/Components/CustomModal/ProfileModal";
 import Profile from "@/Components/Profile/Profile";
 import Logo from "@/public/Images/Logo.png";
-const Dashboard = (urlParam: any) => {
+import { useSearchParams } from "next/navigation";
+import CreateTradeSuccess from "@/Components/Trade/CreateTradeSuccess";
+const Dashboard = ({ params }: { params: { sidebarlink: string } }) => {
   const dispatch = useDispatch();
   const [showSidebar, setShowSidebar] = useState(false);
-  const urlLink: any = urlParam.params.sidebarlink;
+  // const urlLink: any = urlParam.params.sidebarlink;
+  const searchParams = useSearchParams();
+  const urlLink: string | any = params.sidebarlink;
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
   };
@@ -52,6 +56,13 @@ const Dashboard = (urlParam: any) => {
   const handleChatIcon = () => {
     dispatch(openChatModal());
   };
+
+  const paymentId = searchParams.get("payment_id");
+
+  if (paymentId) {
+    return <CreateTradeSuccess />;
+  }
+
   return (
     <div className="flex bg-[#F5F1FB]  relative w-full h-screen max-h-screen   fixed top-0  bottom-0  _h-[1024px]">
       {/* sidebar */}
@@ -76,9 +87,15 @@ const Dashboard = (urlParam: any) => {
               <Image src={Menu} width={20} height={6} alt="" />
             </button> */}
 
-            <div className="flex justify-between py-5 border-slate-200 p-[24px_40px_24px_40px] bg-white-100">
-              <div className="flex items-center">
-                <div className="hidden lg:block ml-5">
+            <div className="flex justify-between items-start py-5 border-slate-200 p-[24px_40px_24px_40px] bg-white-100">
+              <div className="flex flex-col md:space-y-0 space-y-6 items-start">
+                <div>
+                  <button className="md:hidden cursor-pointer">
+                    <Image src={Logo} alt="Logo" className="" />
+                  </button>
+                </div>
+
+                <div className="lg:block lg:ml-5">
                   <span className="text-black-200 font-bold text-lg">
                     <div className=" flex gap-[4px]">
                       <p className="text-black-200 font-bold text-lg">
@@ -94,19 +111,15 @@ const Dashboard = (urlParam: any) => {
               </div>
 
               <div className="flex justify-between space-x-[330px]">
-                {" "}
-                <div>
-                  <button className="md:hidden cursor-pointer">
-                    <Image src={Logo} alt="Logo" className="" />
-                  </button>
-                </div>
-                <div className="flex items-center gap-[40px]">
+                <div className="flex items-center gap-5 md:gap-[40px]">
                   <div
                     onClick={() => dispatch(openCheckRateModal())}
-                    className=" cursor-pointer items-center font-bold mr-5 hidden md:flex"
+                    className=" cursor-pointer items-center font-bold lg:mr-5 hidden md:flex"
                   >
                     <ArrowsRightLeftIcon className="text-purple-700 text-sm h-6 w-6" />
-                    <p className="text-purple-700">Check out our rates </p>
+                    <p className="text-purple-700 hidden lg:flex">
+                      Check out our rates{" "}
+                    </p>
                   </div>
                   <BellIcon
                     onClick={() => dispatch(openNotificationModal())}

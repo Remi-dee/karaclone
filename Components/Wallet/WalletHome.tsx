@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TiEye } from "react-icons/ti";
 import { IoIosAddCircle, IoIosArrowRoundUp } from "react-icons/io";
 import { CgArrowsExchange } from "react-icons/cg";
-import { walletData } from "./walletData";
+
 import TransactionTable from "../Transactions/TransactionTable";
 import { useRouter } from "next/navigation";
 
@@ -16,16 +16,48 @@ import {
   toggleCreateTrade,
   toggleCreateTradeStage,
   toggleBuyTradeDisplay,
+  setLoading,
+  setWallets,
+  setError,
+  setSelectedCurrency,
+  userSelector,
 } from "@/redux/features/user/userSlice";
+import NGN from "@/public/Images/NGN.png";
+
+import GBP from "@/public/Images/GBP.png";
 
 import { toast } from "react-toastify";
+import { useGetAllUserWalletsQuery } from "@/redux/features/user/userApi";
 function WalletHome() {
-  const [selectedCurrency, setSelectedCurrency] = useState<string | null>(null);
   const router = useRouter();
   const dispatch = useDispatch();
   const handleCurrency = (currency: string) => {
-    setSelectedCurrency(currency);
+    dispatch(setSelectedCurrency(currency));
   };
+  const { selectedCurrency } = useSelector(userSelector);
+  const { data, error, isLoading } = useGetAllUserWalletsQuery();
+
+  useEffect(() => {
+    if (isLoading) {
+      dispatch(setLoading(true));
+    } else {
+      dispatch(setLoading(false));
+    }
+    console.log("here is data 1", data);
+    if (data) {
+      console.log("here is data", data);
+      dispatch(setWallets(data));
+    }
+
+    if (error) {
+      console.log("here is error", error);
+      dispatch(setError(error.toString()));
+    }
+
+    if (isLoading) {
+      console.log("here is data", isLoading);
+    }
+  }, [data, error, isLoading, dispatch]);
 
   const handleFundWallet = () => {
     if (selectedCurrency) {
@@ -50,6 +82,19 @@ function WalletHome() {
       toast.warn("Please, select a currency!");
     }
   };
+
+  const wallets = data?.wallets || [];
+
+  // Sort wallets: NGN first, then GBP
+  const sortedWallets = wallets.sort((a, b) => {
+    if (a.currency_code === "NGN") return -1;
+    if (b.currency_code === "NGN") return 1;
+    if (a.currency_code === "GBP") return -1;
+    if (b.currency_code === "GBP") return 1;
+    return 0;
+  });
+
+  console.log(sortedWallets);
   return (
     <div className=" w-full  h-full">
       <div className="w-full rounded-md h-[369px] shadow-lg p-[1.5rem]  flex flex-col gap-[24px]   bg-white-100">
@@ -68,10 +113,10 @@ function WalletHome() {
           </p>
         </div>
         <div className="flex justify-start lg:justify-between gap-[16px] items-center">
-          {walletData?.map((item) => (
+          {data?.map((item: any) => (
             <div
               key={item.id}
-              onClick={() => handleCurrency(item.name)}
+              onClick={() => handleCurrency(item.currency_code)}
               className={`w-[210px] h-[119px] currency cursor-pointer p-[16px_24px_16px_24px] border rounded-[8px] ${
                 selectedCurrency === item.name
                   ? "border-primaryBtn"
@@ -81,20 +126,20 @@ function WalletHome() {
               <div className="flex justify-start items-center  text-gray-300 gap-[16px]">
                 <div className=" flex gap-[8px]">
                   <Image
-                    src={item.img}
+                    src={item.currency_code === "NGN" ? NGN : GBP}
                     width={20}
                     height={20}
                     alt=""
                     className=" min-w-[24px]  min-h-[24px]   "
                   />
                   <p className="font-semibold tracking-[-2%] text-[16px] leading-[24px]   ">
-                    {item.name}
+                    {item.currency_code}
                   </p>
                 </div>
               </div>
               <p className="text-xs text-gray-300 py-2">Available balance</p>
               <p className="font-bold leading-[28.8px] tracking-[-2%] text-[24px]">
-                {item.amount}
+                {item.currency_code == "NGN" ? "N" : "E"} {item.escrow_balance}
               </p>
             </div>
           ))}

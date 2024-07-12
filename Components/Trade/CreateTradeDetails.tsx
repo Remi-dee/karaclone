@@ -56,14 +56,14 @@ const CreateTradeDetails = () => {
 
   useEffect(() => {
     // dispatch(toggleCreateTradeStage(3));
-    if (isPaymentSuccess) {
-      createTrade(createdTrade);
-    }
-    if (isTradeSuccess) {
+    if (isPaymentSuccess && isTradeSuccess) {
       toast.success("Trade created successfully");
-      dispatch(toggleCreateTradeStage(3));
+      // dispatch(toggleCreateTradeStage(4));
       dispatch(addCreatedTrade(tradeData?.trade));
+    } else {
+      ("Unable to create a trade, please try again");
     }
+
     if (tradeError) {
       toast.error("An error occurred!");
     }
@@ -74,19 +74,28 @@ const CreateTradeDetails = () => {
     if (createdTrade?.currency === "NGN") {
       await openMonoWidget();
     } else {
-      // const paymentCreated = await handleCreateTruelayerPayment(
-      //   createdTrade,
-      //   data,
-      //   createPayment,
-      //   dispatch,
-      //   setPaymentDetails
-      // );
-      // if (paymentCreated.status === "success") {
-      //   dispatch(setIsPaymentSuccess(true));
-      // }
-      createTrade(createdTrade);
+      console.log("this is created data", {
+        ...createdTrade,
+        status: "success",
+      });
+      const paymentCreated = await handleCreateTruelayerPayment(
+        createdTrade,
+        data,
+        createPayment,
+        dispatch,
+        setPaymentDetails
+      );
+      if (paymentCreated.status === "success") {
+        dispatch(setIsPaymentSuccess(true));
+        // createTrade(createdTrade{
+        //   ...createdTrade,
+        //   status: "success",
+        // });
+
+        createTrade(createdTrade);
+      }
     }
-    dispatch(toggleCreateTradeStage(4));
+    // dispatch(toggleCreateTradeStage(4));
   };
 
   return (

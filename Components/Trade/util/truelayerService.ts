@@ -11,7 +11,7 @@ const handleCreateTruelayerPayment = async (
 ) => {
   try {
     const paymentData = {
-      amount_in_minor: parseInt(createTradeDetails?.amount), // Assuming amount is part of the trade details
+      amount_in_minor: parseInt(createTradeDetails?.amount) * 100, // Assuming amount is part of the trade details
       currency: createTradeDetails?.currency, // Assuming currency is part of the trade details
       payment_method: {
         provider_selection: {

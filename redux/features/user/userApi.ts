@@ -2,6 +2,15 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { userLoggedIn, userLoggedOut } from "../auth/authSlice";
 import getTokenFromLocalStorage from "@/utils/FetchUserToken";
 
+interface Wallet {
+  _id: string;
+  currency_code: string;
+  balance: number;
+}
+
+interface WalletsResponse {
+  wallets: Wallet[];
+}
 const baseQuery = fetchBaseQuery({
   baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
   prepareHeaders: (headers) => {
@@ -130,20 +139,22 @@ export const userApi = createApi({
 
     //next
 
-    getAllUsersWallet: builder.query({
+    getAllUserWallets: builder.query({
       query: () => ({
-        url: "wallet/get-all-user-wallets",
+        url: "wallets/me",
         method: "GET",
       }),
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
-        try {
-          const result = await queryFulfilled;
+      transformResponse: (response: {
+        data: WalletsResponse;
+      }): WalletsResponse => response.data,
+    }),
 
-          // console.log(result);
-        } catch (error: any) {
-          // console.log(error);
-        }
-      },
+    fundWallet: builder.mutation({
+      query: ({ userId, currency_code, amount }) => ({
+        url: "wallets/fund",
+        method: "POST",
+        body: { userId, currency_code, amount },
+      }),
     }),
 
     // /Currency converstion
@@ -192,7 +203,7 @@ export const {
   useGetRandomPasswordQuery,
   useGetSingleCurrencyPairQuery,
   useGetAllCurrencyPairsQuery,
-  useGetAllUsersWalletQuery,
+  useGetAllUserWalletsQuery,
 
   useCurrencyConverterQuery,
 } = userApi;

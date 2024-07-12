@@ -3,7 +3,28 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "@/redux/store";
 import { TextDecoderStream } from "node:stream/web";
 
-const initialState = {
+interface UserWalletState {
+  TextDecoderStream: boolean;
+  conversionFees: string;
+  options: string;
+  settingsOption: string;
+  walletDisplay: string;
+  fundStage: number;
+  reversalInitiated: boolean;
+  createTradeState: number;
+  isBuyTrade: boolean;
+  isCreateTrade: boolean;
+  isSuccesssTradeModal: boolean;
+  recepient: string;
+  createdTrade: object;
+  selectedTrade: object;
+  wallets: any[];
+  loading: boolean;
+  error: string;
+  selectedCurrency: string;
+}
+
+const initialState: UserWalletState = {
   TextDecoderStream: false,
   conversionFees: "",
   options: "",
@@ -18,6 +39,10 @@ const initialState = {
   recepient: "",
   createdTrade: {},
   selectedTrade: {},
+  wallets: [],
+  loading: false,
+  error: "",
+  selectedCurrency: "",
 };
 
 const userSlice = createSlice({
@@ -65,6 +90,18 @@ const userSlice = createSlice({
     addDataForSelectedTrade: (state, { payload }) => {
       state.selectedTrade = payload;
     },
+    setWallets: (state, action: PayloadAction<any>) => {
+      state.wallets = action.payload;
+    },
+    setLoading: (state, action: PayloadAction<boolean>) => {
+      state.loading = action.payload;
+    },
+    setError: (state, action: PayloadAction<string>) => {
+      state.error = action.payload;
+    },
+    setSelectedCurrency: (state, action: PayloadAction<string>) => {
+      state.selectedCurrency = action.payload;
+    },
   },
 });
 export const {
@@ -81,6 +118,10 @@ export const {
   toggleBuyTradeDisplay,
   addDataForSelectedTrade,
   toggleBuyTradeSuccessModal,
+  setWallets,
+  setLoading,
+  setError,
+  setSelectedCurrency,
 } = userSlice.actions;
 export const userSelector = (state: RootState) => state.user;
 

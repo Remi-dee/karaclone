@@ -63,7 +63,7 @@ const BuyTradeTable = () => {
               </td>
               <td className="p-4">{item?.amount + " " + item?.currency}</td>
               <td className="p-4">
-                {item?.amount} {item?.currency}
+                {item?.available_amount} {item?.currency}
               </td>
               <td className="p-4">{item?.minimumBid}</td>
               <td className="p-4">{item?.payment_method || "X Method"}</td>

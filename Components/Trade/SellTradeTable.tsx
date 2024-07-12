@@ -82,7 +82,9 @@ const SellTradeTable = () => {
                   className="leading-[24px] overflow-auto text-[#464646] tracking-[-2%] border-b text-[16px] border-b-gray-500"
                 >
                   <td className="p-4">{item.tradeId}</td>
-                  <td className="p-4">{item.amount}</td>
+                  <td className="p-4">
+                    {item.price} {item?.exit_currency}
+                  </td>
                   <td className="p-4">
                     {Number(item.amount) - Number(item?.sold)}
                   </td>

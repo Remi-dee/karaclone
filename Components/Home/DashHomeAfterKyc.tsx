@@ -20,6 +20,7 @@ import {
   toggleCreateTrade,
 } from "@/redux/features/user/userSlice";
 import KYBModal from "../KYC/kyb";
+import TransactionTable from "../Transactions/TransactionTable";
 function DashHomeAfterKyc() {
   const { startKycModalOpen, startKybModalOpen } = useSelector(kycSelector);
 
@@ -218,57 +219,7 @@ function DashHomeAfterKyc() {
           </div>
         </div>
 
-        <div className="p-6  bg-white-100 flex flex-col items-center space-x-4">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-[#FBFBFB]">
-              <tr>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-8700 uppercase tracking-wider"
-                >
-                  Type
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-8700 uppercase tracking-wider"
-                >
-                  Description
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-8700 uppercase tracking-wider"
-                >
-                  Amount
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-8700 uppercase tracking-wider"
-                >
-                  Date
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-[black] text-left text-xs font-medium  uppercase tracking-wider"
-                >
-                  Status
-                </th>
-              </tr>
-            </thead>
-
-            <tbody></tbody>
-
-            {/* empty transactions */}
-          </table>
-          <div className="text-center mt-[68px] w-full flex flex-col items-center justify-center">
-            <img src="/svg/emptytrans.svg" alt="" />
-            <p className="text-center mt-[24px] leading-[28px] tracking-[-2%] text-[18px] text-[#3D3D3D] font-semibold">
-              No Transactions Yet
-            </p>
-            <p className="text-gray-300 leading-[24px] text-[16px] mt-[8px] ">
-              Start making transactions and track your activity here
-            </p>
-          </div>
-        </div>
+        <TransactionTable />
       </div>
       {startKycModalOpen && <KycModal />}
       {/* {startKybModalOpen && <KYBModal />} */}
