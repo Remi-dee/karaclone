@@ -65,7 +65,13 @@ export const userApi = createApi({
         body: { topt },
       }),
     }),
-
+    updateUserProfile: builder.mutation({
+      query: (userData) => ({
+        url: "user/update-profile",
+        method: "POST",
+        body: userData,
+      }),
+    }),
     logOut: builder.query({
       query: () => ({
         url: "user/logout",
@@ -141,20 +147,20 @@ export const userApi = createApi({
 
     getAllUserWallets: builder.query({
       query: () => ({
-        url: "wallets/me",
+        url: "wallets",
         method: "GET",
       }),
-      transformResponse: (response: {
-        data: WalletsResponse;
-      }): WalletsResponse => response.data,
+      transformResponse: (response: { wallets: Wallet[] }) => response,
+      providesTags: ["Wallets"],
     }),
 
     fundWallet: builder.mutation({
-      query: ({ userId, currency_code, amount }) => ({
+      query: ({ currency_code, escrow_balance }) => ({
         url: "wallets/fund",
         method: "POST",
-        body: { userId, currency_code, amount },
+        body: { currency_code, escrow_balance },
       }),
+      invalidatesTags: ["Wallets"],
     }),
 
     // /Currency converstion
@@ -204,6 +210,8 @@ export const {
   useGetSingleCurrencyPairQuery,
   useGetAllCurrencyPairsQuery,
   useGetAllUserWalletsQuery,
+  useFundWalletMutation,
+  useUpdateUserProfileMutation,
 
   useCurrencyConverterQuery,
 } = userApi;

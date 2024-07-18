@@ -35,7 +35,10 @@ function WalletHome() {
     dispatch(setSelectedCurrency(currency));
   };
   const { selectedCurrency } = useSelector(userSelector);
-  const { data, error, isLoading } = useGetAllUserWalletsQuery();
+  const { data, error, isLoading } = useGetAllUserWalletsQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+    refetchOnReconnect: true,
+  });
 
   useEffect(() => {
     if (isLoading) {
@@ -55,7 +58,7 @@ function WalletHome() {
     }
 
     if (isLoading) {
-      console.log("here is data", isLoading);
+      console.log("here is loading", isLoading);
     }
   }, [data, error, isLoading, dispatch]);
 

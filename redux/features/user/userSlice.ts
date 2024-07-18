@@ -17,11 +17,15 @@ interface UserWalletState {
   isSuccesssTradeModal: boolean;
   recepient: string;
   createdTrade: object;
+  boughtTrade: object;
   selectedTrade: object;
   wallets: any[];
   loading: boolean;
   error: string;
   selectedCurrency: string;
+  amountToBuy: number;
+  amountToFund: number;
+  isWalletFund: boolean;
 }
 
 const initialState: UserWalletState = {
@@ -38,11 +42,15 @@ const initialState: UserWalletState = {
   isSuccesssTradeModal: false,
   recepient: "",
   createdTrade: {},
+  boughtTrade: {},
   selectedTrade: {},
   wallets: [],
   loading: false,
   error: "",
   selectedCurrency: "",
+  amountToBuy: 0,
+  amountToFund: 0,
+  isWalletFund: false,
 };
 
 const userSlice = createSlice({
@@ -58,6 +66,9 @@ const userSlice = createSlice({
       return { ...state, ...payload };
     },
     addCreatedTrade: (state, { payload }) => {
+      state.createdTrade = payload;
+    },
+    addBoughtTrade: (state, { payload }) => {
       state.createdTrade = payload;
     },
     toggleSettingsTab: (state, { payload }) => {
@@ -102,6 +113,15 @@ const userSlice = createSlice({
     setSelectedCurrency: (state, action: PayloadAction<string>) => {
       state.selectedCurrency = action.payload;
     },
+    setAmountToBuy: (state, action: PayloadAction<number>) => {
+      state.amountToBuy = action.payload;
+    },
+    setAmountToFund: (state, action: PayloadAction<number>) => {
+      state.amountToFund = action.payload;
+    },
+    setIsWalletFund: (state, action: PayloadAction<boolean>) => {
+      state.isWalletFund = action.payload;
+    },
   },
 });
 export const {
@@ -122,6 +142,10 @@ export const {
   setLoading,
   setError,
   setSelectedCurrency,
+  addBoughtTrade,
+  setAmountToBuy,
+  setAmountToFund,
+  setIsWalletFund,
 } = userSlice.actions;
 export const userSelector = (state: RootState) => state.user;
 

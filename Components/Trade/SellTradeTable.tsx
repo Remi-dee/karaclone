@@ -86,7 +86,7 @@ const SellTradeTable = () => {
                     {item.price} {item?.exit_currency}
                   </td>
                   <td className="p-4">
-                    {Number(item.amount) - Number(item?.sold)}
+                    {Number(item.amount) - Number(item?.sold)} {item?.currency}
                   </td>
                   <td className="p-4">
                     {item.minimumBid +

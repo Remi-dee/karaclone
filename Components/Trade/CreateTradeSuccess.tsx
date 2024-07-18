@@ -9,11 +9,21 @@ import {
 } from "@/redux/features/user/userSlice";
 import { useDispatch } from "react-redux";
 import { Modal } from "../modal/modal";
+import { setTransactionPaymentId } from "@/redux/features/truelayer/truelayerSlice";
 
-const CreateTradeSuccess = () => {
+const CreateTradeSuccess = ({
+  isCreateTrade,
+  isBuyTrade,
+  isWalletFund,
+  transactionPaymentId,
+}: any) => {
   const dispatch = useDispatch();
   const router = useRouter();
   const handleDone = () => {
+    dispatch(setTransactionPaymentId(""));
+    localStorage.removeItem("isBuyTrade");
+    localStorage.removeItem("isCreateTrade");
+    localStorage.removeItem("isWalletFund");
     router.push("/dashboard/P2P-trade");
   };
   return (
@@ -44,11 +54,18 @@ const CreateTradeSuccess = () => {
             </div>
             <div className=" flex  flex-col gap-[12px]">
               <h3 className=" text-[29px] tracking-[-2%] text-center text-[#3D3D3D] leadng-[38.4px] font-bold py-2">
-                Trade Successfully Created
+                {isCreateTrade
+                  ? "Trade Successfully Created"
+                  : isBuyTrade
+                  ? "Trade Bought Successfully "
+                  : "Wallet funded successfuly"}
               </h3>
               <p className="text-[#7C7C7C] leading-[24px] text-[16px] text-center ">
-                Your trade has been successfully initiated and will be visible
-                to all other traders within the platform.
+                {isCreateTrade
+                  ? "Your trade has been successfully initiated and will be visible to all other traders within the platform."
+                  : isBuyTrade
+                  ? "You have successfuly bought a trade."
+                  : "You have Successfully Funded your Wallet"}
               </p>
             </div>
             <div>
@@ -60,12 +77,16 @@ const CreateTradeSuccess = () => {
               </button>
             </div>
 
-            <div className=" w-[513px] text-[#FF104B] mt-[24px] font-bold">
-              <p className=" text-center text-[16px] leading-[24px]">
-                Note: If the funds remain unused for 24 hours, they will
-                automatically be returned to your account.
-              </p>
-            </div>
+            {isCreateTrade ? (
+              <div className=" w-[513px] text-[#FF104B] mt-[24px] font-bold">
+                <p className=" text-center text-[16px] leading-[24px]">
+                  Note: If the funds remain unused for 24 hours, they will
+                  automatically be returned to your account.
+                </p>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </div>

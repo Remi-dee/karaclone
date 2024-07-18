@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import {
   increaseFundWallet,
+  setAmountToFund,
   toggleWalletDispaly,
   userSelector,
 } from "@/redux/features/user/userSlice";
@@ -27,6 +28,9 @@ const FundAmount: FC<any> = () => {
   const filteredWallets = wallets?.filter(
     (wallet: any) => wallet.currency_code === selectedCurrency
   );
+  const handleChange = (e: any) => {
+    dispatch(setAmountToFund(e.target.value));
+  };
 
   return (
     <div>
@@ -133,6 +137,7 @@ const FundAmount: FC<any> = () => {
                                       name=""
                                       id=""
                                       placeholder="Amount"
+                                      onChange={handleChange}
                                       className="w-full border-none outline-none"
                                     />
                                   </div>
@@ -150,7 +155,7 @@ const FundAmount: FC<any> = () => {
                               Transaction Fee
                             </div>
                             <div className="relative tracking-[-0.02em] leading-[20px] font-medium text-neutral-black inline-block min-w-[27px]">
-                              0.00
+                              2.42
                             </div>
                           </div>
                         </div>

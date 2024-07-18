@@ -10,6 +10,7 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 import { BiSolidCopy } from "react-icons/bi";
 import {
   addCreatedTrade,
+  toggleCreateTrade,
   toggleCreateTradeStage,
 } from "@/redux/features/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -60,6 +61,7 @@ const CreateTradeDetails = () => {
       toast.success("Trade created successfully");
       // dispatch(toggleCreateTradeStage(4));
       dispatch(addCreatedTrade(tradeData?.trade));
+      // dispatch(toggleCreateTrade(true));
     } else {
       ("Unable to create a trade, please try again");
     }
@@ -87,12 +89,13 @@ const CreateTradeDetails = () => {
       );
       if (paymentCreated.status === "success") {
         dispatch(setIsPaymentSuccess(true));
-        // createTrade(createdTrade{
-        //   ...createdTrade,
-        //   status: "success",
-        // });
-
-        createTrade(createdTrade);
+        localStorage.setItem("isCreateTrade", "true");
+        createTrade({
+          ...createdTrade,
+          status: "Success",
+        });
+        dispatch(toggleCreateTrade(true));
+        // createTrade(createdTrade);
       }
     }
     // dispatch(toggleCreateTradeStage(4));

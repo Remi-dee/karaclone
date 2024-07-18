@@ -1,11 +1,30 @@
 "use client";
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { FaCreditCard, FaBuilding } from "react-icons/fa";
 import BankTransfer from "./BankTransfer";
-import { increaseFundWallet } from "@/redux/features/user/userSlice";
-import { useDispatch } from "react-redux";
+import {
+  increaseFundWallet,
+  setAmountToFund,
+  setIsWalletFund,
+  userSelector,
+} from "@/redux/features/user/userSlice";
+import { useDispatch, useSelector } from "react-redux";
 import DirectDebit from "./DirectDebit";
+import { authSelector } from "@/redux/features/auth/authSlice";
+import {
+  isPaymentSuccessSelector,
+  setIsPaymentSuccess,
+  setPaymentDetails,
+} from "@/redux/features/truelayer/truelayerSlice";
+import { useMonoWidget } from "@/app/mono/monoServices";
+import { handleCreateTruelayerPayment } from "../Trade/util/truelayerService";
+import {
+  useFundWalletMutation,
+  useLoadUserQuery,
+} from "@/redux/features/user/userApi";
+import { useCreatePaymentMutation } from "@/redux/features/truelayer/truelayerApi";
+import { toast } from "react-toastify";
 
 // type Props = {
 //   active: number;
@@ -16,17 +35,71 @@ const FundMethod: FC<any> = ({ active, setActive }) => {
   const [showComponent, setShowComponent] = useState(true);
   const [option, setOption] = useState<string | null>(null);
   const [selected, setSelected] = useState<string | null>(null);
-  const handleOptionChange = (option: string) => {
-    setOption(option);
-  };
+  const { wallets, selectedCurrency } = useSelector(userSelector);
+  const openMonoWidget = useMonoWidget();
+
+  const [
+    createPayment,
+    { isLoading: isCreatingPayment, error: paymentError, data: paymentData },
+  ] = useCreatePaymentMutation();
+  const [
+    fundWallet,
+    {
+      isLoading: isCreatingFund,
+      error: fundError,
+      data: fundData,
+      isSuccess: isFundSuccess,
+    },
+  ] = useFundWalletMutation();
+  const isPaymentSuccess = useSelector(isPaymentSuccessSelector);
+
+  const { data } = useLoadUserQuery({});
+
+  const { amountToFund } = useSelector(userSelector);
   const dispatch = useDispatch();
   const handleBack = () => {
     dispatch(increaseFundWallet(1));
   };
-  const handleSelct = () => {
+
+  useEffect(() => {
+    if (isPaymentSuccess && isFundSuccess) {
+      toast.success("Wallet funded successfully");
+    } else {
+      ("Unable to fund wallet, please try again");
+    }
+
+    if (fundError) {
+      toast.error("An error occurred!");
+      console.log(fundError);
+    }
+  }, [isFundSuccess, fundError, isPaymentSuccess]);
+
+  const handleOptionChange = (option: string) => {
+    setOption(option);
+  };
+  const handleSelct = async () => {
+    console.log("clicked");
     setShowComponent(false);
-    if (option === "Bank Transfer") {
-      setSelected(option);
+
+    if (option === "Connect with Bank" && selectedCurrency === "NGN") {
+      await openMonoWidget();
+    } else {
+      const paymentCreated = await handleCreateTruelayerPayment(
+        { amount: amountToFund, currency: selectedCurrency },
+        data,
+        createPayment,
+        dispatch,
+        setPaymentDetails
+      );
+      if (paymentCreated.status === "success") {
+        dispatch(setIsPaymentSuccess(true));
+        localStorage.setItem("isWalletFund", "true");
+        console.log("FUND DETAILS IS", { selectedCurrency, amountToFund });
+        fundWallet({
+          currency_code: selectedCurrency,
+          escrow_balance: amountToFund,
+        });
+      }
     }
   };
   return (
@@ -71,7 +144,7 @@ const FundMethod: FC<any> = ({ active, setActive }) => {
             </div>
             <div className="w-[550px] rounded-lg bg-white-100 shadow-lg overflow-hidden flex flex-col items-center justify-start py-8 px-10 box-border max-w-full text-left text-sm text-neutral-color-500 ">
               <div
-                onClick={() => handleOptionChange("Credit Card")}
+                onClick={() => handleOptionChange("Direct Debit")}
                 className={`w-full h-[48px] cursor cursor-pointer flex justify-start items-center mt-6 mb-4 gap-2 p-2 border rounded-md ${
                   option === "Credit Card"
                     ? "border-black-200 bg-[#F5F1FF]"
@@ -88,14 +161,14 @@ const FundMethod: FC<any> = ({ active, setActive }) => {
                 </div>
                 <input
                   type="radio"
-                  checked={option === "Credit Card"}
-                  onChange={() => handleOptionChange("Credit Card")}
+                  checked={option === "Direct Debit"}
+                  onChange={() => handleOptionChange("Direct Debit")}
                   className="w-10 checked:bg-primaryBtn"
                 />
               </div>
 
               <div
-                onClick={() => handleOptionChange("Bank Transfer")}
+                onClick={() => handleOptionChange("Connect with Bank")}
                 className={`w-full h-[48px] cursor cursor-pointer flex justify-start items-center mt-6 mb-4 gap-2 p-2 border rounded-md ${
                   option === "Bank Transfer"
                     ? "border-black-200 bg-[#F5F1FF]"
@@ -112,8 +185,8 @@ const FundMethod: FC<any> = ({ active, setActive }) => {
                 </div>
                 <input
                   type="radio"
-                  checked={option === "Bank Transfer"}
-                  onChange={() => handleOptionChange("Bank Transfer")}
+                  checked={option === "Connect with Bank"}
+                  onChange={() => handleOptionChange("Connect with Bank")}
                   className="w-10 checked:bg-primaryBtn"
                 />
               </div>
@@ -127,10 +200,11 @@ const FundMethod: FC<any> = ({ active, setActive }) => {
             </div>
           </div>
         </div>
-      ) : selected !== "Bank Transfer" ? (
+      ) : selected == "Direct Debit" ? (
         <DirectDebit />
       ) : (
-        <BankTransfer active={active} setActive={setActive} />
+        // <BankTransfer active={active} setActive={setActive} />
+        ""
       )}
     </>
   );

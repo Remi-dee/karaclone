@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowsRightLeftIcon } from "@heroicons/react/24/outline";
 import { BellIcon, SunIcon, UserCircleIcon } from "@heroicons/react/20/solid";
 import CircleIcon from "@/public/profile-circle.png";
@@ -9,7 +9,10 @@ import Home from "@/Components/Home";
 import Wallet from "@/Components/Wallet/Wallet";
 import Transaction from "@/Components/Transactions/Transaction";
 import Trade from "@/Components/Trade/Trade";
-import { useLoadUserQuery } from "@/redux/features/user/userApi";
+import {
+  useFundWalletMutation,
+  useLoadUserQuery,
+} from "@/redux/features/user/userApi";
 import {
   authSelector,
   toggleLogoutModal,
@@ -42,27 +45,177 @@ import Profile from "@/Components/Profile/Profile";
 import Logo from "@/public/Images/Logo.png";
 import { useSearchParams } from "next/navigation";
 import CreateTradeSuccess from "@/Components/Trade/CreateTradeSuccess";
+import { userSelector } from "@/redux/features/user/userSlice";
+import {
+  isPaymentSuccessSelector,
+  setTransactionPaymentId,
+  trueLayerSelector,
+} from "@/redux/features/truelayer/truelayerSlice";
+import {
+  useBuyTradeMutation,
+  useCreateTradeMutation,
+} from "@/redux/features/trade/tradeApi";
+import { toast } from "react-toastify";
 const Dashboard = ({ params }: { params: { sidebarlink: string } }) => {
   const dispatch = useDispatch();
   const [showSidebar, setShowSidebar] = useState(false);
+  const [isBuyTrade, setIsBuyTrade] = useState(false);
+  const [isCreateTrade, setIsCreateTrade] = useState(false);
+  const [isWalletFund, setIsWalletFund] = useState(false);
+  const [
+    buyTrade,
+    {
+      isLoading: isBuyingTrade,
+      error: buyTradeError,
+      data: buyTradeData,
+      isSuccess: isBuyTradeSuccess,
+    },
+  ] = useBuyTradeMutation();
+  const [
+    createTrade,
+    {
+      isLoading: isCreatingTrade,
+      error: tradeError,
+      data: tradeData,
+      isSuccess: isTradeSuccess,
+    },
+  ] = useCreateTradeMutation();
+
+  const [
+    fundWallet,
+    {
+      isLoading: isFundingWallet,
+      error: fundWalletError,
+      data: fundWalletData,
+      isSuccess: isFundWalletSuccess,
+    },
+  ] = useFundWalletMutation();
+
   // const urlLink: any = urlParam.params.sidebarlink;
   const searchParams = useSearchParams();
   const urlLink: string | any = params.sidebarlink;
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
   };
+  const { selectedCurrency } = useSelector(userSelector);
+  const { amountToFund } = useSelector(userSelector);
   const { logoutModalOpen } = useSelector(authSelector);
+  const isPaymentSuccess = useSelector(isPaymentSuccessSelector);
+  const { transactionPaymentId } = useSelector(trueLayerSelector);
+  // const { isCreateTrade, isBuyTrade, boughtTrade, createdTrade, isWalletFund } =
+  //   useSelector(userSelector);
   const { data } = useLoadUserQuery({});
   const handleChatIcon = () => {
     dispatch(openChatModal());
   };
-
   const paymentId = searchParams.get("payment_id");
 
-  if (paymentId) {
-    return <CreateTradeSuccess />;
-  }
+  useEffect(() => {
+    dispatch(setTransactionPaymentId(paymentId));
 
+    // Retrieve state from local storage on component mount
+    const storedIsCreateTrade = localStorage.getItem("isCreateTrade");
+    const storedIsWalletFund = localStorage.getItem("isWalletFund");
+    const storedIsBuyTrade = localStorage.getItem("isBuyTrade");
+    if (storedIsBuyTrade === "true") {
+      setIsBuyTrade(true);
+    } else if (storedIsCreateTrade === "true") {
+      setIsCreateTrade(true);
+    } else if (storedIsWalletFund === "true") {
+      setIsWalletFund(true);
+    }
+
+    console.log("iscreate trade i", isCreateTrade);
+    console.log("is buy trade i", isBuyTrade);
+    console.log("is fun is", isWalletFund);
+  }, []);
+
+  // useEffect(() => {
+  //   console.log("iscreate trade i", isCreateTrade);
+  //   console.log("is buy trade i", isBuyTrade);
+  //   console.log("is fun is", isWalletFund);
+  //   const handleTrade = async () => {
+  //     if (transactionPaymentId) {
+  //       if (isCreateTrade) {
+  //         // console.log("our created trade is", createdTrade);
+  //         // await createTrade(createdTrade);
+
+  //         if (tradeError) {
+  //           console.error("We have a trade error:", tradeError);
+  //         } else if (tradeData) {
+  //           console.log("Trade successful:", tradeData);
+  //         }
+
+  //         if (isTradeSuccess) {
+  //           toast.success("Trade created successfully");
+  //         }
+  //       } else if (isBuyTrade) {
+  //         console.log("our bought trade is", boughtTrade);
+  //         await buyTrade(boughtTrade);
+
+  //         if (buyTradeError) {
+  //           console.error("We have a trade error:", buyTradeError);
+  //         } else if (buyTradeData) {
+  //           console.log("Trade successful:", buyTradeData);
+  //         }
+
+  //         if (isBuyTradeSuccess) {
+  //           toast.success("Trade bought successfully");
+  //         }
+  //       } else if (isWalletFund) {
+  //         console.log("our bought trade is", amountToFund, selectedCurrency);
+  //         await fundWallet({ amountToFund, selectedCurrency });
+
+  //         if (buyTradeError) {
+  //           console.error("We have a trade error:", buyTradeError);
+  //         } else if (buyTradeData) {
+  //           console.log("Trade successful:", buyTradeData);
+  //         }
+
+  //         if (isBuyTradeSuccess) {
+  //           toast.success("Trade bought successfully");
+  //         }
+  //       }
+
+  //       // // After using the transactionPaymentId, clear it from the URL
+  //       // const params = new URLSearchParams(window.location.search);
+  //       // params.delete("transactionPaymentId");
+  //       // router.replace({
+  //       //   pathname: router.pathname,
+  //       //   query: params.toString(),
+  //       // }, undefined, { shallow: true });
+  //     }
+  //   };
+
+  //   handleTrade();
+  // }, [
+  //   transactionPaymentId,
+  //   isCreateTrade,
+  //   createdTrade,
+  //   tradeError,
+  //   tradeData,
+  //   isTradeSuccess,
+  //   isBuyTrade,
+  //   boughtTrade,
+  //   buyTradeError,
+  //   buyTradeData,
+  //   isBuyTradeSuccess,
+  //   isPaymentSuccess,
+  //   dispatch,
+  //   paymentId,
+  //   // router,
+  // ]);
+
+  if (paymentId) {
+    return (
+      <CreateTradeSuccess
+        isCreateTrade={isCreateTrade}
+        isBuyTrade={isBuyTrade}
+        isWalletFund={isWalletFund}
+        transactionPaymentId={transactionPaymentId}
+      />
+    );
+  }
   return (
     <div className="flex bg-[#F5F1FB]  relative w-full h-screen max-h-screen   fixed top-0  bottom-0  _h-[1024px]">
       {/* sidebar */}
