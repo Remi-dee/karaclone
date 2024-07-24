@@ -42,7 +42,7 @@ interface TradeDetails {
   exit_currency: string;
   rate: number;
   amount: string;
-  minimumBid: string;
+  minimum_bid: string;
   bank_name: string;
   account_number: string;
   beneficiary_name: string;
@@ -63,7 +63,7 @@ const CreateTrade = () => {
     exit_currency: "",
     rate: rate,
     amount: 0,
-    minimumBid: 0,
+    minimum_bid: 0,
     bank_name: "",
     account_number: "",
     account_name: "",
@@ -74,7 +74,7 @@ const CreateTrade = () => {
     sold: 0,
     payment_method: "",
     additional_information: "",
-    transaction_fee: "XX",
+    transaction_fee: 2.45,
   });
   const { data } = useLoadUserQuery({});
   const [
@@ -188,7 +188,7 @@ const CreateTrade = () => {
     setcreateTradeDetails((prevState) => ({
       ...prevState,
       [name]: name === "rate" ? Number(value) : value,
-      [name]: name === "minimumBid" ? Number(value) : value,
+      [name]: name === "minimum_bid" ? Number(value) : value,
     }));
   };
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>): void => {
@@ -361,7 +361,7 @@ const CreateTrade = () => {
               <div className="h-[46px] w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
                 <input
                   type="text"
-                  name="minimumBid"
+                  name="minimum_bid"
                   onChange={handleChange}
                   className="w-[80%] outline-none bg-transparent placeholder:text-gray-300"
                 />

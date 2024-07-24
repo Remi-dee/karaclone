@@ -92,7 +92,7 @@ const BuyTrade = () => {
   const [option, setOption] = useState<string | null>("");
   const [convertedAmount, setConvertedAmount] = useState<string>("");
   const [buyTradeDetails, setBuyTradeDetails] = useState({
-    tradeId: "",
+    trade_id: "",
     purchase: 0,
     beneficiary_name: "",
     beneficiary_account: "",
@@ -204,10 +204,11 @@ const BuyTrade = () => {
       beneficiary_name: item?.name,
       beneficiary_account: item?.account,
       beneficiary_bank: item?.bank_name,
-      tradeId: selectedTrade?.tradeId,
+      trade_id: selectedTrade?.trade_id,
       purchase_currency: selectedTrade?.currency,
       paid_currency: selectedTrade?.exit_currency,
       purchase: Number(amountToBuy),
+      rate: selectedTrade.exchange_rate,
     }));
   };
 
@@ -236,7 +237,10 @@ const BuyTrade = () => {
           status: "Processing",
         });
         localStorage.setItem("isBuyTrade", "true");
-        console.log("buy trade is", buyTradeDetails);
+        console.log("buy trade is", {
+          ...buyTradeDetails,
+          status: "Processing",
+        });
         dispatch(toggleBuyTradeDisplay(true));
       }
     }
@@ -284,7 +288,7 @@ const BuyTrade = () => {
                 <p className="text-gray-300">Trade ID</p>
                 <div className="flex justify-start items-center  gap-1  ">
                   <span className="leading-[24px] text-[#1E1E1E] tracking-[-2%] font-[500] text-[14px]">
-                    {selectedTrade?.tradeId}
+                    {selectedTrade?.trade_id}
                   </span>
                   <BiSolidCopy className="text-primaryBtn cursor-pointer" />
                 </div>

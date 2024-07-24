@@ -2,7 +2,7 @@ import {
   useLoadUserQuery,
   useUpdateUserProfileMutation,
 } from "@/redux/features/user/userApi";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 function BasicDetails() {
@@ -12,32 +12,57 @@ function BasicDetails() {
   });
   const [editMode, setEditMode] = useState(false);
   const [userData, setUserData] = useState({
-    firstName: user?.user.name?.split(" ")[0] || "",
-    lastName: user?.user.name?.split(" ")[1] || "",
-    email: user?.user.email || "",
-    phone: user?.user.phone || "",
-    gender: user?.user.gender || "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    gender: "",
   });
+  const [initialUserData, setInitialUserData] = useState({});
   const [updateUserProfile] = useUpdateUserProfileMutation();
+
+  useEffect(() => {
+    if (user?.user) {
+      const initialData = {
+        firstName: user.user.name?.split(" ")[0] || "",
+        lastName: user.user.name?.split(" ")[1] || "",
+        email: user.user.email || "",
+        phone: user.user.phone || "",
+        gender: user.user.gender || "",
+      };
+      setUserData(initialData);
+      setInitialUserData(initialData);
+    }
+  }, [user]);
 
   const handleCancel = () => {
     setEditMode(false);
-    setUserData({
-      firstName: user?.user.name?.split(" ")[0] || "",
-      lastName: user?.user.name?.split(" ")[1] || "",
-      email: user?.user.email || "",
-      phone: user?.user.phone || "",
-      gender: user?.user.gender || "",
-    });
+    setUserData(initialUserData);
   };
 
-  const handleChange = (e: { target: { name: any; value: any } }) => {
-    setUserData({ ...userData, [e.target.name]: e.target.value });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUserData({ ...userData, [name]: value });
   };
 
   const handleSubmit = async () => {
+    const updatedData = {};
+    for (const key in userData) {
+      if (userData[key] !== initialUserData[key]) {
+        updatedData[key] = userData[key];
+      }
+    }
+
     try {
-      await updateUserProfile(userData);
+      if (Object.keys(updatedData).length > 0) {
+        const updatedUserData = {
+          ...updatedData,
+          name: `${updatedData.firstName || initialUserData.firstName} ${
+            updatedData.lastName || initialUserData.lastName
+          }`,
+        };
+        await updateUserProfile(updatedUserData);
+      }
       setEditMode(false);
     } catch (error) {
       console.error("Failed to update user profile", error);
@@ -76,7 +101,7 @@ function BasicDetails() {
               />
             ) : (
               <p className=" text-[16px] leading-[24px] tracking-[-2%] text-[#464646]   ">
-                {user?.user.name?.split(" ")[0]}
+                {userData.firstName}
               </p>
             )}
           </div>
@@ -95,7 +120,7 @@ function BasicDetails() {
               />
             ) : (
               <p className=" text-[16px] leading-[24px] tracking-[-2%] text-[#464646]   ">
-                {user?.user.email}
+                {userData.email}
               </p>
             )}
           </div>
@@ -115,7 +140,7 @@ function BasicDetails() {
               />
             ) : (
               <p className=" text-[16px] leading-[24px] tracking-[-2%] text-[#464646]   ">
-                {user?.user.name?.split(" ")[1]}
+                {userData.lastName}
               </p>
             )}
           </div>
@@ -134,7 +159,7 @@ function BasicDetails() {
               />
             ) : (
               <p className=" text-[16px] leading-[24px] tracking-[-2%] text-[#464646]   ">
-                {user?.user.phone}
+                {userData.phone}
               </p>
             )}
           </div>
@@ -157,7 +182,7 @@ function BasicDetails() {
             </select>
           ) : (
             <p className=" text-[16px] leading-[24px] tracking-[-2%] text-[#464646]   ">
-              {user?.user.gender}
+              {userData.gender}
             </p>
           )}
         </div>

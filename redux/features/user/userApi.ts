@@ -155,10 +155,10 @@ export const userApi = createApi({
     }),
 
     fundWallet: builder.mutation({
-      query: ({ currency_code, escrow_balance }) => ({
+      query: ({ currency_code, amount }) => ({
         url: "wallets/fund",
         method: "POST",
-        body: { currency_code, escrow_balance },
+        body: { currency_code, amount },
       }),
       invalidatesTags: ["Wallets"],
     }),

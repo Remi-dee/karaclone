@@ -94,10 +94,13 @@ const FundMethod: FC<any> = ({ active, setActive }) => {
       if (paymentCreated.status === "success") {
         dispatch(setIsPaymentSuccess(true));
         localStorage.setItem("isWalletFund", "true");
-        console.log("FUND DETAILS IS", { selectedCurrency, amountToFund });
+        console.log("FUND DETAILS IS", {
+          currency_code: selectedCurrency,
+          escrow_balance: Number(amountToFund),
+        });
         fundWallet({
           currency_code: selectedCurrency,
-          escrow_balance: amountToFund,
+          amount: Number(amountToFund),
         });
       }
     }

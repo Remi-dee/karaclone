@@ -94,6 +94,7 @@ const CreateTradeDetails = () => {
           ...createdTrade,
           status: "Success",
         });
+
         dispatch(toggleCreateTrade(true));
         // createTrade(createdTrade);
       }
@@ -182,7 +183,7 @@ const CreateTradeDetails = () => {
                 <p className="text-gray-300">Minimum Bid</p>
                 <p className="text-xs font-semibold">
                   {" "}
-                  {createdTrade?.minimumBid + " " + createdTrade?.currency}
+                  {createdTrade?.minimum_bid + " " + createdTrade?.currency}
                 </p>
               </div>
 

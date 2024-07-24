@@ -59,7 +59,7 @@ const handleCreateTruelayerPayment = async (
     );
     const hppUrl = `https://payment.truelayer-sandbox.com/payments#payment_id=${result.data.id}&resource_token=${result.data.resource_token}&return_uri=${returnUri}`;
 
-    // window.location.href = hppUrl;
+    window.location.href = hppUrl;
     return {
       message: `payment created successfully with payment id: ${result.payment_id}`,
       status: "success",

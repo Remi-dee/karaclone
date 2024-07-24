@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaEye } from "react-icons/fa";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -13,7 +13,10 @@ import {
   toggleStartKycModalSuccess,
 } from "@/redux/features/kyc/kycSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { useLoadUserQuery } from "@/redux/features/user/userApi";
+import {
+  useGetAllUserWalletsQuery,
+  useLoadUserQuery,
+} from "@/redux/features/user/userApi";
 import {
   toggleWalletDispaly,
   toggleReversalState,
@@ -24,6 +27,15 @@ import TransactionTable from "../Transactions/TransactionTable";
 function DashHomeAfterKyc() {
   const { startKycModalOpen, startKybModalOpen } = useSelector(kycSelector);
 
+  const {
+    data: wallets,
+    error,
+    isLoading,
+  } = useGetAllUserWalletsQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+    refetchOnReconnect: true,
+  });
+  const [selectedWallet, setSelectedWallet] = useState(null);
   const { data } = useLoadUserQuery({});
   const dispatch = useDispatch();
   const router = useRouter();
@@ -62,6 +74,12 @@ function DashHomeAfterKyc() {
       href: "/dashboard/P2P-trade",
     },
   ];
+
+  useEffect(() => {
+    if (wallets && wallets.length > 0) {
+      setSelectedWallet(wallets[0]);
+    }
+  }, [wallets]);
 
   return (
     <div>
@@ -160,14 +178,18 @@ function DashHomeAfterKyc() {
                 </div>
                 <div className="">
                   <div>
-                    <BalanceDropdown currency={""} />
+                    <BalanceDropdown
+                      wallets={wallets}
+                      selectedWallet={selectedWallet}
+                      setSelectedWallet={setSelectedWallet}
+                    />
                   </div>
                 </div>
               </div>
               <p className="text-[32px] flex   items-end gap-[4px] leading-[38.4px] tracking-[-2%] font-bold   text-[#1E1E1E] mt-2">
-                0.00
+                {selectedWallet?.balance.toFixed(2)}
                 <span className="text-[#7C7C7C] text-[16px] pb-[2px] leading-[24px] ">
-                  NGN
+                  {selectedWallet?.currency}
                 </span>{" "}
               </p>
             </div>

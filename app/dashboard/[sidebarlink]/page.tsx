@@ -56,12 +56,14 @@ import {
   useCreateTradeMutation,
 } from "@/redux/features/trade/tradeApi";
 import { toast } from "react-toastify";
+import { useGetNotificationsQuery } from "@/redux/features/notification/notificationApi";
 const Dashboard = ({ params }: { params: { sidebarlink: string } }) => {
   const dispatch = useDispatch();
   const [showSidebar, setShowSidebar] = useState(false);
   const [isBuyTrade, setIsBuyTrade] = useState(false);
   const [isCreateTrade, setIsCreateTrade] = useState(false);
   const [isWalletFund, setIsWalletFund] = useState(false);
+  const [hasNewNotifications, setHasNewNotifications] = useState(false);
   const [
     buyTrade,
     {
@@ -102,6 +104,13 @@ const Dashboard = ({ params }: { params: { sidebarlink: string } }) => {
   const { logoutModalOpen } = useSelector(authSelector);
   const isPaymentSuccess = useSelector(isPaymentSuccessSelector);
   const { transactionPaymentId } = useSelector(trueLayerSelector);
+  const { data: notificationData, refetch } = useGetNotificationsQuery(
+    undefined,
+    {
+      // Add polling interval
+      pollingInterval: 10000, // Poll every 10 seconds
+    }
+  );
   // const { isCreateTrade, isBuyTrade, boughtTrade, createdTrade, isWalletFund } =
   //   useSelector(userSelector);
   const { data } = useLoadUserQuery({});
@@ -109,6 +118,15 @@ const Dashboard = ({ params }: { params: { sidebarlink: string } }) => {
     dispatch(openChatModal());
   };
   const paymentId = searchParams.get("payment_id");
+
+  useEffect(() => {
+    if (notificationData) {
+      const hasUnread = notificationData.data.some(
+        (notification: any) => !notification.read
+      );
+      setHasNewNotifications(hasUnread);
+    }
+  }, [notificationData]);
 
   useEffect(() => {
     dispatch(setTransactionPaymentId(paymentId));
@@ -206,6 +224,13 @@ const Dashboard = ({ params }: { params: { sidebarlink: string } }) => {
   //   // router,
   // ]);
 
+  const handleBellClick = async () => {
+    setHasNewNotifications(false);
+    dispatch(openNotificationModal());
+    // await markNotificationsRead(); // Mark notifications as read in the backend
+    refetch(); // Fetch the latest notifications after marking as read
+  };
+
   if (paymentId) {
     return (
       <CreateTradeSuccess
@@ -274,10 +299,15 @@ const Dashboard = ({ params }: { params: { sidebarlink: string } }) => {
                       Check out our rates{" "}
                     </p>
                   </div>
-                  <BellIcon
-                    onClick={() => dispatch(openNotificationModal())}
-                    className="text-gray-300 cursor-pointer h-6 w-6"
-                  />
+                  <div className="relative">
+                    <BellIcon
+                      onClick={handleBellClick}
+                      className="text-gray-300 cursor-pointer h-6 w-6"
+                    />
+                    {hasNewNotifications && (
+                      <div className="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full"></div>
+                    )}
+                  </div>
                   {/* <SunIcon className="text-gray-300 h-6 w-6" /> */}
 
                   <button
