@@ -59,12 +59,36 @@ export const userApi = createApi({
     }),
 
     verifyTwofa: builder.mutation({
-      query: ({ topt }) => ({
-        url: "user/verify-2fa",
+      query: (body) => ({
+        url: "/authentication/verify-2fa",
         method: "POST",
-        body: { topt },
+        body,
       }),
     }),
+
+    // Enable Two-Factor Authentication
+    enableTwoFA: builder.mutation({
+      query: () => ({
+        url: "user/enable-email-2fa",
+        method: "POST",
+      }),
+    }),
+
+    // Disable Two-Factor Authentication
+    disableTwoFA: builder.mutation({
+      query: () => ({
+        url: "user/disable-2fa",
+        method: "POST",
+      }),
+    }),
+
+    fetchTwoFAStatus: builder.query({
+      query: () => ({
+        url: "user/two-factor-status",
+        method: "GET",
+      }),
+    }),
+
     updateUserProfile: builder.mutation({
       query: (userData) => ({
         url: "user/update-profile",
@@ -212,6 +236,9 @@ export const {
   useGetAllUserWalletsQuery,
   useFundWalletMutation,
   useUpdateUserProfileMutation,
+  useEnableTwoFAMutation,
+  useDisableTwoFAMutation,
+  useFetchTwoFAStatusQuery,
 
   useCurrencyConverterQuery,
 } = userApi;

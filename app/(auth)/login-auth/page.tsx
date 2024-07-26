@@ -17,25 +17,27 @@ type VerifyNumber = {
 };
 
 export default function Home() {
+  const storedUser = localStorage.getItem("user");
+  const userObject = storedUser ? JSON.parse(storedUser) : null;
   const router = useRouter();
   const [invalidError, setInvalidError] = useState<boolean>(false);
   const [verify, { isSuccess, error }] = useVerifyTwofaMutation();
 
-  useEffect(() => {
-    if (isSuccess) {
-      toast.success("Verified successfully");
-      router.push("/dashboard/home");
-    }
-    if (error) {
-      if ("data" in error) {
-        const errorData = error as any;
-        toast.error(errorData.data.message);
-        setInvalidError(true);
-      } else {
-        console.log("An error occurred:", error);
-      }
-    }
-  }, [isSuccess, error]);
+  // useEffect(() => {
+  //   if (isSuccess) {
+  //     toast.success("Verified successfully");
+  //     router.push("/dashboard/home");
+  //   }
+  //   if (error) {
+  //     if ("data" in error) {
+  //       const errorData = error as any;
+  //       toast.error(errorData.data.message);
+  //       setInvalidError(true);
+  //     } else {
+  //       console.log("An error occurred:", error);
+  //     }
+  //   }
+  // }, [isSuccess, error]);
   const inputRefs = [
     useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),
@@ -54,35 +56,81 @@ export default function Home() {
     5: "",
   });
 
+  const verificationNumber = Object.values(verifyNumber).join("");
+
   const verificationHandler = async () => {
-    const verificationNumber = Object.values(verifyNumber).join("");
     if (verificationNumber.length !== 6) {
       setInvalidError(true);
       return;
     }
-    await verify({
-      topt: verificationNumber,
-    });
-  };
-
-  const handleInputChange = (index: number, value: string) => {
     setInvalidError(false);
-    let newValue = value; // Initialize newValue with the provided value
 
-    // If the length of the value is greater than 1, trim it to keep only the first character
-    if (value.length > 1) {
-      newValue = value.slice(0, 1);
-    }
+    console.log("here is verify number", verificationNumber);
+    console.log("here is stored user id", userObject._id);
+    try {
+      const response = await verify({
+        userId: userObject._id,
+        code: verificationNumber,
+      }).unwrap();
 
-    // Update the verifyNumber state with the new value for the specified index
-    const newVerifyNumber = { ...verifyNumber, [index]: newValue };
-    setVerifyNumber(newVerifyNumber);
+      console.log("here is response", response);
 
-    // Move focus to the next input if a single character is entered
-    if (value.length === 1 && index < 5) {
-      inputRefs[index + 1].current?.focus();
+      localStorage.setItem("auth_token", response.accessToken);
+      localStorage.setItem("user", JSON.stringify(response.user));
+      router.push("/dashboard/home");
+    } catch (error) {
+      toast.error("Invalid verification code");
     }
   };
+
+  const handleKeyDown = (
+    e: React.KeyboardEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    if (e.key === "Backspace" && verifyNumber[index] === "" && index > 0) {
+      inputRefs[index - 1].current?.focus();
+    } else if (e.key === "ArrowLeft" && index > 0) {
+      inputRefs[index - 1].current?.focus();
+    } else if (e.key === "ArrowRight" && index < 5) {
+      inputRefs[index + 1].current?.focus();
+    } else if (e.key === "Enter") {
+      verificationHandler();
+    }
+  };
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    const { value } = e.target;
+    if (/^[0-9]$/.test(value)) {
+      setVerifyNumber((prev) => ({ ...prev, [index]: value }));
+      if (index < 5) {
+        inputRefs[index + 1].current?.focus();
+      }
+    } else {
+      setVerifyNumber((prev) => ({ ...prev, [index]: "" }));
+    }
+  };
+
+  // const handleInputChange = (index: number, value: string) => {
+  //   setInvalidError(false);
+  //   let newValue = value; // Initialize newValue with the provided value
+
+  //   // If the length of the value is greater than 1, trim it to keep only the first character
+  //   if (value.length > 1) {
+  //     newValue = value.slice(0, 1);
+  //   }
+
+  //   // Update the verifyNumber state with the new value for the specified index
+  //   const newVerifyNumber = { ...verifyNumber, [index]: newValue };
+  //   setVerifyNumber(newVerifyNumber);
+
+  //   // Move focus to the next input if a single character is entered
+  //   if (value.length === 1 && index < 5) {
+  //     inputRefs[index + 1].current?.focus();
+  //   }
+  // };
   // const handleInputChange = (index: number, value: string) => {
   //   setInvalidError(false);
   //   const newVerifyNumber = { ...verifyNumber, [index]: value };
@@ -135,7 +183,8 @@ export default function Home() {
                       placeholder="0"
                       maxLength={1}
                       value={verifyNumber[key as keyof VerifyNumber]}
-                      onChange={(e) => handleInputChange(index, e.target.value)}
+                      onChange={(e) => handleInputChange(e, index)}
+                      onKeyDown={(e) => handleKeyDown(e, index)}
                     />
                   ))}
                 </div>

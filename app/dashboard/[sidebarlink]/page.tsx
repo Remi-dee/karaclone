@@ -277,7 +277,7 @@ const Dashboard = ({ params }: { params: { sidebarlink: string } }) => {
                   <span className="text-black-200 font-bold text-lg">
                     <div className=" flex gap-[4px]">
                       <p className="text-black-200 font-bold text-lg">
-                        {"Hello, " + data?.user?.name?.split(" ")[1]}
+                        {"Hello, " + data?.user?.name}
                       </p>
                       <Image src={wave} width={20} height={6} alt="" />
                     </div>

@@ -54,6 +54,14 @@ export const tradeApi = createApi({
     }),
     // /Currency converstion
 
+    fetchCurrencyPairs: builder.query({
+      query: ({ skip = 0, limit = 10 }) => ({
+        url: "currencypair/get-all",
+        method: "GET",
+        params: { skip, limit },
+      }),
+    }),
+
     CurrencyConverter: builder.query<
       any,
       { amount: number; sourceCurrency: string; targetCurrency: string }
@@ -135,4 +143,5 @@ export const {
   useCreateBeneficiaryMutation,
   useGetBeneficiariesQuery,
   useBuyTradeMutation,
+  useFetchCurrencyPairsQuery,
 } = tradeApi;
