@@ -11,7 +11,7 @@ function BalanceDropdown({ wallets, selectedWallet, setSelectedWallet }) {
     <div>
       <Menu as="div" className="relative inline-block text-left">
         <Menu.Button className="inline-flex items-center w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-[black] shadow-sm ring-1 ring-inset ring-slate-300 outine-0 focus:outline-0 hover:bg-gray-50">
-          {selectedWallet?.currency}
+          {selectedWallet?.currency_code}
           <ChevronDownIcon
             className="-mr-1 h-5 w-5 text-[black]"
             aria-hidden="true"
@@ -39,7 +39,7 @@ function BalanceDropdown({ wallets, selectedWallet, setSelectedWallet }) {
                         "block px-4 py-2 text-sm"
                       )}
                     >
-                      {wallet.currency}
+                      {wallet.currency_code}
                     </button>
                   )}
                 </Menu.Item>

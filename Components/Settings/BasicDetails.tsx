@@ -70,7 +70,7 @@ function BasicDetails() {
   };
 
   return (
-    <div className=" h-[252px] flex  flex-col gap-[24px] bg-[#FFFFFF] w-[100%]  p-[24px] rounded-[8px]  ">
+    <div className="  flex  flex-col gap-[24px] bg-[#FFFFFF] w-[100%]  p-[24px] rounded-[8px]  ">
       <div className="  h-[44px]  min-h-[44px] border-b border-b-[#EFEFEF] flex justify-between items-center">
         <h1 className="  font-bold leading-[28px] tracking-[-2%] text-[18px]   ">
           Personal Information
@@ -85,11 +85,11 @@ function BasicDetails() {
         )}
       </div>
 
-      <section className=" h-full flex  justify-between  pr-[1rem] ">
-        <div className=" flex flex-col content-between justify-between h-full">
+      <section className="  flex  gap-[24px] ">
+        <div className="w-full flex flex-col content-between justify-between h-full gap-[24px]">
           <div className=" flex flex-col gap-[4px]">
             <h2 className="   font-[500] tracking-[-2%] leading-[20px]  text-[14px] ">
-              FIRST NAME
+              FIRST
             </h2>
             {editMode ? (
               <input
@@ -97,7 +97,7 @@ function BasicDetails() {
                 name="firstName"
                 value={userData.firstName}
                 onChange={handleChange}
-                className="text-[16px] leading-[24px] tracking-[-2%] text-[#464646] border p-2 rounded"
+                className="text-[16px] w-full leading-[24px] tracking-[-2%] text-[#464646] border border-[#464646] p-2 rounded-[8px]"
               />
             ) : (
               <p className=" text-[16px] leading-[24px] tracking-[-2%] text-[#464646]   ">
@@ -116,7 +116,7 @@ function BasicDetails() {
                 name="email"
                 value={userData.email}
                 onChange={handleChange}
-                className="text-[16px] leading-[24px] tracking-[-2%] text-[#464646] border p-2 rounded"
+                className="text-[16px] w-full border-[#464646] rounded-[8px] leading-[24px] tracking-[-2%] text-[#464646] border p-2 "
               />
             ) : (
               <p className=" text-[16px] leading-[24px] tracking-[-2%] text-[#464646]   ">
@@ -124,8 +124,30 @@ function BasicDetails() {
               </p>
             )}
           </div>
+
+          <div className="w-full flex flex-col gap-[4px]">
+            <h2 className="   text-[14px] font-[500] tracking-[-2%] leading-[20px]  ">
+              GENDER
+            </h2>
+            {editMode ? (
+              <select
+                name="gender"
+                value={userData.gender}
+                onChange={handleChange}
+                className="text-[16px]  rounded-[8px] border-[#464646] leading-[24px] tracking-[-2%] text-[#464646] border p-2 "
+              >
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            ) : (
+              <p className=" text-[16px] leading-[24px] tracking-[-2%] text-[#464646]   ">
+                {userData.gender}
+              </p>
+            )}
+          </div>
         </div>
-        <div className=" flex flex-col content-between justify-between h-full">
+        <div className="w-full flex flex-col content-between justify-between h-full gap-[24px]">
           <div className=" flex flex-col gap-[4px]">
             <h2 className="  text-[14px]   font-[500] tracking-[-2%] leading-[20px]  ">
               LAST NAME
@@ -136,7 +158,7 @@ function BasicDetails() {
                 name="lastName"
                 value={userData.lastName}
                 onChange={handleChange}
-                className="text-[16px] leading-[24px] tracking-[-2%] text-[#464646] border p-2 rounded"
+                className="text-[16px] w-full border-[#464646] rounded-[8px] leading-[24px] tracking-[-2%] text-[#464646] border p-2 "
               />
             ) : (
               <p className=" text-[16px] leading-[24px] tracking-[-2%] text-[#464646]   ">
@@ -155,7 +177,7 @@ function BasicDetails() {
                 name="phone"
                 value={userData.phone}
                 onChange={handleChange}
-                className="text-[16px] leading-[24px] tracking-[-2%] text-[#464646] border p-2 rounded"
+                className="text-[16px] w- border-[#464646] rounded-[8px] leading-[24px] tracking-[-2%] text-[#464646] border p-2 "
               />
             ) : (
               <p className=" text-[16px] leading-[24px] tracking-[-2%] text-[#464646]   ">
@@ -163,28 +185,6 @@ function BasicDetails() {
               </p>
             )}
           </div>
-        </div>
-
-        <div className="flex flex-col gap-[4px]">
-          <h2 className="   text-[14px] font-[500] tracking-[-2%] leading-[20px]  ">
-            GENDER
-          </h2>
-          {editMode ? (
-            <select
-              name="gender"
-              value={userData.gender}
-              onChange={handleChange}
-              className="text-[16px] leading-[24px] tracking-[-2%] text-[#464646] border p-2 rounded"
-            >
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-              <option value="Other">Other</option>
-            </select>
-          ) : (
-            <p className=" text-[16px] leading-[24px] tracking-[-2%] text-[#464646]   ">
-              {userData.gender}
-            </p>
-          )}
         </div>
       </section>
 

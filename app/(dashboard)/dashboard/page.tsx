@@ -27,7 +27,10 @@ const Dashboard = (urlParam: any) => {
     setShowSidebar(!showSidebar);
   };
   const { logoutModalOpen } = useSelector(authSelector);
-  const { data } = useLoadUserQuery({});
+  const { data } = useLoadUserQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+    refetchOnReconnect: true,
+  });
   return (
     <div className="flex bg-[#F5F1FB] items-center ">
       {/* sidebar */}

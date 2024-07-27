@@ -187,9 +187,9 @@ function DashHomeAfterKyc() {
                 </div>
               </div>
               <p className="text-[32px] flex   items-end gap-[4px] leading-[38.4px] tracking-[-2%] font-bold   text-[#1E1E1E] mt-2">
-                {selectedWallet?.balance.toFixed(2)}
+                {selectedWallet?.escrow_balance.toFixed(2)}
                 <span className="text-[#7C7C7C] text-[16px] pb-[2px] leading-[24px] ">
-                  {selectedWallet?.currency}
+                  {selectedWallet?.currency_code}
                 </span>{" "}
               </p>
             </div>

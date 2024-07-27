@@ -113,7 +113,10 @@ const Dashboard = ({ params }: { params: { sidebarlink: string } }) => {
   );
   // const { isCreateTrade, isBuyTrade, boughtTrade, createdTrade, isWalletFund } =
   //   useSelector(userSelector);
-  const { data } = useLoadUserQuery({});
+  const { data } = useLoadUserQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+    refetchOnReconnect: true,
+  });
   const handleChatIcon = () => {
     dispatch(openChatModal());
   };
