@@ -19,6 +19,7 @@ import VerificationSuccess from "@/Components/KYC/VerificationSuccess";
 import Navbar from "@/Components/LandingPage/Navbar";
 import Footer from "@/Components/LandingPage/Footer";
 import MomoModal from "@/Components/CustomModal/MomoModal";
+import HeroPage from "@/Components/LandingPage/HeroPage";
 
 const Page = () => {
   const [active, setActive] = useState(1);
@@ -74,8 +75,9 @@ const Page = () => {
     }
   };
   return (
-    <div>
+    <div className="text-slate-900">
       <Navbar />
+      <HeroPage />
       <MomoModal />
       <Footer />
     </div>

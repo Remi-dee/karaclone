@@ -28,8 +28,7 @@ function Home() {
       {/* This page directs the Homepage for the dashboard */}
 
       {kycBegin ? (
-        <CreateKYC />
-      ) : reversalInitiated ? (
+        <CreateKYC />      ) : reversalInitiated ? (
         <Reversal />
       ) : auth?.is_completed_kyc ? (
         <DashHomeBeforeKyc />
