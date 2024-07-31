@@ -41,7 +41,7 @@ const Sidebar = ({ link, showSideBar }: Props) => {
     label.toLowerCase() === link?.toLowerCase();
 
   return (
-    <div className="w-[330px]  bg-white-100  h-screen invisible-scrollbar  overflow-x-hidden  overflow-y-auto">
+    <div className="w-[330px] hidden md:flex md:flex-col  bg-white-100  h-screen invisible-scrollbar  overflow-x-hidden  overflow-y-auto">
       <div
         className={`border-r border-slate-200 h-[1024px]  relative   top-0  flex flex-col  items-center     lg:relative ${
           showSideBar ? "hidden " : " block"

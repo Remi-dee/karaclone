@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import rightarrow from "@/public/svg/arrow-right.svg";
 
 import DeactivateVerification from "../Auth/DeactivateVerification";
@@ -8,15 +8,58 @@ import { useDispatch } from "react-redux";
 import { openModal } from "@/redux/modal/modalSlice";
 import CustomModal from "../CustomModal/CustomModal";
 import YesNoDeactivate from "../Auth/YesNoDeactivate";
+import { toast } from "react-toastify";
+import {
+  useDisableTwoFAMutation,
+  useEnableTwoFAMutation,
+  useFetchTwoFAStatusQuery,
+} from "@/redux/features/user/userApi";
 
 function Security() {
   const dispatch = useDispatch();
-  const [verificationResponse, setverificationResponse] = useState(false);
+
+  const [verificationResponse, setVerificationResponse] = useState(false);
+  const [isTwoFAEnabled, setIsTwoFAEnabled] = useState(false);
+  const { data: twoFAStatus, refetch: refetchTwoFAStatus } =
+    useFetchTwoFAStatusQuery({});
+
+  useEffect(() => {
+    if (twoFAStatus) {
+      setIsTwoFAEnabled(twoFAStatus.isTwoFactorEnabled);
+    }
+  }, [twoFAStatus]);
+
   const handleDeactive = () => {
     dispatch(openModal());
   };
+
+  const [enableTwoFA] = useEnableTwoFAMutation();
+  const [disableTwoFA] = useDisableTwoFAMutation();
+
+  const handleActivate = async () => {
+    try {
+      const response = await enableTwoFA({}).unwrap();
+      setIsTwoFAEnabled(true);
+      toast("2FA activated successfully");
+    } catch (error) {
+      console.error("Error enabling 2FA:", error);
+      toast(`Error: ${error.message}`);
+    }
+  };
+
+  const handleDeactivate = async () => {
+    try {
+      const response = await disableTwoFA({}).unwrap();
+      setIsTwoFAEnabled(false);
+      toast("2FA deactivated successfully");
+    } catch (error) {
+      console.error("Error disabling 2FA:", error);
+      toast(`Error: ${error.message}`);
+    }
+  };
+
   const handleResonse = (e: boolean) => {
-    setverificationResponse(e);
+    setVerificationResponse(e);
   };
 
   return (
@@ -34,20 +77,31 @@ function Security() {
         </div>
 
         <section className="  justify-between   flex content-between  w-full">
-          <div className=" inline-flex flex-col gap-[8px] max-w-[45%]  flex-1  ">
-            <h2 className=" text-[#A3ADBF]     ">Email</h2>
-
-            <p className="  text-[#656565]  text-[14px] leading-[20px] tracking-[-2%] ">
+          <div className="inline-flex flex-col gap-[8px] max-w-[45%] flex-1">
+            <h2 className="text-[#A3ADBF]">Email</h2>
+            <p className="text-[#656565] text-[14px] leading-[20px] tracking-[-2%]">
               Use your email to receive your authentication code to enter when
               you log in to your Karasell account
             </p>
-
-            <span className=" flex   items-center content-center gap-[8px]  ">
-              <p className="text-[#7F56D9] tracking-[-2%] font-medium text-[14px] leading-[20px]  ">
-                Activate
-                <span className="ml-[8px]">{">"}</span>
-              </p>{" "}
-            </span>
+            {isTwoFAEnabled ? (
+              <button
+                onClick={handleDeactivate}
+                className="flex items-center content-center gap-[8px]"
+              >
+                <p className="text-[#F04438] tracking-[-2%] font-medium text-[14px] leading-[20px]">
+                  Deactivate <span className="ml-[8px]">{">"}</span>
+                </p>
+              </button>
+            ) : (
+              <button
+                onClick={handleActivate}
+                className="flex items-center content-center gap-[8px]"
+              >
+                <p className="text-[#7F56D9] tracking-[-2%] font-medium text-[14px] leading-[20px]">
+                  Activate <span className="ml-[8px]">{">"}</span>
+                </p>
+              </button>
+            )}
           </div>
 
           <div className=" w-[0.5px] h-full bg-[#DCDCDC] inline-flex"></div>

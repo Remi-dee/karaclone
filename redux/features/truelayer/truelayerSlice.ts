@@ -5,12 +5,14 @@ interface TrueLayerState {
   paymentId: string;
   resourceToken: string;
   isPaymentSuccess: boolean;
+  transactionPaymentId: string;
 }
 
 const initialState: TrueLayerState = {
   paymentId: "",
   resourceToken: "",
   isPaymentSuccess: false,
+  transactionPaymentId: "",
 };
 
 const trueLayerSlice = createSlice({
@@ -31,11 +33,18 @@ const trueLayerSlice = createSlice({
     setIsPaymentSuccess: (state, { payload }) => {
       state.isPaymentSuccess = payload;
     },
+    setTransactionPaymentId: (state, { payload }) => {
+      state.transactionPaymentId = payload;
+    },
   },
 });
 
-export const { setPaymentDetails, clearPaymentDetails, setIsPaymentSuccess } =
-  trueLayerSlice.actions;
+export const {
+  setPaymentDetails,
+  clearPaymentDetails,
+  setIsPaymentSuccess,
+  setTransactionPaymentId,
+} = trueLayerSlice.actions;
 export const trueLayerSelector = (state: RootState) => state.trueLayer;
 export const isPaymentSuccessSelector = (state: RootState) =>
   state.trueLayer?.isPaymentSuccess;

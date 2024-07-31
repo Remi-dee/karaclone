@@ -2,8 +2,8 @@ import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
-function BalanceDropdown({ currency }: { currency: string }) {
-  function classNames(...classes: string[]) {
+function BalanceDropdown({ wallets, selectedWallet, setSelectedWallet }) {
+  function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
   }
 
@@ -11,12 +11,7 @@ function BalanceDropdown({ currency }: { currency: string }) {
     <div>
       <Menu as="div" className="relative inline-block text-left">
         <Menu.Button className="inline-flex items-center w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-[black] shadow-sm ring-1 ring-inset ring-slate-300 outine-0 focus:outline-0 hover:bg-gray-50">
-          {currency === "usd" ? (
-            <img src="/svg/US.svg" alt="" />
-          ) : (
-            <img src="/svg/NG.svg" alt="" />
-          )}
-          {currency === "usd" ? "US Dollar " : "Naira Balance"}
+          {selectedWallet?.currency_code}
           <ChevronDownIcon
             className="-mr-1 h-5 w-5 text-[black]"
             aria-hidden="true"
@@ -34,19 +29,21 @@ function BalanceDropdown({ currency }: { currency: string }) {
         >
           <Menu.Items className=" bg-[white] absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
             <div className="py-1">
-              <Menu.Item>
-                {({ active }) => (
-                  <a
-                    href="#"
-                    className={classNames(
-                      active ? "bg-[white] text-[black]" : "text-[black]",
-                      "block px-4 py-2 text-sm"
-                    )}
-                  >
-                    {currency === "usd" ? "US Dollar " : "Naira Balance"}
-                  </a>
-                )}
-              </Menu.Item>
+              {wallets?.map((wallet) => (
+                <Menu.Item key={wallet.id}>
+                  {({ active }) => (
+                    <button
+                      onClick={() => setSelectedWallet(wallet)}
+                      className={classNames(
+                        active ? "bg-[white] text-[black]" : "text-[black]",
+                        "block px-4 py-2 text-sm"
+                      )}
+                    >
+                      {wallet.currency_code}
+                    </button>
+                  )}
+                </Menu.Item>
+              ))}
             </div>
           </Menu.Items>
         </Transition>

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaEye } from "react-icons/fa";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -13,16 +13,29 @@ import {
   toggleStartKycModalSuccess,
 } from "@/redux/features/kyc/kycSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { useLoadUserQuery } from "@/redux/features/user/userApi";
+import {
+  useGetAllUserWalletsQuery,
+  useLoadUserQuery,
+} from "@/redux/features/user/userApi";
 import {
   toggleWalletDispaly,
   toggleReversalState,
   toggleCreateTrade,
 } from "@/redux/features/user/userSlice";
 import KYBModal from "../KYC/kyb";
+import TransactionTable from "../Transactions/TransactionTable";
 function DashHomeAfterKyc() {
   const { startKycModalOpen, startKybModalOpen } = useSelector(kycSelector);
 
+  const {
+    data: wallets,
+    error,
+    isLoading,
+  } = useGetAllUserWalletsQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+    refetchOnReconnect: true,
+  });
+  const [selectedWallet, setSelectedWallet] = useState(null);
   const { data } = useLoadUserQuery({});
   const dispatch = useDispatch();
   const router = useRouter();
@@ -61,6 +74,12 @@ function DashHomeAfterKyc() {
       href: "/dashboard/P2P-trade",
     },
   ];
+
+  useEffect(() => {
+    if (wallets && wallets.length > 0) {
+      setSelectedWallet(wallets[0]);
+    }
+  }, [wallets]);
 
   return (
     <div>
@@ -159,14 +178,18 @@ function DashHomeAfterKyc() {
                 </div>
                 <div className="">
                   <div>
-                    <BalanceDropdown currency={""} />
+                    <BalanceDropdown
+                      wallets={wallets}
+                      selectedWallet={selectedWallet}
+                      setSelectedWallet={setSelectedWallet}
+                    />
                   </div>
                 </div>
               </div>
               <p className="text-[32px] flex   items-end gap-[4px] leading-[38.4px] tracking-[-2%] font-bold   text-[#1E1E1E] mt-2">
-                0.00
+                {selectedWallet?.escrow_balance.toFixed(2)}
                 <span className="text-[#7C7C7C] text-[16px] pb-[2px] leading-[24px] ">
-                  NGN
+                  {selectedWallet?.currency_code}
                 </span>{" "}
               </p>
             </div>
@@ -174,7 +197,7 @@ function DashHomeAfterKyc() {
         </div>
 
         {/* Quick actions cards*/}
-        <div className="md:w-full lg:w-1/2 bg-white-100 rounded-2xl border border-slate-200  p-[24px] h-[421px]">
+        <div className="mt-5 lg:mt-0 md:w-full lg:w-1/2 bg-white-100 rounded-2xl border border-slate-200  p-[24px] h-[421px]">
           <p className="font-bold text-lg  ">Quick Actions</p>
 
           <div className="grid grid-rows-2 grid-flow-col mt-[20px] gap-4 cursor-pointer">
@@ -218,57 +241,7 @@ function DashHomeAfterKyc() {
           </div>
         </div>
 
-        <div className="p-6  bg-white-100 flex flex-col items-center space-x-4">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-[#FBFBFB]">
-              <tr>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-8700 uppercase tracking-wider"
-                >
-                  Type
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-8700 uppercase tracking-wider"
-                >
-                  Description
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-8700 uppercase tracking-wider"
-                >
-                  Amount
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-8700 uppercase tracking-wider"
-                >
-                  Date
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-[black] text-left text-xs font-medium  uppercase tracking-wider"
-                >
-                  Status
-                </th>
-              </tr>
-            </thead>
-
-            <tbody></tbody>
-
-            {/* empty transactions */}
-          </table>
-          <div className="text-center mt-[68px] w-full flex flex-col items-center justify-center">
-            <img src="/svg/emptytrans.svg" alt="" />
-            <p className="text-center mt-[24px] leading-[28px] tracking-[-2%] text-[18px] text-[#3D3D3D] font-semibold">
-              No Transactions Yet
-            </p>
-            <p className="text-gray-300 leading-[24px] text-[16px] mt-[8px] ">
-              Start making transactions and track your activity here
-            </p>
-          </div>
-        </div>
+        <TransactionTable />
       </div>
       {startKycModalOpen && <KycModal />}
       {/* {startKybModalOpen && <KYBModal />} */}

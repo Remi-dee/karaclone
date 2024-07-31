@@ -3,6 +3,7 @@ import { FaEye } from "react-icons/fa";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import arrowRight from "@/public/svg/arrow-right.svg";
+import TransactionTable from "../Transactions/TransactionTable";
 
 function DashHomeBeforeKyc() {
   const router = useRouter();
@@ -194,44 +195,7 @@ function DashHomeBeforeKyc() {
         </div>
 
         <div className="p-6  bg-white-100 flex flex-col items-center space-x-4">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
-              <tr>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-8700 uppercase tracking-wider"
-                >
-                  Type
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-8700 uppercase tracking-wider"
-                >
-                  Description
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-8700 uppercase tracking-wider"
-                >
-                  Amount
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-8700 uppercase tracking-wider"
-                >
-                  Date
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-[black] uppercase tracking-wider"
-                >
-                  Status
-                </th>
-              </tr>
-            </thead>
-
-            <tbody></tbody>
-          </table>
+          <TransactionTable />
           {/* empty transactions */}
           <div className="text-center w-full flex  h-full flex-col items-center justify-center mt-[68px]">
             <img src="/svg/emptytrans.svg" alt="" />

@@ -43,6 +43,7 @@ function SelectBank({ onSelect, onAccountAndNameChange }: SelectBankProps) {
   const handleSelect = (item: any) => {
     console.log("Selected item:", item); // Debugging log
     setSelected(item._id);
+
     // onAccountChange(item?.account);
     // onNameChange(item?.name);
     onAccountAndNameChange(item);

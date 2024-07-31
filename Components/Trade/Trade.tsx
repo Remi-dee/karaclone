@@ -51,7 +51,7 @@ const Trade = () => {
 
                 <div
                   onClick={handleNewTrade}
-                  className="flex justify-center rounded-[8px] items-center p-[8px_10px]   gap-2 cursor-pointer bg-primaryBtn  text-white-100"
+                  className="flex justify-center rounded-[8px] items-center p-[15px_17px] lg:p-[8px_10px]   gap-2 cursor-pointer bg-primaryBtn  text-white-100"
                 >
                   <IoIosAddCircle className="text-lg  bg-primaryBtn" />
                   <p className="text-xs font-semibold">New Trade</p>
