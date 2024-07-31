@@ -22,17 +22,20 @@ const TransactionTable = () => {
     <section className="mt-4 box-border">
       {transactions && transactions.length > 0 ? (
         <div className="h-full relative w-full">
-          <table className="w-[100%] border-collapse">
+          <table className="w-full border-collapse  ">
             <thead>
-              <tr className="bg-gray-900 text-sm">
+              <tr className="bg-gray-900 text-sm w-full">
                 <th className="p-4 text-left">Type</th>
-                <th className="p-4 text-left">Beneficiary</th>
-                <th className="p-4 text-left">Amount</th>
-                <th className="p-4 text-left">Date</th>
-                <th className="p-4 text-left">Status</th>
-                <th className="p-4 text-left"></th>
+                <th className="p-4 text-left hidden md:table-cell">
+                  Beneficiary
+                </th>
+                <th className="p-4 text-left ">Amount</th>
+                <th className="p-4 text-left hidden md:table-cell">Date</th>
+                <th className="p-4 text-left hidden md:table-cell">Status</th>
+                <th className="p-4 text-left "></th>
               </tr>
             </thead>
+
             <tbody>
               {transactions.map((item, i) => (
                 <tr
@@ -40,10 +43,12 @@ const TransactionTable = () => {
                   className="text-gray-800 border-b text-xs border-b-gray-500"
                 >
                   <td className="p-4">{item.transaction_type}</td>
-                  <td className="p-4">{item.beneficiary_name}</td>
+                  <td className="p-4 hidden md:table-cell">
+                    {item.beneficiary_name}
+                  </td>
                   {item.transaction_type == "Trade" ? (
                     <>
-                      <td className="p-4">
+                      <td className="p-4 ">
                         {" "}
                         {item.amount_exchanged
                           ? item.amount_exchanged
@@ -60,30 +65,30 @@ const TransactionTable = () => {
                     </>
                   )}
 
-                  <td className="p-4">{item.date}</td>
+                  <td className="p-4 hidden md:table-cell">{item.date}</td>
                   <td
                     className={`${
-                      item.status ===  "Processing"
+                      item.status === "Processing"
                         ? "text-[#FDB022] bg-[#FCF5E6]"
-                        : item.status === "Success"
+                        : item.status === "success"
                         ? "text-[#00A600] bg-[#EFFFEF]"
                         : "text-[#FF104B] bg-[#FCF5E6]"
-                    } flex justify-center items-center w-4/6 gap-2 rounded-lg  mt-2 px-1 py-1`}
+                    } md:flex hidden justify-center items-center w-4/6 gap-2 rounded-lg  mt-2 px-1 py-1`}
                   >
                     <span
                       className={` ${
                         item.status === "Processing"
                           ? "bg-[#FDB022]"
-                          : item.status === "Success"
+                          : item.status === "success"
                           ? "bg-[#00A600]"
                           : "bg-[#FF104B]"
                       } w-[10px] h-[10px] rounded-full `}
                     ></span>
                     <span
                       className={`  text-[#00A600]  ${
-                        item.status ===  "Processing"
+                        item.status === "Processing"
                           ? "text-[#FDB022]"
-                          : item.status === "Success"
+                          : item.status === "success"
                           ? "text-[#00A600]"
                           : "text-[#FF104B]"
                       }`}

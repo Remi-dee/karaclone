@@ -197,7 +197,7 @@ function DashHomeAfterKyc() {
         </div>
 
         {/* Quick actions cards*/}
-        <div className="md:w-full lg:w-1/2 bg-white-100 rounded-2xl border border-slate-200  p-[24px] h-[421px]">
+        <div className="mt-5 lg:mt-0 md:w-full lg:w-1/2 bg-white-100 rounded-2xl border border-slate-200  p-[24px] h-[421px]">
           <p className="font-bold text-lg  ">Quick Actions</p>
 
           <div className="grid grid-rows-2 grid-flow-col mt-[20px] gap-4 cursor-pointer">

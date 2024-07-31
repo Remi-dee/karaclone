@@ -100,7 +100,7 @@ function WalletHome() {
   console.log(sortedWallets);
   return (
     <div className=" w-full  h-full">
-      <div className="w-full rounded-md h-[369px] shadow-lg p-[1.5rem]  flex flex-col gap-[24px]   bg-white-100">
+      <div className="w-full rounded-md  shadow-lg p-[1.5rem]  flex flex-col gap-[24px]   bg-white-100">
         <div className=" flex flex-col gap-[13px]">
           <h2 className=" text-[20px]  font-Josefin leading-[24px]  font-bold tracking-[-2%] ">
             Wallet
@@ -147,9 +147,9 @@ function WalletHome() {
             </div>
           ))}
         </div>
-        <div className="flex justify-center items-center gap-6 pt-4">
+        <div className="md:flex-row flex flex-col mx-auto   gap-6 pt-4">
           <div
-            className={` action flex justify-start content-center place-items-center place-content-center gap-1 items-center cursor-pointer w-[122px] h-[42px] p-[16px] border rounded-md ${
+            className={`w-[356px] action flex justify-center content-center place-items-center place-content-center gap-1 items-center cursor-pointer md:w-[122px] h-[42px] p-[16px] border rounded-md ${
               selectedCurrency
                 ? "text-[#000] border-[#000] cursor-pointer"
                 : "text-gray-300 border-[#DCDCDC] cursor-not-allowed"
@@ -162,7 +162,7 @@ function WalletHome() {
             </p>
           </div>
           <div
-            className={` action flex justify-start items-center  w-[122px] h-[42px] p-[16px] border rounded-md ${
+            className={`w-[356px] action flex justify-center items-center  md:w-[122px] h-[42px] p-[16px] border rounded-md ${
               selectedCurrency
                 ? "text-[#000] border-[#000] cursor-pointer"
                 : "text-gray-300 border-[#DCDCDC] cursor-not-allowed"
@@ -176,7 +176,7 @@ function WalletHome() {
           </div>
 
           <div
-            className={` action flex justify-start items-center  w-[122px] h-[42px] p-[16px] border rounded-md ${
+            className={`w-[356px] action flex justify-center items-center  md:w-[122px] h-[42px] p-[16px] border rounded-md ${
               selectedCurrency
                 ? "text-[#000] border-[#000] cursor-pointer"
                 : "text-gray-300 border-[#DCDCDC] cursor-not-allowed"

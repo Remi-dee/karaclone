@@ -41,37 +41,41 @@ const Transaction = () => {
           <h2 className="py-[24px] text-[20px] leading-[24px] tracking-[-2%] font-bold">
             Transactions
           </h2>
-          <div className="  w-full pb-6 flex flex-wrap justify-start gap-[18px] items-center">
-            <div className="border border-gray-800 p-2 rounded-lg">
-              <CustomDropdown
-                options={currencyData}
-                onSelect={handleCurrency}
-                placeholder="All Currencies"
-                displayImages
-                className=""
-              />
-            </div>
-            <div className="border border-gray-800 p-2 rounded-lg">
-              <CustomDropdown
-                options={transactionOption}
-                onSelect={handleTransaction}
-                placeholder="All transactions"
-                className="text-gray-800"
-              />
+
+          <div className="flex md:flex-row flex-col pb-6 md:gap-0 gap-5">
+            <div className="  w-full flex gap-[18px] items-center">
+              <div className="border border-gray-800 p-2 rounded-lg ">
+                <CustomDropdown
+                  options={currencyData}
+                  onSelect={handleCurrency}
+                  placeholder="All Currencies"
+                  displayImages
+                  className=""
+                />
+              </div>
+              <div className="border border-gray-800 p-2 rounded-lg">
+                <CustomDropdown
+                  options={transactionOption}
+                  onSelect={handleTransaction}
+                  placeholder="All transactions"
+                  className="text-gray-800"
+                />
+              </div>
+
+              <div className="hidden md:flex border border-gray-800 p-2 rounded-lg">
+                <CustomDropdown
+                  options={statusList}
+                  onSelect={handleCurrency}
+                  placeholder="All Status "
+                  displayImages
+                  className=""
+                />
+              </div>
             </div>
 
-            <div className="border border-gray-800 p-1 rounded-lg">
-              <CustomDropdown
-                options={statusList}
-                onSelect={handleCurrency}
-                placeholder="All Status "
-                displayImages
-                className=""
-              />
-            </div>
             <TransactionDate />
           </div>
-          <hr className="border border-gray-500" />
+          <hr className="border hidden md:flex border-gray-500" />
           <div className="py-4">
             <TransactionList />
           </div>

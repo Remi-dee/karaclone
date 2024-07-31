@@ -109,7 +109,7 @@ const TradeTab: React.FC<tradeProp> = ({ onSelectBuy, onSelectSell }) => {
         <div className="lg:w-[360px] h-[48px] border flex  items-center rounded-[12px] p-[8px_16px_8px_16px]">
           <div className="">
             <input
-              className="w-[215px] h-[30px] border-r   border-r-[#BDBDBD]  placeholder:text-sm placeholder:text-[#989898] outline-none"
+              className="lg:w-[215px] h-[30px] border-r   border-r-[#BDBDBD]  placeholder:text-sm placeholder:text-[#989898] outline-none"
               placeholder="Amount to Buy"
               onChange={handleAmountChange}
               type="text"
@@ -129,7 +129,7 @@ const TradeTab: React.FC<tradeProp> = ({ onSelectBuy, onSelectSell }) => {
         <div className="lg:w-[360px] h-[48px] border flex  items-center rounded-[12px] p-[8px_16px_8px_16px]">
           <div className=" w-full h-full">
             <input
-              className="w-[215px] pl-[0.5rem]  h-full border-r bg-white-100 border-r-[#BDBDBD]  placeholder:text-sm placeholder:text-[#989898] outline-none cursor-not-allowed"
+              className="lg:w-[215px] pl-[0.5rem]  h-full border-r bg-white-100 border-r-[#BDBDBD]  placeholder:text-sm placeholder:text-[#989898] outline-none cursor-not-allowed"
               placeholder="Exchange Value"
               type="text"
               value={rate}
