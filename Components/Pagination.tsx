@@ -1,33 +1,32 @@
-import React, { useState } from "react";
+import React from "react";
 import { IoIosArrowRoundBack, IoIosArrowRoundForward } from "react-icons/io";
 
-const generateItems = (numItems: number) => {
-  return Array.from({ length: numItems }, (_, i) => `Item ${i + 1}`);
-};
+interface PaginationProps {
+  currentPage: number;
+  onPageChange: (page: number) => void;
+  totalItems: number;
+  itemsPerPage: number;
+}
 
-const itemsPerPage = 10;
-
-const Pagination = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const items = generateItems(1000);
-  const totalPages = Math.ceil(items.length / itemsPerPage);
+const Pagination: React.FC<PaginationProps> = ({
+  currentPage,
+  onPageChange,
+  totalItems,
+  itemsPerPage,
+}) => {
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   const handlePageClick = (page: number) => {
-    setCurrentPage(page);
+    onPageChange(page);
   };
 
   const handlePreviousClick = () => {
-    setCurrentPage((prev) => Math.max(prev - 1, 1));
+    onPageChange(Math.max(currentPage - 1, 1));
   };
 
   const handleNextClick = () => {
-    setCurrentPage((prev) => Math.min(prev + 1, totalPages));
+    onPageChange(Math.min(currentPage + 1, totalPages));
   };
-
-  const currentItems = items.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
 
   const renderPageNumbers = () => {
     const pageNumbers = [];
@@ -86,11 +85,11 @@ const Pagination = () => {
   };
 
   return (
-    <div className="w-full absolute bottom-0  p-4">
+    <div className="w-full mt-[30px]">
       <div className="flex justify-between items-center">
         <div
           onClick={handlePreviousClick}
-          className={`flex justify-center items-center gap-2 p-1 rounded-md border border-primaryBtn text-primaryBtn hover:bg-primaryBtn hover:text-white-100 cursor-pointer ${
+          className={`flex justify-center items-center gap-2 p-[8px] rounded-md border border-primaryBtn text-primaryBtn hover:bg-primaryBtn hover:text-white-100 cursor-pointer ${
             currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""
           }`}
         >
@@ -102,7 +101,7 @@ const Pagination = () => {
         </div>
         <div
           onClick={handleNextClick}
-          className={`flex justify-center items-center gap-2 p-1 rounded-md border border-primaryBtn text-primaryBtn hover:bg-primaryBtn hover:text-white-100 cursor-pointer ${
+          className={`flex justify-center items-center gap-2 p-[8px] rounded-md border border-primaryBtn text-primaryBtn hover:bg-primaryBtn hover:text-white-100 cursor-pointer ${
             currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""
           }`}
         >

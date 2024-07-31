@@ -53,27 +53,36 @@ export const authApi = createApi({
     }),
 
     // login user
-    login: builder.mutation({
-      query: ({ email, password }) => ({
-        url: "authentication/login",
-        method: "POST",
-        body: { email, password },
-      }),
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
-        try {
-          const result = await queryFulfilled;
 
-          dispatch(
-            userLoggedIn({
-              accessToken: result.data.accessToken,
-              user: result.data.user,
-            })
-          );
-        } catch (error: any) {
-          console.log(error);
-        }
-      },
+    login: builder.mutation({
+      query: (credentials) => ({
+        url: "/authentication/login",
+        method: "POST",
+        body: credentials,
+      }),
     }),
+
+    // login: builder.mutation({
+    //   query: ({ email, password }) => ({
+    //     url: "authentication/login",
+    //     method: "POST",
+    //     body: { email, password },
+    //   }),
+    //   async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+    //     try {
+    //       const result = await queryFulfilled;
+
+    //       dispatch(
+    //         userLoggedIn({
+    //           accessToken: result.data.accessToken,
+    //           user: result.data.user,
+    //         })
+    //       );
+    //     } catch (error: any) {
+    //       console.log(error);
+    //     }
+    //   },
+    // }),
     //reset user email
 
     SendMailForReset: builder.mutation({

@@ -61,11 +61,18 @@ const BuyTradeTable = () => {
                 />
                 <p className="text-sm">{item?.currency}</p>
               </td>
-              <td className="p-4">{item?.amount + " " + item?.currency}</td>
+              <td className="p-4">{item?.price + " " + item?.exit_currency}</td>
               <td className="p-4">
-                {item?.amount} {item?.currency}
+                {item?.available_amount} {item?.currency}
               </td>
-              <td className="p-4">{item?.minimumBid}</td>
+              <td className="p-4">
+                {" "}
+                {item.minimum_bid +
+                  " " +
+                  "-" +
+                  " " +
+                  (Number(item.amount) - Number(item?.sold))}
+              </td>
               <td className="p-4">{item?.payment_method || "X Method"}</td>
               <td className="p-4">{item?.sold}</td>
               <td className="relative p-4">

@@ -28,6 +28,14 @@ export const tradeApi = createApi({
       }),
     }),
 
+    buyTrade: builder.mutation({
+      query: (args) => ({
+        url: "Trade/buy-trade",
+        method: "POST",
+        body: args,
+      }),
+    }),
+
     //get all trades including current user
 
     getAllTrade: builder.query({
@@ -46,9 +54,17 @@ export const tradeApi = createApi({
     }),
     // /Currency converstion
 
+    fetchCurrencyPairs: builder.query({
+      query: ({ skip = 0, limit = 10 }) => ({
+        url: "currencypair/get-all",
+        method: "GET",
+        params: { skip, limit },
+      }),
+    }),
+
     CurrencyConverter: builder.query<
       any,
-      { amount: string; sourceCurrency: string; targetCurrency: string }
+      { amount: number; sourceCurrency: string; targetCurrency: string }
     >({
       query: ({ amount, sourceCurrency, targetCurrency }) => ({
         url: "currency-conversion",
@@ -126,4 +142,6 @@ export const {
   useCurrencyConverterQuery,
   useCreateBeneficiaryMutation,
   useGetBeneficiariesQuery,
+  useBuyTradeMutation,
+  useFetchCurrencyPairsQuery,
 } = tradeApi;

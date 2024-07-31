@@ -1,6 +1,6 @@
 "use client";
 import React, { ChangeEvent, useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { v4 as uuidv4 } from "uuid";
 import NGN from "@/public/Images/NGN.png";
@@ -30,16 +30,19 @@ import BeneficaryDetails from "./BeneficaryDetails";
 import SelectBank from "./SelectBank";
 import TradeTransSuccesss from "./TradeTransSuccess";
 import { handleCreateTruelayerPayment } from "./util/truelayerService";
+import { Modal } from "@/Components/modal/modal";
 
 import { openModal } from "@/redux/modal/modalSlice";
 import Image from "next/image";
 import { useCreateTradeMutation } from "@/redux/features/trade/tradeApi";
+import CreateTradeDetails from "./CreateTradeDetails";
+import CreateTradeSuccess from "./CreateTradeSuccess";
 interface TradeDetails {
   currency: string;
   exit_currency: string;
   rate: number;
   amount: string;
-  minimumBid: string;
+  minimum_bid: string;
   bank_name: string;
   account_number: string;
   beneficiary_name: string;
@@ -53,13 +56,14 @@ const CreateTrade = () => {
   const [showTradeDetails, setShowTradeDetails] = useState(false);
 
   const [benefiaryCurrency, setbenefiaryCurrency] = useState("");
+  const view = useSearchParams().get("view");
 
   const [createTradeDetails, setcreateTradeDetails] = useState({
     currency: "",
     exit_currency: "",
     rate: rate,
-    amount: "",
-    minimumBid: "",
+    amount: 0,
+    minimum_bid: 0,
     bank_name: "",
     account_number: "",
     account_name: "",
@@ -70,7 +74,7 @@ const CreateTrade = () => {
     sold: 0,
     payment_method: "",
     additional_information: "",
-    transaction_fee: "XX",
+    transaction_fee: 2.45,
   });
   const { data } = useLoadUserQuery({});
   const [
@@ -177,13 +181,14 @@ const CreateTrade = () => {
   const handleChange = (event: ChangeEvent<HTMLInputElement | any>): void => {
     const { name, value } = event.target;
     if (name === "amount") {
-      const newValue = value.replace(/[^0-9]/g, "");
+      const newValue = Number(value.replace(/[^0-9]/g, ""));
 
       return setcreateTradeDetails({ ...createTradeDetails, amount: newValue });
     }
     setcreateTradeDetails((prevState) => ({
       ...prevState,
       [name]: name === "rate" ? Number(value) : value,
+      [name]: name === "minimum_bid" ? Number(value) : value,
     }));
   };
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>): void => {
@@ -356,7 +361,7 @@ const CreateTrade = () => {
               <div className="h-[46px] w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
                 <input
                   type="text"
-                  name="minimumBid"
+                  name="minimum_bid"
                   onChange={handleChange}
                   className="w-[80%] outline-none bg-transparent placeholder:text-gray-300"
                 />
@@ -548,6 +553,19 @@ const CreateTrade = () => {
             </button>
           </form>
         </div>
+      </div>
+      <div>
+        {view == "createtradesuccess" ? (
+          <Modal
+            onClose={() => {
+              router.push("/");
+            }}
+          >
+            <CreateTradeSuccess />
+          </Modal>
+        ) : (
+          <div></div>
+        )}{" "}
       </div>
 
       {selectRecipient ? (

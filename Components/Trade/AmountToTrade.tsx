@@ -3,27 +3,33 @@
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
-import { toggleCreateTradeStage } from "@/redux/features/user/userSlice";
-import { useDispatch } from "react-redux";
+import {
+  setAmountToBuy,
+  toggleCreateTradeStage,
+} from "@/redux/features/user/userSlice";
+import { useDispatch, useSelector } from "react-redux";
 import Image from "next/image";
 import bag from "@/public/svg/bag.svg";
 import BalanceDropdown from "../BalanceDropdown";
 import CreateTradeDropDown from "../CustomDropdown/CreateTradeDropDown";
 import { closeModal, closeTradeModal } from "@/redux/modal/modalSlice";
 const AmountToTrade = ({
-  currency,
   handleAmountChange,
+  trade: { currency, available_amount },
 }: {
-  currency: string;
   handleAmountChange: any;
+  trade: any;
 }) => {
   const dispatch = useDispatch();
+  const amountToBuy = useSelector((state: RootState) => state.user.amountToBuy);
   const [currencies, setCurrency] = useState<string>("");
+  const [selectedAmount, setSelectedAmount] = useState<number>(0);
   const [error, setError] = useState("");
   const handleDone = () => {
-    // if (true) {
-    //   return setError("Trade to purchase exceeds available amount!");
-    // }
+    if (selectedAmount > available_amount) {
+      return setError("Trade to purchase exceeds available amount!");
+    } else if (selectedAmount == 0)
+      return setError("Please provide an amount to proceed with purchase!");
 
     dispatch(closeTradeModal());
   };
@@ -51,7 +57,12 @@ const AmountToTrade = ({
               <input
                 className="w-[215px] h-[16px] border-r border-r-[#BDBDBD] placeholder:text-sm placeholder:text-[#989898] outline-none"
                 placeholder="Amount to Buy"
-                onChange={handleAmountChange}
+                onChange={(e: any) => {
+                  setSelectedAmount(e.target.value);
+                  dispatch(setAmountToBuy(e.target.value));
+                  handleAmountChange(e.target.value);
+                  console.log("amoun2", amountToBuy);
+                }}
                 type="text"
               />
             </div>

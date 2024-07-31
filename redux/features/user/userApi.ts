@@ -2,6 +2,15 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { userLoggedIn, userLoggedOut } from "../auth/authSlice";
 import getTokenFromLocalStorage from "@/utils/FetchUserToken";
 
+interface Wallet {
+  _id: string;
+  currency_code: string;
+  balance: number;
+}
+
+interface WalletsResponse {
+  wallets: Wallet[];
+}
 const baseQuery = fetchBaseQuery({
   baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
   prepareHeaders: (headers) => {
@@ -50,13 +59,43 @@ export const userApi = createApi({
     }),
 
     verifyTwofa: builder.mutation({
-      query: ({ topt }) => ({
-        url: "user/verify-2fa",
+      query: (body) => ({
+        url: "/authentication/verify-2fa",
         method: "POST",
-        body: { topt },
+        body,
       }),
     }),
 
+    // Enable Two-Factor Authentication
+    enableTwoFA: builder.mutation({
+      query: () => ({
+        url: "user/enable-email-2fa",
+        method: "POST",
+      }),
+    }),
+
+    // Disable Two-Factor Authentication
+    disableTwoFA: builder.mutation({
+      query: () => ({
+        url: "user/disable-2fa",
+        method: "POST",
+      }),
+    }),
+
+    fetchTwoFAStatus: builder.query({
+      query: () => ({
+        url: "user/two-factor-status",
+        method: "GET",
+      }),
+    }),
+
+    updateUserProfile: builder.mutation({
+      query: (userData) => ({
+        url: "user/update-profile",
+        method: "POST",
+        body: userData,
+      }),
+    }),
     logOut: builder.query({
       query: () => ({
         url: "user/logout",
@@ -130,20 +169,22 @@ export const userApi = createApi({
 
     //next
 
-    getAllUsersWallet: builder.query({
+    getAllUserWallets: builder.query({
       query: () => ({
-        url: "wallet/get-all-user-wallets",
+        url: "wallets",
         method: "GET",
       }),
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
-        try {
-          const result = await queryFulfilled;
+      transformResponse: (response: { wallets: Wallet[] }) => response,
+      providesTags: ["Wallets"],
+    }),
 
-          // console.log(result);
-        } catch (error: any) {
-          // console.log(error);
-        }
-      },
+    fundWallet: builder.mutation({
+      query: ({ currency_code, amount }) => ({
+        url: "wallets/fund",
+        method: "POST",
+        body: { currency_code, amount },
+      }),
+      invalidatesTags: ["Wallets"],
     }),
 
     // /Currency converstion
@@ -192,7 +233,12 @@ export const {
   useGetRandomPasswordQuery,
   useGetSingleCurrencyPairQuery,
   useGetAllCurrencyPairsQuery,
-  useGetAllUsersWalletQuery,
+  useGetAllUserWalletsQuery,
+  useFundWalletMutation,
+  useUpdateUserProfileMutation,
+  useEnableTwoFAMutation,
+  useDisableTwoFAMutation,
+  useFetchTwoFAStatusQuery,
 
   useCurrencyConverterQuery,
 } = userApi;

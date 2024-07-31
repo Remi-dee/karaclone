@@ -3,15 +3,21 @@ import { useLoadUserQuery } from "@/redux/features/user/userApi";
 import { v4 as uuidv4 } from "uuid";
 
 const handleCreateTruelayerPayment = async (
-  createTradeDetails: { amount: string; currency: any },
+  createTradeDetails: { amount: number; currency: any },
   data: { user: { name: any; email: any } },
   createPayment: any,
   dispatch: (arg0: any) => void,
   setPaymentDetails: (arg0: { paymentId: any; resourceToken: any }) => any
 ) => {
   try {
+    console.log(
+      "buy trade details from payment is ",
+      createTradeDetails.amount,
+      createTradeDetails.currency
+    );
+
     const paymentData = {
-      amount_in_minor: parseInt(createTradeDetails?.amount), // Assuming amount is part of the trade details
+      amount_in_minor: Number(createTradeDetails?.amount) * 100, // Assuming amount is part of the trade details
       currency: createTradeDetails?.currency, // Assuming currency is part of the trade details
       payment_method: {
         provider_selection: {
