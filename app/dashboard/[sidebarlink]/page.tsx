@@ -57,6 +57,7 @@ import {
 } from "@/redux/features/trade/tradeApi";
 import { toast } from "react-toastify";
 import { useGetNotificationsQuery } from "@/redux/features/notification/notificationApi";
+import MobileSideBar from "@/Components/Sidebar/MobileSideBar";
 const Dashboard = ({ params }: { params: { sidebarlink: string } }) => {
   const dispatch = useDispatch();
   const [showSidebar, setShowSidebar] = useState(false);
@@ -248,8 +249,12 @@ const Dashboard = ({ params }: { params: { sidebarlink: string } }) => {
     <div className="flex bg-[#F5F1FB]  relative w-full h-screen max-h-screen   fixed top-0  bottom-0  _h-[1024px]">
       {/* sidebar */}
 
-      <Sidebar link={urlLink} showSideBar={showSidebar} />
-
+      <Sidebar link={urlLink} />
+      <MobileSideBar
+        toggleSidebar={toggleSidebar}
+        link={urlLink}
+        showSideBar={showSidebar}
+      />
       <Image
         onClick={handleChatIcon}
         src={chatIcon}
@@ -268,7 +273,7 @@ const Dashboard = ({ params }: { params: { sidebarlink: string } }) => {
               <Image src={Menu} width={20} height={6} alt="" />
             </button> */}
 
-            <div className="flex flex-col md:flex-col   py-5 border-slate-200 p-[24px_40px_24px_40px] bg-white-100">
+            <div className="flex flex-col md:flex-col   py-5 border-slate-200 p-[1rem_1.5rem] md:p-[24px_40px_24px_40px] bg-white-100">
               <div className=" flex  flex-row  w-full justify-between items-start ">
                 <div className="flex flex-col md:space-y-0 space-y-6 items-start">
                   <div>
@@ -280,7 +285,7 @@ const Dashboard = ({ params }: { params: { sidebarlink: string } }) => {
                   <div className=" hidden md:block md:ml-5">
                     <span className="text-black-200 font-bold text-lg">
                       <div className=" flex gap-[4px]">
-                        <p className="text-black-200 font-bold  text-[14px] lg:text-lg   ">
+                        <p className="text-black-200 font-bold  text-[14px] md:text-lg   ">
                           {"Hello, " + data?.user?.name}
                         </p>
                         <Image src={wave} width={20} height={6} alt="" />
@@ -327,7 +332,7 @@ const Dashboard = ({ params }: { params: { sidebarlink: string } }) => {
 
                     <button
                       className=" cursor-pointer md:hidden block"
-                      onClick={() => dispatch(toggleProfileModal())}
+                      onClick={() => toggleSidebar()}
                     >
                       <Image src={Menu} className="h-6 w-6" alt="Menu" />
                     </button>

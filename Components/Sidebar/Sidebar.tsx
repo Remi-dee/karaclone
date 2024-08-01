@@ -43,9 +43,7 @@ const Sidebar = ({ link, showSideBar }: Props) => {
   return (
     <div className="w-[330px] hidden md:flex md:flex-col  bg-white-100  h-screen invisible-scrollbar  overflow-x-hidden  overflow-y-auto">
       <div
-        className={`border-r border-slate-200 h-[1024px]  relative   top-0  flex flex-col  items-center     lg:relative ${
-          showSideBar ? "hidden " : " block"
-        }
+        className={`border-r border-slate-200 h-[1024px]  relative   top-0  flex flex-col  items-center     lg:relative 
    block  z-[1000] py-5 bg-white-100 duration-700 transition-transform	`}
       >
         <div className=" _pl-[126px]  p-[0.4rem] w-[232px] ">
