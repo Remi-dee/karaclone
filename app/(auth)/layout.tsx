@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Suspense, useEffect, useRef, useState } from "react";
+import React, { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import man from "@/public/loginMan.png";
 import stars from "@/public/stars.png";
@@ -17,28 +17,7 @@ import { title } from "process";
 //     icon: "",
 //   },
 // };
-const slides = [
-  {
-    image: manphone,
-    text: "Effortlessly add funds to your account with our simple and user-friendly top-up feature for convenient wallet top up.",
-    title: "Easy top up ",
-  },
-  {
-    image: man,
-    text: "Instantly buy and sell coins with our peer-to-peer transaction feature. Seamlessly connect with buyers and sellers globally.",
-    title: "Easy Peer-to-Peer Transactions",
-  },
-  {
-    image: manbluebg,
-    title: "Manage Multiple Currencies",
-    text: "Store, send, and receive funds in multiple currencies hassle-free. From USD to EUR, manage it all in one place.",
-  },
-  {
-    image: manscan,
-    text: "Instantly buy and sell coins with our peer-to-peer transaction feature. Seamlessly connect with buyers and sellers globally.",
-    title: "Easy Peer-to-Peer Transactions",
-  },
-];
+
 export default function RootLayout({
   children,
 }: {
@@ -47,7 +26,31 @@ export default function RootLayout({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const slideRef = useRef();
-
+  const slides = useMemo(
+    () => [
+      {
+        image: manphone,
+        text: "Effortlessly add funds to your account with our simple and user-friendly top-up feature for convenient wallet top up.",
+        title: "Easy top up ",
+      },
+      {
+        image: man,
+        text: "Instantly buy and sell coins with our peer-to-peer transaction feature. Seamlessly connect with buyers and sellers globally.",
+        title: "Easy Peer-to-Peer Transactions",
+      },
+      {
+        image: manbluebg,
+        title: "Manage Multiple Currencies",
+        text: "Store, send, and receive funds in multiple currencies hassle-free. From USD to EUR, manage it all in one place.",
+      },
+      {
+        image: manscan,
+        text: "Instantly buy and sell coins with our peer-to-peer transaction feature. Seamlessly connect with buyers and sellers globally.",
+        title: "Easy Peer-to-Peer Transactions",
+      },
+    ],
+    []
+  );
   const goToNextSlide = () => {
     if (isAnimating) return;
     setIsAnimating(true);
@@ -75,7 +78,7 @@ export default function RootLayout({
     return () => clearInterval(interval);
   }, []);
   return (
-    <main className=" w-full  relative  lg:w-[] bg-[#FBFBFB] _lg:h-screen h-[960px] flex  jusc items-center ">
+    <main className=" w-full  relative  lg:w-[] bg-[#FBFBFB] _lg:h-screen h-full lg:h-[960px] flex  jusc items-center ">
       <div className="  h-max w-full relative ">
         <div className=" flex justify-center  max-h-full overflow-y-hidden  lg:flex-row flex-col ">
           <div className="lg:flex-1 relative h-full rounded-[20px] hidden px-[2rem] lg:flex justify-center items-center content-center">
@@ -117,12 +120,14 @@ export default function RootLayout({
               </div>
             </div>
           </div>
-          <div className="flex-1 w-full flex pt-0 h-full  justify-center ">
+          <div className="lg:flex-1 w-full block lg:flex pt-0 h-full  lg:justify-center ">
             <div className=" w-full h-full">
               <div className=" w-full">{children}</div>
             </div>
           </div>
-          <div className=" absolute  text-[#475467]  text-sm flex  right-[8rem] bottom-[1rem]   gap-x-[1rem] justify-center wf ">
+
+          {/* footer notes <>ToDo: can migrate when refactoring</> */}
+          <div className=" absolute  text-[#475467]  text-sm   right-[8rem] bottom-[1rem]   gap-x-[1rem] justify-center  hidden lg:flex ">
             <p>© FXkarasell 2024</p>
             <p className="  flex  items-center gap-x-[0.3rem]">
               <span className=" text-[0.4rem] text-[#4d525a]">⚫</span> Help

@@ -268,65 +268,85 @@ const Dashboard = ({ params }: { params: { sidebarlink: string } }) => {
               <Image src={Menu} width={20} height={6} alt="" />
             </button> */}
 
-            <div className="flex justify-between items-start py-5 border-slate-200 p-[24px_40px_24px_40px] bg-white-100">
-              <div className="flex flex-col md:space-y-0 space-y-6 items-start">
-                <div>
-                  <button className="md:hidden cursor-pointer">
-                    <Image src={Logo} alt="Logo" className="" />
-                  </button>
+            <div className="flex flex-col md:flex-col   py-5 border-slate-200 p-[24px_40px_24px_40px] bg-white-100">
+              <div className=" flex  flex-row  w-full justify-between items-start ">
+                <div className="flex flex-col md:space-y-0 space-y-6 items-start">
+                  <div>
+                    <button className="md:hidden cursor-pointer">
+                      <Image src={Logo} alt="Logo" className="" />
+                    </button>
+                  </div>
+
+                  <div className=" hidden md:block md:ml-5">
+                    <span className="text-black-200 font-bold text-lg">
+                      <div className=" flex gap-[4px]">
+                        <p className="text-black-200 font-bold  text-[14px] lg:text-lg   ">
+                          {"Hello, " + data?.user?.name}
+                        </p>
+                        <Image src={wave} width={20} height={6} alt="" />
+                      </div>
+                    </span>
+                    <p className="text-sm w-full text-gray-300">
+                      Trade and withdraw funds easily
+                    </p>
+                  </div>
                 </div>
 
-                <div className="lg:block lg:ml-5">
-                  <span className="text-black-200 font-bold text-lg">
-                    <div className=" flex gap-[4px]">
-                      <p className="text-black-200 font-bold text-lg">
-                        {"Hello, " + data?.user?.name}
+                <div className="flex justify-between space-x-[330px]">
+                  <div className="flex items-center gap-5 md:gap-[40px]">
+                    <div
+                      onClick={() => dispatch(openCheckRateModal())}
+                      className=" cursor-pointer items-center font-bold lg:mr-5 hidden md:flex"
+                    >
+                      <ArrowsRightLeftIcon className="text-purple-700 text-sm h-6 w-6" />
+                      <p className="text-purple-700 hidden lg:flex">
+                        Check out our rates{" "}
                       </p>
-                      <Image src={wave} width={20} height={6} alt="" />
                     </div>
-                  </span>
-                  <p className="text-sm text-gray-300">
-                    Trade and withdraw funds easily
-                  </p>
+                    <div className="relative">
+                      <BellIcon
+                        onClick={handleBellClick}
+                        className="text-gray-300 cursor-pointer h-6 w-6"
+                      />
+                      {hasNewNotifications && (
+                        <div className="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full"></div>
+                      )}
+                    </div>
+                    {/* <SunIcon className="text-gray-300 h-6 w-6" /> */}
+
+                    <button
+                      className="block h-8 w-8 cursor-pointer"
+                      onClick={() => dispatch(toggleProfileModal())}
+                    >
+                      <Image
+                        src={CircleIcon}
+                        alt="Profile"
+                        className="h-6 w-6"
+                      />
+                    </button>
+
+                    <button
+                      className=" cursor-pointer md:hidden block"
+                      onClick={() => dispatch(toggleProfileModal())}
+                    >
+                      <Image src={Menu} className="h-6 w-6" alt="Menu" />
+                    </button>
+                  </div>
                 </div>
               </div>
 
-              <div className="flex justify-between space-x-[330px]">
-                <div className="flex items-center gap-5 md:gap-[40px]">
-                  <div
-                    onClick={() => dispatch(openCheckRateModal())}
-                    className=" cursor-pointer items-center font-bold lg:mr-5 hidden md:flex"
-                  >
-                    <ArrowsRightLeftIcon className="text-purple-700 text-sm h-6 w-6" />
-                    <p className="text-purple-700 hidden lg:flex">
-                      Check out our rates{" "}
+              <div className="  flex flex-col mt-[16px] md:hidden md:ml-5">
+                <span className="text-[#1E1E1E] font-bold text-lg">
+                  <div className=" flex gap-[4px]">
+                    <p className="text-[#1E1E1E] font-[500] tracking-[-2%]  text-[16px]   ">
+                      {"Hello, " + data?.user?.name}
                     </p>
+                    <Image src={wave} width={20} height={6} alt="" />
                   </div>
-                  <div className="relative">
-                    <BellIcon
-                      onClick={handleBellClick}
-                      className="text-gray-300 cursor-pointer h-6 w-6"
-                    />
-                    {hasNewNotifications && (
-                      <div className="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full"></div>
-                    )}
-                  </div>
-                  {/* <SunIcon className="text-gray-300 h-6 w-6" /> */}
-
-                  <button
-                    className="block h-8 w-8 cursor-pointer"
-                    onClick={() => dispatch(toggleProfileModal())}
-                  >
-                    <Image src={CircleIcon} alt="Profile" className="h-6 w-6" />
-                  </button>
-
-                  <button
-                    className=" cursor-pointer md:hidden block"
-                    onClick={() => dispatch(toggleProfileModal())}
-                  >
-                    <Image src={Menu} className="h-6 w-6" alt="Menu" />
-                  </button>
-                </div>
+                </span>
+                <p className="text-[14px] w-full text-[#7C7C7C]">
+                  Trade and withdraw funds easily
+                </p>
               </div>
             </div>
             {/* content */}

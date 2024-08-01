@@ -10,7 +10,7 @@ import {
 } from "@/redux/features/user/userSlice";
 import { toggleReversalState } from "@/redux/features/user/userSlice";
 import { MdSystemSecurityUpdateWarning } from "react-icons/md";
-const WithdrawalComplete = () => {
+const   WithdrawalComplete = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const handleDone = () => {
@@ -20,7 +20,7 @@ const WithdrawalComplete = () => {
   return (
     <div>
       <div className="flex flex-col items-center justify-start gap-[24px] text-center text-2xl text-neutral-black">
-        <div className="w-[550px] p-[32px_40px_32px_40px] mt-32 h-[326px] gap-[25px] mx-auto rounded-lg bg-white-100 shadow-lg overflow-hidden flex flex-col justify-center items-center py-8 px-10 box-border max-w-full text-left text-sm text-neutral-color-500 ">
+        <div className="  w-full   md:w-[550px] p-[32px_40px_32px_40px] mt-32 h-[326px] gap-[25px] mx-auto rounded-lg bg-white-100 shadow-lg overflow-hidden flex flex-col justify-center items-center py-8 px-10 box-border max-w-full text-left text-sm text-neutral-color-500 ">
           <div className="w-[56px] h-[56px] shadow-sm flex justify-center items-center border border[#EAECF0] rounded-[12px] ">
             <div className="w-[20]  rounded-sm text-white-100">
               <svg
@@ -83,7 +83,7 @@ const Reversal: FC<any> = () => {
               <p className="text-primaryBtn font-semibold">Go-Back</p>
             </div>
 
-            <div className="flex flex-row items-center justify-center gap-[16px]">
+            <div className=" hidden  md:flex flex-row items-center justify-center gap-[16px]">
               <img
                 className="h-10 w-10 relative"
                 loading="lazy"
@@ -102,8 +102,8 @@ const Reversal: FC<any> = () => {
           </div>
 
           <div className="  w-full flex justify-center">
-            <div className="flex flex-col min-w-[513px] w-[513px] mt-[64px] items-center justify-start gap-[24px] text-center text-2xl text-neutral-black">
-              <div className="w-[470px] flex flex-col items-center justify-start gap-[16px]">
+            <div className="flex flex-col  min-w-full w-full md:min-w-[513px] md:w-[513px] mt-[64px] items-center justify-start gap-[24px] text-center text-2xl text-neutral-black">
+              <div className=" w-full  md:w-[470px] flex flex-col items-center justify-start gap-[16px]">
                 <h2 className="m-0 relative text-inherit tracking-[-0.55px] font-bold font-inherit inline-block">
                   Reversal
                 </h2>
@@ -112,7 +112,7 @@ const Reversal: FC<any> = () => {
                 </div>
               </div>
 
-              <div className=" w-[513px] h-[220px] rounded-lg mt-[30px] p-[32px_40px_32px_40px] bg-white-100 shadow-lg overflow-hidden flex flex-col items-center justify-start py-8 px-10 box-border max-w-full text-left text-sm text-neutral-color-500 ">
+              <div className=" w-full  md:w-[513px] h-[220px] rounded-lg mt-[30px] p-[32px_40px_32px_40px] bg-white-100 shadow-lg overflow-hidden flex flex-col items-center justify-start py-8  box-border max-w-full text-left text-sm text-neutral-color-500  px-[1rem] ">
                 <div className=" w-full flex flex-col gap-[16px]">
                   <div className="  flex w-full  justify-between">
                     <span className=" text-[#7C7C7C] text-[14px] leading-[20px]  ">
@@ -132,10 +132,10 @@ const Reversal: FC<any> = () => {
                     </span>
                   </div>
                 </div>
-                <div className="flex mt-[40px] gap flex-col items-start justify-start gap-[24px]">
-                  <button
+                <div className="flex w-full mt-[40px] gap flex-col items-start justify-start gap-[24px]">
+                  <button 
                     onClick={handleSubmit}
-                    className="p-[12px] text-[#fff] bg-[#7F56D9] w-[470px] rounded-lg"
+                    className="p-[12px] text-[#fff] bg-[#7F56D9] w-full md:w-[470px] rounded-lg"
                   >
                     Proceed
                   </button>

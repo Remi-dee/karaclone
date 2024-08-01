@@ -1,13 +1,13 @@
-const getTokenFromLocalStorage = () => {
+const getTokenFromLocalStorage = (token = "auth_token"): string | null => {
   if (typeof window === "undefined") {
     return null;
   }
 
   try {
-    const token = localStorage.getItem("auth_token");
-    return token;
+    const storedToken = localStorage.getItem(token);
+    return storedToken;
   } catch (error) {
-    console.error("Error fetching token from local storage:", error);
+    console.error("Error fetching  from local storage");
     return null;
   }
 };

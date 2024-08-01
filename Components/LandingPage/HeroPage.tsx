@@ -62,8 +62,11 @@ function HeroPage() {
 
       <div className="bg-[#0C101B] flex items-center py-8">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center py-10 gap-10 px-4">
-          {features.map((feature) => (
-            <div className=" mx-auto flex flex-col py-4  gap-x-10 justify-center ">
+          {features.map((feature, i) => (
+            <div
+              key={i}
+              className=" mx-auto flex flex-col py-4  gap-x-10 justify-center "
+            >
               <div className=" text-[#D70035] rounded-full mb-4">
                 <img src={feature.icon} alt="" />
               </div>
@@ -155,8 +158,11 @@ function HeroPage() {
       {/* stats */}
       <div className="bg-slate-100">
         <div className="md:w-4/5   mx-auto flex flex-col md:flex-row items-center gap-4 py-5 justify-center lg:gap-x-10  ">
-          {stats.map((stat) => (
-            <div className="flex  items-center gap-6 py-5 md:py-10 px-10">
+          {stats.map((stat, i) => (
+            <div
+              key={i}
+              className="flex  items-center gap-6 py-5 md:py-10 px-10"
+            >
               <p className="text-[#161C2D]/90 text-4xl font-black">
                 {stat.label}
               </p>
@@ -178,8 +184,11 @@ function HeroPage() {
         </div>
 
         <div className=" w-full  flex flex-col md:flex-row  gap-5 items-center mt-6">
-          {features2.map((feature) => (
-            <div className="flex flex-col  flex-1  gap-5 p-5 pb-10 bg-[#0C101B] rounded-3xl">
+          {features2.map((feature, i) => (
+            <div
+              key={i}
+              className="flex flex-col  flex-1  gap-5 p-5 pb-10 bg-[#0C101B] rounded-3xl"
+            >
               <div className=" rounded-full ">
                 <img src={feature.icon} alt="" className="w-10 h-10" />
               </div>
@@ -244,8 +253,11 @@ function HeroPage() {
         </div>
 
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-6 items-center justify-between mt-10">
-          {faq.map((faq) => (
-            <div className="max-w-6xl mx-auto flex flex-col items-center gap-5">
+          {faq.map((faq, i) => (
+            <div
+              key={i}
+              className="max-w-6xl mx-auto flex flex-col items-center gap-5"
+            >
               <div className="flex  gap-5 md:p-5 bg-[#0C101B] rounded-3xl">
                 <div className=" rounded-full p-2 bg-[#D70035] w-max h-max">
                   <FaQuestion className="w-3 h-3 text-[white]" />

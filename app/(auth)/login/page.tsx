@@ -59,11 +59,11 @@ const Login = () => {
 
   const { errors, touched, values, handleChange, handleSubmit } = formik;
   return (
-    <div className="flex-1 w-full flex pt-0 h-full  justify-center ">
-      <div className=" w-[471px] ">
+    <div className="  block  flex-1 w-full lg:flex p-[1rem] lg:p-0 h-full  justify-center ">
+      <div className=" w-full lg:w-[471px] ">
         <div className="flex  flex-col  ">
           <div className="">
-            <div className="  mt-[60px]">
+            <div className="  mt-[24px] lg:mt-[60px]">
               <Image src="/fxkara-logo.svg" height={40} width={150} alt="" />
             </div>
             <div className=" mt-[40px] h-full w-full flex flex-col justify-center gap-y-[40px]  text-black ">
@@ -77,9 +77,9 @@ const Login = () => {
               </div>
               <form
                 onSubmit={handleSubmit}
-                className=" w-full  flex flex-col gap-[20px]"
+                className=" w-full  flex  flex-col gap-[20px]"
               >
-                <div>
+                <div className=" w-full">
                   <label className=" w-full" htmlFor="email">
                     Email
                   </label>
@@ -102,7 +102,7 @@ const Login = () => {
                 </div>
                 <div className="w-full mt-5 relative mb-1">
                   <label
-                    className="text-[16px] font-Poppins text-[black] dark:text-white"
+                    className="text-[16px] w-full font-Poppins text-[black] dark:text-white"
                     htmlFor="password"
                   >
                     Password
@@ -139,7 +139,7 @@ const Login = () => {
                   )}
                 </div>
                 {/* Forgot password  */}
-                <div className="flex justify-between items-center mt-5">
+                <div className="flex flex-row justify-between items-center mt-5">
                   <div className="flex items-center ">
                     <input
                       type="checkbox"
@@ -150,13 +150,13 @@ const Login = () => {
                       htmlFor="rememberPassword"
                       className="text-[#7C7C7C] whitespace-nowrap text-sm"
                     >
-                      Remember password for 30 days
+                      Remember for 30 days
                     </label>
                   </div>
                   <div className="w-max h-full ">
                     <Link
                       className="text-sm text-[#FF2452] leading-[14.4px]"
-                      href="/yforgot-password"
+                      href="/forgot-password"
                     >
                       Forgot Password?
                     </Link>
@@ -173,7 +173,7 @@ const Login = () => {
                   Don’t have an account?{" "}
                   <Link
                     className="text-[#7F56D9] leading-[19px] tracking-[-2%] font-[700] ml-1"
-                    href="/auth/signup"
+                    href="/signup"
                   >
                     Sign up
                   </Link>

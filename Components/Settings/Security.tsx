@@ -64,7 +64,7 @@ function Security() {
 
   return (
     <div>
-      <div className=" h-[252px] flex  flex-col gap-[24px] bg-[#FFFFFF] w-[100%]  p-[24px] rounded-[8px]">
+      <div className=" md:h-[252px] flex  flex-col gap-[24px] bg-[#FFFFFF] h-full w-[100%]  p-[24px] rounded-[8px]">
         <div className=" h-[75px]  min-h-[44px] border-b border-b-[#EFEFEF]">
           <h1 className="  font-bold leading-[28px] tracking-[-2%] text-[18px]   ">
             Two-factor authentication
@@ -76,8 +76,8 @@ function Security() {
           </p>
         </div>
 
-        <section className="  justify-between   flex content-between  w-full">
-          <div className="inline-flex flex-col gap-[8px] max-w-[45%] flex-1">
+        <section className="  justify-between   flex flex-col md:flex-row content-between  w-full">
+          <div className="inline-flex flex-col gap-[8px]  w-full max-w-[100%] md:max-w-[45%] flex-1">
             <h2 className="text-[#A3ADBF]">Email</h2>
             <p className="text-[#656565] text-[14px] leading-[20px] tracking-[-2%]">
               Use your email to receive your authentication code to enter when
@@ -106,7 +106,7 @@ function Security() {
 
           <div className=" w-[0.5px] h-full bg-[#DCDCDC] inline-flex"></div>
 
-          <div className=" inline-flex flex-col gap-[8px] max-w-[45%]   flex-1 ">
+          <div className=" inline-flex flex-col gap-[8px] md:max-w-[45%] w-full max-w-full mt-[1.5rem] md:mt-0   flex-1 ">
             <h2 className=" text-[#A3ADBF]     ">AUTHENTICATOR APP</h2>
 
             <p className="  text-[#656565]  text-[14px] leading-[20px] tracking-[-2%] ">
@@ -133,7 +133,7 @@ function Security() {
         </section>
       </div>
 
-      <div className=" h-[132px] flex mt-[24px]  flex-col gap-[24px] bg-[#FFFFFF] w-[100%]  p-[24px] rounded-[8px]">
+      <div className=" h-full md:h-[132px] flex mt-[24px]  flex-col gap-[24px] bg-[#FFFFFF] w-[100%]  p-[24px] rounded-[8px]">
         <div className="  h-full flex flex-col gap-[8px] ">
           <h1 className="  font-bold leading-[28px] tracking-[-2%] text-[18px]   ">
             Password Reset

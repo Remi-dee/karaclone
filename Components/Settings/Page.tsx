@@ -12,7 +12,7 @@ const Page = (props: any) => {
   const { settingsOption } = useSelector((state: any) => state?.user);
 
   return (
-    <div className="">
+    <div className=" w-full">
       <SettingTab />
 
       <div className=" mt-[40px]">

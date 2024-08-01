@@ -82,9 +82,9 @@ const TradeTab: React.FC<tradeProp> = ({ onSelectBuy, onSelectSell }) => {
   };
   return (
     <div className="lg:flex lg:flex-row flex-col space-y-4 lg:space-y-0 justify-between items-center w-full gap-2  my-4">
-      <div className="  lg:w-[156px] h-[46px] flex justify-between items-center p-[6px]  gap-2 border rounded-md">
+      <div className="  lg:w-[156px] lg:h-[46px] h-[36px] flex justify-between items-center p-[6px]  gap-2 border rounded-md">
         <button
-          className={`py-3 px-[8px] w-[50%] lg:w-[66px]  font-bold text-sm rounded-md gap-[10px] text-[12px] leading-[14.4px] ${
+          className={`lg:py-3 py-[0.5rem] px-[8px] w-[50%] lg:w-[66px]  font-bold text-sm rounded-md gap-[10px] text-[12px] leading-[14.4px] ${
             buttonIsActive("Buy")
               ? "bg-primaryBtn text-white-100 px-3 rounded-md"
               : ""
@@ -95,7 +95,7 @@ const TradeTab: React.FC<tradeProp> = ({ onSelectBuy, onSelectSell }) => {
         </button>
 
         <button
-          className={` py-3 px-[8px] w-[50%] lg:w-[66px]  font-bold text-sm rounded-md gap-[10px] text-[12px] leading-[14.4px] ${
+          className={`lg:py-3 py-[0.5rem] px-[8px] w-[50%] lg:w-[66px]  font-bold text-sm rounded-md gap-[10px] text-[12px] leading-[14.4px] ${
             buttonIsActive("Sell")
               ? "bg-primaryBtn text-white-100 px-2 rounded-md"
               : ""
@@ -106,17 +106,17 @@ const TradeTab: React.FC<tradeProp> = ({ onSelectBuy, onSelectSell }) => {
         </button>
       </div>
       <div className=" lg:flex lg:flex-row flex-col lg:space-x-2 space-y-4 lg:space-y-0">
-        <div className="lg:w-[360px] h-[48px] border flex  items-center rounded-[12px] p-[8px_16px_8px_16px]">
+        <div className="lg:w-[360px] w-[287px] h-[48px] border flex  items-center rounded-[12px] p-[8px_16px_8px_16px]">
           <div className="">
             <input
-              className="lg:w-[215px] h-[30px] border-r   border-r-[#BDBDBD]  placeholder:text-sm placeholder:text-[#989898] outline-none"
+              className="lg:w-[215px] w-[143px] h-[30px] border-r   border-r-[#BDBDBD]  placeholder:text-sm placeholder:text-[#989898] outline-none"
               placeholder="Amount to Buy"
               onChange={handleAmountChange}
               type="text"
               value={amount}
             />
           </div>
-          <div className="w-full lg:w-[115px] flex justify-center items-center ml-[5px] bg-[#F7F7F7] rounded-[16px] ">
+          <div className=" lg:w-[115px] w-[113px] flex justify-center items-center ml-[5px] bg-[#F7F7F7] rounded-[16px] ">
             <CreateTradeDropDown
               onSelect={handleCurrency}
               options={converstionDataExit}
@@ -126,17 +126,17 @@ const TradeTab: React.FC<tradeProp> = ({ onSelectBuy, onSelectSell }) => {
             />
           </div>
         </div>
-        <div className="lg:w-[360px] h-[48px] border flex  items-center rounded-[12px] p-[8px_16px_8px_16px]">
+        <div className="lg:w-[360px] w-[287px] h-[48px] border flex  items-center rounded-[12px] p-[8px_16px_8px_16px]">
           <div className=" w-full h-full">
             <input
-              className="lg:w-[215px] pl-[0.5rem]  h-full border-r bg-white-100 border-r-[#BDBDBD]  placeholder:text-sm placeholder:text-[#989898] outline-none cursor-not-allowed"
+              className=" lg:w-[215px] w-[143px] h-[30px] border-r   border-r-[#BDBDBD]  placeholder:text-sm placeholder:text-[#989898] outline-none"
               placeholder="Exchange Value"
               type="text"
               value={rate}
               disabled
             />
           </div>
-          <div className="w-full lg:w-[115px] ml-[5px] justify-center items-center bg-[#F7F7F7] rounded-[16px]">
+          <div className="lg:w-[115px] w-[113px] flex justify-center items-center ml-[5px] bg-[#F7F7F7] rounded-[16px]">
             <CreateTradeDropDown
               onSelect={handleExitCurrency}
               options={converstionDataSource}

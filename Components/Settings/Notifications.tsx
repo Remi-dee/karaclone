@@ -3,7 +3,7 @@ import PurpleCheckBox from "../PurpleCheckBox";
 
 function Notifications() {
   return (
-    <div className=" h-[320px] flex mt-[24px]  flex-col gap-[24px] bg-[#FFFFFF] w-[100%]  p-[24px] rounded-[8px]">
+    <div className=" h-full md:h-[320px] flex mt-[24px]  flex-col gap-[24px] bg-[#FFFFFF] w-[100%]  p-[24px] rounded-[8px]">
       <div className="  h-[85px] flex flex-col border-b border-b-[#EFEFEF] gap-[8px] ">
         <h1 className="  font-bold leading-[28px] tracking-[-2%] text-[18px]   ">
           Email Notification
