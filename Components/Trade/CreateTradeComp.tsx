@@ -232,8 +232,6 @@ const CreateTrade = () => {
     }
   );
 
-  console.log(dataForCalc);
-
   useEffect(() => {
     setrate(dataForCalc?.data?.exchangeRate);
     setcreateTradeDetails({
@@ -255,13 +253,13 @@ const CreateTrade = () => {
     <div className="m-0 p-0 box-border  h-[870px] invisible-scrollbar overflow-auto ">
       <div
         onClick={handleBack}
-        className="my-4 mx-6 flex justify-start items-center  w-[513px] gap-1 cursor-pointer"
+        className="my-4 mx-0 md:mx-6 flex justify-start items-center  w-full md:w-[513px] gap-1 cursor-pointer"
       >
         <IoIosArrowRoundBack className="bg-primaryBtn text-white-100 rounded-sm" />
         <p className="text-primaryBtn font-semibold">Go-Back</p>
       </div>
       <div className="flex flex-col justify-center  gap-[16px]  items-center">
-        <div className="flex flex-col justify-center  gap-[16px] text-center">
+        <div className="flex flex-col justify-center  gap-[16px] my-[1.2em] text-center">
           <h2 className=" text-[24px] leading-[28.8px] font-bold  tracking-[-2%]  text-[#1E1E1E] ">
             Create a Trade
           </h2>
@@ -269,8 +267,8 @@ const CreateTrade = () => {
             Fill in the details below to sell your currency
           </p>
         </div>
-        <div className=" w-[513px] p-[32px_40px_32px_40px] bg-[white]  rounded-[8px]">
-          <form className="w-[433px] mx-auto flex  flex-col gap-[24px]">
+        <div className=" w-full md:w-[513px] py-[1rem] px-[0.8rem] pb-[2rem] mb-[2.5rem] md:p-[32px_40px_32px_40px] bg-[white]  rounded-[8px]">
+          <form className=" w-full  md:w-[433px] mx-auto flex  flex-col gap-[24px]">
             <div className=" flex flex-col gap-[8px] ">
               <label
                 htmlFor=""
@@ -278,7 +276,7 @@ const CreateTrade = () => {
               >
                 Currency
               </label>
-              <div className=" h-[46px]  items-center  flex   w-[433px] mt-[8px] p-[15px_16px_15px_16px] gap-[10px]  rounded-[8px]  bg-[#FBFBFB]">
+              <div className=" h-[46px]  items-center  flex  w-full  md:w-[433px] mt-[8px] p-[15px_16px_15px_16px] gap-[10px]  rounded-[8px]  bg-[#FBFBFB]">
                 <CreateTradeDropDown
                   onSelect={handleCurrency}
                   className=" w-full flex justify-between"
@@ -317,7 +315,7 @@ const CreateTrade = () => {
               >
                 Rate
               </label>
-              <div className=" h-[46px] cursor-not-allowed w-[433px] gap-[273px] items-center p-[15px_16px_15px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-gray-900">
+              <div className=" h-[46px] cursor-not-allowed w-full md:w-[433px] gap-[273px] items-center p-[15px_16px_15px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-gray-900">
                 <input
                   type="text"
                   onChange={handleChange}
@@ -338,7 +336,7 @@ const CreateTrade = () => {
               >
                 Amount
               </label>
-              <div className="h-[46px] w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white] ">
+              <div className="h-[46px] w-full md:w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white] ">
                 <input
                   type="text"
                   onChange={handleChange}
@@ -358,7 +356,7 @@ const CreateTrade = () => {
               >
                 Minimum Bid
               </label>
-              <div className="h-[46px] w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
+              <div className="h-[46px] w-full md:w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
                 <input
                   type="text"
                   name="minimum_bid"
@@ -381,7 +379,7 @@ const CreateTrade = () => {
               >
                 Payment Method
               </label>
-              <div className="h-[46px] w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px] border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
+              <div className="h-[46px] w-full md:w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px] border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
                 <select
                   name="payment_method"
                   className="w-full text-gray-300 outline-none border-none text-xs p-1"
@@ -415,7 +413,7 @@ const CreateTrade = () => {
                 Select Beneficiary
               </label>
 
-              <div className="h-[46px] w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px] border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
+              <div className="h-[46px] w-full md:w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px] border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
                 {createTradeDetails?.beneficiary_name === "" &&
                 createTradeDetails?.beneficiary_bank === "" ? (
                   <div
@@ -466,7 +464,7 @@ const CreateTrade = () => {
                   >
                     Bank Name
                   </label>
-                  <div className="h-[46px] w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
+                  <div className="h-[46px] w-full md:w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
                     <select
                       name="bank_name"
                       onChange={handleSelectChange}
@@ -493,7 +491,7 @@ const CreateTrade = () => {
                   >
                     Account Number
                   </label>
-                  <div className="h-[46px] w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
+                  <div className="h-[46px] w-full md:w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
                     <input
                       name="account_number"
                       onChange={handleChange}
@@ -510,7 +508,7 @@ const CreateTrade = () => {
                   >
                     Account Name
                   </label>
-                  <div className="h-[46px] w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
+                  <div className="h-[46px] w-full md:w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
                     <input
                       type="text"
                       onChange={handleChange}
@@ -541,13 +539,13 @@ const CreateTrade = () => {
                 cols={10}
                 placeholder="You wish to tell us about why you create this trade..."
                 rows={5}
-                className="border placeholder:text-[#989898] text-[16px] mt-[8px] border-[#DCDCDC] rounded-md resize-none w-[433px] p-[8px_16px_8px_16px] outline-none"
+                className="border placeholder:text-[#989898] text-[16px] mt-[8px] border-[#DCDCDC] rounded-md resize-none w-full md:w-[433px] p-[8px_16px_8px_16px] outline-none"
               ></textarea>
             </div>
             <button
               onClick={HandleTradeDetails}
               disabled={isCreatingTrade}
-              className="p-[12px]  rounded-[8px] text-white-100 bg-[#7F56D9]  w-[433px] h-[44px]["
+              className="p-[12px]  rounded-[8px] text-white-100 bg-[#7F56D9]  w-full md:w-[433px] h-[44px]"
             >
               Create Ad
             </button>

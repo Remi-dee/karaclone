@@ -26,7 +26,7 @@ function FAQ({ clickHandler }: { clickHandler: any }) {
   };
   const dispatch = useDispatch();
   return (
-    <div className=" w-full h-[810px]   p-[1.5rem]  py-[1em] flex  flex-col rounded-[12px]   ">
+    <div className=" w-full h-[810px]   p-[1.5rem]  py-[1em]   flex  flex-col rounded-[12px]   ">
       <section className=" flex   py-[1rem]    flex-col    w-full relative ">
         <section className=" flex  justify-between ">
           <Image
@@ -68,7 +68,7 @@ function FAQ({ clickHandler }: { clickHandler: any }) {
           incentivizes sellers to maintain high standards of service.
         </p>
       </section>
-      <section className=" mt-[0.5rem]">
+      <section className="  my-[1rem] md:my-[0.6rem]  ">
         <Image src={faqimage} alt="" />
       </section>
 

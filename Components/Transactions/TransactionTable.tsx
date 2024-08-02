@@ -49,7 +49,6 @@ const TransactionTable = () => {
                   {item.transaction_type == "Trade" ? (
                     <>
                       <td className="p-4 ">
-                        {" "}
                         {item.amount_exchanged
                           ? item.amount_exchanged
                           : item.amount_sold}

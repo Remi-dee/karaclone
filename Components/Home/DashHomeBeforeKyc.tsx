@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import arrowRight from "@/public/svg/arrow-right.svg";
 import TransactionTable from "../Transactions/TransactionTable";
+import QuickActionCard from "./QuickActionCard";
 
 function DashHomeBeforeKyc() {
   const router = useRouter();
@@ -149,28 +150,8 @@ function DashHomeBeforeKyc() {
 
         {/* Quick actions cards */}
         {/* Quick actions cards*/}
-        <div className="md:w-full lg:w-[480px] bg-white-100 rounded-2xl border border-slate-200  p-[24px] h-[421px]">
-          <p className="font-bold text-lg  ">Quick Actions</p>
 
-          <div className="grid grid-rows-2 grid-flow-col mt-[20px] gap-4 cursor-pointer">
-            {quickActions.map((eachdata, index) => (
-              <div
-                onClick={() => router.push(eachdata.href)}
-                key={index}
-                className=" border max-h-[156px] border-slate-200 px-2 rounded py-3"
-              >
-                <img src={`${eachdata.icon}`} alt="" />
-
-                <p className=" tracking-[-2%] text-[15px] mt-[15px]  font-semibold">
-                  {eachdata.title}
-                </p>
-                <p className="text-[#7C7C7C] mt-[8px] text-[11px] leading-[20px]">
-                  {eachdata.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
+        <QuickActionCard />
       </div>
 
       {/* Table Content */}

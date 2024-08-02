@@ -148,7 +148,7 @@ function WalletHome() {
           ))}
         </div>
         {/* md:flex-row flex flex-col mx-auto   gap-6 pt-4 */}
-        <div className="md:flex-row flex flex-col   md:w-full mx-auto   gap-6 pt-4">
+        <div className="md:flex-row flex flex-col   md:w-full   gap-6 pt-4">
           <div
             className={`w-full md:w-[356px] action flex justify-center content-center place-items-center place-content-center gap-1 items-center cursor-pointer  h-[42px] p-[16px] border rounded-md ${
               selectedCurrency
@@ -158,7 +158,7 @@ function WalletHome() {
             onClick={handleFundWallet}
           >
             <IoIosAddCircle />
-            <p className="text-[#1E1E1E]  w-fit text-[12px] leading-[24px] cursor-pointer ">
+            <p className="text-[#1E1E1E]   text-[12px] leading-[24px] cursor-pointer ">
               Fund Wallet
             </p>
           </div>

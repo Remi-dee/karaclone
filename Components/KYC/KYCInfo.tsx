@@ -81,10 +81,10 @@ const KYCInfo: FC<Props> = ({
   };
 
   return (
-    <div className="w-full flex   flex-col  mx-auto mt-[12rem] h-[1080px]   ">
+    <div className="w-full flex  md:w-[95%] lg:w-[90%]   flex-col mx-0  md:mx-auto mt-[12rem] mb-[2em] h-max  md:h-[1080px]    ">
       <div
         onClick={handleBack}
-        className=" flex justify-start items-center gap-1 cursor-pointer"
+        className=" flex justify-start items-center w-full gap-1 cursor-pointer"
       >
         <IoIosArrowRoundBack className="bg-primaryBtn text-white-100 rounded-sm" />
         <p className="text-primaryBtn font-semibold">Go-Back</p>
@@ -98,8 +98,8 @@ const KYCInfo: FC<Props> = ({
           Fill in the details below to complete your KYC
         </p>
       </div>
-      <div className="w-[80%] h-[1104px] flex p-[32px_40px_32px_40px]  mt-[24px] mx-auto  rounded-[8px]  bg-[white]">
-        <form className="" onSubmit={handleSubmit}>
+      <div className="w-[100%]  h-max md:h-[1104px] flex  px-[1rem] py-[2rem]  md:p-[32px_40px_32px_40px]  mt-[24px] mx-auto  rounded-[8px]  bg-[white]">
+        <form className=" w-full" onSubmit={handleSubmit}>
           <div className=" flex flex-col gap-[8px]   ">
             <h3 className="font-semibold text-[18px] leading-[28px]   ">
               Verify ID
@@ -322,7 +322,7 @@ const KYCInfo: FC<Props> = ({
               </div>
             </div>
           </div>
-          <div className="w-full flex items-center justify-end">
+          <div className="w-full flex items-center  justify-end">
             <input
               onClick={handleSubmit}
               type="submit"

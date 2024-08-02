@@ -24,11 +24,12 @@ function Home() {
   const { reversalInitiated } = user;
 
   return (
-    <div className="w-full  h-full  ">
+    <div className="w-full  h-full   ">
       {/* This page directs the Homepage for the dashboard */}
 
       {kycBegin ? (
-        <CreateKYC />      ) : reversalInitiated ? (
+        <CreateKYC />
+      ) : reversalInitiated ? (
         <Reversal />
       ) : auth?.is_completed_kyc ? (
         <DashHomeBeforeKyc />

@@ -259,7 +259,7 @@ const Dashboard = ({ params }: { params: { sidebarlink: string } }) => {
         onClick={handleChatIcon}
         src={chatIcon}
         alt=""
-        className=" absolute cursor-pointer  right-[1rem] bottom-[0.5rem] z-[900]  h-[50px] w-[50px]"
+        className=" fixed cursor-pointer  right-[1rem]  bottom-[1rem] md:bottom-[0.5rem] z-[900]  h-[50px] w-[50px]"
       />
 
       <div className="  overflow-auto  h-screen w-full">

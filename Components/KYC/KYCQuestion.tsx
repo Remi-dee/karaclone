@@ -68,7 +68,7 @@ const KYCQuestion: FC<Props> = ({
   };
 
   return (
-    <div className="w-[85%]  mx-auto ">
+    <div className=" w-full mx-0 md:w-[85%]  md:mx-auto ">
       <div
         onClick={handleBack}
         className="my-4 mx-6 flex justify-start items-center gap-1 cursor-pointer"
@@ -84,8 +84,8 @@ const KYCQuestion: FC<Props> = ({
           Answer all questions below to complete your kyc
         </p>
       </div>
-      <div className="w-[80%] h-[478px] p-[32px_40px_32px_40px]  mx-auto mt-[24px]  rounded-[8px] bg-[white] shadow-lg">
-        <form className="px-5 py-5" onSubmit={handleSubmit}>
+      <div className=" w-full md:w-[80%]  h-max md:h-[478px] px-[1rem] py-[2rem] md:p-[32px_40px_32px_40px]  mx-auto mt-[24px]  rounded-[8px] bg-[white] shadow-lg">
+        <form className=" md:px-5 py-5" onSubmit={handleSubmit}>
           <div className="">
             <p className="text-black text-xl font-bold">
               Are you a politically exposed person?
@@ -176,12 +176,17 @@ const KYCQuestion: FC<Props> = ({
             </div>
           </div>
 
-          <div className=" flex gap-[8px] mt-[40px]  content-center items-center  ">
-            <PurpleCheckBox />
-            <p className=" text-[#000000] leading-[30px] font-bold  tracking-[-2%]  ">
-              I confirm that all the information I provided above are correct
-              and accurate
-            </p>
+          <div className=" flex gap-[8px] mt-[40px] object-center  h-full  content-center items-center  ">
+            <div>
+              <PurpleCheckBox />
+            </div>
+
+            <div>
+              <p className=" text-[#000000] leading-[30px] text-sm font-bold  tracking-[-2%]  ">
+                I confirm that all the information I provided above are correct
+                and accurate
+              </p>
+            </div>
           </div>
 
           <div className="w-full flex items-center justify-end">
