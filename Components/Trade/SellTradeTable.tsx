@@ -61,10 +61,10 @@ const SellTradeTable = () => {
     setTradeId(id);
   };
   return (
-    <div className="p-0 m-0 box-border max-h-[610px]  overflow-auto  overflow-y-scroll  h-full w-full ">
+    <div className="p-0 m-0 box-border max-h-[610px]  overflow-auto invisible-scrollbar  overflow-y-scroll  h-full w-full ">
       {listOfTrades && listOfTrades.length > 0 ? (
         <>
-          <table className="w-[100%] overflow-hidden overflow-y-scroll border-collapse">
+          <table className="w-[100%] overflow-hidden overflow-y-scroll  border-collapse">
             <thead>
               <tr key="1" className="bg-gray-900 text-sm">
                 <th className="p-4 text-left">Trade ID</th>

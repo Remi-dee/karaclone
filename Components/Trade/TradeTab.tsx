@@ -106,7 +106,7 @@ const TradeTab: React.FC<tradeProp> = ({ onSelectBuy, onSelectSell }) => {
         </button>
       </div>
       <div className=" lg:flex lg:flex-row flex-col lg:space-x-2 space-y-4 lg:space-y-0">
-        <div className="lg:w-[360px] w-[287px] h-[48px] border flex  items-center rounded-[12px] p-[8px_16px_8px_16px]">
+        <div className="md:w-[360px] w-full h-[48px] border flex  items-center rounded-[12px] p-[8px_16px_8px_16px]">
           <div className="">
             <input
               className="lg:w-[215px] w-[143px] h-[30px] border-r   border-r-[#BDBDBD]  placeholder:text-sm placeholder:text-[#989898] outline-none"
@@ -116,7 +116,7 @@ const TradeTab: React.FC<tradeProp> = ({ onSelectBuy, onSelectSell }) => {
               value={amount}
             />
           </div>
-          <div className=" lg:w-[115px] w-[113px] flex justify-center items-center ml-[5px] bg-[#F7F7F7] rounded-[16px] ">
+          <div className=" md:w-[115px]  w-[99px] flex justify-center items-center ml-[5px] bg-[#F7F7F7] rounded-[16px] ">
             <CreateTradeDropDown
               onSelect={handleCurrency}
               options={converstionDataExit}

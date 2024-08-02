@@ -8,7 +8,11 @@ import SettingsSvg from "../svgIcon/SettingsSvg";
 import LogoutSvg from "../svgIcon/LogoutSvg";
 import questionmark from "@/public/questionmark.svg";
 import Image from "next/image";
-
+import { openCheckRateModal } from "@/redux/modal/modalSlice";
+import ArrowsRightLeftIcon from "@heroicons/react/20/solid/ArrowsRightLeftIcon";
+import { useDispatch } from "react-redux";
+import { TiCancel } from "react-icons/ti";
+import { GiCancel } from "react-icons/gi";
 type Props = {
   link: string;
   showSideBar: boolean;
@@ -37,22 +41,31 @@ const MobileSideBar = ({ link, showSideBar, toggleSidebar }: Props) => {
 
   const isLinkActive = (label: string) =>
     label.toLowerCase() === link?.toLowerCase();
-
+  const dispatch = useDispatch();
   return (
     <div
-      className={`fixed w-full h-full md:hidden inset-0 z-50 transform ${
+      className={`fixed top-0  bottom-0 w-full min-h-full h-full md:hidden inset-0 z-50 transform ${
         showSideBar ? "translate-x-0" : "-translate-x-full"
       } transition-transform duration-300 _bg-[#d4d4d4]`}
     >
-      <div className="border-r border-slate-200 w-[85%] h-full flex flex-col px-[1rem] bg-white-100 py-5">
-        <div className="w-[232px] p-[0.4rem]">
-          <Image
-            src="/fxkara-logo.svg"
-            className="ml-[20px] w-[120px] h-[34px]"
-            height={34}
-            width={120}
-            alt=""
-          />
+      <div className="border-r border-slate-200 w-[86%] h-full flex flex-col px-[1rem] bg-white-100 py-5">
+        <div className=" w-full flex  items-center    justify-between ">
+          <div className="w-[232px] p-[0.4rem]">
+            <Image
+              src="/fxkara-logo.svg"
+              className="ml-[10px] w-[120px] h-[34px]"
+              height={34}
+              width={120}
+              alt=""
+            />
+          </div>
+
+          <div>
+            <GiCancel
+              onClick={() => toggleSidebar()}
+              className=" text-[19px]"
+            />
+          </div>
         </div>
         <nav className="flex flex-col gap-[12px] w-full mt-[24px]">
           {sidebarLinks.map((eachdata, index) => (
@@ -139,8 +152,18 @@ const MobileSideBar = ({ link, showSideBar, toggleSidebar }: Props) => {
               </div>
             </button>
           ))}
+
+          <div
+            onClick={() => dispatch(openCheckRateModal())}
+            className=" cursor-pointer items-center font-bold pl-[1.2rem] mt-[1.3rem]  md:hidden flex"
+          >
+            <ArrowsRightLeftIcon className="text-purple-700 text-sm h-5 w-5" />
+            <p className="text-purple-700 ml-[4px] text-[16px] flex">
+              Check out our rates{" "}
+            </p>
+          </div>
         </nav>
-        <div className="absolute bottom-0 flex justify-center items-center w-[265px] h-[231px]">
+        <div className="r3e bottom-0 flex justify-center items-center w-[265px] h-[231px]">
           <div className="docBoxImage w-[218px] h-[170px] mt-[31px]">
             <div className="text-white-300 p-[1rem] flex flex-col gap-y-[10px]">
               <div className="mt-[4px] w-[35px] h-[34px]">

@@ -62,7 +62,7 @@ function ChatPage({ clickHandler }: { clickHandler: any }) {
           </div>
         </section>
 
-        <section className=" p-[1rem] flex justify-between">
+        <section className=" px-[0.8rem] md:p-[1rem] flex justify-between">
           <button
             onClick={() => handleChange("ticketStatus")}
             className=" z-40 w-[160px] h-[38px] bg-[#7F56D9] text-[white] rounded-[8px]  outline-none  "
