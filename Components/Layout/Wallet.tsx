@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-
-import { useRouter } from "next/navigation";
 import FundAmount from "../FundWallet/FundAmount";
 import FundMethod from "../FundWallet/FundMethod";
 import FundSuccess from "../FundWallet/FundSuccess";
@@ -9,7 +7,6 @@ import { useSelector } from "react-redux";
 
 export default function Wallet() {
   const globalState = useSelector((state: any) => state?.user);
-  // console.log(globalState);
   return (
     <div className="  w-full  h-full">
       {globalState?.walletDisplay === "" ? (

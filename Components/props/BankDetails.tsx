@@ -1,29 +1,32 @@
-import React from "react";
+import React, { useMemo } from "react";
 
 function BankDetails({ changeStep }: { changeStep: () => void }) {
-  const nigerianBanks: string[] = [
-    "Access Bank",
-    "Zenith Bank",
-    "Guaranty Trust Bank (GTBank)",
-    "United Bank for Africa (UBA)",
-    "First Bank of Nigeria",
-    "Ecobank Nigeria",
-    "Fidelity Bank Nigeria",
-    "Union Bank of Nigeria",
-    "Sterling Bank",
-    "Stanbic IBTC Bank",
-    "First City Monument Bank (FCMB)",
-    "Wema Bank",
-    "Unity Bank",
-    "Heritage Bank",
-    "Keystone Bank",
-    "Polaris Bank",
-    "Citibank Nigeria",
-    "Standard Chartered Bank Nigeria",
-    "Providus Bank",
-    "SunTrust Bank Nigeria",
-    "Titan Trust Bank",
-  ];
+  const nigerianBanks: string[] = useMemo(
+    () => [
+      "Access Bank",
+      "Zenith Bank",
+      "Guaranty Trust Bank (GTBank)",
+      "United Bank for Africa (UBA)",
+      "First Bank of Nigeria",
+      "Ecobank Nigeria",
+      "Fidelity Bank Nigeria",
+      "Union Bank of Nigeria",
+      "Sterling Bank",
+      "Stanbic IBTC Bank",
+      "First City Monument Bank (FCMB)",
+      "Wema Bank",
+      "Unity Bank",
+      "Heritage Bank",
+      "Keystone Bank",
+      "Polaris Bank",
+      "Citibank Nigeria",
+      "Standard Chartered Bank Nigeria",
+      "Providus Bank",
+      "SunTrust Bank Nigeria",
+      "Titan Trust Bank",
+    ],
+    []
+  );
 
   const handleClickEvent = () => {
     changeStep();

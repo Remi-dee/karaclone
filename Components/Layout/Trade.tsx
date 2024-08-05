@@ -4,9 +4,7 @@ import { IoIosAddCircle } from "react-icons/io";
 import TradeTab from "../UI/Trade/TradeTab";
 import TradeTable from "../UI/Trade/SellTradeTable";
 import BuyTradeTable from "../UI/Trade/BuyTradeTable";
-
 import CreateTrade from "../features/CreateTradeComp";
-
 import { useDispatch, useSelector } from "react-redux";
 import CreateTradeDetails from "../UI/Trade/CreateTradeDetails";
 import {
@@ -14,7 +12,6 @@ import {
   toggleCreateTrade,
   toggleCreateTradeStage,
 } from "@/redux/features/user/userSlice";
-
 import BuyTradePage from "../UI/Trade/BuyTradePage";
 import CreateTradeSuccess from "../UI/Trade/CreateTradeSuccess";
 
@@ -90,8 +87,6 @@ function DisplayAltCreateTrade() {
       ) : createTradeState === 4 ? (
         <CreateTradeSuccess />
       ) : null}
-
-      {/* <CustomModal>{showSelectBank ? <></> : null}</CustomModal> */}
     </div>
   );
 }
