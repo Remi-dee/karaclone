@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import { BsEnvelope } from "react-icons/bs";
 import { MdOutlineNavigateBefore, MdOutlineNavigateNext } from "react-icons/md";
 import Image from "next/image";
+import getTokenFromLocalStorage from "@/hooks/FetchUserToken";
 type VerifyNumber = {
   "0": string;
   "1": string;
@@ -17,7 +18,8 @@ type VerifyNumber = {
 };
 
 export default function Home() {
-  const storedUser = localStorage.getItem("user");
+  const storedUser = getTokenFromLocalStorage("user");
+
   const userObject = storedUser ? JSON.parse(storedUser) : null;
   const router = useRouter();
   const [invalidError, setInvalidError] = useState<boolean>(false);
@@ -143,14 +145,14 @@ export default function Home() {
   //   }
   // };
   return (
-    <main className="flex w-full min-h-screen">
+    <main className="flex px-[1rem] w-full min-h-screen">
       <div className="w-full   flex flex-col pb-4 justify-between  bg-[#FBFBFB]">
         <div className="flex flex-col items-center">
           <div className="mt-16 ">
             <div>
               <Image src="/fxkara-logo.svg" height={40} width={150} alt="" />
             </div>
-            <div className="h-[397px]  mt-[24px] w-[471px]  flex flex-col justify-center">
+            <div className="  h-full lg:h-[397px]  mt-[24px] md:w-[471px] w-[95%] flex flex-col justify-center">
               <div className=" flex  mt-[24px]">
                 <div className="p-4 flex items-center  justify-center border-2 w-[56px] h-[56px] shadow-sm rounded-[12px]  border-[#EAECF0]  ">
                   <BsEnvelope
@@ -169,13 +171,13 @@ export default function Home() {
                 To log in, kindly enter the code we sent to your email
               </p>
               <div className="mt-[24px] ">
-                <div className="flex justify-start items-center my-4 gap-4">
+                <div className="flex justify-center lg:justify-start w-full  items-center my-4 gap-4">
                   {Object.keys(verifyNumber).map((key, index) => (
                     <input
                       type="number"
                       key={key}
                       ref={inputRefs[index]}
-                      className={`w-[64px] min-h-[64px] min-w-[64px] h-[64px] bg-transparent border-[2px]  flex items-center text-black dark:text-white rounded-[8px] leading-[60px] tracking-[-2%] justify-center text-[48px] placeholder:text-[#BDBDBD] font-Poppins outline-none text-center ${
+                      className={`md:w-[64px] w-[40px] h-[40px] md:min-h-[64px] md:min-w-[64px] md:h-[64px] bg-transparent border-[2px]  flex items-center text-black dark:text-white rounded-[8px] leading-[60px] tracking-[-2%] justify-center text-[24px] md:text-[48px] placeholder:text-[#BDBDBD] font-Poppins outline-none text-center ${
                         invalidError
                           ? "shake border-red-500"
                           : "dark:border-white border-[#3D3D3D]"

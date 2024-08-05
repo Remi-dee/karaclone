@@ -18,7 +18,7 @@ import {
   setPaymentDetails,
 } from "@/redux/features/truelayer/truelayerSlice";
 import { useMonoWidget } from "@/app/mono/monoServices";
-import { handleCreateTruelayerPayment } from "../Trade/util/truelayerService";
+import { handleCreateTruelayerPayment } from "../UI/Trade/util/truelayerService";
 import {
   useFundWalletMutation,
   useLoadUserQuery,
@@ -137,7 +137,7 @@ const FundMethod: FC<any> = ({ active, setActive }) => {
           </div>
 
           <div className="flex flex-col items-center justify-start gap-[24px] text-center text-2xl text-neutral-black">
-            <div className="w-[470px] flex flex-col items-center justify-start gap-[16px]">
+            <div className="  w-full  md:w-[470px] flex flex-col items-center justify-start gap-[16px]">
               <h2 className="m-0 relative text-inherit tracking-[-0.55px] font-bold font-inherit inline-block">
                 Select Payment Method
               </h2>
@@ -145,7 +145,7 @@ const FundMethod: FC<any> = ({ active, setActive }) => {
                 Select how you want to fund your account
               </div>
             </div>
-            <div className="w-[550px] rounded-lg bg-white-100 shadow-lg overflow-hidden flex flex-col items-center justify-start py-8 px-10 box-border max-w-full text-left text-sm text-neutral-color-500 ">
+            <div className=" w-full md:w-[550px] rounded-lg bg-white-100 shadow-lg overflow-hidden flex flex-col items-center justify-start py-8 px-10 box-border max-w-full text-left text-sm text-neutral-color-500 ">
               <div
                 onClick={() => handleOptionChange("Direct Debit")}
                 className={`w-full h-[48px] cursor cursor-pointer flex justify-start items-center mt-6 mb-4 gap-2 p-2 border rounded-md ${

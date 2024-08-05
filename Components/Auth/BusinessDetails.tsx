@@ -37,8 +37,8 @@ const BusinessDetails: FC<any> = () => {
   };
 
   return (
-    <div className="w-[550px] h-[760px] mx-auto mt-4 rounded-[12px] shadow-lg bg-[#FFFFFF]">
-      <div className="w-[470px] pt-6 mx-auto">
+    <div className=" w-full md:w-[550px] h-[760px] mx-auto mt-4 rounded-[12px] md:p-0 p-[1rem] shadow-lg bg-[#FFFFFF]">
+      <div className=" w-full md:w-[470px] pt-6 mx-auto">
         <div className="w-[56px] h-[56px] flex justify-center items-center shadow-md border border-gray-200  rounded-[12px] ">
           <Image src={businessLogo} alt="" className="w-[28px] mt-1 h-[28px]" />
         </div>

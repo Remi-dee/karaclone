@@ -362,8 +362,11 @@ const Trade = () => {
           </div>
 
           <div className=" mx-auto  grid grid-cols-3 gap-5 items-center mt-6">
-            {p2pUses2.map((feature) => (
-              <div className="flex flex-col  flex-1  gap-5 p-5 pb-10 bg-[#0C101B] rounded-3xl">
+            {p2pUses2.map((feature, i) => (
+              <div
+                key={i}
+                className="flex flex-col  flex-1  gap-5 p-5 pb-10 bg-[#0C101B] rounded-3xl"
+              >
                 <div className=" rounded-full ">
                   <img src={feature.icon} alt="" className="w-10 h-10" />
                 </div>
@@ -398,9 +401,15 @@ const Trade = () => {
               <h3 className="text-[#fff] font-semibold pb-2 ">
                 {feature.heading}
               </h3>
-              <img src={feature.image} alt="Getting started" className="object-cover"/>
+              <img
+                src={feature.image}
+                alt="Getting started"
+                className="object-cover"
+              />
               <p className="text-[#fff]/60 font-medium text-center text-sm">
-                {feature.description} Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illo, ab veniam dicta fugit magni hic ipsa ducimus.
+                {feature.description} Lorem ipsum, dolor sit amet consectetur
+                adipisicing elit. Illo, ab veniam dicta fugit magni hic ipsa
+                ducimus.
               </p>
             </div>
           ))}

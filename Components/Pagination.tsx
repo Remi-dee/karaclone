@@ -85,28 +85,37 @@ const Pagination: React.FC<PaginationProps> = ({
   };
 
   return (
-    <div className="w-full mt-[30px]">
-      <div className="flex justify-between items-center">
-        <div
-          onClick={handlePreviousClick}
-          className={`flex justify-center items-center gap-2 p-[8px] rounded-md border border-primaryBtn text-primaryBtn hover:bg-primaryBtn hover:text-white-100 cursor-pointer ${
-            currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""
-          }`}
-        >
-          <IoIosArrowRoundBack />
-          <p className="text-xs font-semibold">Previous</p>
-        </div>
-        <div className="flex justify-start items-center gap-3">
-          {renderPageNumbers()}
-        </div>
-        <div
-          onClick={handleNextClick}
-          className={`flex justify-center items-center gap-2 p-[8px] rounded-md border border-primaryBtn text-primaryBtn hover:bg-primaryBtn hover:text-white-100 cursor-pointer ${
-            currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""
-          }`}
-        >
-          <p className="text-xs font-semibold">Next</p>
-          <IoIosArrowRoundForward />
+    <div className="w-full   mt-8 relative bottom-0 ">
+      <div className="flex w-full  items-center gap-4">
+        <div className="  grid grid-cols-[11%_71%_11%] w-[99%] items-center gap-2 overflow-hidden">
+          {/*  */}
+          <div
+            onClick={handlePreviousClick}
+            className={`flex justify-center items-center gap-2 p-2 rounded-md border border-primaryBtn text-primaryBtn hover:bg-primaryBtn hover:text-white-100 cursor-pointer ${
+              currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""
+            }`}
+          >
+            <IoIosArrowRoundBack />
+            <p className="text-[9px] hidden md:flex md:text-xs font-semibold">
+              Previous
+            </p>
+          </div>
+
+          {/*  */}
+          <div className="flex justify-center items-center gap-3 overflow-x-auto whitespace-nowrap">
+            {renderPageNumbers()}
+          </div>
+
+          {/*  */}
+          <div
+            onClick={handleNextClick}
+            className={`flex justify-center items-center gap-2 p-2 rounded-md border border-primaryBtn text-primaryBtn hover:bg-primaryBtn hover:text-white-100 cursor-pointer ${
+              currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""
+            }`}
+          >
+            <p className="text-xs hidden md:flex font-semibold">Next</p>
+            <IoIosArrowRoundForward />
+          </div>
         </div>
       </div>
     </div>

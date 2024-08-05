@@ -27,7 +27,7 @@ const ProfileModal: React.FC<CustomModalprops> = ({ children }) => {
           className="fixed  top-0 left-0 right-0 w-screen h-screen flex justify-center items-center inset-0 z-[50000]  overflow-auto bg-[#989898] bg-opacity-10"
         >
           <div className=" " onClick={stopPropagationHandler}>
-            <div className="absolute bg-[white]  overflow-y-auto    shadow-lg right-[1.7rem]   top-[6rem]  w-[375px]  max-w-[284px] max-h-[284px]  min-h-[284px] flex">
+            <div className="absolute bg-[white]  overflow-y-auto    shadow-lg md:right-[1.7rem] right-[0.7rem]  top-[5rem]  md:top-[6rem]  w-[375px]  max-w-[284px] max-h-[284px]  min-h-[284px] flex">
               {children}
               <div
                 onClick={closeModalHandler}

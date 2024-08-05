@@ -66,11 +66,15 @@ const NewPassword: FC<any> = () => {
   const [showPassword, setShowPassword] = useState("password");
 
   return (
-    <div className="w-[500px] bg-[#FFFFFF]  h-[693px]  shadow-lg rounded-md border border-white-100">
-      <div className="w-[400px] pt-6 flex flex-col gap-y-[24px]  mx-auto">
+    <div className="  w-full px-[1rem] py-[1rem]  md:px-0  md:w-[500px] bg-[#FFFFFF]  h-max shadow-lg rounded-md border border-white-100">
+      <div className="  w-full  h-full  md:w-[400px] pt-6 flex flex-col gap-y-[24px] mx-0 md:mx-auto">
         <div>
-          <div className="w-[56px] h-[56px] flex justify-center items-center shadow-md border border-gray-200  rounded-md ">
-            <Image src={passwordLogo} alt="" className="w-[28pxx]  h-[28px]" />
+          <div className="md:w-[56px] w-[32px] h-[32px] md:h-[56px] flex justify-center items-center shadow-md border border-gray-200  rounded-md ">
+            <Image
+              src={passwordLogo}
+              alt=""
+              className="md:w-[28px] w-[19px] h-[19px]  md:h-[28px]"
+            />
           </div>
           <div className=" leading-[19.2px] mt-[24px] font-[400]">
             <h3 className="py-2 font-semibold text-2xl">Create Password</h3>
@@ -80,12 +84,12 @@ const NewPassword: FC<any> = () => {
         <div>
           <form
             // onSubmit={handleSubmit}
-            className=" flex flex-col gap-y-[32px] "
+            className=" flex flex-col w-full gap-y-[32px] "
           >
-            <div className="flex flex-col mt-2 ">
+            <div className="flex w-full flex-col mt-2 ">
               <label
                 htmlFor=""
-                className="font-semibold text-[16px] tracking-[-2%]"
+                className="font-semibold text-[16px] text-start tracking-[-2%]"
               >
                 New Password
               </label>
@@ -214,7 +218,7 @@ const NewPassword: FC<any> = () => {
             <div className="flex flex-col mt-2 gap-1">
               <label
                 htmlFor=""
-                className="font-semibold text-[16px] tracking-[-2%]"
+                className="font-semibold text-[16px] text-start tracking-[-2%]"
               >
                 Confirm Password
               </label>

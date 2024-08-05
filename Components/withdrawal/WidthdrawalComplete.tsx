@@ -14,11 +14,11 @@ const WithdrawalComplete = () => {
     router.push("/dashboard/Wallet");
   };
   return (
-    <div>
-      <div className="flex flex-col items-center justify-start gap-[24px] text-center text-2xl text-neutral-black">
-        <div className="w-[550px] p-[32px_40px_32px_40px] mt-32 h-[326px] gap-[25px] mx-auto rounded-lg bg-white-100 shadow-lg overflow-hidden flex flex-col justify-center items-center py-8 px-10 box-border max-w-full text-left text-sm text-neutral-color-500 ">
-          <div className="w-[56px] h-[56px] shadow-sm flex justify-center items-center border border[#EAECF0] rounded-[12px] ">
-            <div className="w-[20]  rounded-sm text-white-100">
+    <div className=" w-full">
+      <div className="flex  flex-col w-full items-center justify-start gap-[24px] text-center text-2xl text-neutral-black">
+        <div className=" w-full md:w-[550px] p-[1em]  md:p-[32px_40px_32px_40px] mt-1 md:mt-[4rem] h-[326px] gap-[25px] rounded-lg bg-white-100 shadow-lg overflow-hidden flex flex-col justify-center items-center  box-border max-w-full text-left text-sm text-neutral-color-500 ">
+          <div className=" w-[20px] md:w-[56px] h-[56px] shadow-sm flex justify-center items-center border border-[#EAECF0] rounded-[12px] ">
+            <div className="w-[20px]  rounded-sm text-white-100">
               <svg
                 width="28"
                 height="29"
@@ -33,8 +33,8 @@ const WithdrawalComplete = () => {
               </svg>
             </div>
           </div>
-          <div className=" flex  flex-col gap-[12px]">
-            <h3 className=" text-[32px] text-center text-[#3D3D3D] leadng-[38.4px] font-bold py-2">
+          <div className=" w-full flex  flex-col gap-[12px]">
+            <h3 className=" text-[24px] md:text-[32px] text-center text-[#3D3D3D] leading-[38.4px] font-bold py-2">
               Reversal Successful
             </h3>
             <p className="text-[#7C7C7C] leading-[24px] text-[16px] text-center ">
@@ -45,7 +45,7 @@ const WithdrawalComplete = () => {
 
           <button
             onClick={handleDone}
-            className="p-[12px] w-[470px] text-[#fff] bg-primaryBtn  h-[44px] rounded-lg"
+            className="p-[12px] w-full md:w-[470px] text-[#fff] bg-primaryBtn  h-[44px] rounded-lg"
           >
             Done
           </button>

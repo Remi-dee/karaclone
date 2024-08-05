@@ -27,7 +27,7 @@ const ChatModal: React.FC<CustomModalprops> = ({ children }) => {
           className="fixed  top-0 left-0 right-0 w-screen h-screen flex justify-center items-center inset-0 z-[50000]  overflow-auto bg-[#404040] bg-opacity-90"
         >
           <div className=" " onClick={stopPropagationHandler}>
-            <div className="absolute bg-[white]  overflow-y-auto invisible-scrollbar  shadow-lg right-[1rem]   top-[1.5rem]  w-[375px]  max-w-[375px] max-h-[90vh]  min-h-[350px] flex">
+            <div className="absolute bg-[white]  overflow-y-auto invisible-scrollbar  shadow-lg right-0  md:right-[1rem]  top-0 md:top-[1.5rem]  w-full md:w-[375px]  md:max-w-[375px] h-[90%] md:max-h-[90vh]  min-h-full md:min-h-[350px] flex">
               {children}
               <div
                 onClick={closeModalHandler}

@@ -109,12 +109,12 @@ const FundAmount: FC<any> = () => {
                 <div className="flex flex-col items-start justify-start text-base text-neutral-black">
                   <div className="flex flex-col items-start justify-start gap-[40px]">
                     <div className="flex flex-col items-start justify-start gap-[16px]">
-                      <div className="w-[433px] overflow-x-auto flex flex-col items-start justify-start max-w-full">
-                        <div className="w-[433px] flex flex-col items-start justify-start">
+                      <div className="  w-full  md:w-[433px] overflow-x-auto flex flex-col items-start justify-start max-w-full">
+                        <div className=" w-full  md:w-[433px] flex flex-col items-start justify-start">
                           <div className="self-stretch flex flex-col items-start justify-start">
                             <div className="self-stretch flex flex-col items-start justify-start gap-[8px]">
                               <div className="self-stretch flex flex-col items-start justify-start gap-[8px]">
-                                <div className="relative tracking-[-0.02em] text-[16px] leading-[20px] font-semibold inline-block min-w-[112px]">
+                                <div className="relative tracking-[-0.02em] text-[16px] leading-[20px] font-semibold inline-block min-w-full md:min-w-[112px]">
                                   Amount to Fund
                                 </div>
                                 <div className="self-stretch rounded-xl overflow-hidden flex flex-row flex-wrap items-center justify-start py-1 px-[15px] gap-[10px] text-neutral-color-400 border-[1px] border-solid border-neutral-color-200">

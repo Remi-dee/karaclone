@@ -2,7 +2,7 @@
 import { useEnableTwofaQuery } from "@/redux/features/user/userApi";
 import React, { useState } from "react";
 import { FaKey } from "react-icons/fa";
-import QrCode from "../SignUp/QrCode";
+import QrCode from "../UI/SignUp/QrCode";
 
 const TwoFactorAuth = () => {
   const [option, setOption] = useState<string | null>(null);

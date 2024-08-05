@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @font-face {
     font-family: 'gilory';
     src: url('/font/gilroy-regular.ttf');
@@ -14,7 +15,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-     :root {
+    :root {
         --foreground-rgb: 255, 255, 255;
         --background-start-rgb: 0, 0, 0;
         --background-end-rgb: 0, 0, 0;
@@ -98,22 +99,28 @@ body {
 }
 
 @keyframes changeBackgroundColor {
+
     0%,
     100% {
         opacity: 1;
     }
+
     16.67% {
         opacity: 0.9;
     }
+
     33.33% {
         opacity: 0.8;
     }
+
     50% {
         opacity: 0.6;
     }
+
     66.67% {
         opacity: 0.5;
     }
+
     83.33% {
         opacity: 0.4;
     }
@@ -123,18 +130,23 @@ body {
     0% {
         transform: translateX(0);
     }
+
     20% {
         transform: translateX(-2px);
     }
+
     40% {
         transform: translateX(2px);
     }
+
     60% {
         transform: translateX(-2px);
     }
+
     80% {
         transform: translateX(2px);
     }
+
     100% {
         transform: translateX(0);
     }
@@ -326,6 +338,7 @@ input[type="file"] {
     0% {
         transform: scale(1);
     }
+
     50% {
         transform: scale(1.08);
         -webkit-transform: scale(1.08);
@@ -333,6 +346,7 @@ input[type="file"] {
         -ms-transform: scale(1.08);
         -o-transform: scale(1.08);
     }
+
     100% {
         transform: scale(1);
     }

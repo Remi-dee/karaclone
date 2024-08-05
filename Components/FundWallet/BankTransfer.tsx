@@ -57,7 +57,7 @@ const BankTransfer: FC<Props> = ({ active, setActive }) => {
       </div>
 
       <div className="flex flex-col items-center justify-start gap-[24px] text-center text-2xl text-neutral-black">
-        <div className="w-[470px] flex flex-col items-center justify-start gap-[16px]">
+        <div className="  w-full  md:w-[470px] flex flex-col items-center justify-start gap-[16px]">
           <h2 className="m-0 leading-[28.8px] lg:text-[24px] relative text-inherit tracking-[-0.55px] font-bold font-inherit inline-block">
             Bank Transfer
           </h2>
@@ -65,7 +65,7 @@ const BankTransfer: FC<Props> = ({ active, setActive }) => {
             Make your transfer to the account details below
           </div>
         </div>
-        <div className="w-[528px] h-[348px] rounded-lg bg-white-100 shadow-lg overflow-hidden flex flex-col py-8 px-10 box-border max-w-full text-left text-sm text-neutral-color-500 ">
+        <div className=" w-full md:w-[528px] h-[348px] rounded-lg bg-white-100 shadow-lg overflow-hidden flex flex-col py-8 px-10 box-border max-w-full text-left text-sm text-neutral-color-500 ">
           <p className="mb-3 text-[1rem] lg:text-[16px] leading-[24px] ">
             Amount to be transferred: 20,000
           </p>

@@ -1,4 +1,4 @@
-import getTokenFromLocalStorage from "@/utils/FetchUserToken";
+import getTokenFromLocalStorage from "@/hooks/FetchUserToken";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 type Notification = {

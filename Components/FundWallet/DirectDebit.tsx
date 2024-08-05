@@ -73,7 +73,7 @@ const DirectDebit: FC<any> = () => {
           </div>
 
           <div className="flex flex-col mt-[24px] items-center justify-start gap-[24px] text-center text-2xl text-neutral-black">
-            <div className="w-[470px] flex flex-col items-center justify-start gap-[16px]">
+            <div className="  w-full  md:w-[470px] flex flex-col items-center justify-start gap-[16px]">
               <h2 className="m-0 leading-[28.8px] lg:text-[24px] relative text-inherit tracking-[-0.55px] font-bold font-inherit inline-block">
                 Direct Debit
               </h2>
@@ -81,7 +81,7 @@ const DirectDebit: FC<any> = () => {
                 Fill in the details below to make a direct Debit
               </div>
             </div>
-            <div className="w-[528px] h-[348px] rounded-lg bg-white-100 shadow-lg overflow-hidden flex flex-col py-8 px-10 box-border max-w-full text-left text-sm text-neutral-color-500 ">
+            <div className=" w-full md:w-[528px] h-[348px] rounded-lg bg-white-100 shadow-lg overflow-hidden flex flex-col py-8 px-10 box-border max-w-full text-left text-sm text-neutral-color-500 ">
               <div>
                 <label
                   htmlFor=""
@@ -89,7 +89,7 @@ const DirectDebit: FC<any> = () => {
                 >
                   Bank Name
                 </label>
-                <div className="h-[46px] w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
+                <div className="h-[46px] w-full md:w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
                   <select
                     name=""
                     value={selectedBank}
@@ -116,7 +116,7 @@ const DirectDebit: FC<any> = () => {
 
               {/* marke */}
 
-              <div className=" mt-[24px] w-[433px]">
+              <div className=" mt-[24px] w-full md:w-[433px]">
                 <label
                   htmlFor=""
                   className=" text-[16px] mb-[10px]  leading-[24px]  tracking-[-2%]  text-[#000000] font-semibold"
@@ -129,7 +129,7 @@ const DirectDebit: FC<any> = () => {
                   // value={selectedBank}
                   // onChange={handleChange}
                   placeholder="Enter your account number"
-                  className="h-[46px] w-[433px] gap-[10px] mt-[10px] rounded-[12px] text-gray-300 p-[8px_16px_8px_16px]  border-[#DCDCDC] border  text-[16px] focus:border-black focus:ring-0 focus:outline-none "
+                  className="h-[46px] w-full md:w-[433px] gap-[10px] mt-[10px] rounded-[12px] text-gray-300 p-[8px_16px_8px_16px]  border-[#DCDCDC] border  text-[16px] focus:border-black focus:ring-0 focus:outline-none "
                   id=""
                 ></input>
               </div>
@@ -139,7 +139,7 @@ const DirectDebit: FC<any> = () => {
                   onClick={onSubmit}
                   type="submit"
                   className={`
-      w-[433px]     h-[44px]     mt-[24px]    px-[16px]         py-[10px]         gap-[8px]         rounded-[8px]  border-t-[1px]         border-t-[#000]         border-opacity-0            text-[16px]  font-semibold   text-[#98A2B3]      text-cente        leading-[24px]        hover:opacity-100       focus:opacity-100  ${
+      md:w-[433px]  w-full    h-[44px]     mt-[24px]    px-[16px]         py-[10px]         gap-[8px]         rounded-[8px]  border-t-[1px]         border-t-[#000]         border-opacity-0            text-[16px]  font-semibold   text-[#98A2B3]      text-cente        leading-[24px]        hover:opacity-100       focus:opacity-100  ${
         isSubmitReady ? "bg-[#7F56D9] text-[white] " : "bg-[#F2F4F7]"
       }  `}
                 >
