@@ -9,13 +9,13 @@ const DepositDetails = () => {
   if (!item) return null;
 
   return (
-    <div className=" gap-[24px] h-[842px] mt-[32px]  p-[32px_40px_32px_40px] flex-col flex w-[512px] text-xs font-semibold">
+    <div className=" gap-[24px] min-w-full h-[842px] mt-[32px] px-[0.8rem] py-[1.4rem]  md:p-[32px_40px_32px_40px] flex-col flex w-full md:w-[512px] text-xs font-semibold">
       <div>
         <h2 className="py-2 font-bold leading-[28px] text-[#1E1E1E] text-center text-[18px]  ">
           Transaction Details
         </h2>
       </div>
-      <div className="  text-[14px]  leading-[20px]  gap-[32px] flex flex-col">
+      <div className="  text-[14px]  leading-[20px]  w-full  gap-[32px] flex flex-col">
         <div className="flex justify-between items-center ">
           <span>Transaction ID</span>
           <div className="flex justify-center items-center gap-1">
@@ -75,8 +75,9 @@ const DepositDetails = () => {
               <span>Beneficiary</span>
               <p className="text-[#000]">{item.beneficiary_name}</p>
             </div>
-            <div className="flex justify-between items-center ">
-              <span>Beneficiary Account Number</span>
+            <div className="flex justify-between w-full items-center ">
+              <span> Account Number</span>
+              {/* <span>Beneficiary Account Number</span> */}
               <p className="text-[#000]">{item.beneficiary_account}</p>
             </div>
 

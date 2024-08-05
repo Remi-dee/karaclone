@@ -3,10 +3,11 @@ import React, { useState } from "react";
 import KYCInfo from "./KYCInfo";
 import KYCQuestion from "./KYCQuestion";
 import { useSelector } from "react-redux";
-
+import KYBInfo from "./KYBInfo";
+import KYBQuestion from "./KYBQuestion";
 const CreateKYC = () => {
   const [active, setActive] = useState(1);
-  const { kycLevel } = useSelector((state: any) => state?.kyc);
+  const { kycLevel, kybBegin } = useSelector((state: any) => state?.kyc);
   const [kycDetails, setKycDetails] = useState({
     country: "",
     id_document_type: "",
@@ -20,28 +21,48 @@ const CreateKYC = () => {
     is_politician: false,
     is_criminal_convict: false,
   });
+  const [kybQuestion, setkybQuestion] = useState({
+    is_politician: false,
+    is_criminal_convict: false,
+  });
 
   return (
-    <div className="w-full flex justify-center items-center   max-h-[890px] invisible-scrollbar overflow-y-scroll   ">
+    <div className="w-full flex justify-center items-center h-max max-h-[890px] invisible-scrollbar overflow-y-scroll">
       <div className="w-[100%]">
-        {kycLevel === 1 && (
-          <KYCInfo
-            kycDetails={kycDetails}
-            setKycDetails={setKycDetails}
-            active={active}
-            setActive={setActive}
-          />
-        )}
-
-        {kycLevel === 2 && (
-          <KYCQuestion
-            kycQuestion={kycQuestion}
-            setKycQuestion={setKycQuestion}
-            kycDetails={kycDetails}
-            active={active}
-            setActive={setActive}
-          />
-        )}
+        {kycLevel === 1 &&
+          (kybBegin ? (
+            <KYBInfo
+              kycDetails={kycDetails}
+              setKycDetails={setKycDetails}
+              active={active}
+              setActive={setActive}
+            />
+          ) : (
+            <KYCInfo
+              kycDetails={kycDetails}
+              setKycDetails={setKycDetails}
+              active={active}
+              setActive={setActive}
+            />
+          ))}
+        {kycLevel === 2 &&
+          (kybBegin ? (
+            <KYBQuestion
+              kybQuestion={kybQuestion}
+              setKybQuestion={setkybQuestion}
+              kybDetails={kycDetails}
+              active={active}
+              setActive={setActive}
+            />
+          ) : (
+            <KYCQuestion
+              kycQuestion={kycQuestion}
+              setKycQuestion={setKycQuestion}
+              kycDetails={kycDetails}
+              active={active}
+              setActive={setActive}
+            />
+          ))}
       </div>
     </div>
   );

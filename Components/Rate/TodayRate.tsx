@@ -54,7 +54,7 @@ function TodayRate() {
     : currencyPairs;
 
   return (
-    <div className="w-full h-[810px] py-[1em] flex flex-col rounded-[12px]">
+    <div className=" w-[95%] md:w-full h-[810px] py-[1em] flex flex-col rounded-[12px]">
       <section className="flex py-[1rem] h-full flex-col w-full relative">
         <section className="border-b border-[#DCDCDC] px-[24px] flex h-[72px] justify-between w-full">
           <div>
@@ -71,7 +71,7 @@ function TodayRate() {
         </section>
 
         <section className="p-[1rem]">
-          <div className="h-[46px] items-center flex w-[438px] mt-[8px] p-[15px_16px_15px_16px] gap-[10px] rounded-[8px] bg-[#FBFBFB]">
+          <div className="h-[46px] items-center flex w-full md:w-[438px] mt-[8px] p-[15px_16px_15px_16px] gap-[10px] rounded-[8px] bg-[#FBFBFB]">
             <CreateTradeDropDown
               onSelect={handleCurrency}
               className="w-full flex justify-between"
@@ -85,7 +85,7 @@ function TodayRate() {
             {filteredCurrencyPairs.map((pair, i) => (
               <div
                 key={i}
-                className="flex justify-between p-[16px_24px_16px_24px] border border-[#EFEFEF] rounded-[8px] w-[438px] h-[87px]"
+                className="flex justify-between p-[16px_24px_16px_24px] border border-[#EFEFEF] rounded-[8px] w-full md:w-[438px] h-[87px]"
               >
                 <div className="flex flex-col gap-[8px]">
                   <div className="text-[#656565] text-[14px] leading-[20px] flex gap-[8px] items-center content-center">

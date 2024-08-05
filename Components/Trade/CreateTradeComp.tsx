@@ -253,11 +253,14 @@ const CreateTrade = () => {
     <div className="m-0 p-0 box-border  h-[870px] invisible-scrollbar overflow-auto ">
       <div
         onClick={handleBack}
-        className="my-4 mx-0 md:mx-6 flex justify-start items-center  w-full md:w-[513px] gap-1 cursor-pointer"
+        className=" flex  items-center text-[16px] leading-[24px] tracking-[-2%] mt-[1rem] md:mt-[2rem] w-full gap-1 cursor-pointer"
       >
         <IoIosArrowRoundBack className="bg-primaryBtn text-white-100 rounded-sm" />
-        <p className="text-primaryBtn font-semibold">Go-Back</p>
+        <p className="text-primaryBtn font-semibold ml-[4px] mt-[3px] md:mt-0  ">
+          Go-Back
+        </p>
       </div>
+
       <div className="flex flex-col justify-center  gap-[16px]  items-center">
         <div className="flex flex-col justify-center  gap-[16px] my-[1.2em] text-center">
           <h2 className=" text-[24px] leading-[28.8px] font-bold  tracking-[-2%]  text-[#1E1E1E] ">
@@ -563,7 +566,7 @@ const CreateTrade = () => {
           </Modal>
         ) : (
           <div></div>
-        )}{" "}
+        )}
       </div>
 
       {selectRecipient ? (

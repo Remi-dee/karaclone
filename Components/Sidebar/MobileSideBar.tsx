@@ -44,7 +44,7 @@ const MobileSideBar = ({ link, showSideBar, toggleSidebar }: Props) => {
   const dispatch = useDispatch();
   return (
     <div
-      className={`fixed top-0  bottom-0 w-full min-h-full h-full md:hidden inset-0 z-50 transform ${
+      className={`fixed top-0  bottom-0  bg-[rgb(198,198,198,0.3)] w-full min-h-full h-full md:hidden inset-1 z-[10000] transform ${
         showSideBar ? "translate-x-0" : "-translate-x-full"
       } transition-transform duration-300 _bg-[#d4d4d4]`}
     >
@@ -163,22 +163,22 @@ const MobileSideBar = ({ link, showSideBar, toggleSidebar }: Props) => {
             </p>
           </div>
         </nav>
-        <div className="r3e bottom-0 flex justify-center items-center w-[265px] h-[231px]">
+        <div className="realative bottom-0 flex justify-center items-center w-[265px] h-[251px]">
           <div className="docBoxImage w-[218px] h-[170px] mt-[31px]">
-            <div className="text-white-300 p-[1rem] flex flex-col gap-y-[10px]">
+            <div className="text-white-300 p-[1rem] flex flex-col gap-y-[15px]">
               <div className="mt-[4px] w-[35px] h-[34px]">
                 <Image
                   src={questionmark}
                   alt=""
-                  className="w-[24px] h-[24px]"
+                  className="w-[20px] h-[20px]"
                 />
               </div>
-              <div className="flex flex-col h-[38px] gap-[2px] w-[111px]">
+              <div className="flex flex-col h-[28px] gap-[2px] w-[141px]">
                 <p className="text-[14px]">Need help?</p>
                 <p className="text-[12px]">Please check our docs</p>
               </div>
               <div className="flex mx-auto w-full">
-                <button className="bg-[#FFFFFF] text-black-200 w-[95%] rounded-[12px] p-[0px_8px_0px_8px] text-[12px] h-[35px] flex justify-center items-center">
+                <button className="bg-[#FFFFFF] text-black-200 w-[95%] rounded-[12px] p-[0px_8px_0px_8px] text-[12px] h-[22px] flex justify-center items-center">
                   DOCUMENTATION
                 </button>
               </div>

@@ -15,7 +15,7 @@ const Page = (props: any) => {
     <div className=" w-full">
       <SettingTab />
 
-      <div className=" mt-[40px]">
+      <div className=" pb-[2rem] md:pb-0  mt-[40px]">
         {settingsOption === "Basic Details" ? (
           <BasicDetails />
         ) : settingsOption === "Security" ? (

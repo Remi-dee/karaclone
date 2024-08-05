@@ -14,10 +14,10 @@ const TradeTransSuccesss = () => {
     // dispatch(toggleCreateTradeStage(1));
   };
   return (
-    <div>
-      <div className="flex w-[550px]  flex-col items-center justify-start gap-[24px] text-center text-2xl text-neutral-black">
-        <div className="w-[550px] p-[32px_40px_32px_40px] mt-[2rem] ml-[4rem] gap-[25px] mx-auto rounded-[16px] bg-white-100 h-[411px] shadow-lg overflow-hidden flex flex-col justify-center items-center py-8 px-10 box-border max-w-full text-left text-sm text-neutral-color-500 ">
-          <div className="w-[56px] h-[56px]  shadow flex justify-center items-center border border[#EAECF0] rounded-[12px] ">
+    <div className=" w-full md:w-auto  flex  justify-center">
+      <div className="flex w-[95%] md:w-[550px]  flex-col items-center justify-start gap-[24px] text-center text-2xl text-neutral-black">
+        <div className=" w-full  md:w-[550px] p-[1rem] md:p-[32px_40px_32px_40px] mt-[2rem] ml-0 md:ml-[4rem] gap-[25px] mx-auto rounded-[16px] bg-white-100 h-[411px] shadow-lg overflow-hidden flex flex-col justify-center items-center py-8 px-10 box-border max-w-full text-left text-sm text-neutral-color-500 ">
+          <div className="md:w-[56px] md:h-[56px] w-[24px] h-[24px]  shadow flex justify-center items-center border border[#EAECF0] rounded-[12px] ">
             <div className="w-[20]  rounded-sm text-white-100">
               <svg
                 width="28"
@@ -42,17 +42,17 @@ const TradeTransSuccesss = () => {
               your wallet for confirmation.
             </p>
           </div>
-          <div>
+          <div className=" w-full">
             <button
               onClick={handleDone}
-              className="p-[12px] text-[14px] leading-[20px] w-[470px] text-[#fff] bg-primaryBtn  h-[44px] rounded-lg"
+              className="p-[12px] text-[14px] leading-[20px]  w-full  md:w-[470px] text-[#fff] bg-primaryBtn  h-[44px] rounded-lg"
             >
               Go To The Trade Board
             </button>
           </div>
 
-          <div className=" w-[513px] text-[#FF104B] mt-[24px] font-bold">
-            <p className=" text-center text-[16px] leading-[24px]">
+          <div className=" w-full md:w-[513px] text-[#FF104B] mt-[24px] font-bold">
+            <p className=" text-center md:text-center text-[16px] leading-[24px]">
               Note: If the funds remain unused for 24 hours, they will
               automatically be returned to your account.
             </p>

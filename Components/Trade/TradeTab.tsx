@@ -106,10 +106,10 @@ const TradeTab: React.FC<tradeProp> = ({ onSelectBuy, onSelectSell }) => {
         </button>
       </div>
       <div className=" lg:flex lg:flex-row flex-col lg:space-x-2 space-y-4 lg:space-y-0">
-        <div className="md:w-[360px] w-full h-[48px] border flex  items-center rounded-[12px] p-[8px_16px_8px_16px]">
-          <div className="">
+        <div className="md:w-[60%] lg:w-[15rem] xl:w-full w-[287px] h-[48px] border flex  items-center rounded-[12px] p-[8px_16px_8px_16px]">
+          <div className=" w-full h-full">
             <input
-              className="lg:w-[215px] w-[143px] h-[30px] border-r   border-r-[#BDBDBD]  placeholder:text-sm placeholder:text-[#989898] outline-none"
+              className="xl:w-[215px] w-[143px] lg:w-[100%] h-[30px] border-r   border-r-[#BDBDBD] placeholder:text-sm  lg:placeholder:text-[11px] xl:placeholder:text-sm placeholder:text-[#989898] outline-none"
               placeholder="Amount to Buy"
               onChange={handleAmountChange}
               type="text"
@@ -126,17 +126,17 @@ const TradeTab: React.FC<tradeProp> = ({ onSelectBuy, onSelectSell }) => {
             />
           </div>
         </div>
-        <div className="lg:w-[360px] w-[287px] h-[48px] border flex  items-center rounded-[12px] p-[8px_16px_8px_16px]">
+        <div className="md:w-[60%] lg:w-[15rem] xl:w-full w-[287px] h-[48px] border flex  items-center rounded-[12px] p-[8px_16px_8px_16px]">
           <div className=" w-full h-full">
             <input
-              className=" lg:w-[215px] w-[143px] h-[30px] border-r   border-r-[#BDBDBD]  placeholder:text-sm placeholder:text-[#989898] outline-none"
+              className="xl:w-[215px] w-[143px] lg:w-[100%] h-[30px] border-r   border-r-[#BDBDBD] placeholder:text-sm  lg:placeholder:text-[11px] xl:placeholder:text-sm placeholder:text-[#989898] outline-none"
               placeholder="Exchange Value"
               type="text"
               value={rate}
               disabled
             />
           </div>
-          <div className="lg:w-[115px] w-[113px] flex justify-center items-center ml-[5px] bg-[#F7F7F7] rounded-[16px]">
+          <div className="md:w-[115px]  w-[99px] flex justify-center items-center ml-[5px] bg-[#F7F7F7] rounded-[16px]">
             <CreateTradeDropDown
               onSelect={handleExitCurrency}
               options={converstionDataSource}

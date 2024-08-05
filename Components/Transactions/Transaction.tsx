@@ -42,15 +42,15 @@ const Transaction = () => {
             Transactions
           </h2>
 
-          <div className="flex md:flex-row flex-col pb-6 md:gap-0 gap-5">
-            <div className="  w-full flex gap-[18px] items-center">
+          <div className="flex lg:flex-row flex-col pb-6 lg:gap-0 gap-5">
+            <div className="  w-full   flex gap-[18px] items-center">
               <div className="border border-gray-800 p-2 rounded-lg ">
                 <CustomDropdown
                   options={currencyData}
                   onSelect={handleCurrency}
                   placeholder="All Currencies"
                   displayImages
-                  className=""
+                  className=" w-full"
                 />
               </div>
               <div className="border border-gray-800 p-2 rounded-lg">
@@ -58,7 +58,7 @@ const Transaction = () => {
                   options={transactionOption}
                   onSelect={handleTransaction}
                   placeholder="All transactions"
-                  className="text-gray-800"
+                  className="text-gray-800 w-full"
                 />
               </div>
 
@@ -68,7 +68,7 @@ const Transaction = () => {
                   onSelect={handleCurrency}
                   placeholder="All Status "
                   displayImages
-                  className=""
+                  className=" w-full"
                 />
               </div>
             </div>

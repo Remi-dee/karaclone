@@ -56,7 +56,7 @@ function Notification() {
   if (error) return <div>Error loading notifications</div>;
 
   return (
-    <div className="w-full h-[810px] py-[1em] flex flex-col rounded-[12px]">
+    <div className=" w-[95%] px-[1rem] md:w-full h-[810px] py-[1em] flex flex-col rounded-[12px]">
       <section className="flex py-[1rem] h-full flex-col w-full relative">
         <section className="border-b border-[#DCDCDC] px-[24px] flex h-[72px] justify-between w-full">
           <div>

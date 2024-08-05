@@ -20,14 +20,14 @@ function Home() {
   const user = useSelector((state: any) => state?.user);
   const auth = useSelector((state: any) => state?.auth);
   // const { kyc, auth, user } = globalState;
-  const { kycBegin } = kyc;
+  const { kycBegin, kybBegin } = kyc;
   const { reversalInitiated } = user;
 
   return (
     <div className="w-full  h-full   ">
       {/* This page directs the Homepage for the dashboard */}
 
-      {kycBegin ? (
+      {kycBegin || kybBegin ? (
         <CreateKYC />
       ) : reversalInitiated ? (
         <Reversal />

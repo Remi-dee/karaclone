@@ -23,50 +23,31 @@ const KYCInfo: FC<Props> = ({
   const [selectedCountry, setSelectedCountry] = useState("");
   const [address_Document_Name, setaddress_Document_Name] = useState("");
   const [documentFile, setdocumentFile] = useState("");
-  const handleCountryChange = (country: any, e: any) => {
-    setSelectedCountry(country);
 
-    setKycDetails({
-      ...kycDetails,
-      country: e.target.value,
-    });
-
-    // formik.setFieldValue("country", country);
+  const updateFileDetails = (file: File, key: string) => {
+    const reader = new FileReader();
+    reader.onload = (e: any) => {
+      if (reader.readyState === 2) {
+        setKycDetails({ ...kycDetails, [key]: reader.result });
+      }
+    };
+    reader.readAsDataURL(file);
   };
 
-  const handleIdDocumentChange = (e: any) => {
+  const handleFileChange = (
+    e: any,
+    setName: (name: string) => void,
+    key: string
+  ) => {
     const file = e.target.files?.[0];
-    setdocumentFile(e.target.files[0].name);
-
-    if (file) {
-      const reader = new FileReader();
-
-      reader.onload = (e: any) => {
-        if (reader.readyState === 2) {
-          setKycDetails({ ...kycDetails, id_document: reader.result });
-        }
-      };
-      reader.readAsDataURL(file);
-    }
+    setName(file?.name || "");
+    if (file) updateFileDetails(file, key);
   };
-  const updateFileName = () => {
-    return;
-  };
-  const handleAddressDocumentChange = (e: any) => {
-    setaddress_Document_Name(e.target.files[0].name);
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
 
-      reader.onload = (e: any) => {
-        if (reader.readyState === 2) {
-          setKycDetails({ ...kycDetails, address_document: reader.result });
-          // console.log(reader.result);
-        }
-      };
-      reader.readAsDataURL(file);
-    }
+  const handleInputChange = (key: string) => (e: any) => {
+    setKycDetails({ ...kycDetails, [key]: e.target.value });
   };
+
   const dispacth = useDispatch();
 
   const handleSubmit = (e: any) => {
@@ -81,13 +62,15 @@ const KYCInfo: FC<Props> = ({
   };
 
   return (
-    <div className="w-full flex  md:w-[95%] lg:w-[90%]   flex-col mx-0  md:mx-auto mt-[12rem] mb-[2em] h-max  md:h-[1080px]    ">
+    <div className="w-full flex  relative md:w-[95%] lg:w-[90%]   flex-col mx-0  md:mx-auto mt-[9rem] dslmb-[2em] h-max  md:h-[1100px]   max-h-max  ">
       <div
         onClick={handleBack}
-        className=" flex justify-start items-center w-full gap-1 cursor-pointer"
+        className=" flex  items-center text-[16px] leading-[24px] tracking-[-2%] mt-[27rem] md:mt-[2rem] w-full gap-1 cursor-pointer"
       >
         <IoIosArrowRoundBack className="bg-primaryBtn text-white-100 rounded-sm" />
-        <p className="text-primaryBtn font-semibold">Go-Back</p>
+        <p className="text-primaryBtn font-semibold ml-[4px] mt-[3px] md:mt-0  ">
+          Go-Back
+        </p>
       </div>
 
       <div className="mt-[24px] mb-2 items-center text-center">
@@ -98,7 +81,7 @@ const KYCInfo: FC<Props> = ({
           Fill in the details below to complete your KYC
         </p>
       </div>
-      <div className="w-[100%]  h-max md:h-[1104px] flex  px-[1rem] py-[2rem]  md:p-[32px_40px_32px_40px]  mt-[24px] mx-auto  rounded-[8px]  bg-[white]">
+      <div className="w-[100%]  h-max md:h-[1104px] flex  px-[1rem] py-[2rem]  md:p-[32px_40px_32px_40px]  mt-[24px] mx-auto  rounded-[8px] mb-[1rem]  bg-[white]">
         <form className=" w-full" onSubmit={handleSubmit}>
           <div className=" flex flex-col gap-[8px]   ">
             <h3 className="font-semibold text-[18px] leading-[28px]   ">
@@ -115,22 +98,21 @@ const KYCInfo: FC<Props> = ({
                   htmlFor=""
                   className="font-semibold text-[16px] text-[#1E1E1E]  tracking-[-2%] leading-[24px]  "
                 >
-                  {/* Select Country<span className="text-red-400">*</span> */}
                   Select Country
                 </label>
                 <CountryDropdown
                   classes="p-2  h-[48px] w-full border border-gray-300 rounded-[12px]"
                   value={selectedCountry}
-                  onChange={handleCountryChange}
-                  // defaultOptionLabel={formik.values.country || ""}
+                  onChange={(country: any, e: any) => {
+                    setSelectedCountry(country);
+                    setKycDetails({
+                      ...kycDetails,
+                      country: e.target.value,
+                    });
+                  }}
                   name="country"
                   id="country"
                 />
-                {/* {formik.touched.fullName && formik.errors.fullName && (
-                  <p className="mt-2 text-sm text-danger font-medium">
-                    {formik.errors.fullName}
-                  </p>
-                )} */}
               </div>
 
               <div className="w-full flex flex-col gap-[8px] ">
@@ -145,12 +127,7 @@ const KYCInfo: FC<Props> = ({
                   defaultValue=""
                   required
                   value={kycDetails.id_document_type}
-                  onChange={(e: any) =>
-                    setKycDetails({
-                      ...kycDetails,
-                      id_document_type: e.target.value,
-                    })
-                  }
+                  onChange={handleInputChange("id_document_type")}
                   id=""
                 >
                   <option value="" disabled hidden>
@@ -161,16 +138,9 @@ const KYCInfo: FC<Props> = ({
                   <option value="International Passport">
                     International Passport
                   </option>
-                  <option value="Driver License">
-                    &apos; Driver's Licence
-                  </option>
-                  <option value="Voter Card">&apos; Voter's Card</option>
+                  <option value="Driver License">Driver's Licence</option>
+                  <option value="Voter Card">Voter's Card</option>
                 </select>
-                {/* {formik.touched.fullName && formik.errors.fullName && (
-                  <p className="mt-2 text-sm text-danger font-medium">
-                    {formik.errors.fullName}
-                  </p>
-                )} */}
               </div>
             </div>
           </div>
@@ -192,7 +162,9 @@ const KYCInfo: FC<Props> = ({
               <input
                 id="file-upload"
                 type="file"
-                onChange={handleIdDocumentChange}
+                onChange={(e: any) =>
+                  handleFileChange(e, setdocumentFile, "id_document")
+                }
                 required
               />
               <span id="file-name" className="file-name">
@@ -233,12 +205,7 @@ const KYCInfo: FC<Props> = ({
                   defaultValue=""
                   required
                   value={kycDetails.address_document_type}
-                  onChange={(e: any) =>
-                    setKycDetails({
-                      ...kycDetails,
-                      address_document_type: e.target.value,
-                    })
-                  }
+                  onChange={handleInputChange("address_document_type")}
                   id=""
                 >
                   <option value="" disabled hidden>
@@ -247,11 +214,6 @@ const KYCInfo: FC<Props> = ({
                   <option value="Waste Bill">Waste Bill</option>
                   <option value="Electricity Bill">Electricity Bill</option>
                 </select>
-                {/* {formik.touched.fullName && formik.errors.fullName && (
-                  <p className="mt-2 text-sm text-danger font-medium">
-                    {formik.errors.fullName}
-                  </p>
-                )} */}
               </div>
 
               <div className="mt-[24px]  w-full flex flex-col gap-[8px]">
@@ -271,7 +233,13 @@ const KYCInfo: FC<Props> = ({
                   <input
                     id="address_file-upload"
                     type="file"
-                    onChange={handleAddressDocumentChange}
+                    onChange={(e: any) =>
+                      handleFileChange(
+                        e,
+                        setaddress_Document_Name,
+                        "address_document"
+                      )
+                    }
                   />
                   <span id="file-name" className="file-name">
                     {address_Document_Name || "Sample PDF"}
@@ -292,7 +260,7 @@ const KYCInfo: FC<Props> = ({
           <div className="flex flex-col gap-[24px]">
             <div className=" flex flex-col gap-[8px]   ">
               <h3 className="font-semibold text-[18px] leading-[28px]   ">
-                Bank Verifcation
+                Bank Verification
               </h3>
               <p className="text-[#7C7C7C] text-[16px] leading-[24px]  ">
                 Enter your bank verification number (BVN)
@@ -312,12 +280,7 @@ const KYCInfo: FC<Props> = ({
                   className="w-full leading-[24px] text-[16px] text-[#989898] h-full rounded-md p-2 focus:outline-none"
                   required
                   value={kycDetails.bvn}
-                  onChange={(e: any) =>
-                    setKycDetails({
-                      ...kycDetails,
-                      bvn: e.target.value,
-                    })
-                  }
+                  onChange={handleInputChange("bvn")}
                 />
               </div>
             </div>

@@ -71,23 +71,23 @@ function BasicDetails() {
 
   return (
     <div className="  flex  flex-col gap-[24px] bg-[#FFFFFF] w-[100%]  p-[24px] rounded-[8px]  ">
-      <div className="  h-[44px]  min-h-[44px] border-b border-b-[#EFEFEF] flex justify-between items-center">
-        <h1 className="  font-bold leading-[28px] tracking-[-2%] text-[18px]   ">
+      <div className="  h-[44px]  min-h-[44px] w-full border-b border-b-[#EFEFEF] flex justify-between items-center">
+        <h1 className="  font-bold leading-[28px] w-full tracking-[-2%] text-nowrap  text-[16px] md:text-[18px]   ">
           Personal Information
         </h1>
         {!editMode && (
           <button
-            className=" text-[#7F56D9] px-4 py-2 rounded"
+            className=" text-[#7F56D9] w-full px-0 md:px-4 text-[14px] md:text-[18px] py-0 md:py-2 "
             onClick={() => setEditMode(true)}
           >
-            Edit Profile Details &gt;
+            Edit Profile &gt;
           </button>
         )}
       </div>
 
       <section className="  flex  gap-[24px] ">
         <div className="w-full flex flex-col content-between justify-between h-full gap-[24px]">
-          <div className=" flex flex-col gap-[4px]">
+          <div className=" flex flex-col gap-[4px] w-full">
             <h2 className="   font-[500] tracking-[-2%] leading-[20px]  text-[14px] ">
               FIRST
             </h2>
@@ -97,16 +97,16 @@ function BasicDetails() {
                 name="firstName"
                 value={userData.firstName}
                 onChange={handleChange}
-                className="text-[16px] w-full leading-[24px] tracking-[-2%] text-[#464646] border border-[#464646] p-2 rounded-[8px]"
+                className="text-[16px] w-[7.5rem] md:w-full leading-[24px] tracking-[-2%] text-[#464646] border border-[#464646] p-2 rounded-[8px]"
               />
             ) : (
-              <p className=" text-[16px] leading-[24px] tracking-[-2%] text-[#464646]   ">
+              <p className=" text-[16px] leading-[19px] md:leading-[24px] font-bold tracking-[-2%] text-[#464646] ">
                 {userData.firstName}
               </p>
             )}
           </div>
 
-          <div className=" flex flex-col gap-[4px]">
+          <div className=" hidden md:flex  flex-col gap-[4px]">
             <h2 className="   text-[14px] font-[500] tracking-[-2%] leading-[20px]  ">
               EMAIL
             </h2>
@@ -119,7 +119,7 @@ function BasicDetails() {
                 className="text-[16px] w-full border-[#464646] rounded-[8px] leading-[24px] tracking-[-2%] text-[#464646] border p-2 "
               />
             ) : (
-              <p className=" text-[16px] leading-[24px] tracking-[-2%] text-[#464646]   ">
+              <p className=" text-[16px] leading-[19px] md:leading-[24px] font-bold tracking-[-2%] text-[#464646]   ">
                 {userData.email}
               </p>
             )}
@@ -134,14 +134,14 @@ function BasicDetails() {
                 name="gender"
                 value={userData.gender}
                 onChange={handleChange}
-                className="text-[16px]  rounded-[8px] border-[#464646] leading-[24px] tracking-[-2%] text-[#464646] border p-2 "
+                className="text-[16px] rounded-[8px] border-[#464646] leading-[24px] tracking-[-2%] text-[#464646] border p-2 "
               >
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
                 <option value="Other">Other</option>
               </select>
             ) : (
-              <p className=" text-[16px] leading-[24px] tracking-[-2%] text-[#464646]   ">
+              <p className="text-[16px] leading-[19px] md:leading-[24px] font-bold tracking-[-2%] text-[#464646]  ">
                 {userData.gender}
               </p>
             )}
@@ -149,7 +149,7 @@ function BasicDetails() {
         </div>
         <div className="w-full flex flex-col content-between justify-between h-full gap-[24px]">
           <div className=" flex flex-col gap-[4px]">
-            <h2 className="  text-[14px]   font-[500] tracking-[-2%] leading-[20px]  ">
+            <h2 className="  text-[14px]    font-[500] tracking-[-2%] leading-[20px]  ">
               LAST NAME
             </h2>
             {editMode ? (
@@ -158,10 +158,10 @@ function BasicDetails() {
                 name="lastName"
                 value={userData.lastName}
                 onChange={handleChange}
-                className="text-[16px] w-full border-[#464646] rounded-[8px] leading-[24px] tracking-[-2%] text-[#464646] border p-2 "
+                className="text-[16px]  w-[7.5rem] md:w-full border-[#464646] rounded-[8px] leading-[24px] tracking-[-2%] text-[#464646] border p-2 "
               />
             ) : (
-              <p className=" text-[16px] leading-[24px] tracking-[-2%] text-[#464646]   ">
+              <p className=" text-[16px] leading-[19px] md:leading-[24px] font-bold tracking-[-2%] text-[#464646]   ">
                 {userData.lastName}
               </p>
             )}
@@ -177,16 +177,34 @@ function BasicDetails() {
                 name="phone"
                 value={userData.phone}
                 onChange={handleChange}
-                className="text-[16px] w- border-[#464646] rounded-[8px] leading-[24px] tracking-[-2%] text-[#464646] border p-2 "
+                className="text-[16px]  md:w-full w-[8rem]  border-[#464646] rounded-[8px] leading-[24px] tracking-[-2%] text-[#464646] border p-2 "
               />
             ) : (
-              <p className=" text-[16px] leading-[24px] tracking-[-2%] text-[#464646]   ">
+              <p className=" text-[16px] leading-[19px] md:leading-[24px] font-bold tracking-[-2%] text-[#464646]   ">
                 {userData.phone}
               </p>
             )}
           </div>
         </div>
       </section>
+      <div className=" flex md:hidden flex-col gap-[4px]">
+        <h2 className="   text-[14px] font-[500] tracking-[-2%] leading-[20px]  ">
+          EMAIL
+        </h2>
+        {editMode ? (
+          <input
+            type="email"
+            name="email"
+            value={userData.email}
+            onChange={handleChange}
+            className="text-[16px] w-full border-[#464646] rounded-[8px] leading-[24px] tracking-[-2%] text-[#464646] border p-2 "
+          />
+        ) : (
+          <p className=" text-[16px] leading-[19px] md:leading-[24px] font-bold tracking-[-2%] text-[#464646]   ">
+            {userData.email}
+          </p>
+        )}
+      </div>
 
       {editMode && (
         <div className="mt-4 flex justify-end gap-4">

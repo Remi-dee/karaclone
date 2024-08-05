@@ -1,6 +1,9 @@
 import { useDispatch } from "react-redux";
 import DefaultModal from "../CustomModal/CustomModalAlt";
-import { toggleStartKybModalSuccess } from "@/redux/features/kyc/kycSlice";
+import {
+  toggleKbyBegin,
+  toggleStartKybModalSuccess,
+} from "@/redux/features/kyc/kycSlice";
 import { MdOutlineCheck } from "react-icons/md";
 import Link from "next/link";
 
@@ -13,17 +16,17 @@ const KYBModal = () => {
         dispatch(toggleStartKybModalSuccess({ data: false }));
       }}
     >
-      <form>
-        <div>
-          <div className="flex justify-between">
+      <form className=" w-full px-[0.9rem]  md:px-0   ">
+        <div className=" w-full">
+          <div className="flex w-full  justify-between">
             <img src="/svg/featured_wallet.svg" alt="" />
             <div></div>
           </div>
           <div>
-            <h1 className="text-black text-[24px] mb-5 font-semibold">
+            <h1 className="text-[#3D3D3D] w-full  text-[17px] leading-[28px] tracking-[-2%] md:text-[24px] mb-5 font-semibold">
               Complete your KYB Verification
             </h1>
-            <p className="mt-5 mb-5">This will enamble you to:</p>
+            <p className="mt-5 mb-5">This will enable you to:</p>
 
             <div className="mb-5">
               <ul>
@@ -53,16 +56,17 @@ const KYBModal = () => {
                 </li>
               </ul>
             </div>
-            <Link href="/kyc-business">
-              <button
-                onClick={() => {
-                  dispatch(toggleStartKybModalSuccess({ data: false }));
-                }}
-                className="p-2 my-2 text-[#fff] bg-primaryBtn w-full rounded-lg"
-              >
-                Begin Verification
-              </button>
-            </Link>
+            {/* <Link href="/kyc-business"> */}
+            <button
+              onClick={() => {
+                dispatch(toggleKbyBegin());
+                dispatch(toggleStartKybModalSuccess({ data: false }));
+              }}
+              className="p-2 my-2 text-[#fff] bg-primaryBtn w-full rounded-lg"
+            >
+              Begin Verification
+            </button>
+            {/* </Link> */}
           </div>
         </div>
       </form>

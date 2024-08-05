@@ -10,7 +10,7 @@ import {
 } from "@/redux/features/user/userSlice";
 import { toggleReversalState } from "@/redux/features/user/userSlice";
 import { MdSystemSecurityUpdateWarning } from "react-icons/md";
-const   WithdrawalComplete = () => {
+const WithdrawalComplete = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const handleDone = () => {
@@ -127,13 +127,13 @@ const Reversal: FC<any> = () => {
                     <span className=" text-[#7C7C7C] text-[14px] leading-[20px]  ">
                       Amount you will get
                     </span>
-                    <span className=" text-[#1E1E1E] tracking-[-2%] text-[14px] leading-[20px]  font-medium   ">
+                    <span className=" text-[#1E1E1E] tracking-[-2% ] text-[14px] leading-[20px]  font-medium   ">
                       980 NGN
                     </span>
                   </div>
                 </div>
                 <div className="flex w-full mt-[40px] gap flex-col items-start justify-start gap-[24px]">
-                  <button 
+                  <button
                     onClick={handleSubmit}
                     className="p-[12px] text-[#fff] bg-[#7F56D9] w-full md:w-[470px] rounded-lg"
                   >

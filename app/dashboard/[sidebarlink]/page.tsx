@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { ArrowsRightLeftIcon } from "@heroicons/react/24/outline";
 import { BellIcon, SunIcon, UserCircleIcon } from "@heroicons/react/20/solid";
 import CircleIcon from "@/public/profile-circle.png";
+import profileIcon from "@/public/svg/circled_profile.svg";
 import Menu from "@/public/menu.png";
 import Sidebar from "@/Components/Sidebar/Sidebar";
 import Home from "@/Components/Home";
@@ -324,7 +325,7 @@ const Dashboard = ({ params }: { params: { sidebarlink: string } }) => {
                       onClick={() => dispatch(toggleProfileModal())}
                     >
                       <Image
-                        src={CircleIcon}
+                        src={profileIcon}
                         alt="Profile"
                         className="h-6 w-6"
                       />

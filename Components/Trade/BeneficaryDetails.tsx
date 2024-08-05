@@ -37,7 +37,7 @@ const BeneficiaryInput: React.FC<BeneficiaryInputProps> = ({
         onChange={handleChange}
         type="text"
         name={inputName}
-        className="w-[433px] h-[48px] p-2 pl-4 pr-4 gap-2 rounded-[12px] border border-[#DCDCDC] focus:opacity-100"
+        className="  w-full md:w-[433px] h-[48px] p-2 pl-4 pr-4 gap-2 rounded-[12px] border border-[#DCDCDC] focus:opacity-100"
       />
     </div>
   );
@@ -69,7 +69,7 @@ const BeneficiarySelect: React.FC<BeneficiarySelectProps> = ({
       <label className="font-lato text-lg font-semibold leading-6 tracking-tight text-left">
         {label}
       </label>
-      <div className="relative w-[433px]">
+      <div className="relative w-full md:w-[433px]">
         <select
           value={selectedValue}
           onChange={handleChange}
@@ -186,7 +186,7 @@ function BeneficaryDetails({
   }, [isSuccess]);
 
   return (
-    <div className="   h-[1000px]  max-h-[1027px]  min-h-max">
+    <div className="   md:h-[1000px]  h-full max-h-full md:max-h-[1027px] min-h-full  md:min-h-max">
       <div className=" w-full justify-center flex">
         <Image src={svgBank} alt="" />
       </div>

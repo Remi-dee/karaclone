@@ -63,7 +63,7 @@ function SelectBank({ onSelect, onAccountAndNameChange }: SelectBankProps) {
   if (error) return <div>Error fetching beneficiaries</div>;
 
   return (
-    <div className="  mb-[10rem] h-full w-[500px]  min-h-max">
+    <div className="    mb-[10rem] h-full w-full md:w-[350px]   min-h-max">
       <div className=" w-full justify-center flex">
         <Image src={svgBank} alt="" />
       </div>

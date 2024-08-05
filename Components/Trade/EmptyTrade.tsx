@@ -31,7 +31,7 @@ const EmptyTrade = () => {
         </p>
         <button
           onClick={handleCreateTrade}
-          className="my-4 p-[12px] rounded-[8px] bg-primaryBtn h-[44px] w-[430px] text-white-100 hidden lg:flex "
+          className="my-4 p-[12px] rounded-[8px] bg-primaryBtn h-[44px] text-center w-[430px] text-white-100  items-center justify-center hidden lg:flex "
         >
           Create Ads
         </button>

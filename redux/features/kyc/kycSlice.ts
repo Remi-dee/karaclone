@@ -9,6 +9,7 @@ const initialState: KYCState = {
   startKybModalOpen: false,
   kycBegin: false,
   kycLevel: 1,
+  kybBegin: false,
 };
 
 export const kycSlice = createSlice({
@@ -23,9 +24,15 @@ export const kycSlice = createSlice({
     },
     toggleKycBegin: (state: KYCState) => {
       state.kycBegin = true;
+      state.kybBegin = false;
+    },
+    toggleKbyBegin: (state: KYCState) => {
+      state.kycBegin = false;
+      state.kybBegin = true;
     },
     toggleKycOff: (state: KYCState) => {
       state.kycBegin = false;
+      state.kybBegin = false;
       state.startKycModalOpen = false;
       state.startKybModalOpen = false;
     },
@@ -45,6 +52,7 @@ export const {
   increaseKycLevel,
   decreaseKycLevel,
   toggleKycOff,
+  toggleKbyBegin,
 } = kycSlice.actions;
 export const kycSelector = (state: RootState) => state.kyc;
 export default kycSlice.reducer;

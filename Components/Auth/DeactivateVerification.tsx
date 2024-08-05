@@ -66,18 +66,18 @@ const DeactivateVerification: FC<Props> = ({ setVerificationSuccess }) => {
   };
 
   return (
-    <div className="w-[470px] h-[451px] mx-auto  shadow-md rounded-[16px] border border-white-100">
-      <div className="w-[470px] text-center mx-auto">
+    <div className=" md:w-[470px] w-full h-[451px] mx-auto  shadow-md rounded-[16px] border border-white-100">
+      <div className="  w-full md:w-[470px] text-center mx-auto">
         <div className=" w-full flex items-center justify-center">
           <div className="w-[56px]    ml-[1rem] h-[56px] flex justify-center items-center shadow-md border border-gray-200  rounded-[12px] ">
             <MdMail className="text-[22px]" />
           </div>
         </div>
-        <div className=" text-center px-[1rem] flex flex-col gap-[16px] mt-[24px] ">
-          <h4 className="py-2 font-bold text-[#1E1E1E] leading-[38.4px] text-[32px] tracking-[-2%]">
+        <div className=" text-center px-[1rem] flex flex-col gap-[10px] md:gap-[16px] mt-[24px] ">
+          <h4 className="py-2 font-bold text-[#1E1E1E] leading-[38.4px] text-[20px] md:text-[32px] tracking-[-2%]">
             Enter your verification code
           </h4>
-          <p className="text-[#7C7C7C] text-[16px] leading-[19.2px]">
+          <p className="text-[#7C7C7C] text-[14px] md:text-[16px] leading-[19.2px]">
             To deactivate authentication method, kindly enter the code we sent
             to your email
           </p>
@@ -88,7 +88,7 @@ const DeactivateVerification: FC<Props> = ({ setVerificationSuccess }) => {
               type="number"
               key={key}
               ref={inputRefs[index]}
-              className={`w-[64px] h-[64px] bg-transparent border-[2px] border-[#3D3D3D] rounded-[8px] flex items-center text-black dark:text-white juverifyNumberstify-center text-[48px] font-[500] leading-[60px] tracking-[-2%] font-Poppins outline-none p-[2px_8px] text-center ${
+              className={`md:w-[64px] w-[40px] h-[40px] md:h-[64px] bg-transparent border-[2px] border-[#3D3D3D] rounded-[8px] flex items-center text-black dark:text-white juverifyNumberstify-center text-[20px] md:text-[48px] font-[500] leading-[60px] tracking-[-2%] font-Poppins outline-none p-[2px_8px] text-center ${
                 invalidError
                   ? "shake border-red-500"
                   : "dark:border-white border-[#0000004a]"
@@ -102,7 +102,7 @@ const DeactivateVerification: FC<Props> = ({ setVerificationSuccess }) => {
         </div>
         <button
           onClick={verificationHandler}
-          className=" p-[10px_16px)] border border-[#7F56D9] h-[40px] w-[470px] mt-[32px] rounded-[8px] text-center  bg-primaryBtn text-white-100 "
+          className=" p-[10px_16px)] border border-[#7F56D9] h-[40px] w-full md:w-[470px] mt-[32px] rounded-[8px] text-center  bg-primaryBtn text-white-100 "
         >
           Deactivate
         </button>

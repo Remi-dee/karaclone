@@ -13,7 +13,6 @@ import Image from "next/image";
 
 type Props = {
   link: string;
-  showSideBar: boolean;
 };
 
 const sidebarLinks = [
@@ -34,7 +33,7 @@ const moreSidebarLinks = [
   { id: 7, label: "Logout", href: "/dashboard/Logout", icon: "" },
 ];
 
-const Sidebar = ({ link, showSideBar }: Props) => {
+const Sidebar = ({ link }: Props) => {
   const router = useRouter();
 
   const isLinkActive = (label: string) =>

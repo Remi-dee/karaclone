@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 import { BsEnvelope } from "react-icons/bs";
 import { MdOutlineNavigateBefore, MdOutlineNavigateNext } from "react-icons/md";
 import Image from "next/image";
-import getTokenFromLocalStorage from "@/utils/FetchUserToken";
+import getTokenFromLocalStorage from "@/hooks/FetchUserToken";
 type VerifyNumber = {
   "0": string;
   "1": string;

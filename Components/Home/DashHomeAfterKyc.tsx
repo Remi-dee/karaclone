@@ -53,8 +53,7 @@ function DashHomeAfterKyc() {
         <div className="  flex flex-col gap-2 h-full">
           {/* kyc verification card */}
 
-          {/* //remove ! after editing */}
-          {data?.user?.account_type !== "individual" ? (
+          {data?.user?.account_type === "individual" ? (
             <div className="relative dashHomeImage w-full p-[1rem] flex-1 grow overflow-hidden min-h-fit rounded-2xl">
               <div className="relative grid  grid-cols-[72%_35%]  lg:flex text-white-100 lg:w-[460px] lg:h-[200px]  w-full h-[145.39px] ">
                 <div className=" flex relative gap-[14px] lg:gap-[25px] top-0 lg:top-[34px]  flex-col lg:w-[320px] lg:h-[88px] w-[95%] h-full">
@@ -96,7 +95,7 @@ function DashHomeAfterKyc() {
               alt=""
             /> */}
               <div className="relative grid  grid-cols-[72%_35%]  lg:flex text-white-100 md:w-[460px] lg:h-[200px]  w-full h-[145.39px] ">
-                <div className=" flex relative gap-[14px] lg:gap-[25px] top-0 lg:top-[34px]  flex-col md:w-[320px] lg:h-[88px] w-[95%] h-full">
+                <div className=" flex relative gap-[14px] lg:gap-[25px] top-0 lg:top-[34px]  flex-col lg:w-[320px] lg:h-[88px] w-[95%] h-full">
                   <div className="  w-full">
                     <p className="font-bold  text-xs  leading-[28px] tracking-[-2%] text-[#EFEFEF] ">
                       Complete your account set up by verifying your KYB
@@ -191,8 +190,8 @@ function DashHomeAfterKyc() {
         <TransactionTable />
       </div>
       {startKycModalOpen && <KycModal />}
-      {/* {startKybModalOpen && <KYBModal />} */}
-      {startKybModalOpen && <KycModal />}
+      {startKybModalOpen && <KYBModal />}
+      {/* {startKybModalOpen && <KycModal />} */}
     </div>
   );
 }

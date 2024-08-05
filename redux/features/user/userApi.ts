@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { userLoggedIn, userLoggedOut } from "../auth/authSlice";
-import getTokenFromLocalStorage from "@/utils/FetchUserToken";
+import getTokenFromLocalStorage from "@/hooks/FetchUserToken";
 
 interface Wallet {
   _id: string;

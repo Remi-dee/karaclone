@@ -106,19 +106,21 @@ const CreateTradeDetails = () => {
     <div className="p-0 m-0 invisible-scrollbar overflow-auto h-[890px]  w-full ">
       <div
         onClick={handleBack}
-        className="my-4 mx-6 flex justify-start items-center gap-1 cursor-pointer"
+        className=" flex  items-center text-[16px] leading-[24px] tracking-[-2%] mt-[1rem] md:mt-[2rem] w-full gap-1 cursor-pointer"
       >
         <IoIosArrowRoundBack className="bg-primaryBtn text-white-100 rounded-sm" />
-        <p className="text-primaryBtn font-semibold">Go-Back</p>
+        <p className="text-primaryBtn font-semibold ml-[4px] mt-[3px] md:mt-0  ">
+          Go-Back
+        </p>
       </div>
 
       <div className="flex flex-col justify-center items-center mt-4">
         <h2 className="text-lg font-semibold pb-4">Create Trade</h2>
-        <p className="text-sm w-[500px] text-gray-300 text-center pb-4">
+        <p className="text-sm w-full md:w-[500px] text-gray-300 text-center pb-4">
           Please note that all transactions may take a few minutes to process.
           Rest assured, all transactions are safe and secure.
         </p>
-        <div className="w-[513px] bg-[white] p-[32px_40px_32px_40px]  h-[872px] min-h-[872px] shadow-xl rounded-md ">
+        <div className=" w-full md:w-[513px]  mb-[2rem] md:mb-0 bg-[white] px-[1rem] py-[1.5rem] md:p-[32px_40px_32px_40px]  h-[872px] min-h-[872px] shadow-xl rounded-md ">
           <div className=" flex flex-col gap-[24px] ">
             <h2 className="font-bold text-[18px] leading-[28px] tracking-[-2%]">
               Trade Details

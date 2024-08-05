@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { MdMail } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { increaseRegistrationStage } from "@/redux/features/auth/authSlice";
-import getTokenFromLocalStorage from "@/utils/FetchUserToken";
+import getTokenFromLocalStorage from "@/hooks/FetchUserToken";
 // type Props = {
 //   setVerificationSuccess: (success: boolean) => void;
 // };
