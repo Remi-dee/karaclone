@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import ChatPage from "./ChatPage";
-import ConversationChat from "./ConversationChat";
+import ChatPage from "../Layout/ChatPage";
+import ConversationChat from "../Layout/ConversationChat";
 import TicketPage from "./TicketPage";
 import TicketDetails from "./TicketDetails";
 import FAQ from "./FAQ";

@@ -294,3 +294,86 @@
 // };
 
 // export default KYCInfo;
+
+
+
+
+
+////d ashbsidelink 
+
+
+// useEffect(() => {
+  //   console.log("iscreate trade i", isCreateTrade);
+  //   console.log("is buy trade i", isBuyTrade);
+  //   console.log("is fun is", isWalletFund);
+  //   const handleTrade = async () => {
+  //     if (transactionPaymentId) {
+  //       if (isCreateTrade) {
+  //         // console.log("our created trade is", createdTrade);
+  //         // await createTrade(createdTrade);
+
+  //         if (tradeError) {
+  //           console.error("We have a trade error:", tradeError);
+  //         } else if (tradeData) {
+  //           console.log("Trade successful:", tradeData);
+  //         }
+
+  //         if (isTradeSuccess) {
+  //           toast.success("Trade created successfully");
+  //         }
+  //       } else if (isBuyTrade) {
+  //         console.log("our bought trade is", boughtTrade);
+  //         await buyTrade(boughtTrade);
+
+  //         if (buyTradeError) {
+  //           console.error("We have a trade error:", buyTradeError);
+  //         } else if (buyTradeData) {
+  //           console.log("Trade successful:", buyTradeData);
+  //         }
+
+  //         if (isBuyTradeSuccess) {
+  //           toast.success("Trade bought successfully");
+  //         }
+  //       } else if (isWalletFund) {
+  //         console.log("our bought trade is", amountToFund, selectedCurrency);
+  //         await fundWallet({ amountToFund, selectedCurrency });
+
+  //         if (buyTradeError) {
+  //           console.error("We have a trade error:", buyTradeError);
+  //         } else if (buyTradeData) {
+  //           console.log("Trade successful:", buyTradeData);
+  //         }
+
+  //         if (isBuyTradeSuccess) {
+  //           toast.success("Trade bought successfully");
+  //         }
+  //       }
+
+  //       // // After using the transactionPaymentId, clear it from the URL
+  //       // const params = new URLSearchParams(window.location.search);
+  //       // params.delete("transactionPaymentId");
+  //       // router.replace({
+  //       //   pathname: router.pathname,
+  //       //   query: params.toString(),
+  //       // }, undefined, { shallow: true });
+  //     }
+  //   };
+
+  //   handleTrade();
+  // }, [
+  //   transactionPaymentId,
+  //   isCreateTrade,
+  //   createdTrade,
+  //   tradeError,
+  //   tradeData,
+  //   isTradeSuccess,
+  //   isBuyTrade,
+  //   boughtTrade,
+  //   buyTradeError,
+  //   buyTradeData,
+  //   isBuyTradeSuccess,
+  //   isPaymentSuccess,
+  //   dispatch,
+  //   paymentId,
+  //   // router,
+  // ]);

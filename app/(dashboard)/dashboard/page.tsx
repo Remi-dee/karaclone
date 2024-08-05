@@ -4,10 +4,10 @@ import { ArrowsRightLeftIcon } from "@heroicons/react/24/outline";
 import { BellIcon, SunIcon, UserCircleIcon } from "@heroicons/react/20/solid";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import Sidebar from "@/Components/Sidebar/Sidebar";
-import Home from "@/Components/Home";
+import Home from "@/Components/Layout/Home";
 import Wallet from "@/Components/Wallet/Wallet";
-import Transaction from "@/Components/Transactions/Transaction";
-import Trade from "@/Components/Trade/Trade";
+import Transaction from "@/Components/Layout/Transaction";
+import Trade from "@/Components/Layout/Trade";
 import wave from "@/public/svg/wave.svg";
 import { useLoadUserQuery } from "@/redux/features/user/userApi";
 import {
@@ -16,7 +16,7 @@ import {
 } from "@/redux/features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import LogoutModal from "@/Components/Auth/LogoutModal";
-import Settings from "@/Components/Settings/Page";
+import Settings from "@/Components/Layout/Settings";
 import Image from "next/image";
 
 const Dashboard = (urlParam: any) => {

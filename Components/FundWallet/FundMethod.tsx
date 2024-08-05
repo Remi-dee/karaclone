@@ -18,7 +18,7 @@ import {
   setPaymentDetails,
 } from "@/redux/features/truelayer/truelayerSlice";
 import { useMonoWidget } from "@/app/mono/monoServices";
-import { handleCreateTruelayerPayment } from "../Trade/util/truelayerService";
+import { handleCreateTruelayerPayment } from "../UI/Trade/util/truelayerService";
 import {
   useFundWalletMutation,
   useLoadUserQuery,

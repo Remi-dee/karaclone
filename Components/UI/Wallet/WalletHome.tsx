@@ -4,10 +4,7 @@ import React, { useEffect, useState } from "react";
 import { TiEye } from "react-icons/ti";
 import { IoIosAddCircle, IoIosArrowRoundUp } from "react-icons/io";
 import { CgArrowsExchange } from "react-icons/cg";
-
-
 import { useRouter } from "next/navigation";
-
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -25,10 +22,10 @@ import {
 import NGN from "@/public/Images/NGN.png";
 
 import GBP from "@/public/Images/GBP.png";
-import { ArrowsRightLeftIcon } from "@heroicons/react/24/outline";
 import { toast } from "react-toastify";
 import { useGetAllUserWalletsQuery } from "@/redux/features/user/userApi";
-import TransactionTable from "../UI/Transactions/TransactionTable";
+import TransactionTable from "../Transactions/TransactionTable";
+
 function WalletHome() {
   const router = useRouter();
   const dispatch = useDispatch();
