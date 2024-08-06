@@ -20,8 +20,8 @@ const QrCode: FC<Props> = ({ qrCode, isEmailVerify }) => {
   return (
     <>
       {isEmailVerify ? (
-        <div className="w-[550px] mx-auto  h-[760px] shadow-lg  rounded-md border border-white-100">
-          <div className="w-[470px] flex  flex-col gap-y-[32px]  mx-auto">
+        <div className=" w-full md:w-[550px] mx-auto  h-max md:h-[760px] shadow-lg  rounded-md border border-white-100">
+          <div className=" w-full md:w-[470px] flex  flex-col gap-y-[32px]  mx-auto">
             <div className="w-[56px] h-[56px] flex justify-center items-center shadow-md border border-gray-200  rounded-md ">
               <Image
                 width={50}

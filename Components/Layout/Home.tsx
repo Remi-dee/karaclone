@@ -1,36 +1,38 @@
-"use Client";
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { checkAuthentication } from "@/hooks/ProtectedRoute";
+import Reversal from "../withdrawal/Reversal";
 import DashHomeBeforeKyc from "../features/DashHomeBeforeKyc";
 import DashHomeAfterKyc from "../features/DashHomeAfterKyc";
-import Reversal from "../withdrawal/Reversal";
 import CreateKYC from "./CreateKYC";
 
+interface ComponentMap {
+  createKyc: React.ReactElement;
+  reversal: React.ReactElement;
+  dashHomeBeforeKyc: React.ReactElement;
+  dashHomeAfterKyc: React.ReactElement;
+}
+
+const components: ComponentMap = {
+  createKyc: <CreateKYC />,
+  reversal: <Reversal />,
+  dashHomeBeforeKyc: <DashHomeBeforeKyc />,
+  dashHomeAfterKyc: <DashHomeAfterKyc />,
+};
 
 function Home() {
   const kyc = useSelector((state: any) => state?.kyc);
   const user = useSelector((state: any) => state?.user);
   const auth = useSelector((state: any) => state?.auth);
-  // const { kyc, auth, user } = globalState;
-  const { kycBegin, kybBegin } = kyc;
-  const { reversalInitiated } = user;
 
-  return (
-    <div className="w-full  h-full   ">
-      {/* This page directs the Homepage for the dashboard */}
+  const renderComponent = () => {
+    if (kyc?.kycBegin || kyc?.kybBegin) return components.createKyc;
+    if (user?.reversalInitiated) return components.reversal;
+    if (auth?.is_completed_kyc) return components.dashHomeBeforeKyc;
+    return components.dashHomeAfterKyc;
+  };
 
-      {kycBegin || kybBegin ? (
-        <CreateKYC />
-      ) : reversalInitiated ? (
-        <Reversal />
-      ) : auth?.is_completed_kyc ? (
-        <DashHomeBeforeKyc />
-      ) : (
-        <DashHomeAfterKyc />
-      )}
-    </div>
-  );
+  return <div className="w-full h-full">{renderComponent()}</div>;
 }
 
 export default checkAuthentication(Home);

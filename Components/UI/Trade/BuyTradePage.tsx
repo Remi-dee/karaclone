@@ -260,13 +260,13 @@ const BuyTrade = () => {
           <h2 className="text-[#1E1E1E] font-bold  text-[24px] leading-[28.8px] ">
             Buy Trade
           </h2>
-          <p className="text-[16px] w-[500px] text-[#7C7C7C] leading-[24px] text-center ">
+          <p className="text-[16px] w-full md:w-[500px] text-[#7C7C7C] leading-[24px] text-center ">
             Please note that all transactions may take a few minutes to process.
             Rest assured, all transactions are safe and secure.
           </p>
         </div>
-        <div className="w-[513px]  mt-[24px] bg-[#FFFFFF] shadow-xl rounded-md p-[32px_40px_32px_40px]">
-          <div className="w-[433px] mx-auto">
+        <div className=" w-full md:w-[513px]  mt-[24px] bg-[#FFFFFF] shadow-xl rounded-md p-[32px_40px_32px_40px]">
+          <div className="  w-full md:w-[433px] mx-auto">
             <h2 className="font-bold  leading-[28px] text-[18px] tracking-[-2%] ">
               Transaction Details
             </h2>
@@ -400,7 +400,7 @@ const BuyTrade = () => {
                 >
                   Payment Method
                 </label>
-                <div className="h-[46px] w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px] border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
+                <div className="h-[46px] w-[95%] md:w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px] border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
                   <select
                     name="payment_method"
                     className="w-full text-gray-300 outline-none border-none text-xs p-1"
@@ -435,7 +435,7 @@ const BuyTrade = () => {
                       >
                         Bank Name
                       </label>
-                      <div className="h-[46px] w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
+                      <div className="h-[46px] w-[95%] md:w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
                         <select
                           name="bank_name"
                           onChange={handleSelectChange}
@@ -465,7 +465,7 @@ const BuyTrade = () => {
                       >
                         Account Number
                       </label>
-                      <div className="h-[46px] w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
+                      <div className="h-[46px] w-[95%] md:w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
                         <input
                           name="account_number"
                           onChange={handleSelectChange}
@@ -482,7 +482,7 @@ const BuyTrade = () => {
                       >
                         Account Name
                       </label>
-                      <div className="h-[46px] w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
+                      <div className="h-[46px]  w-[95%] md:w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
                         <input
                           type="text"
                           onChange={handleSelectChange}
@@ -507,7 +507,7 @@ const BuyTrade = () => {
           </div>
         </div>
 
-        <div className=" w-[513px] text-[#000000] mt-[24px] font-bold">
+        <div className=" w-full md:w-[513px] text-[#000000] mt-[24px] font-bold">
           <p className=" text-center text-[16px] leading-[24px]">
             Note: If the funds remain unused for 24 hours, they will
             automatically be returned to your account.

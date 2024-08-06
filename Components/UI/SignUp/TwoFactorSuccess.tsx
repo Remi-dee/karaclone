@@ -4,8 +4,8 @@ import Image from "next/image";
 import tick from "@/public/tick.svg";
 const TwoFactorSuccess = () => {
   return (
-    <div className="w-[550px] flex  justify-center items-center  h-[370px] mx-auto p-[32px_40px_32px_40px]   shadow-lg rounded-md border border-white-100">
-      <div className="w-[400px] gap-[40px] flex flex-col ">
+    <div className="  w-full md:w-[550px] flex  justify-center items-center  h-max md:h-[370px] mx-auto p-[32px_40px_32px_40px]   shadow-lg rounded-md border border-white-100">
+      <div className="   w-full md:w-[400px] gap-[40px] flex flex-col ">
         <div className="w-[56px] h-[56px] flex justify-center items-center shadow-md border border-[#EAECF0] rounded-[12px] ">
           <Image src={tick} alt="" />
         </div>

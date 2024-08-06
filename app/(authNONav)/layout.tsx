@@ -17,13 +17,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className=" flex h-[1000px] bg-[#FBFBFB]">
+    <div className=" flex h-max md:h-[1000px] bg-[#FBFBFB]">
       <div className="   _w-full lg:w-[45%] hidden lg:flex w-[450px] bg-white-100 h-[100vh] lg:h-full shadow-lg ">
-        <SignUpOptions
-        // accountType={params?.accountType}
-        // active={active}
-        // setActive={setActive}
-        />
+        <SignUpOptions />
       </div>
       <div className=" relative p-[1rem] lg:p-0  bottom-0  w-full  items-center  justify-center  flex top-0 h-full  flex-col  ">
         <div className=" w-full h-full lg:w-auto lg:h-auto">{children}</div>
