@@ -5,10 +5,9 @@ import Image from "next/image";
 import man from "@/public/loginMan.png";
 import stars from "@/public/stars.png";
 import manphone from "@/public/Images/manphone.png";
-import manCall from "@/public/Images/manCall.png";
 import manbluebg from "@/public/Images/manbluebg.png";
 import manscan from "@/public/Images/manscan.png";
-import { title } from "process";
+
 // export const metadata: Metadata = {
 //   title: "Fx",
 //   description:
