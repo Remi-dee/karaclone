@@ -16,6 +16,8 @@ import truelayerSlice from "./features/truelayer/truelayerSlice";
 import { userTransactionsApi } from "./features/userTransactions/userTransactionsApi";
 import userTransactionsSlice from "./features/userTransactions/userTransactionsSlice";
 import { notificationApi } from "./features/notification/notificationApi";
+import { chatApi } from "./features/chat/chatApi";
+import chatSlice from "./features/chat/chatSlice";
 
 export const store = configureStore({
   reducer: {
@@ -27,6 +29,7 @@ export const store = configureStore({
     [trueLayerApi.reducerPath]: trueLayerApi.reducer,
     [userTransactionsApi.reducerPath]: userTransactionsApi.reducer,
     [notificationApi.reducerPath]: notificationApi.reducer,
+    [chatApi.reducerPath]: chatApi.reducer,
 
     userTransactions: userTransactionsSlice,
     trueLayer: truelayerSlice,
@@ -35,6 +38,7 @@ export const store = configureStore({
     kyc: kycSlice,
     user: userSlice,
     trade: tradeSlice,
+    chat: chatSlice
   },
   devTools: false,
   middleware: (getDefaultMiddleware) =>
@@ -45,7 +49,8 @@ export const store = configureStore({
       tradeApi.middleware,
       trueLayerApi.middleware,
       userTransactionsApi.middleware,
-      notificationApi.middleware
+      notificationApi.middleware,
+      chatApi.middleware
     ),
 });
 
