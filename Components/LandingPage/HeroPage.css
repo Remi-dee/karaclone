@@ -1,0 +1,10 @@
+.animate-scroll {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+}
+
+.review-container {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+}

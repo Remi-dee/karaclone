@@ -5,7 +5,7 @@ import { TiEye } from "react-icons/ti";
 import { IoIosAddCircle, IoIosArrowRoundUp } from "react-icons/io";
 import { CgArrowsExchange } from "react-icons/cg";
 
-import TransactionTable from "../Transactions/TransactionTable";
+
 import { useRouter } from "next/navigation";
 
 import Image from "next/image";
@@ -25,9 +25,10 @@ import {
 import NGN from "@/public/Images/NGN.png";
 
 import GBP from "@/public/Images/GBP.png";
-
+import { ArrowsRightLeftIcon } from "@heroicons/react/24/outline";
 import { toast } from "react-toastify";
 import { useGetAllUserWalletsQuery } from "@/redux/features/user/userApi";
+import TransactionTable from "../UI/Transactions/TransactionTable";
 function WalletHome() {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -111,7 +112,7 @@ function WalletHome() {
             </p>
             <TiEye className=" text-[20px]  text-[#7C7C7C]" />
           </div>
-          <p className="leading-[24px] text-[#7C7C7C]  text-[16px] font-regular tracking-[-2%]">
+          <p className="leading-[24px] text-[#7C7C7C]  text-[14px] md:text-[16px] font-regular tracking-[-2%]">
             Select each currency to perform a transaction
           </p>
         </div>
@@ -147,22 +148,23 @@ function WalletHome() {
             </div>
           ))}
         </div>
-        <div className="md:flex-row flex flex-col mx-auto   gap-6 pt-4">
+        {/* md:flex-row flex flex-col mx-auto   gap-6 pt-4 */}
+        <div className="md:flex-row flex flex-col   md:w-full   gap-6 pt-4">
           <div
-            className={`w-[356px] action flex justify-center content-center place-items-center place-content-center gap-1 items-center cursor-pointer md:w-[122px] h-[42px] p-[16px] border rounded-md ${
+            className={`w-full md:w-[356px] action flex justify-center content-center place-items-center place-content-center gap-1 items-center cursor-pointer  h-[42px] p-[16px] border rounded-md ${
               selectedCurrency
                 ? "text-[#000] border-[#000] cursor-pointer"
-                : "text-gray-300 border-[#DCDCDC] cursor-not-allowed"
+                : "text-gray-300 border-[rgb(220,220,220)] cursor-not-allowed"
             }`}
             onClick={handleFundWallet}
           >
             <IoIosAddCircle />
-            <p className="text-[#1E1E1E] text-[12px] leading-[24px] cursor-pointer ">
+            <p className="text-[#1E1E1E]   text-[12px] leading-[24px] cursor-pointer ">
               Fund Wallet
             </p>
           </div>
           <div
-            className={`w-[356px] action flex justify-center items-center  md:w-[122px] h-[42px] p-[16px] border rounded-md ${
+            className={`w-full md:w-[356px] action flex justify-center items-center   h-[42px] p-[16px] border rounded-md ${
               selectedCurrency
                 ? "text-[#000] border-[#000] cursor-pointer"
                 : "text-gray-300 border-[#DCDCDC] cursor-not-allowed"
@@ -170,13 +172,13 @@ function WalletHome() {
             onClick={handleTrade}
           >
             <CgArrowsExchange className=" text-[20px]" />
-            <p className="text-[#1E1E1E] text-[12px] leading-[24px]  cursor-pointer">
+            <p className="text-[#1E1E1E] w-fit text-[12px] leading-[24px]  cursor-pointer">
               Trade
             </p>
           </div>
 
           <div
-            className={`w-[356px] action flex justify-center items-center  md:w-[122px] h-[42px] p-[16px] border rounded-md ${
+            className={`w-full md:w-[356px] action flex justify-center items-center   h-[42px] p-[16px] border rounded-md ${
               selectedCurrency
                 ? "text-[#000] border-[#000] cursor-pointer"
                 : "text-gray-300 border-[#DCDCDC] cursor-not-allowed"
@@ -184,7 +186,7 @@ function WalletHome() {
             onClick={handleReversal}
           >
             <IoIosArrowRoundUp className=" text-[20px]" />
-            <p className="text-[#1E1E1E] text-[12px] leading-[24px] cursor-pointer">
+            <p className="text-[#1E1E1E] w-fit text-[12px] leading-[24px] cursor-pointer">
               Reversal
             </p>
           </div>

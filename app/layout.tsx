@@ -8,7 +8,7 @@ import { Providers } from "./Provider";
 import { SessionProvider } from "next-auth/react";
 import { Suspense, useEffect } from "react";
 import { useLoadUserQuery } from "@/redux/features/user/userApi";
-import getTokenFromLocalStorage from "@/utils/FetchUserToken";
+import getTokenFromLocalStorage from "@/hooks/FetchUserToken";
 import { useDispatch } from "react-redux";
 import { addCurrentUser } from "@/redux/features/auth/authSlice";
 import { ToastContainer } from "react-toastify";

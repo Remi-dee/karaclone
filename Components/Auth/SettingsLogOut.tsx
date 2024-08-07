@@ -41,7 +41,7 @@ const SettingsLogoutModal = () => {
         router.push("/dashboard/Home");
       }}
     >
-      <div className="text-center">
+      <div className="text-center w-full">
         <div className="flex justify-center items-center space-x-5">
           <BiLogOut className="text-2xl text-twinklly-light-red" />
           <h1 className="text-textColor items-center text-2xl font-semibold">

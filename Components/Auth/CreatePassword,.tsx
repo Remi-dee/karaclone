@@ -72,9 +72,9 @@ const CreatePassword: FC<any> = () => {
   const [showPassword, setShowPassword] = useState("password");
 
   return (
-    <div className="w-[500px] bg-[#FFFFFF]  h-[693px]  shadow-lg rounded-md border border-white-100">
-      <div className="w-[400px] pt-6 flex flex-col gap-y-[24px]  mx-auto">
-        <div>
+    <div className=" p-[1rem] w-full  md:w-[500px] bg-[#FFFFFF]  md:h-[693px]  shadow-lg rounded-md border border-white-100">
+      <div className=" w-full md:w-[400px] pt-6 flex flex-col gap-y-[24px]  mx-0 md:mx-auto">
+        <div className=" w-full">
           <div className="w-[56px] h-[56px] flex justify-center items-center shadow-md border border-gray-200  rounded-md ">
             <Image src={passwordLogo} alt="" className="w-[28pxx]  h-[28px]" />
           </div>
@@ -83,10 +83,10 @@ const CreatePassword: FC<any> = () => {
             <p className="text-gray-300 text-sm">Create your password</p>
           </div>
         </div>
-        <div>
+        <div className=" w-full">
           <form
             // onSubmit={handleSubmit}
-            className=" flex flex-col gap-y-[32px] "
+            className=" w-full flex flex-col gap-y-[32px] "
           >
             <div className="flex flex-col mt-2 ">
               <label

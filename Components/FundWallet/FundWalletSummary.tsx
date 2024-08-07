@@ -19,17 +19,17 @@ function FundWalletSummary() {
       ) : (
         <div>
           <div className="flex mt-[32px]  flex-col justify-center items-center ">
-            <div className=" flex flex-col gap-[16px] w-[513px] text-center">
+            <div className=" flex flex-col gap-[16px] w-full md:w-[513px] text-center">
               <h2 className="text-[#1E1E1E] font-bold  text-[24px] leading-[28.8px] ">
                 Fund Wallet
               </h2>
-              <p className="text-[16px] w-[500px] text-[#7C7C7C] leading-[24px] text-center ">
+              <p className="text-[16px] w-full md:w-[500px] text-[#7C7C7C] leading-[24px] text-center ">
                 Please note that all transactions may take a few minutes to
                 process. Rest assured, all transactions are safe and secure.
               </p>
             </div>
-            <div className="w-[523px] h-[444px] mt-[24px] bg-[#FFFFFF] shadow-xl rounded-md p-[32px_40px_32px_40px]">
-              <div className="w-[433px] mx-auto">
+            <div className=" w-full  md:w-[523px] h-[444px] mt-[24px] bg-[#FFFFFF] shadow-xl rounded-md p-[32px_40px_32px_40px]">
+              <div className="  w-full md:w-[433px] mx-auto">
                 <h2 className="font-bold  leading-[28px] text-[18px] tracking-[-2%] ">
                   Transaction Details
                 </h2>

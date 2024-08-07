@@ -39,8 +39,8 @@ const SignUpContent = () => {
       <div className=" w-max h-max  ">
         <div className="w-full  h-[445px]  flex flex-col pb-4  items-center justify-center  bg-[#FBFBFB]">
           <div className=" bg-white-300">
-            <div className="w-[450px]  mx-auto  mt-20 shadow-lg border-[0.1px]  border-[#eaeaea]  ">
-              <div className="w-[400px] mx-auto pt-8 flex flex-col gap-y-[40px]">
+            <div className="md:w-[450px] w-[95%] p-[1rem]  mx-auto  mt-20 shadow-lg border-[0.1px]  border-[#eaeaea]  ">
+              <div className="md:w-[400px]  w-full mx-auto pt-8 flex flex-col gap-y-[40px]">
                 <div className="w-[56px] items-center h-[56px] flex justify-center shadow-lg border rounded-[12px]">
                   <TiUser className="text-[28px]" />
                 </div>

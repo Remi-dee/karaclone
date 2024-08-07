@@ -27,7 +27,7 @@ const CheckRateModal: React.FC<CustomModalprops> = ({ children }) => {
           className="fixed  top-0 left-0 right-0 w-screen h-screen flex justify-center items-center inset-0 z-[50000]  overflow-auto bg-[#989898] bg-opacity-10"
         >
           <div className=" " onClick={stopPropagationHandler}>
-            <div className="absolute bg-[white] rounded-[8px]  overflow-y-auto  invisible-scrollbar  shadow-lg right-[6%]   top-[7rem]  w-[513px]  max-w-[513px] max-h-[80vh]  min-h-[350px] flex">
+            <div className="absolute bg-[white] rounded-[8px]  overflow-y-auto  invisible-scrollbar  shadow-lg right-[4%] md:right-[6%]   top-[2rem] md:top-[7rem]  w-[95%] md:w-[513px]   max-w-full md:max-w-[513px] max-h-[80vh]  min-h-max md:min-h-[350px] flex  ">
               {children}
               <div
                 onClick={closeModalHandler}

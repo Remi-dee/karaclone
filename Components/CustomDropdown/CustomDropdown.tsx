@@ -40,7 +40,7 @@ const CustomDropdown: React.FC<DropdownProps> = ({
       onMouseLeave={() => setIsHovered(false)}
     >
       <div
-        className={`text-xs md:text-[16px] border-[#DCDCDC] p-[4px_24px_4px_24px]  flex justify-center items-center content-center rounded-md  text-gray-800 gap-[10px] cursor-pointer ${
+        className={`text-xs md:text-[16px] border-[#DCDCDC] p-[4px_12px] md:p-[4px_24px_4px_24px]  flex justify-center items-center content-center rounded-md  text-gray-800 gap-[10px] cursor-pointer ${
           isHovered ? "bg-white-100" : ""
         }`}
         onClick={() => setIsHovered(!isHovered)}

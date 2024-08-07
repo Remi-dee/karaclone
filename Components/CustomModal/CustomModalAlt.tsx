@@ -37,7 +37,7 @@ const DefaultModal: React.FC<CustomModalTypes> = ({
               />
             </svg>
           </button>
-          <div className="mt-8 pb-2">{children}</div>
+          <div className="mt-8 pb-2 w-full">{children}</div>
         </div>
       </div>
     </div>
