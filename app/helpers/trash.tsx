@@ -466,3 +466,267 @@
 // };
 
 // export default Dashboard;
+
+// contact page
+
+// "use client";
+// import React from "react";
+// import Navbar from "@/Components/LandingPage/Navbar";
+// import { Cta } from "@/Components/LandingPage/component/Cta";
+// import Footer from "@/Components/LandingPage/Footer";
+// import { FaInstagram, FaTiktok, FaWhatsapp } from "react-icons/fa";
+
+// const contactMethods = [
+//   {
+//     label: "Email Us",
+//     value: "fxkarasell@gmail.com",
+//   },
+//   {
+//     label: "Call Us",
+//     value: "+234 789 898 7542",
+//   },
+//   {
+//     label: "Address",
+//     value: "Plot 32, Araromi Road, Lekki Phase 1, 22134, Lagos, Nigeria",
+//   },
+// ];
+
+// const socialLinks = [
+//   {
+//     href: "https://facebook.com",
+//     icon: <FaWhatsapp className="size-4" />,
+//     ariaLabel: "Facebook",
+//   },
+//   {
+//     href: "https://twitter.com",
+//     icon: <FaTiktok className="size-4" />,
+//     ariaLabel: "Twitter",
+//   },
+//   {
+//     href: "https://instagram.com",
+//     icon: <FaInstagram className="size-4" />,
+//     ariaLabel: "Instagram",
+//   },
+// ];
+
+// const ContactMethod = ({ label, value }: { label: any; value: any }) => (
+//   <div className="flex bg-[white] border border-slate-200 rounded-lg justify-between p-4 items-start py-5 gap-10">
+//     <div className="flex gap-4 flex-col">
+//       <p className="text-slate-700 font-bold">{label}</p>
+//       <p className="text-slate-400 text-sm">{value}</p>
+//     </div>
+//     <div className="w-max h-max bg-[#d700360e] p-4 rounded-xl">
+//       <svg
+//         xmlns="http://www.w3.org/2000/svg"
+//         fill="none"
+//         viewBox="0 0 24 24"
+//         strokeWidth={1.5}
+//         stroke="currentColor"
+//         className="size-6 text-[#D70035]"
+//       >
+//         <path
+//           strokeLinecap="round"
+//           strokeLinejoin="round"
+//           d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
+//         />
+//       </svg>
+//     </div>
+//   </div>
+// );
+
+// const SocialLink = ({
+//   href,
+//   icon,
+//   ariaLabel,
+// }: {
+//   href: string;
+//   icon: any;
+//   ariaLabel: string;
+// }) => (
+//   <a
+//     href={href}
+//     className="border rounded-full border-slate-200 text-slate-800 p-2.5 hover:border-slate-500 hover:bg-slate-100 duration-500 transition-all"
+//     aria-label={ariaLabel}
+//   >
+//     {icon}
+//   </a>
+// );
+
+// const ContactUs = () => (
+//   <div>
+//     <Navbar />
+//     <div className="bg-slate-50 w-full">
+//       <div className="min-w-7xl max-w-7xl flex-col flex items-center mx-auto py-20">
+//         <p className="text-center mt-10 text-slate-500">Have Questions.</p>
+//         <h1 className="text-4xl font-bold text-slate-900">Contact Our Team</h1>
+//         <div className="flex flex-1 w-full px-[1rem] lg:px-0 mx-auto gap-10 mt-10">
+//           <section>
+//             <div className="flex flex-col space-y-4 container">
+//               {contactMethods.map((method, index) => (
+//                 <ContactMethod key={index} {...method} />
+//               ))}
+//               <div className="flex bg-[white] border border-slate-200 rounded-lg justify-between p-4 items-start py-5 gap-10">
+//                 <div className="flex gap-4 flex-col">
+//                   <p className="text-slate-700 font-bold">Socials</p>
+//                   <div className="flex gap-4 items-center">
+//                     {socialLinks.map((link, index) => (
+//                       <SocialLink key={index} {...link} />
+//                     ))}
+//                   </div>
+//                 </div>
+//               </div>
+//             </div>
+//           </section>
+//           <div className="flex flex-col items-center justify-center flex-1 bg-white rounded-xl border border-[#eee] p-10 bg-[white]">
+//             <form className="w-full">
+//               <div className="flex flex-col space-y-4">
+//                 <div className="flex space-x-4 text-sm">
+//                   <div className="flex flex-col w-1/2">
+//                     <label htmlFor="full-name" className="mb-2 text-slate-500">
+//                       Full Name
+//                     </label>
+//                     <input
+//                       id="full-name"
+//                       type="text"
+//                       placeholder="Full Name"
+//                       className="border p-3 rounded-md focus:outline-[#616161] border-[#eee] text-sm placeholder:text-slate-500"
+//                     />
+//                   </div>
+//                   <div className="flex flex-col w-1/2">
+//                     <label htmlFor="email" className="mb-2 text-slate-500">
+//                       Email
+//                     </label>
+//                     <input
+//                       id="email"
+//                       type="email"
+//                       placeholder="Email"
+//                       className="border p-3 rounded-md focus:outline-[#616161] border-[#eee] text-sm placeholder:text-slate-500"
+//                     />
+//                   </div>
+//                 </div>
+//                 <div className="flex flex-col">
+//                   <label htmlFor="subject" className="mb-2 text-slate-500">
+//                     Subject
+//                   </label>
+//                   <input
+//                     id="subject"
+//                     type="text"
+//                     placeholder="Subject"
+//                     className="border p-3 rounded-md focus:outline-[#616161] border-[#eee] text-sm placeholder:text-slate-500"
+//                   />
+//                 </div>
+//                 <div className="flex flex-col">
+//                   <label htmlFor="message" className="mb-2 text-slate-500">
+//                     Message
+//                   </label>
+//                   <textarea
+//                     id="message"
+//                     placeholder="Message"
+//                     className="border p-3 rounded-md focus:outline-[#616161] border-[#eee] text-sm placeholder:text-slate-500"
+//                     rows={10}
+//                     cols={50}
+//                   ></textarea>
+//                 </div>
+//                 <button
+//                   type="submit"
+//                   className="bg-[#D70035] text-white p-3 rounded-md"
+//                 >
+//                   Send Message
+//                 </button>
+//               </div>
+//             </form>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//     <Cta />
+//     <Footer />
+//   </div>
+// );
+
+// export default ContactUs;
+
+// tradehistory
+
+// mport Image from "next/image";
+// import USD from "@/public/Images/USD.png";
+
+// const TradeHistory = () => {
+//   return (
+//     <div className=" w-[550px] m-0 overflow-auto  flex  justify-center   h-[485px]">
+//       <div className="  mt-[24px]   ">
+//         <p className="text-xl mb-[24px] text-center text-[#3D3D3D]  tracking-[-2%] leading-[24px]  font-bold ">
+//           Trade History
+//         </p>
+//         <div className="flex   w-[470px]  items-center  p-[8px_16px_8px_16px]  gap-10 rounded-md bg-[#7F56D91A]">
+//           <div className=" justify-center flex flex-col w-[312px] content-center   ">
+//             <div className="flex  mx-auto  w-max justify-start items-center gap-2">
+//               <Image src={USD} alt="" width={15} height={15} />
+//               <span className="font-semibold text-[14px] leadidng-[16.8px] text-[#1E1E1E]">
+//                 US Dollar
+//               </span>
+//             </div>
+//             <div className=" w-max  mx-auto">
+//               <p className="text-[12px] w-max    text-[#7C7C7C] leading-[14.4px] mt-[8xp] tracking-[-2%]    ">
+//                 Units left :{" "}
+//                 <span className=" font-semibold text-[14px] leadidng-[16.8px] text-[#1E1E1E] tracking-[-2%]">
+//                   0 USD
+//                 </span>
+//               </p>
+//             </div>
+//           </div>
+//           <div className="rounded-[8px] flex justify-center items-center ml-6 bg-[#FF104B1A] w-[102px] h-[30px]   ">
+//             <p className="text-xs font-semibold text-red-600  leading-[14.4px] tracking-[-2%]   ">
+//               Trade Closed
+//             </p>
+//           </div>
+//         </div>
+//         <table className="w-[100%] mt-6 text-black-200 overflow-auto border-collapse">
+//           <tr className="bg-gray-900  text-[16px] font-medium tracking-[-2%]  leading-[24%]   ">
+//             <th className="p-4 text-left">Date & Time</th>
+//             <th className="p-4 text-left">Amount Sold</th>
+//             <th className="p-4 text-left">Remaining Unit</th>
+//           </tr>
+//           <tr className="text-gray-800 border-b text-xs border-b-gray-500">
+//             <td className="p-4  text-[#7C7C7C] text-[16px] leading-[24px] text-right  ">
+//               12/02/2024 <span className=" mr-[5px]"> </span> |{" "}
+//               <span className=" ml-[5px]">2.00PM</span>
+//             </td>
+//             <td className="p-4  text-[#7C7C7C] text-[16px] leading-[24px] text-left">
+//               500 USD
+//             </td>
+//             <td className="p-4  text-[#7C7C7C] text-[16px] leading-[24px] text-left">
+//               1500 USD
+//             </td>
+//           </tr>
+//           <tr className="text-gray-800 border-b text-xs border-b-gray-500">
+//             <td className="p-4  text-[#7C7C7C] text-[16px] leading-[24px] text-right  ">
+//               12/02/2024 <span className=" mr-[5px]"> </span> |{" "}
+//               <span className=" ml-[5px]">2.00PM</span>
+//             </td>
+//             <td className="p-4  text-[#7C7C7C] text-[16px] leading-[24px] text-left">
+//               500 USD
+//             </td>
+//             <td className="p-4  text-[#7C7C7C] text-[16px] leading-[24px] text-left">
+//               1500 USD
+//             </td>
+//           </tr>
+//           <tr className="text-gray-800 border-b text-xs border-b-gray-500">
+//             <td className="p-4  text-[#7C7C7C] text-[16px] leading-[24px] text-right  ">
+//               12/02/2024 <span className=" mr-[5px]"> </span> |{" "}
+//               <span className=" ml-[5px]">2.00PM</span>
+//             </td>
+//             <td className="p-4  text-[#7C7C7C] text-[16px] leading-[24px] text-left">
+//               500 USD
+//             </td>
+//             <td className="p-4  text-[#7C7C7C] text-[16px] leading-[24px] text-left">
+//               1500 USD
+//             </td>
+//           </tr>
+//         </table>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default TradeHistory;

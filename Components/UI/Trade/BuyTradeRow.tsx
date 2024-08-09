@@ -6,7 +6,7 @@ interface TradeRowProps {
   handleBuyButton: (tradeId: string) => void;
 }
 
-const TradeRow: React.FC<TradeRowProps> = ({
+const BuyTradeRow: React.FC<TradeRowProps> = ({
   item,
   isLoading,
   handleBuyButton,
@@ -43,4 +43,4 @@ const TradeRow: React.FC<TradeRowProps> = ({
   );
 };
 
-export default TradeRow;
+export default BuyTradeRow;

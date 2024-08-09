@@ -1,9 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { checkAuthentication } from "@/hooks/ProtectedRoute";
 import Reversal from "../withdrawal/Reversal";
-import DashHomeBeforeKyc from "../features/DashHomeBeforeKyc";
-import DashHomeAfterKyc from "../features/DashHomeAfterKyc";
+import DashHomeBeforeKyc from "../UI/Home/DashHomeBeforeKyc";
+import DashHomeAfterKyc from "../UI/Home/DashHomeAfterKyc";
 import CreateKYC from "./CreateKYC";
 
 interface ComponentMap {
@@ -35,4 +34,4 @@ function Home() {
   return <div className="w-full h-full">{renderComponent()}</div>;
 }
 
-export default checkAuthentication(Home);
+export default Home;

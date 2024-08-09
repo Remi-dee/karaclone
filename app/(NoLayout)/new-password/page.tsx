@@ -5,7 +5,7 @@ import React from "react";
 import fxKara from "@/public/fxkara-logo.svg";
 import Image from "next/image";
 import Link from "next/link";
-import NewPassword from "@/Components/Auth/NewPassword";
+import NewPassword from "@/Components/Layout/NewPassword";
 
 function page() {
   return (

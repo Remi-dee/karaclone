@@ -2,11 +2,10 @@
 
 import { useRouter } from "next/navigation";
 import React from "react";
-import { IoIosCheckmark } from "react-icons/io";
 import { toggleReversalState } from "@/redux/features/user/userSlice";
 import { useDispatch } from "react-redux";
 
-const WithdrawalComplete = () => {
+const ReversalSuccessful = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const handleDone = () => {
@@ -17,11 +16,11 @@ const WithdrawalComplete = () => {
     <div className=" w-full">
       <div className="flex  flex-col w-full items-center justify-start gap-[24px] text-center text-2xl text-neutral-black">
         <div className=" w-full md:w-[550px] p-[1em]  md:p-[32px_40px_32px_40px] mt-1 md:mt-[4rem] h-[326px] gap-[25px] rounded-lg bg-white-100 shadow-lg overflow-hidden flex flex-col justify-center items-center  box-border max-w-full text-left text-sm text-neutral-color-500 ">
-          <div className=" w-[20px] md:w-[56px] h-[56px] shadow-sm flex justify-center items-center border border-[#EAECF0] rounded-[12px] ">
-            <div className="w-[20px]  rounded-sm text-white-100">
+          <div className=" w-[35px] md:w-[56px] h-[40px] md:h-[56px] shadow-sm flex justify-center items-center border border-[#EAECF0] rounded-[12px] ">
+            <div className="w-[23px] h-[23px]  rounded-sm text-white-100">
               <svg
-                width="28"
-                height="29"
+                width="23"
+                height="24"
                 viewBox="0 0 28 29"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +44,7 @@ const WithdrawalComplete = () => {
 
           <button
             onClick={handleDone}
-            className="p-[12px] w-full md:w-[470px] text-[#fff] bg-primaryBtn  h-[44px] rounded-lg"
+            className="p-[12px] w-[90%] md:w-[470px] text-[#fff] bg-primaryBtn  h-[44px] rounded-lg"
           >
             Done
           </button>
@@ -55,4 +54,4 @@ const WithdrawalComplete = () => {
   );
 };
 
-export default WithdrawalComplete;
+export default ReversalSuccessful;

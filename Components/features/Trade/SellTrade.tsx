@@ -1,23 +1,23 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Pagination from "../../Pagination";
-import EmptyTrade from "./EmptyTrade";
 import { useDispatch, useSelector } from "react-redux";
+import Pagination from "../../Pagination";
 import {
   addDataForSelectedTrade,
   toggleBuyTradeDisplay,
   toggleBuyTradeState,
 } from "@/redux/features/user/userSlice";
-import CustomModal from "../../CustomModal/CustomModal";
 import { openTradeModal } from "@/redux/modal/modalSlice";
 import { RootState } from "@/redux/store";
 import {
   useGetSingleTradeQuery,
   useGetAllTradeExecptMineQuery,
 } from "@/redux/features/trade/tradeApi";
-import TradeRow from "./TradeRow";
+import EmptyTrade from "@/Components/UI/Trade/EmptyTrade";
+import BuyMobileCards from "@/Components/UI/Trade/BuyMobileCard";
+import BuyTradeRow from "@/Components/UI/Trade/BuyTradeRow";
 
-const SellTradeTable = () => {
+const SellTrade = () => {
   const [tradeId, setTradeId] = useState<string | null>(null);
   const [listOfTrades, setListOfTrades] = useState([]);
   const isModalOpen = useSelector((state: RootState) => state.modal.isOpen);
@@ -50,45 +50,12 @@ const SellTradeTable = () => {
 
   const renderTradeRows = () =>
     listOfTrades.map((item: any, i: any) => (
-      <TradeRow
+      <BuyTradeRow
         key={i}
         item={item}
         isLoading={allTradeData.isLoading}
         handleBuyButton={handleBuyButton}
       />
-    ));
-
-  const renderMobileCards = () =>
-    listOfTrades.map((item: any, i: any) => (
-      <div
-        key={i}
-        className="p-[24px] border rounded-[24px] flex md:hidden gap-[12px]"
-      >
-        <div className="flex flex-col gap-[12px]">
-          <h2 className="text-[#656565] leading-[17.8px] text-[14px]">
-            TZN-324532A
-          </h2>
-          <h1 className="font-bold leading-[30.51px] text-[24px]">
-            2000 <span className="font-[500] text-[17.8px]">USD</span>
-          </h1>
-          <p>1550 NGN / $1</p>
-          <span className="flex items-center">
-            Limit:
-            <p className="text-[14px] text-[#3D3D3D] leading-[17.8px] font-bold">
-              10 - 2000 USD
-            </p>
-          </span>
-        </div>
-        <div className="flex items-end">
-          <button
-            disabled={allTradeData.isLoading}
-            onClick={() => handleBuyButton(item.trade_id)}
-            className="w-[130px] h-[30px] rounded-md text-sm text-white-100 bg-primaryBtn p-1"
-          >
-            Buy
-          </button>
-        </div>
-      </div>
     ));
 
   return (
@@ -111,7 +78,11 @@ const SellTradeTable = () => {
             {/* <Pagination /> */}
           </div>
           <div className="h-[30rem] overflow-y-auto flex flex-col gap-[12px] md:hidden">
-            {renderMobileCards()}
+            <BuyMobileCards
+              listOfTrades={listOfTrades}
+              handleBuyButton={handleBuyButton}
+              isLoading={allTradeData.isLoading}
+            />
             {/* <Pagination /> */}
           </div>
         </>
@@ -124,4 +95,4 @@ const SellTradeTable = () => {
   );
 };
 
-export default SellTradeTable;
+export default SellTrade;

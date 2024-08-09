@@ -59,7 +59,7 @@ const VerifyEmail: FC = () => {
   };
 
   return (
-    <div className="md:w-[550px]  w-full h-max md:h-[451px] mx-auto p-[1rem] md:p-[32px_40px_32px_40px] shadow-lg rounded-md border border-white-100">
+    <div className="md:w-[550px]  w-full h-max md:h-[451px] mx-auto p-[1rem] md:p-[32px_40px_32px_40px]  rounded-md  shadow-[40px_4px_40px_0px_#7F56D91A] border border-[#EAECF0]  md:shadow-lg  ">
       <div className="w-full md:w-[470px] mx-0 md:mx-auto">
         <div className="md:w-[56px] md:h-[56px] h-[39px] w-[39px] flex justify-center items-center shadow-md border border-gray-200 rounded-[12px]">
           <MdMail className=" text-[24px]   md:text-[28px]" />

@@ -62,7 +62,7 @@ const BusinessDetails: FC = () => {
   );
 
   return (
-    <div className="w-full md:w-[550px] h-max md:h-[760px] mx-auto mt-4 rounded-[12px] md:p-0 p-[1rem] shadow-lg bg-[#FFFFFF]">
+    <div className="w-full md:w-[550px] h-max md:h-[760px] mx-auto mt-4 rounded-[12px] md:p-0 p-[1rem]  bg-[#FFFFFF]  shadow-[40px_4px_40px_0px_#7F56D91A] border border-[#EAECF0]  md:shadow-lg  ">
       <div className="w-full md:w-[470px] pt-6 mx-auto">
         <div className="w-[56px] h-[56px] flex justify-center items-center shadow-md border border-gray-200 rounded-[12px]">
           <Image

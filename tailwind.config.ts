@@ -15,6 +15,8 @@ const config: Config = {
       fontFamily: {
         Poppins: ["var(--font-Poppins)"],
         Josefin: ["var(--font-Josefin)"],
+        inter: ["inter"],
+        lato: ["lato"],
       },
 
       colors: {

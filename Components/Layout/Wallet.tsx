@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import FundAmount from "../FundWallet/FundAmount";
-import FundMethod from "../FundWallet/FundMethod";
-import FundSuccess from "../FundWallet/FundSuccess";
-import WalletHome from "../Wallet/WalletHome";
 import { useSelector } from "react-redux";
+import WalletHome from "../UI/Wallet/WalletHome";
+import FundAmount from "../features/FundWallet/FundAmount";
+import FundMethod from "../features/FundWallet/FundMethod";
+import FundSuccess from "../features/FundWallet/FundSuccess";
 
 export default function Wallet() {
   const globalState = useSelector((state: any) => state?.user);

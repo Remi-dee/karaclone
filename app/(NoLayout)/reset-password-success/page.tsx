@@ -12,9 +12,9 @@ const ResetPasswordSuccess = () => {
     e.preventDefault();
   };
   return (
-    <div className="flex w-full  justify-center p-[32px_40px_32px_40px]  bg-white-300 h-[960px]">
-      <div className=" gap-[24px]  text-center  h-[381px] flex   flex-col justify-center w-full">
-        <div className=" w-full flex justify-center pt-[120px]">
+    <div className="flex w-full  justify-center p-[1rem] md:p-[32px_40px_32px_40px]  bg-white-300 h-[960px]">
+      <div className=" gap-[24px]  text-center     h-max md:h-[381px] flex   flex-col justify-center w-full">
+        <div className=" w-full flex justify-center pt-[20px] md:pt-[120px]">
           <Image
             src={fxKara}
             className="mx-auto mix-blend-darken"
@@ -24,14 +24,15 @@ const ResetPasswordSuccess = () => {
         </div>
 
         {/* shadow container*/}
-        <div className="border mx-auto border-slate-100  mt-[24px]  shadow-md  h-[381px] bg-white-100 rounded-xl w-[551px] text-center  p-[32px_40px_32px_40px] flex flex-col gap-[24px] justify-center items-center text-[black]">
-          <div className="w-[20px] h-[20px] bg-green-500 rounded-sm text-white-100">
-            <IoIosCheckmark className="w-full" />
+        <div className="border mx-auto border-slate-100  mt-[24px]  shadow-md  h-[381px] bg-white-100 rounded-xl w-full md:w-[551px] text-center  p-[1rem] md:p-[32px_40px_32px_40px] flex flex-col gap-[24px] justify-center items-center text-[black]">
+          <div className="w-[35px] h-[35px] flex justify-center items-center shadow-md border border-gray-200 rounded-md ">
+            <div className="w-[20px] h-[20px] flex items-center justify-center bg-green-500 rounded-sm text-white-100">
+              <IoIosCheckmark className="w-full text-[18px] " />
+            </div>
           </div>
 
-          <div className="w-[400px] pt-6 mx-auto">
-            <div className="w-[35px] h-[30px] flex justify-center items-center shadow-md border border-gray-200 rounded-md "></div>
-            <h3 className="font-semibold text-xl py-2">
+          <div className="  w-full md:w-[430px] pt-6 mx-auto">
+            <h3 className="font-bold font-lato text-[#3D3D3D] leading-[38.4px] tracking-[-2%] text-xl md:text-[32px] py-2">
               Password Reset Successful
             </h3>
             <p className="text-gray-200 text-sm pb-4">
@@ -40,9 +41,9 @@ const ResetPasswordSuccess = () => {
 
             <button
               //   onClick={() => setActive(active + 1)}
-              className="w-full p-2 mb-6 rounded-md text-center  bg-primaryBtn text-white-100 "
+              className="w-full p-2  mt-[24px] rounded-md text-center leading-[20px] font-lato  font-semibold tracking-[2%] bg-primaryBtn text-white-100 "
             >
-              Continue
+              Login Now
             </button>
           </div>
         </div>

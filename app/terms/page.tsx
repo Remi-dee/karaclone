@@ -206,7 +206,7 @@ const Terms: React.FC = () => {
           closure of your Fx Karasell Account.
         </p>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };
