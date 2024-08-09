@@ -1,8 +1,7 @@
 "use client";
 import React, { FC, useState } from "react";
 import { IoIosArrowRoundBack, IoMdCopy } from "react-icons/io";
-import copy from "@/public/svg/copy.svg";
-import Image from "next/image";
+
 import FundWalletSummary from "./FundWalletSummary";
 // type Props = {
 //   active: number;
@@ -45,27 +44,29 @@ const DirectDebit: FC<any> = () => {
         <FundWalletSummary />
       ) : (
         <div>
-          <div
-            onClick={handleBack}
-            className="my-4 mx-6 flex justify-start items-center gap-1 cursor-pointer"
-          >
-            <IoIosArrowRoundBack className="bg-primaryBtn text-white-100 rounded-sm" />
-            <p className="text-primaryBtn font-semibold">Go-Back</p>
-          </div>
+          <div className="flex flex-row items-center justify-between text-sm text-neutral-color-800">
+            <div
+              onClick={handleBack}
+              className="flex items-center text-[16px] leading-[24px] tracking-[-2%] w-full gap-1 cursor-pointer"
+            >
+              <IoIosArrowRoundBack className="bg-primaryBtn text-white-100 rounded-sm" />
+              <p className="text-primaryBtn font-semibold ml-[4px] mt-[3px] md:mt-0">
+                Go-Back
+              </p>
+            </div>
 
-          <div className="flex flex-row items-center justify-end text-sm text-neutral-color-800">
             <div className="flex flex-row items-center justify-center gap-[16px]">
               <img
-                className="h-10 w-10 relative"
+                className="md:h-10 h-8 w-8 md:w-10 relative"
                 loading="lazy"
                 alt=""
-                src="/progress.svg"
+                src="/svg/progress.svg"
               />
               <div className="flex flex-col items-start justify-start gap-[2px]">
                 <div className="relative leading-[20px] inline-block min-w-[54px]">
                   Step 1/3
                 </div>
-                <div className="relative text-base tracking-[-0.39px] leading-[24px] font-semibold text-primary-main whitespace-pre-wrap inline-block min-w-[99px]">
+                <div className="relative text-xs md:text-base tracking-[-0.39px] leading-[24px] font-semibold text-primary-main whitespace-pre-wrap inline-block min-w-[99px]">
                   Enter Amount
                 </div>
               </div>
@@ -94,7 +95,7 @@ const DirectDebit: FC<any> = () => {
                     name=""
                     value={selectedBank}
                     onChange={handleChange}
-                    className="w-full rounded-[12px] text-gray-300 outline-none border-none text-xs focus:border-black focus:ring-0 focus:outline-none p-1"
+                    className="w-full rounded-[12px]  h-full outline-none border-none text-xs focus:border-black focus:ring-0 focus:outline-none p-1"
                     id=""
                   >
                     {["Select Payment Method", "Zenith", "Union", "Wema"].map(

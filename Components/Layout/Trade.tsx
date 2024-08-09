@@ -2,9 +2,8 @@
 import React, { useState } from "react";
 import { IoIosAddCircle } from "react-icons/io";
 import TradeTab from "../UI/Trade/TradeTab";
-import TradeTable from "../UI/Trade/SellTradeTable";
-import BuyTradeTable from "../UI/Trade/BuyTradeTable";
-import CreateTrade from "../features/CreateTradeComp";
+import TradeTable from "../features/Trade/SellTrade";
+import BuyTradeTable from "../features/Trade/BuyTradeTable";
 import { useDispatch, useSelector } from "react-redux";
 import CreateTradeDetails from "../UI/Trade/CreateTradeDetails";
 import {
@@ -12,8 +11,9 @@ import {
   toggleCreateTrade,
   toggleCreateTradeStage,
 } from "@/redux/features/user/userSlice";
-import BuyTradePage from "../UI/Trade/BuyTradePage";
 import CreateTradeSuccess from "../UI/Trade/CreateTradeSuccess";
+import BuyTradePage from "../features/Trade/BuyTradePage";
+import CreateTrade from "../features/Trade/CreateTradeComp";
 
 const Trade = () => {
   const globalState = useSelector((state: any) => state?.user);
@@ -38,7 +38,7 @@ const Trade = () => {
   return (
     <div className=" ">
       {createTradeState === 1 ? (
-        <div className=" h-[840px] bg-white-100  rounded-[8px] w-full p-[1.5rem] shadow-lg  box-border">
+        <div className="  min-h-[32rem]  h-max md:h-[840px] bg-white-100  rounded-[8px] w-full p-[1.5rem] shadow-lg  box-border">
           <div className=" w-full">
             <div className="">
               <div className="flex justify-between items-center">

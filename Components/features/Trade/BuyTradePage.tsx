@@ -1,6 +1,5 @@
 "use client";
 import { ChangeEvent, ReactElement, useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { BiSolidCopy } from "react-icons/bi";
 import Image from "next/image";
@@ -12,23 +11,17 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addBoughtTrade,
   toggleBuyTradeDisplay,
-  toggleBuyTradeSuccessModal,
   toggleCreateTradeStage,
 } from "@/redux/features/user/userSlice";
-import SelectBank from "./SelectBank";
 import TradeModal from "../../CustomModal/TradeModal";
-import BeneficaryDetails from "./BeneficaryDetails";
 import TradeSuccessModal from "../../CustomModal/TradeSuccessModal";
-import TradeTransSuccesss from "./TradeTransSuccess";
-import { openModal } from "@/redux/modal/modalSlice";
 import { RootState } from "@/redux/store";
-import AmountToTrade from "./AmountToTrade";
 import {
   useBuyTradeMutation,
   useCurrencyConverterQuery,
   useCurrentRateQuery,
 } from "@/redux/features/trade/tradeApi";
-import { handleCreateTruelayerPayment } from "./util/truelayerService";
+import { handleCreateTruelayerPayment } from "../../../utils/truelayerService";
 import { useCreatePaymentMutation } from "@/redux/features/truelayer/truelayerApi";
 import { useLoadUserQuery } from "@/redux/features/user/userApi";
 import {
@@ -38,18 +31,11 @@ import {
 } from "@/redux/features/truelayer/truelayerSlice";
 import { useMonoWidget } from "@/app/mono/monoServices";
 import { toast } from "react-toastify";
-
-function formatReadableDate(isoDateString: string): string {
-  const date = new Date(isoDateString);
-  const year = date.getFullYear();
-  const month = (date.getMonth() + 1).toString().padStart(2, "0");
-  const day = date.getDate().toString().padStart(2, "0");
-  const hours = date.getHours().toString().padStart(2, "0");
-  const minutes = date.getMinutes().toString().padStart(2, "0");
-  const seconds = date.getSeconds().toString().padStart(2, "0");
-  const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-  return formattedDate;
-}
+import { openModal } from "@/redux/modal/modalSlice";
+import BeneficaryDetails from "@/Components/UI/Trade/BeneficaryDetails";
+import SelectBank from "@/Components/UI/Trade/SelectBank";
+import formatReadableDate from "@/hooks/formatReadableDate";
+import AmountToTrade from "@/Components/UI/Trade/AmountToTrade";
 
 const BuyTrade = () => {
   const globalState = useSelector((state: any) => state.user);
@@ -177,7 +163,9 @@ const BuyTrade = () => {
     isPaymentSuccess,
   ]);
 
-  const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>): void => {
+  const handleSelectChange = (
+    event: ChangeEvent<HTMLSelectElement> | any
+  ): void => {
     const { name, value } = event.target;
     setBuyTradeDetails((prevState) => ({
       ...prevState,
@@ -256,7 +244,7 @@ const BuyTrade = () => {
         <p className="text-primaryBtn font-semibold">Go-Back</p>
       </div>
       <div className="flex mt-[32px]  flex-col justify-center items-center ">
-        <div className=" flex flex-col gap-[16px] w-[513px] text-center">
+        <div className=" flex flex-col gap-[16px] w-full md:w-[513px] text-center">
           <h2 className="text-[#1E1E1E] font-bold  text-[24px] leading-[28.8px] ">
             Buy Trade
           </h2>

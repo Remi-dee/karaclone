@@ -3,8 +3,8 @@ import { FaEye } from "react-icons/fa";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import arrowRight from "@/public/svg/arrow-right.svg";
-import QuickActionCard from "../UI/Home/QuickActionCard";
-import TransactionTable from "../UI/Transactions/TransactionTable";
+import QuickActionCard from "./QuickActionCard";
+import TransactionTable from "../Transactions/TransactionTable";
 
 function DashHomeBeforeKyc() {
   const router = useRouter();

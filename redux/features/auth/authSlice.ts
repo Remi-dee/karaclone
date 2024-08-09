@@ -6,7 +6,7 @@ const initialState = {
   loadingState: false,
   token: "",
   user: "",
-  registrationStage: 1,
+  registrationStage: 2,
   currentUser: {},
   logoutModalOpen: false,
   name: "",
@@ -35,7 +35,9 @@ const authSlice = createSlice({
   reducers: {
     increaseRegistrationStage: (state) => {
       state.registrationStage += 1;
-      console.log(state.registrationStage);
+    },
+    decreaseRegistrationStage: (state) => {
+      state.registrationStage = state.registrationStage - 1;
     },
     addCurrentUser: (state, { payload }) => {
       console.log(payload);
@@ -83,6 +85,7 @@ export const {
   userLoggedOut,
   toggleLogoutModal,
   addBasicDetailsToObject,
+  decreaseRegistrationStage,
 } = authSlice.actions;
 export const authSelector = (state: RootState) => state.auth;
 export default authSlice.reducer;

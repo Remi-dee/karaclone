@@ -3,10 +3,6 @@
 import { useRouter } from "next/navigation";
 import React from "react";
 
-import {
-  toggleCreateTrade,
-  toggleCreateTradeStage,
-} from "@/redux/features/user/userSlice";
 import { useDispatch } from "react-redux";
 import { Modal } from "../../modal/modal";
 import { setTransactionPaymentId } from "@/redux/features/truelayer/truelayerSlice";
@@ -32,10 +28,9 @@ const CreateTradeSuccess = ({
         router.push("/");
       }}
     >
-      {" "}
       <div>
         <div className="flex  flex-col items-center justify-start gap-[24px] text-center text-2xl text-neutral-black">
-          <div className="w-[550px] p-[32px_40px_32px_40px] mt-[2rem] ml-[6rem] gap-[25px] mx-auto rounded-[16px] bg-white-100 h-[411px] shadow-lg overflow-hidden flex flex-col justify-center items-center py-8 px-10 box-border max-w-full text-left text-sm text-neutral-color-500 ">
+          <div className=" w-full md:w-[550px] px-[1rem] py-[1.3rem] md:p-[32px_40px_32px_40px] mt-[2rem] ml-0 md:ml-[6rem] gap-[25px] mx-auto rounded-[16px] bg-white-100 h-[411px] shadow-lg overflow-hidden flex flex-col justify-center items-center md:py-8 md:px-10 box-border max-w-full text-left text-sm text-neutral-color-500 ">
             <div className="w-[56px] h-[56px]  shadow flex justify-center items-center border border[#EAECF0] rounded-[12px] ">
               <div className="w-[20]  rounded-sm text-white-100">
                 <svg
@@ -71,14 +66,14 @@ const CreateTradeSuccess = ({
             <div>
               <button
                 onClick={handleDone}
-                className="p-[12px] text-[14px] leading-[20px] w-[470px] text-[#fff] bg-primaryBtn  h-[44px] rounded-lg"
+                className="p-[12px] text-[14px] leading-[20px] w-full md:w-[470px] text-[#fff] bg-primaryBtn  h-[44px] rounded-lg"
               >
                 Go To The Trade Board
               </button>
             </div>
 
             {isCreateTrade ? (
-              <div className=" w-[513px] text-[#FF104B] mt-[24px] font-bold">
+              <div className=" w-full md:w-[513px] text-[#FF104B] mt-[16px] md:mt-[24px] font-bold">
                 <p className=" text-center text-[16px] leading-[24px]">
                   Note: If the funds remain unused for 24 hours, they will
                   automatically be returned to your account.

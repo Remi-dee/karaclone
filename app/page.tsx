@@ -3,7 +3,7 @@ import MomoModal from "@/Components/CustomModal/MomoModal";
 import Footer from "@/Components/LandingPage/Footer";
 import HeroPage from "@/Components/LandingPage/HeroPage";
 import Navbar from "@/Components/LandingPage/Navbar";
-import React, { useState } from "react";
+import React from "react";
 
 const Page = () => {
   return (
@@ -17,11 +17,3 @@ const Page = () => {
 };
 
 export default Page;
-
-{
-  /* <div>
-<h5>Hello world!</h5>
-<button onClick={openModalHandler}>open modal</button>
-<CustomModal>{renderCurrentPage()}</CustomModal>
-</div> */
-}

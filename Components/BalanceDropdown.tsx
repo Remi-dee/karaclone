@@ -2,8 +2,16 @@ import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
-function BalanceDropdown({ wallets, selectedWallet, setSelectedWallet }) {
-  function classNames(...classes) {
+function BalanceDropdown({
+  wallets,
+  selectedWallet,
+  setSelectedWallet,
+}: {
+  wallets: any;
+  selectedWallet: any;
+  setSelectedWallet: any;
+}) {
+  function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(" ");
   }
 
@@ -29,7 +37,7 @@ function BalanceDropdown({ wallets, selectedWallet, setSelectedWallet }) {
         >
           <Menu.Items className=" bg-[white] absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
             <div className="py-1">
-              {wallets?.map((wallet) => (
+              {wallets?.map((wallet: any) => (
                 <Menu.Item key={wallet.id}>
                   {({ active }) => (
                     <button

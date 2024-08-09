@@ -42,7 +42,7 @@ const Transaction = () => {
           </h2>
 
           <div className="flex lg:flex-row flex-col pb-6 lg:gap-0 gap-5">
-            <div className="  w-full   flex gap-[18px] items-center">
+            <div className="  w-full   flex gap-[8px] sm:gap-[18px] items-center">
               <div className="border border-gray-800 p-2 rounded-lg ">
                 <CustomDropdown
                   options={currencyData}

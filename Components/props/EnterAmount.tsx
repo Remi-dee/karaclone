@@ -3,8 +3,6 @@ import BalanceDropdown from "../BalanceDropdown";
 import WithdrawalForm from "../props/withdrawForm";
 import InfoRow from "./InfoRow";
 
-
-
 function EnterAmount({ changeStep }: { changeStep: () => void }) {
   const [amount, setAmount] = useState<number>(0);
   const [isValid, setIsValid] = useState<boolean>(false);

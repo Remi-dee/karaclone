@@ -15,11 +15,11 @@ import {
   useGetAllUserWalletsQuery,
   useLoadUserQuery,
 } from "@/redux/features/user/userApi";
-import QuickActionCard from "../UI/Home/QuickActionCard";
-import TransactionTable from "../UI/Transactions/TransactionTable";
-import BalanceDropdown from "../BalanceDropdown";
-import KycModal from "../UI/KYC/Kyc";
-import KYBModal from "../UI/KYC/kyb";
+import QuickActionCard from "./QuickActionCard";
+import TransactionTable from "../Transactions/TransactionTable";
+import BalanceDropdown from "../../BalanceDropdown";
+import KycModal from "../KYC/Kyc";
+import KYBModal from "../KYC/kyb";
 
 function DashHomeAfterKyc() {
   const { startKycModalOpen, startKybModalOpen } = useSelector(kycSelector);

@@ -17,7 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { useLoadUserQuery } from "@/redux/features/user/userApi";
 import { toast } from "react-toastify";
-import { handleCreateTruelayerPayment } from "./util/truelayerService";
+import { handleCreateTruelayerPayment } from "../../../utils/truelayerService";
 import {
   isPaymentSuccessSelector,
   setPaymentDetails,
