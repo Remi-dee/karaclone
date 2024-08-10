@@ -20,24 +20,20 @@ import {
   useLoadUserQuery,
 } from "@/redux/features/user/userApi";
 
-import CreateTradeDropDown from "../CustomDropdown/CreateTradeDropDown";
 import { toast } from "react-toastify";
 import { useMonoWidget } from "@/app/mono/monoServices";
 import { useCreatePaymentMutation } from "@/redux/features/truelayer/truelayerApi";
 import { setPaymentDetails } from "@/redux/features/truelayer/truelayerSlice";
-import TradeModal from "../CustomModal/TradeModal";
-import TradeSuccessModal from "../CustomModal/TradeSuccessModal";
-import BeneficaryDetails from "../UI/Trade/BeneficaryDetails";
-import SelectBank from "../UI/Trade/SelectBank";
-import TradeTransSuccesss from "../UI/Trade/TradeTransSuccess";
-import { handleCreateTruelayerPayment } from "../UI/Trade/util/truelayerService";
 import { Modal } from "@/Components/modal/modal";
 
 import { openModal } from "@/redux/modal/modalSlice";
 import Image from "next/image";
 import { useCreateTradeMutation } from "@/redux/features/trade/tradeApi";
-import CreateTradeDetails from "../UI/Trade/CreateTradeDetails";
-import CreateTradeSuccess from "../UI/Trade/CreateTradeSuccess";
+import CreateTradeDropDown from "@/Components/CustomDropdown/CreateTradeDropDown";
+import CreateTradeSuccess from "@/Components/UI/Trade/CreateTradeSuccess";
+import SelectBank from "@/Components/UI/Trade/SelectBank";
+import TradeModal from "@/Components/CustomModal/TradeModal";
+import BeneficaryDetails from "@/Components/UI/Trade/BeneficaryDetails";
 interface TradeDetails {
   currency: string;
   exit_currency: string;
@@ -600,30 +596,24 @@ const CreateTrade = () => {
 
       {selectRecipient ? (
         <TradeModal>
-          {
-            selectedItems === "" ? (
-              <SelectBank
-                onAccountAndNameChange={handleAccountAndNameChange}
-                onSelect={handleSelect}
-              />
-            ) : selectedItems === "itemid" ? (
-              <BeneficaryDetails
-                currency={createTradeDetails?.currency}
-                onSelect={handleSelect}
-              />
-            ) : (
-              <SelectBank
-                onAccountAndNameChange={handleAccountAndNameChange}
-                onSelect={handleSelect}
-              />
-            )
-            // <TradeSuccessModal>
-            //   <TradeTransSuccesss />
-            // </TradeSuccessModal>
-          }
+          {selectedItems === "" ? (
+            <SelectBank
+              onAccountAndNameChange={handleAccountAndNameChange}
+              onSelect={handleSelect}
+            />
+          ) : selectedItems === "itemid" ? (
+            <BeneficaryDetails
+              currency={createTradeDetails?.currency}
+              onSelect={handleSelect}
+            />
+          ) : (
+            <SelectBank
+              onAccountAndNameChange={handleAccountAndNameChange}
+              onSelect={handleSelect}
+            />
+          )}
         </TradeModal>
       ) : null}
-      {/* {selectedComponent} */}
     </div>
   );
 };

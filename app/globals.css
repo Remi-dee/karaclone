@@ -7,6 +7,17 @@
     src: url('/font/gilroy-regular.ttf');
 }
 
+@font-face {
+    font-family: 'inter';
+    src: url('/fonts/Inter-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'lato';
+    src: url('/font/Lato-Regular.ttf');
+}
+
+
 :root {
     --foreground-rgb: 0, 0, 0;
     --background-start-rgb: 214, 219, 220;

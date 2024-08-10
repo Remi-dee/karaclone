@@ -97,7 +97,7 @@ function WalletHome() {
 
   console.log(sortedWallets);
   return (
-    <div className=" w-full  h-full">
+    <div className=" font-lato w-full   h-full">
       <div className="w-full rounded-md  shadow-lg p-[1.5rem]  flex flex-col gap-[24px]   bg-white-100">
         <div className=" flex flex-col gap-[13px]">
           <h2 className=" text-[20px]  font-Josefin leading-[24px]  font-bold tracking-[-2%] ">
@@ -113,12 +113,12 @@ function WalletHome() {
             Select each currency to perform a transaction
           </p>
         </div>
-        <div className="flex justify-start lg:justify-between gap-[16px] items-center">
+        <div className="flex justify-start  gap-[16px] items-center">
           {data?.map((item: any) => (
             <div
               key={item.id}
               onClick={() => handleCurrency(item.currency_code)}
-              className={`w-[210px] h-[119px] currency cursor-pointer p-[16px_24px_16px_24px] border rounded-[8px] ${
+              className={`w-[210px] h-[119px] currency cursor-pointer px-[0.5rem]  py-[1rem] md:p-[16px_24px_16px_24px] border rounded-[8px] ${
                 selectedCurrency === item.name
                   ? "border-primaryBtn"
                   : "border-[#DCDCDC]"
@@ -138,8 +138,10 @@ function WalletHome() {
                   </p>
                 </div>
               </div>
-              <p className="text-xs text-gray-300 py-2">Available balance</p>
-              <p className="font-bold leading-[28.8px] tracking-[-2%] text-[24px]">
+              <p className="text-xs text-gray-300 w-full py-2">
+                Available balance
+              </p>
+              <p className="font-bold leading-[28.8px] tracking-[-2%] text-[16px] md:text-[24px]">
                 {item.currency_code == "NGN" ? "N" : "E"} {item.escrow_balance}
               </p>
             </div>

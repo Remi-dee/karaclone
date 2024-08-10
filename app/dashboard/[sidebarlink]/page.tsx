@@ -32,7 +32,7 @@ import Notification from "@/Components/features/Notification/Notification";
 import TodayRate from "@/Components/features/Rate/TodayRate";
 import Profile from "@/Components/features/Profile/Profile";
 import MobileSideBar from "@/Components/features/Sidebar/MobileSideBar";
-import DashboardNav from "@/Components/features/dashboardNav";
+import DashboardNav from "@/Components/UI/Home/dashboardNav";
 import Sidebar from "@/Components/features/Sidebar/Sidebar";
 import Home from "@/Components/Layout/Home";
 import Transaction from "@/Components/Layout/Transaction";
@@ -44,7 +44,7 @@ import CreateTradeSuccess from "@/Components/UI/Trade/CreateTradeSuccess";
 
 import chatIcon from "@/public/chaticon.png";
 
-const Dashboard = ({ params }: { params: { sidebarlink: string } }) => {
+const Page = ({ params }: { params: { sidebarlink: string } }) => {
   const dispatch = useDispatch();
   const [showSidebar, setShowSidebar] = useState(false);
   const [isBuyTrade, setIsBuyTrade] = useState(false);
@@ -115,7 +115,7 @@ const Dashboard = ({ params }: { params: { sidebarlink: string } }) => {
   }
 
   return (
-    <div className="flex bg-[#F5F1FB] relative w-full h-screen max-h-screen fixed top-0 bottom-0">
+    <div className="flex font-lato bg-[#F5F1FB] relative w-full h-screen max-h-screen fixed top-0 bottom-0">
       {/* Sidebar */}
       <Sidebar link={urlLink} />
       <MobileSideBar
@@ -171,4 +171,4 @@ const Dashboard = ({ params }: { params: { sidebarlink: string } }) => {
   );
 };
 
-export default Dashboard;
+export default Page;

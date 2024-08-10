@@ -64,7 +64,7 @@ const TwoFactorAuth = () => {
   return (
     <>
       {showComponent ? (
-        <div className="md:h-[700px] h-full p-[1rem] w-full md:w-[550px] mx-0 md:mx-auto shadow-lg rounded-md border border-white-100">
+        <div className="md:h-[700px] h-full p-[1rem] w-full md:w-[550px] mx-0 md:mx-auto  rounded-md  shadow-[40px_4px_40px_0px_#7F56D91A] border border-[#EAECF0]  md:shadow-lg">
           <div className="w-full md:w-[470px] mx-auto">
             <div className="w-[35px] md:w-[56px] h-[35px] md:h-[56px] flex justify-center items-center shadow-md border border-gray-200 rounded-md">
               <FaKey className="text-[22px] md:text-[28px]" />

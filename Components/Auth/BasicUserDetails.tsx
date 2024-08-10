@@ -120,9 +120,9 @@ const BasicUserDetails: FC = () => {
   );
 
   return (
-    <div className="w-full lg:w-[550px] h-[874px] py-[1rem] flex justify-center items-center gap-y-[24px] shadow-xl rounded-md ml-0 lg:ml-20">
+    <div className="w-full lg:w-[550px] h-[876px] py-[3px] md:py-[1rem] flex justify-center items-center gap-y-[24px] shadow-[40px_4px_40px_0px_#7F56D91A] border border-[#EAECF0]  md:shadow-lg rounded-md ml-0 ">
       <div className="h-[630px] w-full p-[1rem] lg:w-[470px] gap-y-[24px] flex flex-col justify-center">
-        <div className="md:w-[56px] w-[32px] flex justify-center items-center content-center shadow-md border border-[#EAECF0] rounded-md min-h-[32px] md:min-h-[56px]">
+        <div className="md:w-[56px] w-[32px] flex justify-center items-center content-center shadow-md border border-[#EAECF0] rounded-md min-h-[32px]  md:min-h-[56px]">
           <TiUser className="md:text-[38px] text-[22px]" />
         </div>
         <div className="flex flex-col gap-y-[16px]">

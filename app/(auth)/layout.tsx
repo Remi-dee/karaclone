@@ -1,21 +1,36 @@
 "use client";
 
-import React, { Suspense, useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import man from "@/public/loginMan.png";
 import stars from "@/public/stars.png";
 import manphone from "@/public/Images/manphone.png";
 import manbluebg from "@/public/Images/manbluebg.png";
 import manscan from "@/public/Images/manscan.png";
+import MobileSignUpOptions from "@/Components/Auth/MobileSignupOptions";
 
-// export const metadata: Metadata = {
-//   title: "Fx",
-//   description:
-//     "",
-//   icons: {
-//     icon: "",
-//   },
-// };
+const slides = [
+  {
+    image: manphone,
+    text: "Effortlessly add funds to your account with our simple and user-friendly top-up feature for convenient wallet top up.",
+    title: "Easy top up ",
+  },
+  {
+    image: man,
+    text: "Instantly buy and sell coins with our peer-to-peer transaction feature. Seamlessly connect with buyers and sellers globally.",
+    title: "Easy Peer-to-Peer Transactions",
+  },
+  {
+    image: manbluebg,
+    title: "Manage Multiple Currencies",
+    text: "Store, send, and receive funds in multiple currencies hassle-free. From USD to EUR, manage it all in one place.",
+  },
+  {
+    image: manscan,
+    text: "Instantly buy and sell coins with our peer-to-peer transaction feature. Seamlessly connect with buyers and sellers globally.",
+    title: "Easy Peer-to-Peer Transactions",
+  },
+];
 
 export default function RootLayout({
   children,
@@ -24,32 +39,8 @@ export default function RootLayout({
 }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
-  const slideRef = useRef();
-  const slides = useMemo(
-    () => [
-      {
-        image: manphone,
-        text: "Effortlessly add funds to your account with our simple and user-friendly top-up feature for convenient wallet top up.",
-        title: "Easy top up ",
-      },
-      {
-        image: man,
-        text: "Instantly buy and sell coins with our peer-to-peer transaction feature. Seamlessly connect with buyers and sellers globally.",
-        title: "Easy Peer-to-Peer Transactions",
-      },
-      {
-        image: manbluebg,
-        title: "Manage Multiple Currencies",
-        text: "Store, send, and receive funds in multiple currencies hassle-free. From USD to EUR, manage it all in one place.",
-      },
-      {
-        image: manscan,
-        text: "Instantly buy and sell coins with our peer-to-peer transaction feature. Seamlessly connect with buyers and sellers globally.",
-        title: "Easy Peer-to-Peer Transactions",
-      },
-    ],
-    []
-  );
+  const slideRef = useRef<HTMLDivElement>(null);
+
   const goToNextSlide = () => {
     if (isAnimating) return;
     setIsAnimating(true);
@@ -76,11 +67,12 @@ export default function RootLayout({
     }, 5000);
     return () => clearInterval(interval);
   }, []);
+
   return (
-    <main className=" w-full  relative  lg:w-[] bg-[#FBFBFB] _lg:h-screen h-full lg:h-[960px] flex  jusc items-center ">
-      <div className="  h-max w-full relative ">
-        <div className=" flex justify-center  max-h-full overflow-y-hidden  lg:flex-row flex-col ">
-          <div className="lg:flex-1 relative h-full rounded-[20px] hidden px-[2rem] lg:flex justify-center items-center content-center">
+    <main className="w-full relative bg-[#FBFBFB] h-full lg:h-[960px] flex items-center">
+      <div className="w-full relative">
+        <div className="flex justify-center max-h-full overflow-y-hidden lg:flex-row flex-col">
+          <div className="lg:flex-1 relative h-full rounded-[20px] hidden px-[2rem] lg:flex justify-center items-center ">
             <div className="overflow-hidden relative rounded-[20px] flex items-center w-[614px] h-[912px]">
               <div
                 className="flex transition-transform duration-500 ease-in-out"
@@ -90,13 +82,13 @@ export default function RootLayout({
                   <div key={index} className="min-w-full min-h-full h-full">
                     <Image
                       src={slide.image}
-                      alt=""
+                      alt={slide.title}
                       className="object-cover h-full w-full"
                     />
                   </div>
                 ))}
               </div>
-              <div className="text_for_login  bottom-[1rem] mb-[3rem] absolute text-[#FFFFFF]">
+              <div className="text_for_login bottom-[1rem] mb-[3rem] absolute text-[#FFFFFF]">
                 <div className="px-[1rem] w-full">
                   <div className="flex w-full justify-between items-center">
                     <div className="inline-flex">
@@ -119,21 +111,19 @@ export default function RootLayout({
               </div>
             </div>
           </div>
-          <div className="lg:flex-1 w-full block lg:flex pt-0 h-full  lg:justify-center ">
-            <div className=" w-full h-full">
-              <div className=" w-full">{children}</div>
+          <div className="lg:flex-1 w-full block lg:flex pt-0 h-full lg:justify-center">
+            <div className="w-full h-full">
+              <div className="w-full">{children}</div>
             </div>
           </div>
-
-          {/* footer notes <>ToDo: can migrate when refactoring</> */}
-          <div className=" absolute  text-[#475467]  text-sm   right-[8rem] bottom-[1rem]   gap-x-[1rem] justify-center  hidden lg:flex ">
+          <div className="absolute text-[#475467] text-sm right-[8rem] bottom-[1rem] gap-x-[1rem] justify-center hidden lg:flex">
             <p>© FXkarasell 2024</p>
-            <p className="  flex  items-center gap-x-[0.3rem]">
-              <span className=" text-[0.4rem] text-[#4d525a]">⚫</span> Help
+            <p className="flex items-center gap-x-[0.3rem]">
+              <span className="text-[0.4rem] text-[#4d525a]">⚫</span> Help
               center
             </p>
-            <p className="  flex  items-center gap-x-[0.3rem]">
-              <span className=" text-[0.4rem] text-[#4d525a]">⚫</span> Terms of
+            <p className="flex items-center gap-x-[0.3rem]">
+              <span className="text-[0.4rem] text-[#4d525a]">⚫</span> Terms of
               Service
             </p>
           </div>

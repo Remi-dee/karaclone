@@ -40,12 +40,12 @@ const ForgotPassword: React.FC = () => {
   };
 
   return (
-    <div className="flex w-full justify-center px-[1rem] py-[1.5rem] md:p-[32px_40px_32px_40px] bg-white-300  h-screen">
+    <div className="flex w-full justify-center px-[1rem] py-[1.5rem] md:p-[32px_40px_32px_40px] bg-white-300  h-screen    ">
       <div className="gap-[24px] text-center h-full flex flex-col justify-start md:justify-center w-full">
         <div className="w-full mt-[1rem] flex justify-center _pt-[120px]">
           <Image src={fxKara} className="mx-auto mix-blend-darken" alt="Logo" />
         </div>
-        <div className="border mx-auto border-slate-100 mt-[24px] shadow-md h-[381px] bg-white-100 rounded-xl w-full md:w-[551px] text-center p-[32px_40px_32px_40px] flex flex-col gap-[24px] justify-center items-center text-[black]">
+        <div className=" mx-auto  mt-[24px] h-[381px] bg-white-100 rounded-xl w-full md:w-[551px] text-center p-[32px_40px_32px_40px] shadow-[40px_4px_40px_0px_#7F56D91A] border border-[#EAECF0]  md:shadow-lg  flex flex-col gap-[24px] justify-center items-center text-[black]">
           <div className="rounded-xl md:min-h-[56px] min-h-[31px] min-w-[35px] md:min-w-[56px] border flex flex-col items-center justify-center relative border-slate-200">
             <Image
               src="/key-img.png"

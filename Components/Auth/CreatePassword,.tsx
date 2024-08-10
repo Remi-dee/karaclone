@@ -4,30 +4,29 @@ import Image from "next/image";
 import Link from "next/link";
 import passwordLogo from "@/public/Images/passwordLogo.png";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
-import { GiCheckMark, GiCancel } from "react-icons/gi";
 import { useRegisterMutation } from "@/redux/features/auth/authApi";
 import toast from "react-hot-toast";
 import mark from "@/public/mark.svg";
 import closecirce from "@/public/close-circle.svg";
-import { useDispatch } from "react-redux";
-import { increaseRegistrationStage } from "@/redux/features/auth/authSlice";
-import { useSelector } from "react-redux";
 import greenCorrect from "@/public/svg/greenCorrect.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { increaseRegistrationStage } from "@/redux/features/auth/authSlice";
+
 const CreatePassword: FC<any> = () => {
   const [registerUser, { isLoading, isSuccess, error, data }] =
     useRegisterMutation();
   const globalState = useSelector((state: any) => state?.auth);
-  console.log(globalState);
   const [passwordValid, setPasswordValid] = useState(false);
   const [userPassword, setUserPassword] = useState("");
   const [hasSpecialCharacter, setHasSpecialCharacter] = useState(false);
   const [confirmPasswordValid, setConfirmPasswordValid] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
   const dispatch = useDispatch();
+  const [showPassword, setShowPassword] = useState("password");
+
   useEffect(() => {
     if (isSuccess) {
       toast.success("User registration successful");
-
       localStorage.setItem("auth_token", data?.activation_token as any);
       dispatch(increaseRegistrationStage());
     }
@@ -69,33 +68,28 @@ const CreatePassword: FC<any> = () => {
     registerUser(data);
   };
 
-  const [showPassword, setShowPassword] = useState("password");
-
   return (
-    <div className=" p-[1rem] w-full  md:w-[500px] bg-[#FFFFFF]  md:h-[693px]  shadow-lg rounded-md border border-white-100">
-      <div className=" w-full md:w-[400px] pt-6 flex flex-col gap-y-[24px]  mx-0 md:mx-auto">
-        <div className=" w-full">
-          <div className="w-[56px] h-[56px] flex justify-center items-center shadow-md border border-gray-200  rounded-md ">
-            <Image src={passwordLogo} alt="" className="w-[28pxx]  h-[28px]" />
+    <div className="p-[1rem] w-full md:w-[500px] bg-[#FFFFFF] md:h-[693px] rounded-md shadow-[40px_4px_40px_0px_#7F56D91A] border border-[#EAECF0] md:shadow-lg">
+      <div className="w-full md:w-[400px] pt-6 flex flex-col gap-y-[24px] mx-0 md:mx-auto">
+        <div className="w-full">
+          <div className="w-[56px] h-[56px] flex justify-center items-center shadow-md border border-gray-200 rounded-md">
+            <Image src={passwordLogo} alt="" className="w-[28px] h-[28px]" />
           </div>
-          <div className=" leading-[19.2px] mt-[24px] font-[400]">
+          <div className="leading-[19.2px] mt-[24px] font-[400]">
             <h3 className="py-2 font-semibold text-2xl">Create Password</h3>
             <p className="text-gray-300 text-sm">Create your password</p>
           </div>
         </div>
-        <div className=" w-full">
-          <form
-            // onSubmit={handleSubmit}
-            className=" w-full flex flex-col gap-y-[32px] "
-          >
-            <div className="flex flex-col mt-2 ">
+        <div className="w-full">
+          <form className="w-full flex flex-col gap-y-[32px]">
+            <div className="flex flex-col mt-2">
               <label
                 htmlFor=""
                 className="font-semibold text-[16px] tracking-[-2%]"
               >
                 Password
               </label>
-              <div className=" mt-[8px] relative w-full">
+              <div className="mt-[8px] relative w-full">
                 <input
                   type={showPassword}
                   className="w-full p-1.5 border rounded-md outline-none"
@@ -123,100 +117,34 @@ const CreatePassword: FC<any> = () => {
                   </div>
                 )}
               </div>
-              <div className=" flex flex-col  mt-[16px]   gap-y-[8px]">
-                <div className="flex justify-start items-center gap-2 ">
+              <div className="flex flex-col mt-[16px] gap-y-[8px]">
+                {/* Password Validity Checks */}
+                <div className="flex justify-start items-center gap-2">
                   <div
                     className={`w-[20px] h-[20px] flex justify-center items-center rounded-full text-center ${
                       passwordValid ? "bg-green-500" : "bg-[#DCDCDC]"
                     }`}
                   >
-                    {!passwordValid ? (
-                      <Image src={mark} alt="" />
-                    ) : (
-                      <Image src={greenCorrect} alt="" />
-                    )}
+                    <Image src={passwordValid ? greenCorrect : mark} alt="" />
                   </div>
                   <p className="text-[#989898] text-xs">
-                    {!passwordValid
-                      ? "Minimum of 15 character"
-                      : "Minimum of 15 character"}
+                    Minimum of 8 characters
                   </p>
                 </div>
 
-                <div className="flex justify-start items-center gap-2 ">
+                <div className="flex justify-start items-center gap-2">
                   <div
                     className={`w-[20px] h-[20px] flex justify-center items-center rounded-full text-center ${
                       hasSpecialCharacter ? "bg-green-500" : "bg-[#DCDCDC]"
                     }`}
                   >
-                    {!hasSpecialCharacter ? (
-                      <Image src={mark} alt="" />
-                    ) : (
-                      <Image src={greenCorrect} alt="" />
-                      // <GiCancel className="text-[#989898]" />
-                    )}
+                    <Image
+                      src={hasSpecialCharacter ? greenCorrect : mark}
+                      alt=""
+                    />
                   </div>
                   <p className="text-[#989898] text-xs">
-                    {!hasSpecialCharacter
-                      ? "Must contain capital letter"
-                      : "Must contain capital letter"}
-                  </p>
-                </div>
-                <div className="flex justify-start items-center gap-2 ">
-                  <div
-                    className={`w-[20px] h-[20px] flex justify-center items-center rounded-full text-center ${
-                      hasSpecialCharacter ? "bg-green-500" : "bg-[#DCDCDC]"
-                    }`}
-                  >
-                    {!hasSpecialCharacter ? (
-                      <Image src={mark} alt="" />
-                    ) : (
-                      <Image src={greenCorrect} alt="" />
-                      // <GiCancel className="text-[#989898]" />
-                    )}
-                  </div>
-                  <p className="text-[#989898] text-xs">
-                    {hasSpecialCharacter
-                      ? "Must contain Small letter"
-                      : "Must contain Small letter"}
-                  </p>
-                </div>
-                <div className="flex justify-start items-center gap-2 ">
-                  <div
-                    className={`w-[20px] h-[20px] flex justify-center items-center rounded-full text-center ${
-                      hasSpecialCharacter ? "bg-green-500" : "bg-[#DCDCDC]"
-                    }`}
-                  >
-                    {!hasSpecialCharacter ? (
-                      <Image src={mark} alt="" />
-                    ) : (
-                      <Image src={greenCorrect} alt="" />
-                      // <GiCancel className="text-[#989898]" />
-                    )}
-                  </div>
-                  <p className="text-[#989898] text-xs">
-                    {hasSpecialCharacter
-                      ? "Must contain number"
-                      : "Must contain number"}
-                  </p>
-                </div>
-                <div className="flex justify-start items-center gap-2 ">
-                  <div
-                    className={`w-[20px] h-[20px] flex justify-center items-center rounded-full text-center ${
-                      hasSpecialCharacter ? "bg-green-500" : "bg-[#DCDCDC]"
-                    }`}
-                  >
-                    {!hasSpecialCharacter ? (
-                      <Image src={mark} alt="" />
-                    ) : (
-                      // <GiCancel className="text-[#989898]" />
-                      <Image src={greenCorrect} alt="" />
-                    )}
-                  </div>
-                  <p className="text-[#989898] text-xs">
-                    {!hasSpecialCharacter
-                      ? "Must contain special character"
-                      : "Must contain special character"}
+                    Must contain special character
                   </p>
                 </div>
               </div>
@@ -256,25 +184,18 @@ const CreatePassword: FC<any> = () => {
                   </div>
                 )}
               </div>
-              <div className="  flex flex-col  mt-[16px]   gap-y-[8px]">
-                <div className="flex justify-start items-center gap-2 ">
-                  <div
-                    className={
-                      "w-[20px] h-[20px] flex justify-center items-center rounded-full text-center"
-                    }
-                  >
-                    {!confirmPasswordValid ? (
-                      <Image src={closecirce} alt="" />
-                    ) : (
-                      <GiCancel className="text-[#989898]" />
-                    )}
-                  </div>
-                  <p className="text-[#989898] text-xs">
-                    {confirmPasswordValid
-                      ? "The password entered does not match."
-                      : "The password entered does not match."}
-                  </p>
+              <div className="flex justify-start items-center gap-2 mt-[16px]">
+                <div className="w-[20px] h-[20px] flex justify-center items-center rounded-full text-center">
+                  <Image
+                    src={confirmPasswordValid ? greenCorrect : closecirce}
+                    alt=""
+                  />
                 </div>
+                <p className="text-[#989898] text-xs">
+                  {confirmPasswordValid
+                    ? "Passwords match"
+                    : "Passwords do not match"}
+                </p>
               </div>
             </div>
             <div className="w-full flex items-center justify-end">
@@ -282,14 +203,16 @@ const CreatePassword: FC<any> = () => {
                 type="submit"
                 onClick={submitPasswordHandler}
                 value="Continue"
-                className={`w-full h-[40px]  text-[16px] font-semibold text-center text-[#98A2B3] rounded-[8px]
-                    : " bg-[#DCDCDC] cursor-not-allowed"
+                className={`w-full h-[40px] text-[16px] font-semibold text-center text-[#98A2B3] rounded-[8px] ${
+                  passwordValid && hasSpecialCharacter && confirmPasswordValid
+                    ? "bg-primary cursor-pointer"
+                    : "bg-[#DCDCDC] cursor-not-allowed"
                 }`}
-                // disabled={
-                //   !passwordValid ||
-                //   !hasSpecialCharacter ||
-                //   !confirmPasswordValid
-                // }
+                disabled={
+                  !passwordValid ||
+                  !hasSpecialCharacter ||
+                  !confirmPasswordValid
+                }
               />
             </div>
           </form>
@@ -297,10 +220,10 @@ const CreatePassword: FC<any> = () => {
             <p className="py-4 text-center text-sm text-gray-300">
               Already have an account?{" "}
               <Link
-                className="text-[#7F56D9] leading-[19px] tracking-[-2%] font-[700]  "
-                href={"/login"}
+                className="text-[#7F56D9] leading-[20px] tracking-[-0.1px] font-medium"
+                href="/auth/signin"
               >
-                Log In
+                Sign in
               </Link>
             </p>
           </div>
