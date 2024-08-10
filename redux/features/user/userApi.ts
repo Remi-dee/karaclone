@@ -5,7 +5,7 @@ import getTokenFromLocalStorage from "@/hooks/FetchUserToken";
 interface Wallet {
   _id: string;
   currency_code: string;
-  balance: number;
+  escrow_balance: number;
 }
 
 interface WalletsResponse {
@@ -174,13 +174,21 @@ export const userApi = createApi({
         url: "wallets",
         method: "GET",
       }),
-      transformResponse: (response: { wallets: Wallet[] }) => response,
       providesTags: ["Wallets"],
     }),
 
     fundWallet: builder.mutation({
       query: ({ currency_code, amount }) => ({
         url: "wallets/fund",
+        method: "POST",
+        body: { currency_code, amount },
+      }),
+      invalidatesTags: ["Wallets"],
+    }),
+
+    deductWallet: builder.mutation({
+      query: ({ currency_code, amount }) => ({
+        url: "wallets/deduct",
         method: "POST",
         body: { currency_code, amount },
       }),
@@ -239,6 +247,7 @@ export const {
   useEnableTwoFAMutation,
   useDisableTwoFAMutation,
   useFetchTwoFAStatusQuery,
+  useDeductWalletMutation,
 
   useCurrencyConverterQuery,
 } = userApi;

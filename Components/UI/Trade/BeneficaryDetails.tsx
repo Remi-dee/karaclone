@@ -149,6 +149,7 @@ function BeneficaryDetails({
   };
   const handleCreateBeneficiary = async (beneficiaryData: object) => {
     try {
+      console.log("beneficiary data is", beneficiaryData);
       await createBeneficiary(beneficiaryData).unwrap();
       toast.success("created successfully!");
     } catch (error) {
@@ -169,6 +170,7 @@ function BeneficaryDetails({
     e.preventDefault();
     // onSelect("1");
     // console.log(BeneficaryDetails);
+    console.log(BeneficaryDetails);
     if (validateDetails()) {
       console.log(BeneficaryDetails);
       handleCreateBeneficiary(BeneficaryDetails);

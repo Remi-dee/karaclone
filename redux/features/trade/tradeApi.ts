@@ -116,6 +116,7 @@ export const tradeApi = createApi({
       query: (args) => ({
         url: "Trade/create-beneficiary",
         method: "POST",
+        body: args,
       }),
     }),
 

@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { TiEye } from "react-icons/ti";
 import { IoIosAddCircle, IoIosArrowRoundUp } from "react-icons/io";
 import { CgArrowsExchange } from "react-icons/cg";
-
 
 import { useRouter } from "next/navigation";
 
@@ -25,7 +24,7 @@ import {
 import NGN from "@/public/Images/NGN.png";
 
 import GBP from "@/public/Images/GBP.png";
-import { ArrowsRightLeftIcon } from "@heroicons/react/24/outline";
+
 import { toast } from "react-toastify";
 import { useGetAllUserWalletsQuery } from "@/redux/features/user/userApi";
 import TransactionTable from "../UI/Transactions/TransactionTable";

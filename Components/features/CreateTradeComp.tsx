@@ -16,6 +16,7 @@ import {
   useCurrencyConverterQuery,
   useCurrentRateQuery,
   useGetAllCurrencyPairsQuery,
+  useGetAllUserWalletsQuery,
   useLoadUserQuery,
 } from "@/redux/features/user/userApi";
 
@@ -68,6 +69,7 @@ const CreateTrade = () => {
     account_number: "",
     account_name: "",
     beneficiary_name: "",
+    beneficiary_id: "",
     beneficiary_account: "",
     beneficiary_bank: "",
     vat_fee: "XX",
@@ -87,6 +89,15 @@ const CreateTrade = () => {
     },
   ] = useCreateTradeMutation();
 
+  const {
+    data: walletData,
+    error,
+    isLoading,
+  } = useGetAllUserWalletsQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+    refetchOnReconnect: true,
+  });
+
   const handleAccountAndNameChange = (item: any) => {
     setcreateTradeDetails({
       ...createTradeDetails,
@@ -99,6 +110,10 @@ const CreateTrade = () => {
     setcreateTradeDetails((prevDetails) => ({
       ...prevDetails,
       beneficiary_bank: item?.bank_name,
+    }));
+    setcreateTradeDetails((prevDetails) => ({
+      ...prevDetails,
+      beneficiary_id: item?.beneficiary_id,
     }));
     return setbenefiaryCurrency(item?.currency);
   };
@@ -146,6 +161,20 @@ const CreateTrade = () => {
       toast.warn("Please fill in all the fields.");
       return;
     }
+    if (createTradeDetails.payment_method == "Wallet") {
+      console.log(walletData);
+      const selectedWallet = walletData?.find(
+        (wallet) => wallet.currency_code === createTradeDetails.currency
+      );
+      if (
+        selectedWallet &&
+        createTradeDetails.amount > selectedWallet.escrow_balance
+      ) {
+        toast("Insufficient balance in wallet.");
+        return;
+      }
+    }
+
     // form submission handled here
     dispatch(addCreatedTrade(createTradeDetails));
 

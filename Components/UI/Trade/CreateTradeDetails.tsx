@@ -10,12 +10,16 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 import { BiSolidCopy } from "react-icons/bi";
 import {
   addCreatedTrade,
+  setIsWalletTrade,
   toggleCreateTrade,
   toggleCreateTradeStage,
 } from "@/redux/features/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-import { useLoadUserQuery } from "@/redux/features/user/userApi";
+import {
+  useDeductWalletMutation,
+  useLoadUserQuery,
+} from "@/redux/features/user/userApi";
 import { toast } from "react-toastify";
 import { handleCreateTruelayerPayment } from "./util/truelayerService";
 import {
@@ -55,10 +59,21 @@ const CreateTradeDetails = () => {
     },
   ] = useCreateTradeMutation();
 
+  const [
+    deductWallet,
+    {
+      isLoading: isDeductingWallet,
+      error: deductError,
+      data: deductData,
+      isSuccess: isDeductSuccess,
+    },
+  ] = useDeductWalletMutation();
+
   useEffect(() => {
     // dispatch(toggleCreateTradeStage(3));
     if (isPaymentSuccess && isTradeSuccess) {
       toast.success("Trade created successfully");
+
       // dispatch(toggleCreateTradeStage(4));
       dispatch(addCreatedTrade(tradeData?.trade));
       // dispatch(toggleCreateTrade(true));
@@ -67,15 +82,42 @@ const CreateTradeDetails = () => {
     }
 
     if (tradeError) {
-      toast.error("An error occurred!");
+      toast.error("An error occurred creating trade!");
+      console.log(tradeError);
     }
   }, [isTradeSuccess, tradeError, isPaymentSuccess]);
 
   const handleContinue = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    if (createdTrade?.currency === "NGN") {
+    if (
+      createdTrade?.currency === "NGN" &&
+      createdTrade.payment_method == "Connect Bank App"
+    ) {
       await openMonoWidget();
-    } else {
+    } else if (createdTrade.payment_method == "Wallet") {
+      console.log("This is deduct details", createdTrade);
+      await deductWallet({
+        currency_code: createdTrade.currency,
+        amount: createdTrade.amount,
+      }).unwrap();
+
+      if (deductError) {
+        toast("An error occurred deducting trade");
+        console.log(deductError);
+      } else {
+        console.log("trade is", createdTrade);
+        await createTrade({
+          ...createdTrade,
+          status: "Success",
+        });
+
+        if (isTradeSuccess) {
+          toast.success("Trade created successfully");
+          dispatch(setIsWalletTrade(true));
+          dispatch(toggleCreateTradeStage(4));
+        }
+      }
+    } else if (createdTrade.payment_method == "Connect Bank App") {
       console.log("this is created data", {
         ...createdTrade,
         status: "success",

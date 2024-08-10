@@ -24,12 +24,12 @@ function ChatPage({ clickHandler }: { clickHandler: any }) {
   const [selectedConversation, setSelectedConversation] = useState(null);
   const [selectedConversationName, setSelectedConversationName] =
     useState(null);
-  const [isAdmin, setIsAdmin] = useState(user.user.role === "admin");
+
+  const [isAdmin, setIsAdmin] = useState(user?.user.role === "admin");
 
   const { data: conversations } = useGetAllConversationsQuery(undefined, {
     skip: !isAdmin,
   });
-
   const { data: chatMessages, refetch } = !isAdmin
     ? useGetChatMessagesQuery(selectedConversation, {
         skip: isAdmin && !selectedConversation,
@@ -41,22 +41,10 @@ function ChatPage({ clickHandler }: { clickHandler: any }) {
   const [createChatMessage] = useCreateChatMessageMutation();
 
   useEffect(() => {
-    console.log(selectedConversation);
     if (selectedConversation) {
       refetch();
     }
   }, [selectedConversation, refetch]);
-
-  // const handleSendMessage = async () => {
-  //   if (value.trim() && selectedConversationId) {
-  //     await createChatMessage({
-  //       message: value,
-  //       conversationId: selectedConversationId,
-  //     });
-  //     setValue("");
-  //     refetch();
-  //   }
-  // };
 
   const handleSendMessage = async () => {
     if (value.trim()) {
@@ -70,21 +58,20 @@ function ChatPage({ clickHandler }: { clickHandler: any }) {
   };
 
   const handleConversationClick = (convId) => {
-    console.log(`Clicked conversation: ${convId}`);
     setSelectedConversation(convId?.conversationId);
     setSelectedConversationName(convId?.user.name);
   };
 
   return (
-    <div className="w-full h-[800px] max-h-[800px] grid-flow-col grid grid-rows-[20%_75%_10%] rounded-[12px]">
-      <section className="flex chatPageBg py-[1rem] flex-col min-h-[116px] max-h-[116px] w-full h-[231px] relative">
-        <section className="flex justify-between pr-[1rem]">
+    <div className="w-full h-full flex flex-col rounded-[12px]">
+      <section className="flex chatPageBg py-4 flex-col min-h-[116px] max-h-[116px] w-full relative">
+        <section className="flex justify-between pr-4">
           <Image
             width={15}
             height={15}
             src={backarrow}
             onClick={() => clickHandler("")}
-            className="bg-blend-darken ml-[0.6rem] cursor-pointer z-20"
+            className="bg-blend-darken ml-2 cursor-pointer z-20"
             alt=""
           />
           <MdCancel
@@ -92,49 +79,47 @@ function ChatPage({ clickHandler }: { clickHandler: any }) {
             className="text-gray-200 text-lg z-30 cursor-pointer"
           />
         </section>
-        <div className="flex p-[0.5rem]">
+        <div className="flex p-2">
           <div>
             <Image src={robot} className="w-[60px] h-[54.38px]" alt="" />
           </div>
-          <div className="text-[white] h-full flex justify-center flex-col">
+          <div className="text-white h-full flex justify-center flex-col">
             <h1 className="text-[14px] font-semibold leading-[20px]">
               {!selectedConversation
                 ? "Kara Customer Support"
                 : user.user.role === "admin"
                 ? selectedConversationName
-                : "Kara Customer Support"}{" "}
+                : "Kara Customer Support"}
             </h1>
             <p className="text-[10px]">
               <span className="text-[#66ff66] text-[14px] min-w-[15px] min-h-[15px] tracking-[-2%]">
                 •
-              </span>{" "}
+              </span>
               Active
             </p>
           </div>
         </div>
       </section>
       {isAdmin && !selectedConversation ? (
-        <section className="flex flex-col px-[1rem] max-h-full gap-y-[16px] overscroll-auto invisible-scrollbar">
+        <section className="flex flex-col px-4 flex-grow overflow-auto gap-y-4 invisible-scrollbar">
           {conversations?.conversationsWithUsers.map((conv: any, index) => (
-            <>
-              <button
-                key={index}
-                className="cursor-pointer"
-                onClick={() => handleConversationClick(conv)}
-              >
-                <div className="max-w-[221px] rounded-md bg-[#EFEFEF] p-[16px]">
-                  <p className="font-[500] text-[12px] text-[#292929] leading-[18px] tracking-[-2%]">
-                    Conversation with {conv?.user?.name}
-                  </p>
-                </div>
-              </button>
-              {!conversations?.length && <p>No conversations available.</p>}
-            </>
+            <button
+              key={index}
+              className="cursor-pointer"
+              onClick={() => handleConversationClick(conv)}
+            >
+              <div className="max-w-[221px] rounded-md bg-[#EFEFEF] p-4">
+                <p className="font-medium text-[12px] text-[#292929] leading-[18px] tracking-[-2%]">
+                  Conversation with {conv?.user?.name}
+                </p>
+              </div>
+            </button>
           ))}
+          {!conversations?.length && <p>No conversations available.</p>}
         </section>
       ) : (
         <>
-          <section className="flex flex-col px-[1rem] max-h-full gap-y-[16px] overscroll-auto invisible-scrollbar">
+          <section className="mt-2 flex flex-col px-4 flex-grow overflow-auto gap-y-4 invisible-scrollbar">
             {chatMessages?.map((msg: any) =>
               msg.support ? (
                 <AdminChat key={msg._id} message={msg.message} />
@@ -143,8 +128,8 @@ function ChatPage({ clickHandler }: { clickHandler: any }) {
               )
             )}
           </section>
-          <section className="flex w-full justify-center items-center">
-            <div className="w-[90%] h-[46px] flex items-center bg-[#EFEFEF] p-4 rounded-lg">
+          <section className="flex w-full justify-center items-center p-4 bg-white">
+            <div className="w-full max-w-[90%] flex items-center bg-[#EFEFEF] p-4 rounded-lg text-black-200">
               <input
                 type="text"
                 value={value}
@@ -191,8 +176,8 @@ function AdminChat({ message }: { message: string }) {
       <div>
         <Image className="w-[60px] h-[54.38px]" src={robot} alt="" />
       </div>
-      <div className="max-w-[221px] rounded-md bg-[#EFEFEF] p-[16px]">
-        <p className="font-[500] text-[12px] text-[#292929] leading-[18px] tracking-[-2%]">
+      <div className="max-w-[221px] rounded-md bg-[#EFEFEF] p-4">
+        <p className="font-medium text-[12px] text-[#292929] leading-[18px] tracking-[-2%]">
           {message}
         </p>
       </div>
@@ -203,8 +188,8 @@ function AdminChat({ message }: { message: string }) {
 function UserChat({ message }: { message: string }) {
   return (
     <section className="self-end flex">
-      <div className="max-w-[221px] rounded-md bg-[#7F56D9] p-[16px]">
-        <p className="text-[12px] font-[500] text-[white] leading-[18px] tracking-[-2%]">
+      <div className="max-w-[221px] rounded-md bg-[#7F56D9] p-4">
+        <p className="text-[12px] font-medium text-white leading-[18px] tracking-[-2%]">
           {message}
         </p>
       </div>

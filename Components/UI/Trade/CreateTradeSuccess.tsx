@@ -4,10 +4,12 @@ import { useRouter } from "next/navigation";
 import React from "react";
 
 import {
+  setIsWalletTrade,
   toggleCreateTrade,
   toggleCreateTradeStage,
+  userSelector,
 } from "@/redux/features/user/userSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Modal } from "../../modal/modal";
 import { setTransactionPaymentId } from "@/redux/features/truelayer/truelayerSlice";
 
@@ -17,6 +19,7 @@ const CreateTradeSuccess = ({
   isWalletFund,
   transactionPaymentId,
 }: any) => {
+  const { isWalletTrade } = useSelector(userSelector);
   const dispatch = useDispatch();
   const router = useRouter();
   const handleDone = () => {
@@ -54,14 +57,14 @@ const CreateTradeSuccess = ({
             </div>
             <div className=" flex  flex-col gap-[12px]">
               <h3 className=" text-[29px] tracking-[-2%] text-center text-[#3D3D3D] leadng-[38.4px] font-bold py-2">
-                {isCreateTrade
+                {isCreateTrade || isWalletTrade
                   ? "Trade Successfully Created"
                   : isBuyTrade
                   ? "Trade Bought Successfully "
                   : "Wallet funded successfuly"}
               </h3>
               <p className="text-[#7C7C7C] leading-[24px] text-[16px] text-center ">
-                {isCreateTrade
+                {isCreateTrade || isWalletTrade
                   ? "Your trade has been successfully initiated and will be visible to all other traders within the platform."
                   : isBuyTrade
                   ? "You have successfuly bought a trade."
@@ -77,7 +80,7 @@ const CreateTradeSuccess = ({
               </button>
             </div>
 
-            {isCreateTrade ? (
+            {isCreateTrade || isWalletTrade ? (
               <div className=" w-[513px] text-[#FF104B] mt-[24px] font-bold">
                 <p className=" text-center text-[16px] leading-[24px]">
                   Note: If the funds remain unused for 24 hours, they will
