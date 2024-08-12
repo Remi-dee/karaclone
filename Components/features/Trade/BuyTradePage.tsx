@@ -10,6 +10,7 @@ import USD from "@/public/Images/USD.png";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addBoughtTrade,
+  setIsWalletBuyTrade,
   toggleBuyTradeDisplay,
   toggleCreateTradeStage,
 } from "@/redux/features/user/userSlice";
@@ -23,7 +24,10 @@ import {
 } from "@/redux/features/trade/tradeApi";
 import { handleCreateTruelayerPayment } from "../../../utils/truelayerService";
 import { useCreatePaymentMutation } from "@/redux/features/truelayer/truelayerApi";
-import { useLoadUserQuery } from "@/redux/features/user/userApi";
+import {
+  useGetAllUserWalletsQuery,
+  useLoadUserQuery,
+} from "@/redux/features/user/userApi";
 import {
   isPaymentSuccessSelector,
   setIsPaymentSuccess,
@@ -83,6 +87,7 @@ const BuyTrade = () => {
     beneficiary_name: "",
     beneficiary_account: "",
     beneficiary_bank: "",
+    beneficiary_id: "",
     payment_method: "",
     account_number: "",
     account_name: "",
@@ -109,6 +114,14 @@ const BuyTrade = () => {
         !selectedTrade?.exit_currency,
     }
   );
+  const {
+    data: walletData,
+    error: walletError,
+    isLoading,
+  } = useGetAllUserWalletsQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+    refetchOnReconnect: true,
+  });
 
   const dataForCalc = useCurrentRateQuery(
     {
@@ -152,6 +165,12 @@ const BuyTrade = () => {
       ("Unable to buy a trade, please try again");
     }
 
+    if (isBuyTradeSuccess) {
+      toast.success("Trade bought successfully");
+      dispatch(setIsWalletBuyTrade(true));
+      dispatch(toggleCreateTradeStage(4));
+    }
+
     if (buyTradeError) {
       toast.error("An error occurred!");
       console.log("error buying trade", buyTradeError);
@@ -183,6 +202,7 @@ const BuyTrade = () => {
       beneficiary_name: item?.name,
       beneficiary_account: item?.account,
       beneficiary_bank: item?.bank_name,
+      beneficiary_id: item?.beneficiary_id,
     }));
 
     console.log("benefi is", item);
@@ -192,11 +212,12 @@ const BuyTrade = () => {
       beneficiary_name: item?.name,
       beneficiary_account: item?.account,
       beneficiary_bank: item?.bank_name,
+      beneficiary_id: item?.beneficiary_id,
       trade_id: selectedTrade?.trade_id,
       purchase_currency: selectedTrade?.currency,
       paid_currency: selectedTrade?.exit_currency,
       purchase: Number(amountToBuy),
-      rate: selectedTrade.exchange_rate,
+      rate: selectedTrade.rate,
     }));
   };
 
@@ -207,7 +228,25 @@ const BuyTrade = () => {
 
     if (buyTradeDetails?.paid_currency === "NGN") {
       await openMonoWidget();
-    } else {
+    } else if (buyTradeDetails.payment_method == "Wallet") {
+      console.log(walletData);
+      console.log("here is buy", buyTradeDetails);
+      const selectedWallet = walletData?.find(
+        (wallet) => wallet.currency_code === buyTradeDetails?.paid_currency
+      );
+      if (selectedWallet && convertedAmount > selectedWallet.escrow_balance) {
+        toast("Insufficient balance in wallet.");
+        return;
+      } else {
+        buyTrade({
+          ...buyTradeDetails,
+          status: "Successful",
+        });
+      }
+    } else if (
+      buyTradeDetails.payment_method == "Connect Bank App" &&
+      buyTradeDetails?.paid_currency === "GBP"
+    ) {
       const { purchase, paid_currency } = buyTradeDetails;
       const paymentCreated = await handleCreateTruelayerPayment(
         { amount: purchase, currency: paid_currency },

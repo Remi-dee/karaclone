@@ -69,7 +69,7 @@ const TransactionTable = () => {
                     className={`${
                       item.status === "Processing"
                         ? "text-[#FDB022] bg-[#FCF5E6]"
-                        : item.status === "success"
+                        : item.status === "Successful"
                         ? "text-[#00A600] bg-[#EFFFEF]"
                         : "text-[#FF104B] bg-[#FCF5E6]"
                     } md:flex hidden justify-center items-center w-4/6 gap-2 rounded-lg  mt-2 px-1 py-1`}
@@ -78,7 +78,7 @@ const TransactionTable = () => {
                       className={` ${
                         item.status === "Processing"
                           ? "bg-[#FDB022]"
-                          : item.status === "success"
+                          : item.status === "Successful"
                           ? "bg-[#00A600]"
                           : "bg-[#FF104B]"
                       } w-[10px] h-[10px] rounded-full `}
@@ -87,7 +87,7 @@ const TransactionTable = () => {
                       className={`  text-[#00A600]  ${
                         item.status === "Processing"
                           ? "text-[#FDB022]"
-                          : item.status === "success"
+                          : item.status === "Successful"
                           ? "text-[#00A600]"
                           : "text-[#FF104B]"
                       }`}

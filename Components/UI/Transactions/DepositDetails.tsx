@@ -120,7 +120,7 @@ const DepositDetails = () => {
             className={`${
               item.status === "Processing"
                 ? "text-[#FDB022] bg-[#FCF5E6]"
-                : item.status === "Success"
+                : item.status === "Successful"
                 ? "text-[#00A600] bg-[#EFFFEF]"
                 : "text-[#FF104B] bg-[#FCF5E6]"
             } flex justify-center items-center  gap-2 px-1.5 py-1 rounded-lg text-[#00A600]`}
@@ -129,7 +129,7 @@ const DepositDetails = () => {
               className={`${
                 item.status === "Processing"
                   ? "bg-[#FDB022]"
-                  : item.status === "Success"
+                  : item.status === "Successful"
                   ? "bg-[#00A600]"
                   : "bg-[#FF104B]"
               } w-[10px] h-[10px] rounded-full `}

@@ -20,6 +20,7 @@ const CreateTradeSuccess = ({
   transactionPaymentId,
 }: any) => {
   const { isWalletTrade } = useSelector(userSelector);
+  const { isWalletBuyTrade } = useSelector(userSelector);
   const dispatch = useDispatch();
   const router = useRouter();
   const handleDone = () => {
@@ -58,7 +59,7 @@ const CreateTradeSuccess = ({
               <h3 className=" text-[29px] tracking-[-2%] text-center text-[#3D3D3D] leadng-[38.4px] font-bold py-2">
                 {isCreateTrade || isWalletTrade
                   ? "Trade Successfully Created"
-                  : isBuyTrade
+                  : isBuyTrade || isWalletBuyTrade
                   ? "Trade Bought Successfully "
                   : "Wallet funded successfuly"}
               </h3>

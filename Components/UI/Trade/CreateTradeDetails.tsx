@@ -81,6 +81,12 @@ const CreateTradeDetails = () => {
       ("Unable to create a trade, please try again");
     }
 
+    if (isTradeSuccess) {
+      toast.success("Trade created successfully");
+      dispatch(setIsWalletTrade(true));
+      dispatch(toggleCreateTradeStage(4));
+    }
+
     if (tradeError) {
       toast.error("An error occurred creating trade!");
       console.log(tradeError);
@@ -95,27 +101,16 @@ const CreateTradeDetails = () => {
     ) {
       await openMonoWidget();
     } else if (createdTrade.payment_method == "Wallet") {
-      console.log("This is deduct details", createdTrade);
-      await deductWallet({
-        currency_code: createdTrade.currency,
-        amount: createdTrade.amount,
-      }).unwrap();
+      console.log("trade is", createdTrade);
+      await createTrade({
+        ...createdTrade,
+        status: "Successful",
+      });
 
-      if (deductError) {
-        toast("An error occurred deducting trade");
-        console.log(deductError);
-      } else {
-        console.log("trade is", createdTrade);
-        await createTrade({
-          ...createdTrade,
-          status: "Success",
-        });
-
-        if (isTradeSuccess) {
-          toast.success("Trade created successfully");
-          dispatch(setIsWalletTrade(true));
-          dispatch(toggleCreateTradeStage(4));
-        }
+      if (isTradeSuccess) {
+        toast.success("Trade created successfully");
+        dispatch(setIsWalletTrade(true));
+        dispatch(toggleCreateTradeStage(4));
       }
     } else if (createdTrade.payment_method == "Connect Bank App") {
       console.log("this is created data", {

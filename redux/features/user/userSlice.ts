@@ -27,6 +27,7 @@ interface UserWalletState {
   amountToFund: number;
   isWalletFund: boolean;
   isWalletTrade: boolean;
+  isWalletBuyTrade: boolean;
 }
 
 const initialState: UserWalletState = {
@@ -52,6 +53,8 @@ const initialState: UserWalletState = {
   amountToBuy: 0,
   amountToFund: 0,
   isWalletFund: false,
+  isWalletTrade: false,
+  isWalletBuyTrade: false,
 };
 
 const userSlice = createSlice({
@@ -126,6 +129,9 @@ const userSlice = createSlice({
     setIsWalletTrade: (state, action: PayloadAction<boolean>) => {
       state.isWalletTrade = action.payload;
     },
+    setIsWalletBuyTrade: (state, action: PayloadAction<boolean>) => {
+      state.isWalletBuyTrade = action.payload;
+    },
   },
 });
 export const {
@@ -151,6 +157,7 @@ export const {
   setAmountToFund,
   setIsWalletFund,
   setIsWalletTrade,
+  setIsWalletBuyTrade,
 } = userSlice.actions;
 export const userSelector = (state: RootState) => state.user;
 
