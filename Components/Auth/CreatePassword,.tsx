@@ -19,6 +19,8 @@ const CreatePassword: FC<any> = () => {
   const [passwordValid, setPasswordValid] = useState(false);
   const [userPassword, setUserPassword] = useState("");
   const [hasSpecialCharacter, setHasSpecialCharacter] = useState(false);
+  const [hasUppercase, setHasUppercase] = useState(false);
+  const [hasNumber, setHasNumber] = useState(false);
   const [confirmPasswordValid, setConfirmPasswordValid] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
   const dispatch = useDispatch();
@@ -41,6 +43,8 @@ const CreatePassword: FC<any> = () => {
   const validatePassword = (password: string) => {
     setPasswordValid(password.length >= 8);
     setHasSpecialCharacter(/[!@#$%^&*(),.?":{}|<>]/.test(password));
+    setHasUppercase(/[A-Z]/.test(password));
+    setHasNumber(/\d/.test(password));
     if (confirmPassword !== "") {
       setConfirmPasswordValid(password === confirmPassword);
     }
@@ -147,6 +151,32 @@ const CreatePassword: FC<any> = () => {
                     Must contain special character
                   </p>
                 </div>
+
+                <div className="flex justify-start items-center gap-2">
+                  <div
+                    className={`w-[20px] h-[20px] flex justify-center items-center rounded-full text-center ${
+                      hasUppercase ? "bg-green-500" : "bg-[#DCDCDC]"
+                    }`}
+                  >
+                    <Image src={hasUppercase ? greenCorrect : mark} alt="" />
+                  </div>
+                  <p className="text-[#989898] text-xs">
+                    Must contain an uppercase letter
+                  </p>
+                </div>
+
+                <div className="flex justify-start items-center gap-2">
+                  <div
+                    className={`w-[20px] h-[20px] flex justify-center items-center rounded-full text-center ${
+                      hasNumber ? "bg-green-500" : "bg-[#DCDCDC]"
+                    }`}
+                  >
+                    <Image src={hasNumber ? greenCorrect : mark} alt="" />
+                  </div>
+                  <p className="text-[#989898] text-xs">
+                    Must contain a number
+                  </p>
+                </div>
               </div>
             </div>
             <div className="flex flex-col mt-2 gap-1">
@@ -193,34 +223,40 @@ const CreatePassword: FC<any> = () => {
                 </div>
                 <p className="text-[#989898] text-xs">
                   {confirmPasswordValid
-                    ? "Passwords match"
+                    ? "Password match"
                     : "Passwords do not match"}
                 </p>
               </div>
             </div>
-            <div className="w-full flex items-center justify-end">
-              <input
-                type="submit"
-                onClick={submitPasswordHandler}
-                value="Continue"
-                className={`w-full h-[40px] text-[16px] font-semibold text-center text-[#98A2B3] rounded-[8px] ${
-                  passwordValid && hasSpecialCharacter && confirmPasswordValid
-                    ? "bg-primary cursor-pointer"
-                    : "bg-[#DCDCDC] cursor-not-allowed"
+            <div className="w-full">
+              <button
+                className={`w-full bg-primaryBtn text-[white] py-3 rounded-lg ${
+                  passwordValid &&
+                  confirmPasswordValid &&
+                  hasSpecialCharacter &&
+                  hasUppercase &&
+                  hasNumber
+                    ? "cursor-pointer"
+                    : "opacity-50 cursor-not-allowed"
                 }`}
                 disabled={
                   !passwordValid ||
+                  !confirmPasswordValid ||
                   !hasSpecialCharacter ||
-                  !confirmPasswordValid
+                  !hasUppercase ||
+                  !hasNumber
                 }
-              />
+                onClick={submitPasswordHandler}
+              >
+                Continue
+              </button>
             </div>
           </form>
-          <div>
-            <p className="py-4 text-center text-sm text-gray-300">
+          <div className="text-center text-[16px] mt-[32px]">
+            <p>
               Already have an account?{" "}
               <Link
-                className="text-[#7F56D9] leading-[20px] tracking-[-0.1px] font-medium"
+                className="text-primary text-[16px] tracking-[-0.1px] font-medium"
                 href="/auth/signin"
               >
                 Sign in

@@ -145,7 +145,7 @@ export default function Home() {
   //   }
   // };
   return (
-    <main className="flex px-[1rem] w-full min-h-screen">
+    <main className="flex px-[1rem] font-lato w-full min-h-screen">
       <div className="w-full   flex flex-col pb-4 justify-between  bg-[#FBFBFB]">
         <div className="flex flex-col items-center">
           <div className="mt-16 ">
@@ -180,7 +180,7 @@ export default function Home() {
                       className={`md:w-[64px] w-[40px] h-[40px] md:min-h-[64px] md:min-w-[64px] md:h-[64px] bg-transparent border-[2px]  flex items-center text-black dark:text-white rounded-[8px] leading-[60px] tracking-[-2%] justify-center text-[24px] md:text-[48px] placeholder:text-[#BDBDBD] font-Poppins outline-none text-center ${
                         invalidError
                           ? "shake border-red-500"
-                          : "dark:border-white border-[#3D3D3D]"
+                          : "dark:border-white border-[#BDBDBD]"
                       }`}
                       placeholder="0"
                       maxLength={1}
@@ -194,7 +194,7 @@ export default function Home() {
                 <div className=" mt-[40px]">
                   <button
                     onClick={verificationHandler}
-                    className="w-full bg-[#1E1E1E] text-[#FFFFFF] rounded-lg h-12 mt-6 flex justify-center items-center"
+                    className="w-full bg-[#F2F4F7] text-[#98A2B3] rounded-lg h-12 mt-6 flex justify-center items-center"
                   >
                     Access your Account
                   </button>
@@ -211,19 +211,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        {/* <div className="flex justify-between items-center px-16 h-12">
-          <span>© FXkarasell 2024</span>
-          <div className="flex items-center">
-            {" "}
-            <div className="h-1 w-1 m-2  rounded-full bg-[#7C7C7C]"></div>
-            <span>Help center</span>
-          </div>
-          <div className="flex items-center">
-            {" "}
-            <div className="h-1 w-1 m-2   rounded-full bg-[#7C7C7C]"></div>
-            <span>Terms of Service</span>
-          </div>
-        </div> */}
+
       </div>
     </main>
   );

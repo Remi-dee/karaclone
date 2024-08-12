@@ -90,7 +90,7 @@ const BasicUserDetails: FC = () => {
     dispatch(increaseRegistrationStage());
   };
 
-  const renderInputField = (
+  const InputField = (
     label: string,
     name: string,
     type: string,
@@ -138,7 +138,7 @@ const BasicUserDetails: FC = () => {
           className={`${styles.label} gap-y-[24px] mt-[8px] flex flex-col`}
           onSubmit={continueHandler}
         >
-          {renderInputField(
+          {InputField(
             "Full Name",
             "name",
             "text",
@@ -173,14 +173,14 @@ const BasicUserDetails: FC = () => {
             </select>
           </div>
 
-          {renderInputField(
+          {InputField(
             "Email Address",
             "email",
             "email",
             "example@domain.com",
             inputValuesForBasic.email
           )}
-          {renderInputField(
+          {InputField(
             "Home Address",
             "business_address",
             "text",

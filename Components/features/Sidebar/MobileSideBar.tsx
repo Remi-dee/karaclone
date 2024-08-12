@@ -80,7 +80,7 @@ const MobileSideBar = ({ link, showSideBar, toggleSidebar }: Props) => {
               } delay-${index * 75}ms ${
                 isLinkActive(eachdata.label)
                   ? "bg-purple-800 text-[#fff]"
-                  : "text-[#BDBDBD] hover:text-white hover:bg-purple-100"
+                  : "text-[#BDBDBD] hover:text-[white] hover:bg-purple-100"
               } flex items-center text-sm font-medium`}
             >
               <div className="flex flex-row gap-[12px]">
