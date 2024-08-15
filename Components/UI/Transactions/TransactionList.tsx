@@ -45,7 +45,7 @@ const TransactionList = () => {
   return (
     <div>
       {isLoading && <p>Loading...</p>}
-      {error && <p>Error: {error}</p>}
+      {error && <p>Error: {"Error fecting"}</p>}
       <TransactionTable />
       <Pagination
         currentPage={page}

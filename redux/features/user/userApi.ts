@@ -174,8 +174,9 @@ export const userApi = createApi({
         url: "wallets",
         method: "GET",
       }),
-      transformResponse: (response: { wallets: Wallet[] }) => response,
-      providesTags: ["Wallets"],
+      transformResponse: (response: { length: number; wallets: any }) =>
+        response,
+      providesTags: <any>["Wallets"],
     }),
 
     fundWallet: builder.mutation({
@@ -184,7 +185,7 @@ export const userApi = createApi({
         method: "POST",
         body: { currency_code, amount },
       }),
-      invalidatesTags: ["Wallets"],
+      invalidatesTags: <any>["Wallets"],
     }),
 
     // /Currency converstion

@@ -35,27 +35,31 @@ const SignUpContent = () => {
   };
 
   return (
-    <div className="flex-1 w-full flex flex-col pt-0 h-screen  mt-[7rem] md:mt-0 justify-start md:justify-center items-center  ">
-      <div className=" w-max h-max  ">
+    <div className="flex-1 font-lato w-full flex flex-col pt-0 h-screen  mt-[4rem] md:mt-0 justify-start md:justify-center items-center  ">
+      <div className="  w-full h-full ">
         <div className=" px-[1rem] w-full flex md:hidden  justify-start">
-          <Image src={Logo} alt="Logo" className="h-[5rem]  w-[88px]  " />
+          <Image
+            src={Logo}
+            alt="Logo"
+            className="h-[23px]  self-start  w-[88px]  "
+          />
         </div>
         <MobileSignUpOptions />
         <div className="w-full  h-[445px]  flex flex-col pb-4  items-center justify-center  bg-[#FBFBFB]">
           <div className=" bg-white-300   ">
-            <div className="md:w-[450px] shadow-[40px_4px_40px_0px_#7F56D91A] border border-[#EAECF0]  md:shadow-lg w-[95%] p-[1rem]  mx-auto  mt-0 md:mt-20  ">
-              <div className="w-[56px] items-center h-[56px] flex justify-center shadow-lg border rounded-[12px]">
-                <TiUser className="text-[28px]" />
+            <div className="md:w-[450px] shadow-[40px_4px_40px_0px_#7F56D91A]  border border-[#EAECF0]  md:shadow-lg w-[95%] p-[1rem]  mx-auto  mt-0 md:mt-20  ">
+              <div className="md:w-[56px] items-center h-[32px] w-[32px] md:h-[56px] flex justify-center shadow-lg border rounded-[12px]">
+                <TiUser className=" text-[16px] md:text-[28px]" />
               </div>
               <div>
-                <h2 className="font-bold text-[32px] leding-[38.4px] tracking-[-2%] text-[#1E1E1E] py-2">
+                <h2 className="font-bold mt-[20px] md:mt-0 text-[20px] md:text-[32px] leading-[24px] md:leading-[38.4px] tracking-[-2%] text-[#1E1E1E] py-2">
                   Choose Account Type
                 </h2>
-                <p className="text-sm text-gray-300">
+                <p className=" mt-[8px] text-sm text-gray-300">
                   Select the type of account you would like to get started with.
                 </p>
               </div>
-              <div>
+              <div className=" mt-[24px] md:mt-0">
                 <form className=" flex flex-col gap-[40px]">
                   <div className="flex flex-col gap-y-[8px]  mt-4 mb-6">
                     <label

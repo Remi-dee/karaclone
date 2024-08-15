@@ -11,11 +11,11 @@ const FAQSection = ({
 }) => (
   <div className="pb-[1rem]">
     <div className="h-full w-full flex justify-center mt-[24px]">
-      <div className="max-h-[248px] h-full flex flex-col w-[327px] p-[16px] gap-[10px] rounded-[8px] border border-[#EFEFEF]">
+      <div className="max-h-[248px] h-full flex flex-col w-[90%] md:w-[327px] p-[16px] gap-[10px] rounded-[8px] border border-[#EFEFEF]">
         {data.map((e, i) => (
           <React.Fragment key={i}>
-            <div className="flex justify-between items-center">
-              <p className="text-[10px] leading-[16px] tracking-[-2%] h-full w-full">
+            <div className="flex justify-between w-full items-center">
+              <p className="text-[10px] text-[black] leading-[16px] tracking-[-2%] h-full w-full">
                 Can I trust the sellers/buyers on the platform?
               </p>
               <Image

@@ -115,7 +115,7 @@ const TradeTab: React.FC<TradeProp> = ({ onSelectBuy, onSelectSell }) => {
               value={amount}
             />
           </div>
-          <div className="md:w-[115px] w-[99px] flex justify-center items-center ml-[5px] bg-[#F7F7F7] rounded-[16px]">
+          <div className="md:w-[115px] w-[110px] flex justify-center items-center ml-[5px] bg-[#F7F7F7] rounded-[16px]">
             <CreateTradeDropDown
               onSelect={handleCurrencyChange}
               options={conversionDataExit}
@@ -136,7 +136,7 @@ const TradeTab: React.FC<TradeProp> = ({ onSelectBuy, onSelectSell }) => {
               disabled
             />
           </div>
-          <div className="md:w-[115px] w-[99px] flex justify-center items-center ml-[5px] bg-[#F7F7F7] rounded-[16px]">
+          <div className="md:w-[115px] w-[110px] flex justify-center items-center ml-[5px] bg-[#F7F7F7] rounded-[16px]">
             <CreateTradeDropDown
               onSelect={handleExitCurrencyChange}
               options={conversionDataSource}

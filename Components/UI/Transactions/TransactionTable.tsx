@@ -19,7 +19,7 @@ const TransactionTable = () => {
   };
 
   return (
-    <section className="mt-4 h-[94%] max-h-[95%] overflow-y-auto box-border">
+    <section className="mt-4 h-[94%] w-full max-h-[95%] overflow-y-auto box-border">
       {transactions && transactions.length > 0 ? (
         <div className="h-full relative w-full">
           <table className="w-full border-collapse  ">

@@ -63,7 +63,7 @@ const NewPassword: FC = () => {
   };
 
   return (
-    <div className="w-full px-4 py-4 md:px-0 md:w-[500px] shadow-[40px_4px_40px_0px_#7F56D91A] border border-[#EAECF0]  md:shadow-lg h-max  rounded-md  ">
+    <div className="w-full text-[#1E1E1E] px-4 py-4 md:px-0 md:w-[500px] shadow-[40px_4px_40px_0px_#7F56D91A] border border-[#EAECF0]  md:shadow-lg h-max  rounded-md  ">
       <div className="w-full h-full md:w-[400px] pt-6 flex flex-col gap-y-6 mx-0 md:mx-auto">
         <div>
           <div className="md:w-[56px] w-[32px] h-[32px] md:h-[56px] flex justify-center items-center shadow-md border border-gray-200 rounded-md">
@@ -74,7 +74,9 @@ const NewPassword: FC = () => {
             />
           </div>
           <div className="leading-[19.2px] mt-6 font-normal">
-            <h3 className="py-2 font-semibold text-2xl">Create Password</h3>
+            <h3 className="py-2 text-[#1E1E1E] font-semibold text-2xl">
+              Create Password
+            </h3>
             <p className="text-gray-300 text-sm">Create your password</p>
           </div>
         </div>

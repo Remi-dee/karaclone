@@ -21,7 +21,7 @@ const MobileSignUpOptions: FC = () => {
   const { registrationStage: level, account_type: accountType } = globalState;
   const dispatch = useDispatch();
   return (
-    <div className=" realtive p-6  flex-col md:hidden  ">
+    <div className=" realtive py-6  px-3  flex-col md:hidden  ">
       {level !== 1 && (
         <div className="  h-max block">
           <Image

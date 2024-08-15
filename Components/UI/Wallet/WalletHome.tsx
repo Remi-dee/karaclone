@@ -33,7 +33,7 @@ function WalletHome() {
     dispatch(setSelectedCurrency(currency));
   };
   const { selectedCurrency } = useSelector(userSelector);
-  const { data, error, isLoading } = useGetAllUserWalletsQuery(undefined, {
+  const { data, error, isLoading } = useGetAllUserWalletsQuery<any>(undefined, {
     refetchOnMountOrArgChange: true,
     refetchOnReconnect: true,
   });
@@ -87,7 +87,7 @@ function WalletHome() {
   const wallets = data?.wallets || [];
 
   // Sort wallets: NGN first, then GBP
-  const sortedWallets = wallets.sort((a, b) => {
+  const sortedWallets = wallets.sort((a: any, b: any) => {
     if (a.currency_code === "NGN") return -1;
     if (b.currency_code === "NGN") return 1;
     if (a.currency_code === "GBP") return -1;

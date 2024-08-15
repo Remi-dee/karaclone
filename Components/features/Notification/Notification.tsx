@@ -37,7 +37,7 @@ function Notification() {
       setNotifications(data.data);
     } else if (error) {
       console.log(error);
-      toast("An error occur:", error);
+      toast("An error occur:");
     }
   }, [data]);
 

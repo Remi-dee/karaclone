@@ -34,7 +34,7 @@ const BuyTradeTable = () => {
   };
 
   return (
-    <div className="p-0 m-0 box-border max-h-[610px] overflow-auto overflow-y-scroll h-full w-full">
+    <div className="p-0 m-0 box-border max-h-[610px] overflow-auto invisible-scrollbar overflow-y-scroll h-full w-full">
       <table className="w-[100%] hidden md:table overflow-auto border-collapse">
         <thead>
           <tr className="bg-gray-900 text-[16px] leading-[24px] text-[#1E1E1E]">

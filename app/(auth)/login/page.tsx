@@ -36,7 +36,7 @@ const Login = () => {
   };
 
   return (
-    <div className="block flex-1 w-full md:flex p-[1rem] lg:p-0 h-full justify-center">
+    <div className="block flex-1 w-full md:flex p-[1rem]  px-[1.5rem] lg:p-0 h-full justify-center">
       <div className="w-full lg:w-full _lg:w-[471px]">
         <div className="flex flex-col">
           <div className="mt-[24px] lg:mt-[60px]">
@@ -44,10 +44,10 @@ const Login = () => {
           </div>
           <div className="mt-[40px] h-full w-full flex flex-col justify-center gap-y-[40px] text-black">
             <div className="flex flex-col">
-              <h2 className="text-[#101828] tracking-[-2%] text-[48px] font-lato font-[400]">
+              <h2 className=" text-[#1E1E1E] md:text-[#101828] tracking-[-2%] leading-[24px] md:text-[48px]  font-lato text-[20px] font-bold md:font-[400]">
                 Log in
               </h2>
-              <p className="leading-[28px] tracking-[-2%] text-[1rem] text-[#7C7C7C]">
+              <p className="leading-[28px] mt-[8px] tracking-[-2%] text-[14px] md:text-[1rem] text-[#7C7C7C]">
                 Welcome back! Please enter your details.
               </p>
             </div>
