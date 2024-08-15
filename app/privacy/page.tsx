@@ -249,8 +249,7 @@ const PrivacyPolicy: React.FC = () => {
           </ul>
         </p>
       </div>
-      <Footer/>
-
+      <Footer />
     </div>
   );
 };

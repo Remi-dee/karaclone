@@ -6,7 +6,6 @@ import {
   useGetRandomPasswordQuery,
   useGetSingleCurrencyPairQuery,
   useGetAllCurrencyPairsQuery,
-  useGetAllUsersWalletQuery,
 } from "@/redux/features/user/userApi";
 import React from "react";
 import { useSelector } from "react-redux";

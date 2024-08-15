@@ -539,9 +539,9 @@ const CreateTrade = () => {
       <div>
         {view == "createtradesuccess" ? (
           <Modal
-            onClose={() => {
-              return router.push("/");
-            }}
+          // onClose={() => {
+          //   return router.push("/");
+          // }}
           >
             <CreateTradeSuccess />
           </Modal>

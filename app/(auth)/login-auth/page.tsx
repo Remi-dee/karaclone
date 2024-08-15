@@ -49,7 +49,7 @@ export default function Home() {
     useRef<HTMLInputElement>(null),
   ];
 
-  const [verifyNumber, setVerifyNumber] = useState<VerifyNumber>({
+  const [verifyNumber, setVerifyNumber] = useState<any>({
     0: "",
     1: "",
     2: "",
@@ -106,12 +106,12 @@ export default function Home() {
   ) => {
     const { value } = e.target;
     if (/^[0-9]$/.test(value)) {
-      setVerifyNumber((prev) => ({ ...prev, [index]: value }));
+      setVerifyNumber((prev: any) => ({ ...prev, [index]: value }));
       if (index < 5) {
         inputRefs[index + 1].current?.focus();
       }
     } else {
-      setVerifyNumber((prev) => ({ ...prev, [index]: "" }));
+      setVerifyNumber((prev: any) => ({ ...prev, [index]: "" }));
     }
   };
 
@@ -211,7 +211,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-
       </div>
     </main>
   );

@@ -74,7 +74,9 @@ const NewPassword: FC = () => {
             />
           </div>
           <div className="leading-[19.2px] mt-6 font-normal">
-            <h3 className="py-2 text-[#1E1E1E] font-semibold text-2xl">Create Password</h3>
+            <h3 className="py-2 text-[#1E1E1E] font-semibold text-2xl">
+              Create Password
+            </h3>
             <p className="text-gray-300 text-sm">Create your password</p>
           </div>
         </div>

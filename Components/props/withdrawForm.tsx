@@ -31,7 +31,11 @@ const WithdrawalForm: React.FC<WithdrawalFormProps> = ({
     <div className="mt-5">
       <h4 className="font-bold">{headerText}</h4>
       <div className="border border-slate-200 rounded-lg flex items-center gap-4 p-2 px-4 mt-2">
-        <BalanceDropdown currency={currency} />
+        <BalanceDropdown
+          wallets="usd"
+          selectedWallet="usd"
+          setSelectedWallet="usd"
+        />
         <input
           type="number"
           name={amountToRecieveId}

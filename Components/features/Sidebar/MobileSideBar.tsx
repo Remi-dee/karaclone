@@ -13,6 +13,7 @@ import P2pTradeSvg from "@/Components/svgIcon/P2pTradeSvg";
 import SettingsSvg from "@/Components/svgIcon/SettingsSvg";
 import TransactionSvg from "@/Components/svgIcon/TransactionSvg";
 import WalletSvg from "@/Components/svgIcon/WalletSvg";
+import OrderSvg from "@/Components/svgIcon/OrderSvg";
 type Props = {
   link: string;
   showSideBar: boolean;

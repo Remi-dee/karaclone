@@ -24,9 +24,9 @@ const CreateTradeSuccess = ({
   };
   return (
     <Modal
-      onClose={() => {
-        router.push("/");
-      }}
+    // onClose={() => {
+    //   router.push("/");
+    // }}
     >
       <div>
         <div className="flex  flex-col items-center justify-start gap-[24px] text-center text-2xl text-neutral-black">

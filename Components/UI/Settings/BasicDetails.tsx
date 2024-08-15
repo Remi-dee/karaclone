@@ -11,14 +11,14 @@ function BasicDetails() {
     refetchOnReconnect: true,
   });
   const [editMode, setEditMode] = useState(false);
-  const [userData, setUserData] = useState({
+  const [userData, setUserData] = useState<any>({
     firstName: "",
     lastName: "",
     email: "",
     phone: "",
     gender: "",
   });
-  const [initialUserData, setInitialUserData] = useState({});
+  const [initialUserData, setInitialUserData] = useState<any>({});
   const [updateUserProfile] = useUpdateUserProfileMutation();
 
   useEffect(() => {
@@ -40,13 +40,13 @@ function BasicDetails() {
     setUserData(initialUserData);
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     const { name, value } = e.target;
     setUserData({ ...userData, [name]: value });
   };
 
   const handleSubmit = async () => {
-    const updatedData = {};
+    const updatedData = {} as any;
     for (const key in userData) {
       if (userData[key] !== initialUserData[key]) {
         updatedData[key] = userData[key];

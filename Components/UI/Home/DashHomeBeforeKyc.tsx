@@ -56,6 +56,13 @@ const BalanceCard = ({
   currency,
   hasEyeIcon,
   extraContent,
+}: {
+  imgSrc: any;
+  title: any;
+  value: any;
+  currency: any;
+  hasEyeIcon: any;
+  extraContent: any;
 }) => (
   <div className="bg-[white] flex flex-row p-[16px] md:p-[18px_24px_18px_24px] min-h-[134px] font-lato h-[134px] w-full md:w-[490px] rounded-[8px] justify-between border border-slate-200">
     <div className="md:w-[75px] w-[55px] pl-[3px] h-full flex justify-center items-center">
