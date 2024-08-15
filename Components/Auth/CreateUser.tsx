@@ -2,7 +2,6 @@
 
 import React, { FC, useState } from "react";
 import BasicUserDetails from "./BasicUserDetails";
-import { useDispatch } from "react-redux";
 
 const CreateUser: FC = () => {
   return (

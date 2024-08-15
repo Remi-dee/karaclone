@@ -76,8 +76,12 @@ const CreatePassword: FC<any> = () => {
     <div className="p-[1rem] w-full md:w-[500px] bg-[#FFFFFF] md:h-[693px] rounded-md shadow-[40px_4px_40px_0px_#7F56D91A] border border-[#EAECF0] md:shadow-lg">
       <div className="w-full md:w-[400px] pt-6 flex flex-col gap-y-[24px] mx-0 md:mx-auto">
         <div className="w-full">
-          <div className="w-[56px] h-[56px] flex justify-center items-center shadow-md border border-gray-200 rounded-md">
-            <Image src={passwordLogo} alt="" className="w-[28px] h-[28px]" />
+          <div className="md:w-[56px] md:h-[56px] w-[32px] h-[32px] rounded-[8px] flex justify-center items-center shadow-md border border-gray-200 md:rounded-md">
+            <Image
+              src={passwordLogo}
+              alt=""
+              className="  w-[16px] h-[16px] md:w-[28px] md:h-[28px]"
+            />
           </div>
           <div className="leading-[19.2px] mt-[24px] font-[400]">
             <h3 className="py-2 font-semibold text-2xl">Create Password</h3>

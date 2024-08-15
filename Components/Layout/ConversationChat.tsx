@@ -10,7 +10,7 @@ import backarrow from "@/public/svg/backarrow.svg";
 import { useDispatch } from "react-redux";
 import { closeChatModal } from "@/redux/modal/modalSlice";
 
-function ChatPage({ clickHandler }: { clickHandler: any }) {
+function ConversationChat({ clickHandler }: { clickHandler: any }) {
   const [value, setValue] = useState("");
   const dispatch = useDispatch();
 
@@ -22,7 +22,7 @@ function ChatPage({ clickHandler }: { clickHandler: any }) {
   return (
     <div className="w-full h-screen flex flex-col rounded-[12px]">
       {/* Header */}
-      <section className="flex chatPageBg py-[1rem] flex-col min-h-[116px] max-h-[116px] w-full relative">
+      <section className="flex overflow-y-hidden chatPageBg py-[1rem] flex-col min-h-[116px] max-h-[116px] w-full relative">
         <section className="flex justify-between pr-[1rem]">
           <Image
             src={bgChat}
@@ -87,7 +87,7 @@ function ChatPage({ clickHandler }: { clickHandler: any }) {
   );
 }
 
-export default ChatPage;
+export default ConversationChat;
 
 function EachFaq() {
   return (

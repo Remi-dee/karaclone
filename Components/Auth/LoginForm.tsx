@@ -117,10 +117,10 @@ const LoginForm = ({ onSubmit }: LoginFormProps) => {
       >
         <span className="text-sm text-[white]">Sign in</span>
       </button>
-      <p className="text-center pt-[0.5rem] font-Poppins text-[14px] text-black _dark:text-white">
+      <p className="text-center pt-[0.5rem] font-Poppins text-[14px] text-[#1E1E1E] _dark:text-white">
         Don’t have an account?{" "}
         <Link
-          className=" text-[#FFFFFF] leading-[19px] tracking-[-2%] font-[700] ml-0 rounded-[8px_12px] md:ml-1"
+          className=" _text-[#FFFFFF] leading-[19px] tracking-[-2%] font-[700] ml-0 rounded-[8px_12px] md:ml-1"
           href="/signup"
         >
           Sign up

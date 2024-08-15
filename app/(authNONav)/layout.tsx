@@ -22,7 +22,7 @@ export default function RootLayout({
     <div className=" flex md:flex-row gap-[4px] md:gap-7 flex-col h-max md:h-[1000px] bg-[#FBFBFB]">
       <div className=" h-full block md:hidden w-full">
         <div className="mt-[1.5rem]  h-full  w-full px-[1rem]">
-          <Image src={Logo} alt="Logo" className=" h-[3rem]  w-[10rem]" />
+          <Image src={Logo} alt="Logo" className=" mt-[1.5rem]  h-[23px] md:h-full  w-[88px] md:w-full" />
         </div>
 
         <MobileSignUpOptions />
