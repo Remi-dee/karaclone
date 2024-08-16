@@ -25,7 +25,11 @@ function EnterAmount({ changeStep }: { changeStep: () => void }) {
         <div className="bg-[#F9F5FF] py-3 px-4 border border-purple-200 rounded">
           <div className="flex items-center justify-between">
             <p className="text-gray-100 text-sm">Wallet Balance</p>
-            <BalanceDropdown currency="usd" />
+            <BalanceDropdown
+              wallets="usd"
+              selectedWallet="usd"
+              setSelectedWallet="usd"
+            />
           </div>
           <div>
             <h4 className="font-bold text-lg">$2000</h4>

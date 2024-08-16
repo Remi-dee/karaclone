@@ -26,7 +26,7 @@ function TicketDetails({ clickHandler }: { clickHandler: any }) {
   };
   const dispatch = useDispatch();
   return (
-    <div className=" w-full h-[810px]   py-[1em] flex  flex-col rounded-[12px]   ">
+    <div className=" w-full text-[#1E1E1E] h-[810px]   py-[1em] flex  flex-col rounded-[12px]   ">
       <section className=" flex   py-[1rem] h-full     flex-col    w-full relative ">
         <section className=" flex  justify-between pr-[1rem]">
           <Image

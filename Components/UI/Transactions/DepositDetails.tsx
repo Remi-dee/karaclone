@@ -3,8 +3,28 @@ import Link from "next/link";
 import React from "react";
 import { BiSolidCopy } from "react-icons/bi";
 import { useSelector } from "react-redux";
+
+interface Transaction {
+  date: string;
+  transaction_type: string;
+  currency_pair?: string;
+  rate?: number;
+  amount_exchanged?: number;
+  amount_sold?: number;
+  payment_method: string;
+  account_name: string;
+  beneficiary_name?: string;
+  beneficiary_account?: string;
+  beneficiary_bank?: string;
+  amount_received?: number;
+  transaction_fee?: number;
+  amount_reversed?: number;
+  amount_deposited?: number;
+  status: "Processing" | "Success" | "Failed";
+}
+
 const DepositDetails = () => {
-  const item = useSelector(selectSelectedTransaction);
+  const item = useSelector(selectSelectedTransaction) as Transaction | null;
 
   if (!item) return null;
 
@@ -30,10 +50,10 @@ const DepositDetails = () => {
         </div>
         <div className="flex justify-between items-center ">
           <span>Transaction Type</span>
-          <p className="text-[#000]">{item.transaction_type}</p>
+          <p className="text-[#000]">{item?.transaction_type}</p>
         </div>
 
-        {item.transaction_type == "Trade" ? (
+        {item?.transaction_type == "Trade" ? (
           <>
             <div className="flex justify-between items-center ">
               <span>Currency Pair</span>

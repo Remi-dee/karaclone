@@ -35,7 +35,10 @@ const LoginForm = ({ onSubmit }: LoginFormProps) => {
       className=" w-full  md:w-[95%] flex flex-col gap-[20px]"
     >
       <div className="w-full">
-        <label className="w-full" htmlFor="email">
+        <label
+          className="text-[16px] text-[#1E1E1E] leading-[24px] tracking-[-2%] font-semibold w-full  font-lato text-black _dark:text-white"
+          htmlFor="email"
+        >
           Email
         </label>
         <input
@@ -47,7 +50,7 @@ const LoginForm = ({ onSubmit }: LoginFormProps) => {
           placeholder="Enter your Email"
           className={`${
             errors.email && touched.email && "border-red-500"
-          } w-full text-black dark:text-white bg-transparent border border-slate-200 text-sm rounded h-[40px] px-2 outline-none mt-[10px] font-Poppins`}
+          } w-full text-black _dark:text-white bg-transparent border border-slate-200 text-sm rounded h-[40px] px-2 outline-none mt-[10px] font-Poppins`}
         />
         {errors.email && touched.email && (
           <span className="text-red-500 pt-2 block">{errors.email}</span>
@@ -55,7 +58,7 @@ const LoginForm = ({ onSubmit }: LoginFormProps) => {
       </div>
       <div className="w-full mt-5 relative mb-1">
         <label
-          className="text-[16px] w-full font-Poppins text-black dark:text-white"
+          className="text-[16px] text-[#1E1E1E] leading-[24px] tracking-[-2%] font-semibold w-full  font-lato text-black _dark:text-white"
           htmlFor="password"
         >
           Password
@@ -70,7 +73,7 @@ const LoginForm = ({ onSubmit }: LoginFormProps) => {
           placeholder="Type in password"
           className={`${
             errors.password && touched.password && "border-red-500"
-          } w-full text-black dark:text-white bg-transparent border border-slate-200 text-sm rounded h-[40px] px-2 outline-none mt-[10px] font-Poppins`}
+          } w-full text-black _dark:text-white bg-transparent border border-slate-200 text-sm rounded h-[40px] px-2 outline-none mt-[10px] font-Poppins`}
         />
         {!show ? (
           <AiOutlineEyeInvisible
@@ -112,12 +115,12 @@ const LoginForm = ({ onSubmit }: LoginFormProps) => {
         type="submit"
         className="mt-5 h-[40px] w-full flex justify-center items-center rounded bg-[#7F56D9] hover:bg-[#7F56D9]"
       >
-        <span className="text-sm text-white">Sign in</span>
+        <span className="text-sm text-[white]">Sign in</span>
       </button>
-      <p className="text-center pt-[0.5rem] font-Poppins text-[14px] text-black dark:text-white">
+      <p className="text-center pt-[0.5rem] font-Poppins text-[14px] text-[#1E1E1E] _dark:text-white">
         Don’t have an account?{" "}
         <Link
-          className="text-[#7F56D9] leading-[19px] tracking-[-2%] font-[700] ml-1"
+          className=" _text-[#FFFFFF] leading-[19px] tracking-[-2%] font-[700] ml-0 rounded-[8px_12px] md:ml-1"
           href="/signup"
         >
           Sign up

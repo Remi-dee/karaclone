@@ -17,7 +17,12 @@ import {
 } from "@/redux/features/chat/chatApi";
 import { useLoadUserQuery } from "@/redux/features/user/userApi";
 
+<<<<<<< HEAD
 function ChatPage({ clickHandler }: { clickHandler: any }) {
+=======
+function ConversationChat({ clickHandler }: { clickHandler: any }) {
+  const [value, setValue] = useState("");
+>>>>>>> 3f313087d96ba7c2106596f67063d7b0f98db503
   const dispatch = useDispatch();
   const { data: user } = useLoadUserQuery({});
   const [value, setValue] = useState("");
@@ -63,9 +68,21 @@ function ChatPage({ clickHandler }: { clickHandler: any }) {
   };
 
   return (
+<<<<<<< HEAD
     <div className="w-full h-full flex flex-col rounded-[12px]">
       <section className="flex chatPageBg py-4 flex-col min-h-[116px] max-h-[116px] w-full relative">
         <section className="flex justify-between pr-4">
+=======
+    <div className="w-full h-screen flex flex-col rounded-[12px]">
+      {/* Header */}
+      <section className="flex overflow-y-hidden chatPageBg py-[1rem] flex-col min-h-[116px] max-h-[116px] w-full relative">
+        <section className="flex justify-between pr-[1rem]">
+          <Image
+            src={bgChat}
+            alt=""
+            className="absolute top-0 left-0 right-0 bottom-0"
+          />
+>>>>>>> 3f313087d96ba7c2106596f67063d7b0f98db503
           <Image
             width={15}
             height={15}
@@ -151,7 +168,7 @@ function ChatPage({ clickHandler }: { clickHandler: any }) {
   );
 }
 
-export default ChatPage;
+export default ConversationChat;
 
 function SendSvg() {
   return (

@@ -44,7 +44,7 @@ function FAQ({ clickHandler }: { clickHandler: any }) {
         </section>
       </section>
       <div className=" w-full ">
-        <h1 className=" font-bold text-[15px] tracking-[-2%]  leading-[24px]   ">
+        <h1 className=" text-[#1E1E1E] font-bold text-[15px] tracking-[-2%]  leading-[24px]   ">
           Can I trust the sellers/buyers on the platform?
         </h1>
       </div>

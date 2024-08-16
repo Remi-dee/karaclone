@@ -46,7 +46,7 @@ function TicketPage({ clickHandler }: { clickHandler: any }) {
           />
         </section>
         <div className=" px-[1rem] w-full mt-[1.5rem]">
-          <h1 className=" font-bold text-[16px] tracking-[-2%]  leading-[24px]   ">
+          <h1 className=" font-bold text-[16px] tracking-[-2%] text-[#1E1E1E] leading-[24px]   ">
             Ticket Status
           </h1>
         </div>

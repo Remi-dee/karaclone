@@ -178,21 +178,7 @@ const CreateTrade = () => {
     // createTrade(createTradeDetails);
     // console.log(createTradeDetails);
     console.log(tradeError);
-
-    // setShowTradeDetails(true);
   };
-
-  // useEffect(() => {
-  //   // dispatch(toggleCreateTradeStage(3));
-  //   if (isTradeSuccess) {
-  //     toast.success("Trade created successfully");
-  //     dispatch(toggleCreateTradeStage(3));
-  //     dispatch(addCreatedTrade(tradeData?.trade));
-  //   }
-  //   if (tradeError) {
-  //     toast.error("An error occurred!");
-  //   }
-  // }, [isTradeSuccess, tradeError]);
 
   const handleCurrency = (value: string) => {
     // console.log(value);
@@ -231,9 +217,8 @@ const CreateTrade = () => {
   };
 
   //get all possible conversions
-
   const possibleConverstion = useGetAllCurrencyPairsQuery("");
-  // console.log(possibleConverstion);
+
   //currency converter
   useEffect(() => {
     possibleConverstion?.data?.results?.currencyPairs?.map((e: any) => {
@@ -343,16 +328,16 @@ const CreateTrade = () => {
               >
                 Rate
               </label>
-              <div className=" h-[46px] cursor-not-allowed w-full md:w-[433px] gap-[273px] items-center p-[15px_16px_15px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-gray-900">
+              <div className=" h-[46px] w-full md:w-[433px] gap-[10px] items-center p-[8px_16px_8px_16px]  border border-[#EFEFEF] rounded-[8px] mt-[8px] flex bg-[white]">
                 <input
                   type="text"
                   onChange={handleChange}
                   name="rate"
                   disabled
                   value={rate}
-                  className="w-[80%]  outline-none bg-transparent placeholder:text-gray-300"
+                  className="w-[80%] outline-none bg-transparent placeholder:text-gray-300"
                 />
-                <div className="w-[20%] tracking-[-2%] text-left bg-transparent text-sm">
+                <div className="w-[20%] text-right bg-transparent text-gray-300 text-sm">
                   {createTradeDetails?.exit_currency}
                 </div>
               </div>
@@ -583,9 +568,9 @@ const CreateTrade = () => {
       <div>
         {view == "createtradesuccess" ? (
           <Modal
-            onClose={() => {
-              router.push("/");
-            }}
+          // onClose={() => {
+          //   return router.push("/");
+          // }}
           >
             <CreateTradeSuccess />
           </Modal>

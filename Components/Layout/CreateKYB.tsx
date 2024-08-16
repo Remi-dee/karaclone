@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import KYBInfo from "../KYC/KYBInfo";
-import KYBQuestion from "../KYC/KYBQuestion";
+import KYBQuestion from "../UI/KYC/KYBQuestion";
 
 const CreateKYB = () => {
   const [active, setActive] = useState(1);

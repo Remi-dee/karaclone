@@ -19,7 +19,7 @@ const SupportHeaderSection: React.FC<HeaderSectionProps> = ({
   const dispatch = useDispatch();
 
   return (
-    <div className="flex chatPageBg py-[1rem] flex-col min-h-[231px] w-full h-[231px] relative">
+    <div className="flex chatPageBg py-[1rem] overflow-y-hidden flex-col min-h-[231px] w-full h-[231px] relative">
       <section className="flex justify-between pr-[1rem]">
         <Image
           src={bgChat}

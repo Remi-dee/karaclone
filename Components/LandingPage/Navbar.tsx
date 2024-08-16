@@ -40,7 +40,10 @@ const Navbar = () => {
             <Image src={Logo} alt="Funtravel logo" className="mr-2" />
           </Link>
           {/* Hamburger Icon */}
-          <button className="md:hidden focus:outline-none" onClick={toggleMobileMenu}>
+          <button
+            className="md:hidden focus:outline-none"
+            onClick={toggleMobileMenu}
+          >
             <svg
               className="w-6 h-6 transition-transform duration-300 ease-in-out text-slate-600"
               fill="none"
@@ -72,8 +75,9 @@ const Navbar = () => {
             isMobileMenuOpen ? "flex" : "hidden"
           }`}
         >
-          {navBarLinks.map((link) => (
+          {navBarLinks.map((link, i) => (
             <a
+              key={i}
               href={link.link}
               className="text-slate-900 hover:text-gray-800 transition-colors font-semibold "
             >
@@ -96,8 +100,9 @@ const Navbar = () => {
             isMobileMenuOpen ? "max-h-screen py-10" : "h-0 overflow-hidden"
           }`}
         >
-          {navBarLinks.map((link) => (
+          {navBarLinks.map((link, i) => (
             <a
+              key={i}
               href={link.link}
               className="text-slate-800 hover:text-gray-800 transition-colors"
             >

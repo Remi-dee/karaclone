@@ -36,11 +36,16 @@ function Exchange() {
             Enter the amount and currency you want to convert to
           </p>
         </div>
+        ""
         <div className="bg-[white] border border-slate-100 mt-5  px-8 rounded-lg py-4 text-[dark] w-full  mx-auto">
           <div className="bg-[#F9F5FF] py-3 px-4 border border-purple-200 rounded">
             <div className="flex items-center justify-between">
               <p className="text-gray-100 text-sm">Wallet Balance</p>
-              <BalanceDropdown currency_code="usd" />
+              <BalanceDropdown
+                selectedWallet="USD"
+                wallets="USD"
+                setSelectedWallet="USD"
+              />
             </div>
             <div>
               <h4 className="font-bold text-lg">&apos; $2000</h4>

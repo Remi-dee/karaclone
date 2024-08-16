@@ -13,8 +13,6 @@ type CreateNotificationData = {
   message: string;
 };
 
-type MarkAsReadData = {};
-
 export const notificationApi = createApi({
   reducerPath: "notificationApi",
   baseQuery: fetchBaseQuery({

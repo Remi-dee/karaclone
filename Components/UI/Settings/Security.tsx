@@ -44,7 +44,7 @@ function Security() {
       toast("2FA activated successfully");
     } catch (error) {
       console.error("Error enabling 2FA:", error);
-      toast(`Error: ${error.message}`);
+      toast(" eror: ");
     }
   };
 
@@ -55,7 +55,7 @@ function Security() {
       toast("2FA deactivated successfully");
     } catch (error) {
       console.error("Error disabling 2FA:", error);
-      toast(`Error: ${error.message}`);
+      toast(" Error");
     }
   };
 
