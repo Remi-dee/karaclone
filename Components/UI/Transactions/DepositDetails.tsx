@@ -5,6 +5,7 @@ import { BiSolidCopy } from "react-icons/bi";
 import { useSelector } from "react-redux";
 
 interface Transaction {
+  user_transactionId: string;
   date: string;
   transaction_type: string;
   currency_pair?: string;
@@ -20,7 +21,7 @@ interface Transaction {
   transaction_fee?: number;
   amount_reversed?: number;
   amount_deposited?: number;
-  status: "Processing" | "Success" | "Failed";
+  status: "Processing" | "Successful" | "Failed";
 }
 
 const DepositDetails = () => {
@@ -39,7 +40,7 @@ const DepositDetails = () => {
         <div className="flex justify-between items-center ">
           <span>Transaction ID</span>
           <div className="flex justify-center items-center gap-1">
-            <span className="text-[#000000]">0123456789</span>
+            <span className="text-[#000000]">{item.user_transactionId}</span>
             <BiSolidCopy className="text-primaryBtn" />
           </div>
         </div>
@@ -57,21 +58,21 @@ const DepositDetails = () => {
           <>
             <div className="flex justify-between items-center ">
               <span>Currency Pair</span>
-              <p className="text-[#000]">{item.currency_pair}</p>
+              <p className="text-[#000]">{item.currency_pair || "N/A"} </p>
             </div>
             <div className="flex justify-between items-center ">
               <span>Exchange Rate</span>
-              <p className="text-[#000]">{item.rate}</p>
+              <p className="text-[#000]">{item.rate || "N/A"}</p>
             </div>
             {item.amount_exchanged ? (
               <div className="flex justify-between items-center ">
                 <span>Amount Exchanged</span>
-                <p className="text-[#000]">{item.amount_exchanged}</p>
+                <p className="text-[#000]">{item.amount_exchanged || "N/A"}</p>
               </div>
             ) : (
               <div className="flex justify-between items-center ">
                 <span>Amount Sold</span>
-                <p className="text-[#000]">{item.amount_sold}</p>
+                <p className="text-[#000]">{item.amount_sold || "N/A"}</p>
               </div>
             )}
           </>
@@ -81,11 +82,11 @@ const DepositDetails = () => {
 
         <div className="flex justify-between items-center ">
           <span>Payment Method</span>
-          <p className="text-[#000]">{item.payment_method}</p>
+          <p className="text-[#000]">{item.payment_method || "N/A"}</p>
         </div>
         <div className="flex justify-between items-center  ">
           <span>Account Name</span>
-          <p className="text-[#000]">{item.account_name}</p>
+          <p className="text-[#000]">{item.account_name || "N/A"}</p>
         </div>
         <hr className=" border-gray-200 h-[1.5px]" />
 
@@ -93,27 +94,27 @@ const DepositDetails = () => {
           <>
             <div className="flex justify-between items-center ">
               <span>Beneficiary</span>
-              <p className="text-[#000]">{item.beneficiary_name}</p>
+              <p className="text-[#000]">{item.beneficiary_name || "N/A"}</p>
             </div>
             <div className="flex justify-between w-full items-center ">
               <span> Account Number</span>
               {/* <span>Beneficiary Account Number</span> */}
-              <p className="text-[#000]">{item.beneficiary_account}</p>
+              <p className="text-[#000]">{item.beneficiary_account || "N/A"}</p>
             </div>
 
             <div className="flex justify-between items-center ">
               <span>Beneficiary Bank Name</span>
-              <p className="text-[#000]">{item.beneficiary_bank}</p>
+              <p className="text-[#000]">{item.beneficiary_bank || "N/A"}</p>
             </div>
 
             <div className="flex justify-between items-center ">
               <span>Amount Received</span>
-              <p className="text-[#000]">{item.amount_received}</p>
+              <p className="text-[#000]">{item.amount_received || "N/A"}</p>
             </div>
 
             <div className="flex justify-between items-center ">
               <span>Transaction Fee</span>
-              <p className="text-[#000]">{item.transaction_fee}</p>
+              <p className="text-[#000]">{item.transaction_fee || "N/A"}</p>
             </div>
           </>
         ) : (
@@ -122,12 +123,14 @@ const DepositDetails = () => {
               {item.amount_reversed ? (
                 <div className="flex justify-between items-center ">
                   <span>Amount Reversed</span>
-                  <p className="text-[#000]">{item.amount_reversed}</p>
+                  <p className="text-[#000]">{item.amount_reversed || "N/A"}</p>
                 </div>
               ) : (
                 <div className="flex justify-between items-center ">
                   <span>Amount Deposited</span>
-                  <p className="text-[#000]">{item.amount_deposited}</p>
+                  <p className="text-[#000]">
+                    {item.amount_deposited || "N/A"}
+                  </p>
                 </div>
               )}
             </td>

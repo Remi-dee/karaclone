@@ -78,21 +78,22 @@ const FundMethod: FC<any> = ({ active, setActive }) => {
     if (option === "Connect with Bank" && selectedCurrency === "NGN") {
       await openMonoWidget();
     } else {
-      const paymentCreated = await handleCreateTruelayerPayment(
-        { amount: amountToFund, currency: selectedCurrency },
-        data,
-        createPayment,
-        dispatch,
-        setPaymentDetails
-      );
-      if (paymentCreated.status === "success") {
-        dispatch(setIsPaymentSuccess(true));
-        localStorage.setItem("isWalletFund", "true");
-        fundWallet({
-          currency_code: selectedCurrency,
-          amount: Number(amountToFund),
-        });
-      }
+      // const paymentCreated = await handleCreateTruelayerPayment(
+      //   { amount: amountToFund, currency: selectedCurrency },
+      //   data,
+      //   createPayment,
+      //   dispatch,
+      //   setPaymentDetails
+      // );
+      // if (paymentCreated.status === "success") {
+      //   dispatch(setIsPaymentSuccess(true));
+      localStorage.setItem("isWalletFund", "true");
+      console.log("here is it", selectedCurrency);
+      fundWallet({
+        currency_code: selectedCurrency,
+        amount: Number(amountToFund),
+      });
+      //   }
     }
   };
 

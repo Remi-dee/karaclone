@@ -51,7 +51,7 @@ function DashHomeAfterKyc() {
 
   useEffect(() => {
     if (wallets && wallets.length > 0) {
-      // setSelectedWallet(wallets[0]);
+      setSelectedWallet(wallets[0]);
     }
   }, [wallets]);
 

@@ -44,7 +44,7 @@ const TransactionTable = () => {
                 >
                   <td className="p-4">{item.transaction_type}</td>
                   <td className="p-4 hidden md:table-cell">
-                    {item.beneficiary_name}
+                    {item.beneficiary_name || "N/A"}
                   </td>
                   {item.transaction_type == "Trade" ? (
                     <>
